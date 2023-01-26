@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "10193767589",
+    "project_id": "meno-fe",
+    "storage_bucket": "meno-fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10193767589:android:5963e035a2385b9545d14c",
+        "android_client_info": {
+          "package_name": "com.example.meno_fe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "10193767589-bgfhcdkrn598u3m2dfak4c11dpt8cff9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meno_fe",
+            "certificate_hash": "a21a84a88c1ff2be2c3dd42749f16bc2a5d8fb1c"
+          }
+        },
+        {
+          "client_id": "10193767589-m59ku8jbs8jmvf8n1p6k8o8lgfhbpoa2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmL4Atwkmws3phMMqDA81NfdRFCENq4Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "10193767589-m59ku8jbs8jmvf8n1p6k8o8lgfhbpoa2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "10193767589-bderck4ul78uev9g0i93p2hp00q90nf9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.menoFlutter"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10193767589:android:471fd2ba2db943bb45d14c",
+        "android_client_info": {
+          "package_name": "com.example.meno_fe_v2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "10193767589-m59ku8jbs8jmvf8n1p6k8o8lgfhbpoa2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmL4Atwkmws3phMMqDA81NfdRFCENq4Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "10193767589-m59ku8jbs8jmvf8n1p6k8o8lgfhbpoa2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "10193767589-bderck4ul78uev9g0i93p2hp00q90nf9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.menoFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
