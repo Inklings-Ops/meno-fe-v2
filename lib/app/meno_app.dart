@@ -1,44 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meno_fe_v2/common/constants/m_colors.dart';
+import 'package:meno_fe_v2/core/router/m_router.dart';
 
-class MenoApp extends StatelessWidget {
+class MenoApp extends ConsumerWidget {
   const MenoApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = MRouter();
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Home'),
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      builder: (context, child) {
+        return MaterialApp.router(
+          title: 'Meno',
+          // theme: MTheme.light,
+          color: MColors.primary,
+          debugShowCheckedModeBanner: false,
+          onGenerateTitle: (context) => 'Meno',
+          routerDelegate: router.delegate(),
+          routeInformationParser: router.defaultRouteParser(),
+          builder: (context, widget) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: widget!,
+          ),
+        );
+      },
     );
   }
 }
