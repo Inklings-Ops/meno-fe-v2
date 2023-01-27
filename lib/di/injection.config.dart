@@ -11,7 +11,9 @@ import 'package:image_picker/image_picker.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i5;
-import 'package:meno_fe_v2/di/register_module.dart' as _i12;
+import 'package:meno_fe_v2/di/register_module.dart' as _i13;
+import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/local/auth_local_datasource.dart'
+    as _i12;
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/mapper/user_credentials_mapper.dart'
     as _i10;
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/mapper/user_mapper.dart'
@@ -52,8 +54,10 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.singleton<_i10.UserCredentialsMapper>(_i10.UserCredentialsMapper());
     gh.singleton<_i11.UserMapper>(_i11.UserMapper());
+    gh.factory<_i12.AuthLocalDatasource>(
+        () => _i12.AuthLocalDatasource(gh<_i7.SecureStorageService>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i12.RegisterModule {}
+class _$RegisterModule extends _i13.RegisterModule {}
