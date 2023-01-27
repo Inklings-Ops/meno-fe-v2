@@ -8,7 +8,7 @@ part 'm_router.gr.dart';
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: LayoutPage),
+    AutoRoute(page: LayoutPage, initial: true),
   ],
 )
 class MRouter extends _$MRouter {}

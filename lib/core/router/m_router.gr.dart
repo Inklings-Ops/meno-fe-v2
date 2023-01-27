@@ -29,7 +29,7 @@ class _$MRouter extends RootStackRouter {
   List<RouteConfig> get routes => [
         RouteConfig(
           LayoutRoute.name,
-          path: '/layout-page',
+          path: '/',
         )
       ];
 }
@@ -40,7 +40,7 @@ class LayoutRoute extends PageRouteInfo<void> {
   const LayoutRoute()
       : super(
           LayoutRoute.name,
-          path: '/layout-page',
+          path: '/',
         );
 
   static const String name = 'LayoutRoute';
