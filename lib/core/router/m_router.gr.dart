@@ -13,7 +13,12 @@
 part of 'm_router.dart';
 
 class _$MRouter extends RootStackRouter {
-  _$MRouter([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
+  _$MRouter({
+    GlobalKey<NavigatorState>? navigatorKey,
+    required this.onboardingGuard,
+  }) : super(navigatorKey);
+
+  final OnboardingGuard onboardingGuard;
 
   @override
   final Map<String, PageFactory> pagesMap = {
@@ -21,6 +26,12 @@ class _$MRouter extends RootStackRouter {
       return AdaptivePage<dynamic>(
         routeData: routeData,
         child: const SplashPage(),
+      );
+    },
+    OnboardingRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const OnboardingPage(),
       );
     },
     LayoutRoute.name: (routeData) {
@@ -38,8 +49,13 @@ class _$MRouter extends RootStackRouter {
           path: '/',
         ),
         RouteConfig(
+          OnboardingRoute.name,
+          path: '/onboarding-page',
+        ),
+        RouteConfig(
           LayoutRoute.name,
           path: '/layout-page',
+          guards: [onboardingGuard],
         ),
       ];
 }
@@ -54,6 +70,18 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
+}
+
+/// generated route for
+/// [OnboardingPage]
+class OnboardingRoute extends PageRouteInfo<void> {
+  const OnboardingRoute()
+      : super(
+          OnboardingRoute.name,
+          path: '/onboarding-page',
+        );
+
+  static const String name = 'OnboardingRoute';
 }
 
 /// generated route for

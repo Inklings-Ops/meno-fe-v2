@@ -7,7 +7,7 @@ class MKeys {
   static const authCredentials = 'auth_credentials_';
   static const authToken = 'auth_token_';
   static const profile = 'auth_profile_';
-  static const onBoardingScreenKey = 'meno_initScreen_';
+  static const onboardingInit = 'meno_initScreen_';
   static const avatarKey = 'avatar_key_';
   static const bottomNavIndex = '_bottom_nav_index_';
   static const liveBroadcasts = '_live_broadcasts_';

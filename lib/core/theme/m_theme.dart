@@ -12,10 +12,8 @@ class MTheme {
       visualDensity: VisualDensity.adaptivePlatformDensity,
       primaryColor: MColors.primary,
       primaryColorLight: MColors.primaryLight,
-      backgroundColor: MColors.background,
       primaryColorDark: Colors.black,
       highlightColor: MColors.highlight,
-      errorColor: MColors.danger,
       disabledColor: MColors.disabled,
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.transparent,
