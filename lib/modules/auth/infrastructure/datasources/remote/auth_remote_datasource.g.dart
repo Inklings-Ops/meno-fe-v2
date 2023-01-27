@@ -168,12 +168,10 @@ class _AuthRemoteDatasource implements AuthRemoteDatasource {
   Future<AuthResponse<UserCredentialsDto?>> verify({
     required email,
     required code,
-    required token,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {
       'email': email,
       'code': code,
@@ -204,12 +202,10 @@ class _AuthRemoteDatasource implements AuthRemoteDatasource {
   Future<AuthResponse<UserCredentialsDto?>> changePassword({
     required newPassword,
     required currentPassword,
-    required token,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {
       'newPassword': newPassword,
       'currentPassword': currentPassword,
@@ -237,14 +233,11 @@ class _AuthRemoteDatasource implements AuthRemoteDatasource {
   }
 
   @override
-  Future<AuthResponse<UserCredentialsDto?>> forgotPassword({
-    required email,
-    required token,
-  }) async {
+  Future<AuthResponse<UserCredentialsDto?>> forgotPassword(
+      {required email}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {'email': email};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AuthResponse<UserCredentialsDto>>(Options(
@@ -273,12 +266,10 @@ class _AuthRemoteDatasource implements AuthRemoteDatasource {
     required email,
     required code,
     required newPassword,
-    required token,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {
       'email': email,
       'code': code,
@@ -310,12 +301,10 @@ class _AuthRemoteDatasource implements AuthRemoteDatasource {
   Future<AuthResponse<UserCredentialsDto?>> requestOTP({
     required type,
     required email,
-    required token,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = {
       'type': type,
       'email': email,

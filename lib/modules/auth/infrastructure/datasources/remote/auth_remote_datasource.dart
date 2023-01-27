@@ -47,20 +47,17 @@ abstract class AuthRemoteDatasource {
   Future<AuthResponse<UserCredentialsDto?>> verify({
     @Field() required String email,
     @Field() required String code,
-    @Header(HttpHeaders.authorizationHeader) required String token,
   });
 
   @POST("/api/v1/users/password/change")
   Future<AuthResponse<UserCredentialsDto?>> changePassword({
     @Field() required String newPassword,
     @Field() required String currentPassword,
-    @Header(HttpHeaders.authorizationHeader) required String token,
   });
 
   @POST("/api/v1/users/password/forgot")
   Future<AuthResponse<UserCredentialsDto?>> forgotPassword({
     @Field() required String email,
-    @Header(HttpHeaders.authorizationHeader) required String token,
   });
 
   @POST("/api/v1/users/password/reset")
@@ -68,13 +65,11 @@ abstract class AuthRemoteDatasource {
     @Field() required String email,
     @Field() required String code,
     @Field() required String newPassword,
-    @Header(HttpHeaders.authorizationHeader) required String token,
   });
 
   @POST("/api/v1/users/otp")
   Future<AuthResponse<UserCredentialsDto?>> requestOTP({
     @Field() required String type,
     @Field() required String email,
-    @Header(HttpHeaders.authorizationHeader) required String token,
   });
 }
