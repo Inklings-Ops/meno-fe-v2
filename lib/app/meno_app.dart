@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
+import 'package:meno_fe_v2/core/theme/m_theme.dart';
 
 class MenoApp extends ConsumerWidget {
   const MenoApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = MRouter();
@@ -17,7 +17,7 @@ class MenoApp extends ConsumerWidget {
       builder: (context, child) {
         return MaterialApp.router(
           title: 'Meno',
-          // theme: MTheme.light,
+          theme: MTheme.light,
           color: MColors.primary,
           debugShowCheckedModeBanner: false,
           onGenerateTitle: (context) => 'Meno',
