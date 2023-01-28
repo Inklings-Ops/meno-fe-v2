@@ -8,6 +8,7 @@ import 'package:meno_fe_v2/layout/loading_page.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart';
+import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_page.dart';
 
@@ -30,6 +31,7 @@ class LayoutPage extends ConsumerWidget {
       orElse: () => const LoadingPage(),
       verified: (_) => const VerificationFeedbackPage(),
       unverified: (_) => const VerificationPage(),
+      partiallyUnauthenticated: (_) => const LoginReturnPage(),
       unauthenticated: (_) => LoginPage(
         showLeading: AutoRouter.of(context).canNavigateBack,
       ),

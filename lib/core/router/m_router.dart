@@ -6,6 +6,7 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/forgot_password/forgo
 import 'package:meno_fe_v2/modules/auth/presentation/pages/forgot_password/reset_password_feedback_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/forgot_password/reset_password_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart';
+import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/register/register_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/onboarding/onboarding_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
@@ -22,6 +23,7 @@ part 'm_router.gr.dart';
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
+    // AutoRoute(page: AuthPage, guards: [OnboardingGuard]),
     AutoRoute(page: SplashPage, initial: true),
     AutoRoute(page: OnboardingPage),
     AutoRoute(page: RegisterPage),
@@ -29,10 +31,10 @@ part 'm_router.gr.dart';
     AutoRoute(page: ForgotPasswordPage),
     AutoRoute(page: ResetPasswordFeedbackPage),
     AutoRoute(page: ResetPasswordPage),
-    // AutoRoute(page: AuthPage, guards: [OnboardingGuard]),
     AutoRoute(page: LoginPage),
     AutoRoute(page: VerificationPage),
     AutoRoute(page: VerificationFeedbackPage),
+    AutoRoute(page: LoginReturnPage),
     AutoRoute(
       page: LayoutPage,
       guards: [OnboardingGuard],

@@ -87,6 +87,17 @@ class _$MRouter extends RootStackRouter {
         child: const VerificationFeedbackPage(),
       );
     },
+    LoginReturnRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginReturnRouteArgs>(
+          orElse: () => const LoginReturnRouteArgs());
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: LoginReturnPage(
+          key: args.key,
+          showLeading: args.showLeading,
+        ),
+      );
+    },
     LayoutRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -160,6 +171,10 @@ class _$MRouter extends RootStackRouter {
         RouteConfig(
           VerificationFeedbackRoute.name,
           path: '/verification-feedback-page',
+        ),
+        RouteConfig(
+          LoginReturnRoute.name,
+          path: '/login-return-page',
         ),
         RouteConfig(
           LayoutRoute.name,
@@ -331,6 +346,40 @@ class VerificationFeedbackRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'VerificationFeedbackRoute';
+}
+
+/// generated route for
+/// [LoginReturnPage]
+class LoginReturnRoute extends PageRouteInfo<LoginReturnRouteArgs> {
+  LoginReturnRoute({
+    Key? key,
+    bool showLeading = false,
+  }) : super(
+          LoginReturnRoute.name,
+          path: '/login-return-page',
+          args: LoginReturnRouteArgs(
+            key: key,
+            showLeading: showLeading,
+          ),
+        );
+
+  static const String name = 'LoginReturnRoute';
+}
+
+class LoginReturnRouteArgs {
+  const LoginReturnRouteArgs({
+    this.key,
+    this.showLeading = false,
+  });
+
+  final Key? key;
+
+  final bool showLeading;
+
+  @override
+  String toString() {
+    return 'LoginReturnRouteArgs{key: $key, showLeading: $showLeading}';
+  }
 }
 
 /// generated route for
