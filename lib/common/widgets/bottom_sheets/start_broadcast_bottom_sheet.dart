@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
+import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/bottom_sheets/m_bottom_sheet_container.dart';
 import 'package:meno_fe_v2/common/widgets/bottom_sheets/m_bottom_sheet_title.dart';
 
@@ -14,13 +15,19 @@ class StartBroadcastBottomSheet extends StatelessWidget {
           MBottomSheetTile(
             icon: MIcons.Voice2,
             title: 'Start broadcast now',
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(MSize.r(16)),
+            ),
             onTap: () {},
             // onTap: () => context.router.push(const CreateBroadcastRoute()),
           ),
-          const Divider(),
+          const Divider(height: 2),
           MBottomSheetTile(
-            icon: MIcons.TimeCircle1,
+            icon: MIcons.TimeCircle,
             title: 'Schedule for later',
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(MSize.r(16)),
+            ),
             onTap: () {},
           ),
         ],

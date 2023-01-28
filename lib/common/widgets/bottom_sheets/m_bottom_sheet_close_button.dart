@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 
@@ -7,17 +8,17 @@ class MBottomSheetCloseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pop(context),
+      onTap: () => AutoRouter.of(context).pop(),
       child: Container(
         height: MSize.r(35),
         width: MSize.r(35),
         alignment: Alignment.center,
-        margin: MSize.pSymmetric(h: 16, v: 12),
-        decoration: BoxDecoration(
+        margin: MSize.pSymmetric(h: 25, v: 12),
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: Theme.of(context).primaryColorLight,
+          color: Colors.white,
         ),
-        child: const Icon(Icons.close),
+        child: Icon(Icons.close, size: MSize.r(20)),
       ),
     );
   }

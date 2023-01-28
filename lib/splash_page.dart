@@ -26,7 +26,7 @@ class SplashPage extends ConsumerWidget {
             name: 'assets/animations/meno_splash.riv',
             onSuccess: (data) async {
               ref.read(authProvider.notifier).checkAuthenticated();
-              AutoRouter.of(context).replaceAll([const AuthRoute()]);
+              AutoRouter.of(context).replaceAll([const LayoutRoute()]);
             },
             onError: (err, stack) {},
             until: () async => await di.allReady(),

@@ -7,22 +7,30 @@ class MBottomSheetTile extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.onTap,
+    this.borderRadius,
   });
 
   final IconData icon;
   final String title;
   final void Function() onTap;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: MSize.h(55),
+        height: MSize.h(56),
+        width: MSize.sw(1),
         padding: MSize.pSymmetric(h: 17),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: borderRadius,
+        ),
         child: Row(
           children: [
             CircleAvatar(
+              radius: MSize.r(17),
               backgroundColor: Theme.of(context).primaryColorLight,
               child: Icon(
                 icon,

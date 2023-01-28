@@ -47,7 +47,7 @@ class OnboardingButtons extends ConsumerWidget {
                 fixedSize: Size(MSize.w(223), MSize.r(53)),
                 onPressed: () {
                   event.onboardComplete();
-                  // context.router.push(const SignUpRoute());
+                  AutoRouter.of(context).push(const RegisterRoute());
                 },
               ),
             ],

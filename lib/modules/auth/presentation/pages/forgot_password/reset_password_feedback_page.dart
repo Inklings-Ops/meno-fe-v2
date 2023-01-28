@@ -41,7 +41,7 @@ class ResetPasswordFeedbackPage extends StatelessWidget {
             MButton(
               title: 'Go back to Login',
               onPressed: () {
-                AutoRouter.of(context).replaceAll([const AuthRoute()]);
+                AutoRouter.of(context).replaceAll([LoginRoute()]);
               },
             ),
           ],

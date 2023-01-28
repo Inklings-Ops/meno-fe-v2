@@ -18,6 +18,7 @@ class MTheme {
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.transparent,
       ),
+      dividerTheme: const DividerThemeData(color: Color(0xFFF4F0FF)),
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: MSize.pFromLTRB(12, 16, 12, 16),
         filled: true,
@@ -39,14 +40,22 @@ class MTheme {
           borderSide: const BorderSide(color: MColors.primary),
         ),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
         elevation: 0,
         backgroundColor: MColors.primaryLight,
         selectedItemColor: MColors.primary,
-        unselectedItemColor: Colors.black26,
+        unselectedItemColor: const Color(0xFF989898),
+        selectedLabelStyle: base.textTheme.bodyMedium?.copyWith(
+          fontSize: MSize.fS(12),
+          fontWeight: FontWeight.w500,
+        ),
+        unselectedLabelStyle: base.textTheme.bodyMedium?.copyWith(
+          fontSize: MSize.fS(12),
+          fontWeight: FontWeight.w500,
+        ),
         type: BottomNavigationBarType.fixed,
-        selectedIconTheme: IconThemeData(shadows: null),
-        unselectedIconTheme: IconThemeData(shadows: null),
+        selectedIconTheme: const IconThemeData(shadows: null),
+        unselectedIconTheme: const IconThemeData(shadows: null),
       ),
       colorScheme: const ColorScheme.light().copyWith(
         primary: MColors.primary,
