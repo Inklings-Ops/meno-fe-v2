@@ -15,6 +15,7 @@ class MTheme {
       primaryColorDark: Colors.black,
       highlightColor: MColors.highlight,
       disabledColor: MColors.disabled,
+      scaffoldBackgroundColor: Colors.white,
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.transparent,
       ),
