@@ -5,6 +5,8 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/auth_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/register/register_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/onboarding/onboarding_page.dart';
+import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
+import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_page.dart';
 import 'package:meno_fe_v2/splash_page.dart';
 import 'package:meno_fe_v2/core/router/onboarding_guard.dart';
 
@@ -21,6 +23,8 @@ part 'm_router.gr.dart';
     ),
     AutoRoute(page: LoginPage),
     AutoRoute(page: RegisterPage),
+    AutoRoute(page: VerificationPage),
+    AutoRoute(page: VerificationFeedbackPage),
     AutoRoute(page: LayoutPage),
   ],
 )

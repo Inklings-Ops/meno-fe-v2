@@ -36,7 +36,6 @@ class LoginForm extends ConsumerWidget {
           (_) {
             ScaffoldMessenger.of(context).clearSnackBars();
             authEvent.checkAuthenticated();
-            authEvent.checkVerified();
           },
         ),
       );

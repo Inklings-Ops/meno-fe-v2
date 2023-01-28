@@ -57,6 +57,20 @@ class _$MRouter extends RootStackRouter {
         child: const RegisterPage(),
       );
     },
+    VerificationRoute.name: (routeData) {
+      final args = routeData.argsAs<VerificationRouteArgs>(
+          orElse: () => const VerificationRouteArgs());
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: VerificationPage(key: args.key),
+      );
+    },
+    VerificationFeedbackRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const VerificationFeedbackPage(),
+      );
+    },
     LayoutRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -87,6 +101,14 @@ class _$MRouter extends RootStackRouter {
         RouteConfig(
           RegisterRoute.name,
           path: '/register-page',
+        ),
+        RouteConfig(
+          VerificationRoute.name,
+          path: '/verification-page',
+        ),
+        RouteConfig(
+          VerificationFeedbackRoute.name,
+          path: '/verification-feedback-page',
         ),
         RouteConfig(
           LayoutRoute.name,
@@ -175,6 +197,42 @@ class RegisterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RegisterRoute';
+}
+
+/// generated route for
+/// [VerificationPage]
+class VerificationRoute extends PageRouteInfo<VerificationRouteArgs> {
+  VerificationRoute({Key? key})
+      : super(
+          VerificationRoute.name,
+          path: '/verification-page',
+          args: VerificationRouteArgs(key: key),
+        );
+
+  static const String name = 'VerificationRoute';
+}
+
+class VerificationRouteArgs {
+  const VerificationRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'VerificationRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [VerificationFeedbackPage]
+class VerificationFeedbackRoute extends PageRouteInfo<void> {
+  const VerificationFeedbackRoute()
+      : super(
+          VerificationFeedbackRoute.name,
+          path: '/verification-feedback-page',
+        );
+
+  static const String name = 'VerificationFeedbackRoute';
 }
 
 /// generated route for
