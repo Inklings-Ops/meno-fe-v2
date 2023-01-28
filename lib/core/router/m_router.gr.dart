@@ -34,6 +34,29 @@ class _$MRouter extends RootStackRouter {
         child: const OnboardingPage(),
       );
     },
+    AuthRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const AuthPage(),
+      );
+    },
+    LoginRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: LoginPage(
+          key: args.key,
+          showLeading: args.showLeading,
+        ),
+      );
+    },
+    RegisterRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const RegisterPage(),
+      );
+    },
     LayoutRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -53,9 +76,21 @@ class _$MRouter extends RootStackRouter {
           path: '/onboarding-page',
         ),
         RouteConfig(
+          AuthRoute.name,
+          path: '/auth-page',
+          guards: [onboardingGuard],
+        ),
+        RouteConfig(
+          LoginRoute.name,
+          path: '/login-page',
+        ),
+        RouteConfig(
+          RegisterRoute.name,
+          path: '/register-page',
+        ),
+        RouteConfig(
           LayoutRoute.name,
           path: '/layout-page',
-          guards: [onboardingGuard],
         ),
       ];
 }
@@ -82,6 +117,64 @@ class OnboardingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'OnboardingRoute';
+}
+
+/// generated route for
+/// [AuthPage]
+class AuthRoute extends PageRouteInfo<void> {
+  const AuthRoute()
+      : super(
+          AuthRoute.name,
+          path: '/auth-page',
+        );
+
+  static const String name = 'AuthRoute';
+}
+
+/// generated route for
+/// [LoginPage]
+class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({
+    Key? key,
+    bool showLeading = true,
+  }) : super(
+          LoginRoute.name,
+          path: '/login-page',
+          args: LoginRouteArgs(
+            key: key,
+            showLeading: showLeading,
+          ),
+        );
+
+  static const String name = 'LoginRoute';
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({
+    this.key,
+    this.showLeading = true,
+  });
+
+  final Key? key;
+
+  final bool showLeading;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key, showLeading: $showLeading}';
+  }
+}
+
+/// generated route for
+/// [RegisterPage]
+class RegisterRoute extends PageRouteInfo<void> {
+  const RegisterRoute()
+      : super(
+          RegisterRoute.name,
+          path: '/register-page',
+        );
+
+  static const String name = 'RegisterRoute';
 }
 
 /// generated route for

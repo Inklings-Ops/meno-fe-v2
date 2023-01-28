@@ -15,23 +15,23 @@ abstract class IAuthFacade {
   /// Google sign in or sign up facade;
   Future<Either<AuthFailure, Unit>> google({bool isSignUp = false});
 
-  /// Partially sigTran out facade;
-  Future<void> partialSignOut();
-
-  /// Request one time password for verification of user email facade;
-  Future<Either<AuthFailure, Unit>> requestOTP();
+  /// Checks if the authenticated user is verified
+  Future<bool> isVerified();
 
   /// Sign in facade;
-  Future<Either<AuthFailure, Unit>> signIn({
+  Future<Either<AuthFailure, Unit>> login({
     required IEmail email,
     required IPassword password,
   });
 
   /// Sign out facade;
-  Future<void> signOut();
+  Future<void> logout();
+
+  /// Partially sigTran out facade;
+  Future<void> partialLogout();
 
   /// Sign up facade;
-  Future<Either<AuthFailure, Unit>> signUp({
+  Future<Either<AuthFailure, Unit>> register({
     required IFullName fullName,
     IBio? bio,
     required IEmail email,
@@ -39,8 +39,11 @@ abstract class IAuthFacade {
     IAvatar? avatar,
   });
 
+  /// Request one time password for verification of user email facade;
+  Future<Either<AuthFailure, Unit>> requestOTP();
+
   /// User email verification facade;
-  Future<Either<AuthFailure, bool>> verifyEmail({
+  Future<Either<AuthFailure, bool>> verify({
     required IEmail email,
     required IOtp otp,
   });

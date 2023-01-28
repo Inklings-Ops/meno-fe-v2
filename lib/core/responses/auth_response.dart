@@ -36,14 +36,5 @@ class AuthResponse<T> extends Equatable {
       _$AuthResponseToJson<T>(this, toJsonT);
 
   @override
-  List<Object?> get props => [
-        status,
-        statusCode,
-        message,
-        error,
-        path,
-        status,
-        data,
-      ];
+  List<Object?> get props => [statusCode, message, error, path, status, data];
 }
-

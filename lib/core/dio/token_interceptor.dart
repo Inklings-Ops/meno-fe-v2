@@ -11,7 +11,7 @@ import 'package:meno_fe_v2/services/secure_storage_Service.dart';
 class TokenInterceptor extends Interceptor {
   @override
   Future onError(DioError err, ErrorInterceptorHandler handler) async {
-    Logger().e(
+    Logger().w(
       'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
     );
     return super.onError(err, handler);

@@ -11,7 +11,14 @@ import 'package:image_picker/image_picker.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i6;
-import 'package:meno_fe_v2/di/register_module.dart' as _i14;
+import 'package:meno_fe_v2/di/register_module.dart' as _i18;
+import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart'
+    as _i17;
+import 'package:meno_fe_v2/modules/auth/application/login/login_notifier.dart'
+    as _i16;
+import 'package:meno_fe_v2/modules/auth/domain/i_auth_facade.dart' as _i14;
+import 'package:meno_fe_v2/modules/auth/infrastructure/auth_facade.dart'
+    as _i15;
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/local/auth_local_datasource.dart'
     as _i13;
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/mapper/user_credentials_mapper.dart'
@@ -59,8 +66,17 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i12.UserMapper>(_i12.UserMapper());
     gh.factory<_i13.AuthLocalDatasource>(
         () => _i13.AuthLocalDatasource(gh<_i8.SecureStorageService>()));
+    gh.lazySingleton<_i14.IAuthFacade>(() => _i15.AuthFacade(
+          gh<_i13.AuthLocalDatasource>(),
+          gh<_i3.AuthRemoteDatasource>(),
+          gh<_i11.UserCredentialsMapper>(),
+        ));
+    gh.factory<_i16.LoginNotifier>(
+        () => _i16.LoginNotifier(gh<_i14.IAuthFacade>()));
+    gh.factory<_i17.AuthNotifier>(
+        () => _i17.AuthNotifier(gh<_i14.IAuthFacade>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i14.RegisterModule {}
+class _$RegisterModule extends _i18.RegisterModule {}

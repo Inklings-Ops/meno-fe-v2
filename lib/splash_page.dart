@@ -6,6 +6,7 @@ import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/splash_page_background_painter.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/di/injection.dart';
+import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
 
 class SplashPage extends ConsumerWidget {
@@ -23,8 +24,9 @@ class SplashPage extends ConsumerWidget {
           child: SplashScreen.callback(
             width: MSize.sw(0.8),
             name: 'assets/animations/meno_splash.riv',
-            onSuccess: (data) {
-              AutoRouter.of(context).replaceAll([const LayoutRoute()]);
+            onSuccess: (data) async {
+              ref.read(authProvider.notifier).checkAuthenticated();
+              AutoRouter.of(context).replaceAll([const AuthRoute()]);
             },
             onError: (err, stack) {},
             until: () async => await di.allReady(),
