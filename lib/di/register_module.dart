@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -19,6 +20,9 @@ abstract class RegisterModule {
   @lazySingleton
   InternetConnectionChecker get internetConnectionChecker =>
       InternetConnectionChecker.createInstance();
+
+  @lazySingleton
+  GoogleSignIn get googleSignIn => GoogleSignIn();
 
   @preResolve
   Future<SharedPreferences> get pref => SharedPreferences.getInstance();

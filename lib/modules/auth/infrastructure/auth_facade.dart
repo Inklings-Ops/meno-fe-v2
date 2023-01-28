@@ -1,7 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:meno_fe_v2/common/utils/display_auth_error.dart';
+import 'package:meno_fe_v2/core/responses/auth_response.dart';
 import 'package:meno_fe_v2/core/value/value_objects.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/otp_type.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user_credentials.dart';
 import 'package:meno_fe_v2/modules/auth/domain/errors/auth_failure.dart';
@@ -9,16 +13,17 @@ import 'package:meno_fe_v2/modules/auth/domain/i_auth_facade.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/local/auth_local_datasource.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/mapper/user_credentials_mapper.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/remote/auth_remote_datasource.dart';
-import 'package:meno_fe_v2/common/utils/display_auth_error.dart';
+import 'package:meno_fe_v2/modules/auth/infrastructure/dtos/user_credentials_dto.dart';
 // import 'package:logger/logger.dart';
 
 @LazySingleton(as: IAuthFacade)
 class AuthFacade implements IAuthFacade {
+  final GoogleSignIn _google;
   final AuthLocalDatasource _local;
   final AuthRemoteDatasource _remote;
   final UserCredentialsMapper _mapper;
 
-  AuthFacade(this._local, this._remote, this._mapper);
+  AuthFacade(this._google, this._local, this._remote, this._mapper);
 
   @override
   Future<Option<UserCredentials?>> authCredentials() async {
@@ -32,6 +37,42 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
+  Future<Either<AuthFailure, Unit>> changePassword({
+    required IPassword newPassword,
+    required IPassword currentPassword,
+  }) async {
+    try {
+      await _remote.changePassword(
+        newPassword: newPassword.get()!,
+        currentPassword: currentPassword.get()!,
+      );
+      return right(unit);
+    } on DioError catch (error) {
+      final message = displayAuthError(error);
+      if (message != null) {
+        return left(AuthFailure.message(message));
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> forgotPassword(IEmail email) async {
+    try {
+      await _remote.forgotPassword(email: email.get()!);
+      return right(unit);
+    } on DioError catch (error) {
+      final message = displayAuthError(error);
+      if (message != null) {
+        return left(AuthFailure.message(message));
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
+  }
+
+  @override
   Future<String?> getToken() async => await _local.getToken();
 
   @override
@@ -41,8 +82,37 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> google({bool isSignUp = false}) {
-    throw UnimplementedError();
+  Future<Either<AuthFailure, Unit>> google({bool isSignUp = false}) async {
+    AuthResponse<UserCredentialsDto> res;
+    try {
+      await _google.signOut();
+
+      final GoogleSignInAccount? gAccount = await _google.signIn();
+
+      if (gAccount == null) {
+        return left(const AuthFailure.message('No Google account'));
+      }
+
+      GoogleSignInAuthentication gAuth = await gAccount.authentication;
+
+      if (isSignUp) {
+        res = await _remote.googleSignUp(gAuth.idToken!);
+      } else {
+        res = await _remote.googleSignIn(gAuth.idToken!);
+      }
+
+      await _local.storeToken(res.data!.token!);
+      await _local.storeCredentials(res.data!);
+
+      return right(unit);
+    } on DioError catch (error) {
+      final message = displayAuthError(error);
+      if (message != null) {
+        return left(AuthFailure.message(message));
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
   }
 
   @override
@@ -118,13 +188,60 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> requestOTP() {
-    throw UnimplementedError();
+  Future<Either<AuthFailure, Unit>> requestOTP(OtpType type) async {
+    final email = await getUser().then((value) => value!.email.get()!);
+    try {
+      await _remote.requestOTP(type: type.name, email: email);
+      return right(unit);
+    } on DioError catch (error) {
+      final message = displayAuthError(error);
+      if (message != null) {
+        return left(AuthFailure.message(message));
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
   }
 
   @override
-  Future<Either<AuthFailure, bool>> verify(
-      {required IEmail email, required IOtp otp}) {
-    throw UnimplementedError();
+  Future<Either<AuthFailure, Unit>> resetPassword({
+    required IEmail email,
+    required IOtp code,
+    required IPassword newPassword,
+  }) async {
+    try {
+      await _remote.resetPassword(
+        email: email.get()!,
+        code: code.get()!,
+        newPassword: newPassword.get()!,
+      );
+      return right(unit);
+    } on DioError catch (error) {
+      final message = displayAuthError(error);
+      if (message != null) {
+        return left(AuthFailure.message(message));
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, bool>> verify({
+    required IEmail email,
+    required IOtp otp,
+  }) async {
+    try {
+      await _remote.verify(email: email.get()!, code: otp.get()!);
+      await _local.verifyUser();
+      return right(true);
+    } on DioError catch (error) {
+      final message = displayAuthError(error);
+      if (message != null) {
+        return left(AuthFailure.message(message));
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
   }
 }

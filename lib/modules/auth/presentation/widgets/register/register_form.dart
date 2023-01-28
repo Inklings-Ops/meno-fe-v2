@@ -6,6 +6,7 @@ import 'package:meno_fe_v2/common/widgets/m_button.dart';
 import 'package:meno_fe_v2/common/widgets/m_text_form_field.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/application/register/register_notifier.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/otp_type.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/widgets/register/password_rules_widget.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/widgets/register/upload_image_widget.dart';
 
@@ -35,11 +36,8 @@ class RegisterForm extends ConsumerWidget {
           );
         }, (success) {
           ScaffoldMessenger.of(context).clearSnackBars();
-          authEvent.sendVerificationEmail();
-          // AutoRouter.of(context).pushAndPopUntil(
-          //   const VerificationRoute(),
-          //   predicate: (_) => false,
-          // );
+          authEvent.requestOTP(OtpType.verifyEmail);
+          authEvent.checkAuthenticated();
         }),
       );
     });

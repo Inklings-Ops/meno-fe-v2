@@ -47,4 +47,12 @@ class AuthLocalDatasource {
   Future<void> storeToken(String token) async {
     await _storage.write(key: MKeys.authToken, value: token);
   }
+
+  Future<void> verifyUser() async {
+    String? jsonString = await _storage.read(key: MKeys.authCredentials);
+    final credentials = UserCredentialsDto.fromJson(jsonDecode(jsonString!));
+    final updatedCredentials = credentials.user!.copyWith(verified: true);
+    final encodedString = jsonEncode(updatedCredentials.toJson());
+    await _storage.write(key: MKeys.authCredentials, value: encodedString);
+  }
 }

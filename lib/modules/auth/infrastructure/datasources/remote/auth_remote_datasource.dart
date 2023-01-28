@@ -17,38 +17,6 @@ abstract class AuthRemoteDatasource {
     String baseUrl,
   }) = _AuthRemoteDatasource;
 
-  @POST("/api/v1/users/signup")
-  @MultiPart()
-  Future<AuthResponse<UserCredentialsDto>> register({
-    @Part() required String fullName,
-    @Part() String? bio,
-    @Part() required String email,
-    @Part() required String password,
-    @Part(name: 'image', contentType: 'image/png') File? image,
-  });
-
-  @POST("/api/v1/users/signin")
-  Future<AuthResponse<UserCredentialsDto>> login({
-    @Field() required String email,
-    @Field() required String password,
-  });
-
-  @POST("/api/v1/users/signup/google")
-  Future<AuthResponse<UserCredentialsDto>> googleSignUp(
-    @Field() String idToken,
-  );
-
-  @POST("/api/v1/users/signin/google")
-  Future<AuthResponse<UserCredentialsDto>> googleSignIn(
-    @Field() String idToken,
-  );
-
-  @POST("/api/v1/users/email/verify")
-  Future<AuthResponse<UserCredentialsDto?>> verify({
-    @Field() required String email,
-    @Field() required String code,
-  });
-
   @POST("/api/v1/users/password/change")
   Future<AuthResponse<UserCredentialsDto?>> changePassword({
     @Field() required String newPassword,
@@ -60,6 +28,38 @@ abstract class AuthRemoteDatasource {
     @Field() required String email,
   });
 
+  @POST("/api/v1/users/signin/google")
+  Future<AuthResponse<UserCredentialsDto>> googleSignIn(
+    @Field() String idToken,
+  );
+
+  @POST("/api/v1/users/signup/google")
+  Future<AuthResponse<UserCredentialsDto>> googleSignUp(
+    @Field() String idToken,
+  );
+
+  @POST("/api/v1/users/signin")
+  Future<AuthResponse<UserCredentialsDto>> login({
+    @Field() required String email,
+    @Field() required String password,
+  });
+
+  @POST("/api/v1/users/signup")
+  @MultiPart()
+  Future<AuthResponse<UserCredentialsDto>> register({
+    @Part() required String fullName,
+    @Part() String? bio,
+    @Part() required String email,
+    @Part() required String password,
+    @Part(name: 'image', contentType: 'image/png') File? image,
+  });
+
+  @POST("/api/v1/users/otp")
+  Future<AuthResponse<UserCredentialsDto?>> requestOTP({
+    @Field() required String type,
+    @Field() required String email,
+  });
+
   @POST("/api/v1/users/password/reset")
   Future<AuthResponse<UserCredentialsDto?>> resetPassword({
     @Field() required String email,
@@ -67,9 +67,9 @@ abstract class AuthRemoteDatasource {
     @Field() required String newPassword,
   });
 
-  @POST("/api/v1/users/otp")
-  Future<AuthResponse<UserCredentialsDto?>> requestOTP({
-    @Field() required String type,
+  @POST("/api/v1/users/email/verify")
+  Future<AuthResponse<UserCredentialsDto?>> verify({
     @Field() required String email,
+    @Field() required String code,
   });
 }

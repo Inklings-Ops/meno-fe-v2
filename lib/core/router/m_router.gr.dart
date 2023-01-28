@@ -58,17 +58,39 @@ class _$MRouter extends RootStackRouter {
       );
     },
     VerificationRoute.name: (routeData) {
-      final args = routeData.argsAs<VerificationRouteArgs>(
-          orElse: () => const VerificationRouteArgs());
       return AdaptivePage<dynamic>(
         routeData: routeData,
-        child: VerificationPage(key: args.key),
+        child: const VerificationPage(),
       );
     },
     VerificationFeedbackRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
         child: const VerificationFeedbackPage(),
+      );
+    },
+    ForgotPasswordOtpRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const ForgotPasswordOtpPage(),
+      );
+    },
+    ForgotPasswordRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const ForgotPasswordPage(),
+      );
+    },
+    ResetPasswordFeedbackRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const ResetPasswordFeedbackPage(),
+      );
+    },
+    ResetPasswordRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const ResetPasswordPage(),
       );
     },
     LayoutRoute.name: (routeData) {
@@ -109,6 +131,22 @@ class _$MRouter extends RootStackRouter {
         RouteConfig(
           VerificationFeedbackRoute.name,
           path: '/verification-feedback-page',
+        ),
+        RouteConfig(
+          ForgotPasswordOtpRoute.name,
+          path: '/forgot-password-otp-page',
+        ),
+        RouteConfig(
+          ForgotPasswordRoute.name,
+          path: '/forgot-password-page',
+        ),
+        RouteConfig(
+          ResetPasswordFeedbackRoute.name,
+          path: '/reset-password-feedback-page',
+        ),
+        RouteConfig(
+          ResetPasswordRoute.name,
+          path: '/reset-password-page',
         ),
         RouteConfig(
           LayoutRoute.name,
@@ -201,26 +239,14 @@ class RegisterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [VerificationPage]
-class VerificationRoute extends PageRouteInfo<VerificationRouteArgs> {
-  VerificationRoute({Key? key})
+class VerificationRoute extends PageRouteInfo<void> {
+  const VerificationRoute()
       : super(
           VerificationRoute.name,
           path: '/verification-page',
-          args: VerificationRouteArgs(key: key),
         );
 
   static const String name = 'VerificationRoute';
-}
-
-class VerificationRouteArgs {
-  const VerificationRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'VerificationRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for
@@ -233,6 +259,54 @@ class VerificationFeedbackRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'VerificationFeedbackRoute';
+}
+
+/// generated route for
+/// [ForgotPasswordOtpPage]
+class ForgotPasswordOtpRoute extends PageRouteInfo<void> {
+  const ForgotPasswordOtpRoute()
+      : super(
+          ForgotPasswordOtpRoute.name,
+          path: '/forgot-password-otp-page',
+        );
+
+  static const String name = 'ForgotPasswordOtpRoute';
+}
+
+/// generated route for
+/// [ForgotPasswordPage]
+class ForgotPasswordRoute extends PageRouteInfo<void> {
+  const ForgotPasswordRoute()
+      : super(
+          ForgotPasswordRoute.name,
+          path: '/forgot-password-page',
+        );
+
+  static const String name = 'ForgotPasswordRoute';
+}
+
+/// generated route for
+/// [ResetPasswordFeedbackPage]
+class ResetPasswordFeedbackRoute extends PageRouteInfo<void> {
+  const ResetPasswordFeedbackRoute()
+      : super(
+          ResetPasswordFeedbackRoute.name,
+          path: '/reset-password-feedback-page',
+        );
+
+  static const String name = 'ResetPasswordFeedbackRoute';
+}
+
+/// generated route for
+/// [ResetPasswordPage]
+class ResetPasswordRoute extends PageRouteInfo<void> {
+  const ResetPasswordRoute()
+      : super(
+          ResetPasswordRoute.name,
+          path: '/reset-password-page',
+        );
+
+  static const String name = 'ResetPasswordRoute';
 }
 
 /// generated route for
