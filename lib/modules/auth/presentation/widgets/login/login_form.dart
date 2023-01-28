@@ -87,7 +87,7 @@ class LoginForm extends ConsumerWidget {
           MButton(
             title: 'Login',
             loading: state.loading,
-            disabled: !state.email.isValid() || state.password.get() == null,
+            disabled: !event.isFormValid,
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 event.loginPressed();

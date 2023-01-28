@@ -19,6 +19,8 @@ class LoginNotifier extends StateNotifier<LoginState> {
   LoginNotifier(this._facade) : super(LoginState.initial());
   final IAuthFacade _facade;
 
+  bool get isFormValid => state.email.isValid() || state.password.get() != null;
+
   void emailChanged(String email) {
     state = state.copyWith(email: IEmail(email));
   }
