@@ -9,13 +9,14 @@ class ProfileAppBar extends ConsumerWidget with PreferredSizeWidget {
   const ProfileAppBar({super.key});
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>  Size.fromHeight(MSize.r(100));
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final event = ref.watch(authProvider.notifier);
 
     return AppBar(
+      toolbarHeight: MSize.r(100),
       backgroundColor: Colors.transparent,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.dark,

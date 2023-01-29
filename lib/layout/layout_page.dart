@@ -5,6 +5,7 @@ import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/layout/loading_page.dart';
+import 'package:meno_fe_v2/layout/widgets/m_app_bar.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/application/login_return/login_return_notifier.dart';
@@ -12,7 +13,9 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_page.dart';
+import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/home_app_bar.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_app_bar.dart';
 
 const items = [
   BottomNavigationBarItem(label: 'Home', icon: Icon(MIcons.Home1)),
@@ -51,7 +54,23 @@ class LayoutPage extends ConsumerWidget {
       ),
       authenticated: (a) => AutoTabsScaffold(
         key: MKeys.layoutScaffoldKey,
+        extendBodyBehindAppBar: true,
         routes: routes,
+        appBarBuilder: (context, tabsRouter) {
+          void onAvatarPressed() => tabsRouter.setActiveIndex(3);
+
+          switch (tabsRouter.activeIndex) {
+            case 0:
+              return HomeAppBar(onAvatarPressed: onAvatarPressed);
+            case 3:
+              return const ProfileAppBar();
+            default:
+              return MAppBar(
+                title: tabsRouter.current.name.split('R')[0],
+                onAvatarPressed: onAvatarPressed,
+              );
+          }
+        },
         bottomNavigationBuilder: (context, tabsRouter) => MBottomNavigationBar(
           currentIndex: tabsRouter.activeIndex,
           onTap: tabsRouter.setActiveIndex,
