@@ -1,9 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:injectable/injectable.dart';
 
-@Injectable()
 class SecureStorageService {
   final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions);
 

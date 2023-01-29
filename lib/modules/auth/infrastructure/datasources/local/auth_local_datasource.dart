@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:injectable/injectable.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/dtos/user_credentials_dto.dart';
-import 'package:meno_fe_v2/services/secure_storage_Service.dart';
+import 'package:meno_fe_v2/services/secure_storage_service.dart';
 
 @injectable
 class AuthLocalDatasource {

@@ -12,6 +12,7 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_page.dart';
+import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 
 const items = [
   BottomNavigationBarItem(label: 'Home', icon: Icon(MIcons.Home1)),
@@ -33,6 +34,9 @@ class LayoutPage extends ConsumerWidget {
         orElse: () => null,
         partiallyUnauthenticated: () {
           ref.watch(loginReturnProvider.notifier).init();
+        },
+        authenticated: (_) {
+          ref.watch(profileProvider.notifier).authProfileLoaded();
         },
       );
     });

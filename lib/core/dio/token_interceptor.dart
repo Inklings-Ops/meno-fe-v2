@@ -6,7 +6,7 @@ import 'package:dio/dio.dart' hide Headers;
 import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/di/injection.dart';
-import 'package:meno_fe_v2/services/secure_storage_Service.dart';
+import 'package:meno_fe_v2/services/secure_storage_service.dart';
 
 class TokenInterceptor extends Interceptor {
   @override
