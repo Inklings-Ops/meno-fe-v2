@@ -2,7 +2,7 @@ part of 'auth_notifier.dart';
 
 @freezed
 class AuthState with _$AuthState {
-  const factory AuthState.authenticated(UserCredentials? credentials) =
+  const factory AuthState.authenticated(UserCredentials credentials) =
       _Authenticated;
   const factory AuthState.initial() = _Initial;
   const factory AuthState.unauthenticated() = _Unauthenticated;
