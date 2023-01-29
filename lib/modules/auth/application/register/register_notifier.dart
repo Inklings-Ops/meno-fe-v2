@@ -35,30 +35,39 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
   final MediaService _mediaService;
 
   bool get isFormValid =>
-      state.fullName.get() != null ||
-      state.email.isValid() ||
+      state.fullName.get() != null &&
+      state.email.isValid() &&
       state.password.isValid();
-
-  void fullNameChanged(String fullName) {
-    state = state.copyWith(fullName: IFullName(fullName));
-  }
-
-  void emailChanged(String email) {
-    state = state.copyWith(email: IEmail(email));
-  }
-
-  void passwordChanged(String password) {
-    state = state.copyWith(
-      password: IPassword(password),
-      passwordController: TextEditingController(text: password),
-    );
-  }
 
   Future<void> avatarPicked(bool fromGallery) async {
     final file = await _mediaService.getImage(fromGallery: fromGallery);
     if (file != null) {
       state = state.copyWith(avatar: IAvatar(File(file.path)));
     }
+  }
+
+  void emailChanged(String email) {
+    state = state.copyWith(email: IEmail(email), option: none());
+  }
+
+  void fullNameChanged(String fullName) {
+    state = state.copyWith(fullName: IFullName(fullName), option: none());
+  }
+
+  Future<void> googleRegisterPressed() async {
+    state = state.copyWith(googleButtonLoading: true, loading: false);
+
+    final r = await _facade.google(isRegister: true);
+
+    state = state.copyWith(googleButtonLoading: false, option: some(r));
+  }
+
+  void passwordChanged(String password) {
+    state = state.copyWith(
+      password: IPassword(password),
+      passwordController: TextEditingController(text: password),
+      option: none(),
+    );
   }
 
   Future<void> registerPressed() async {

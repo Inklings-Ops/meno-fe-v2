@@ -37,7 +37,9 @@ class LoginReturnPage extends StatelessWidget {
                 MSize.hS(4),
                 MTextButton(
                   title: 'Create one',
-                  onPressed: () => AutoRouter.of(context).push(LoginRoute()),
+                  onPressed: () {
+                    AutoRouter.of(context).push(const RegisterRoute());
+                  },
                   fontWeight: FontWeight.w600,
                 ),
               ],

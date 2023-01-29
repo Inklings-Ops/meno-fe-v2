@@ -1,5 +1,8 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meno_fe_v2/common/utils/display_auth_error.dart';
@@ -14,7 +17,7 @@ import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/local/auth_lo
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/mapper/user_credentials_mapper.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/remote/auth_remote_datasource.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/dtos/user_credentials_dto.dart';
-// import 'package:logger/logger.dart';
+import 'package:logger/logger.dart';
 
 @LazySingleton(as: IAuthFacade)
 class AuthFacade implements IAuthFacade {
@@ -82,24 +85,26 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> google({bool isSignUp = false}) async {
+  Future<Either<AuthFailure, Unit>> google({bool isRegister = false}) async {
     AuthResponse<UserCredentialsDto> res;
     try {
-      await _google.signOut();
-
       final GoogleSignInAccount? gAccount = await _google.signIn();
+      Logger().i(gAccount);
 
       if (gAccount == null) {
         return left(const AuthFailure.message('No Google account'));
       }
 
       GoogleSignInAuthentication gAuth = await gAccount.authentication;
+      Logger().i(gAuth);
 
-      if (isSignUp) {
+      if (isRegister) {
         res = await _remote.googleSignUp(gAuth.idToken!);
       } else {
         res = await _remote.googleSignIn(gAuth.idToken!);
       }
+
+      Logger().i(res);
 
       await _local.storeToken(res.data!.token!);
       await _local.storeCredentials(res.data!);
@@ -112,6 +117,10 @@ class AuthFacade implements IAuthFacade {
       } else {
         return left(const AuthFailure.serverError());
       }
+    } on PlatformException catch (error) {
+      Logger().i(error);
+      Logger().i(error.message);
+      return left(AuthFailure.message(error.message!));
     }
   }
 
@@ -141,6 +150,8 @@ class AuthFacade implements IAuthFacade {
 
       return right(unit);
     } on DioError catch (error) {
+      Logger().i(error.response);
+
       final message = displayAuthError(error);
       if (message != null) {
         return left(AuthFailure.message(message));

@@ -59,17 +59,19 @@ class PasswordRulesWidget extends ConsumerWidget {
     final registerState = ref.watch(registerProvider);
     final length = state.rules.length;
 
-    return Column(
-      children: [
-        MSize.vS(5),
-        for (var i = 0; i < length; i++) ...[
-          PasswordRuleItem(
-            ruleMap: state.rules[i],
-            password: registerState.passwordController?.text,
-            unsetColor: Colors.black45,
-          ),
-        ]
-      ],
+    return Visibility(
+      visible: registerState.passwordController?.text != null,
+      child: Column(
+        children: [
+          MSize.vS(5),
+          for (var i = 0; i < length; i++) ...[
+            PasswordRuleItem(
+              ruleMap: state.rules[i],
+              password: registerState.passwordController?.text,
+            ),
+          ]
+        ],
+      ),
     );
   }
 }

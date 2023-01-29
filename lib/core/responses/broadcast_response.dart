@@ -42,7 +42,6 @@ class BroadcastResponse<T> extends Equatable {
         message,
         error,
         path,
-        status,
         data,
       ];
 }

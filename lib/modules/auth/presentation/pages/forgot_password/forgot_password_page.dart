@@ -18,7 +18,7 @@ class ForgotPasswordPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "Please fill in your email address. You will receive a \nlink to create a new password via email.",
+            "Please fill in your email address. You will receive a link to create a new password via email.",
             style: TextStyle(
               fontSize: MSize.fS(16),
               fontWeight: FontWeight.w500,

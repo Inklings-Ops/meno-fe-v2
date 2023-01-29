@@ -10,6 +10,7 @@ class RegisterState with _$RegisterState {
     IAvatar? avatar,
     required bool showError,
     required bool loading,
+    required bool googleButtonLoading,
     required Option<Either<AuthFailure, Unit>> option,
   }) = _RegisterState;
 
@@ -21,6 +22,7 @@ class RegisterState with _$RegisterState {
         avatar: IAvatar(null),
         showError: false,
         loading: false,
+        googleButtonLoading: false,
         option: none(),
       );
 }

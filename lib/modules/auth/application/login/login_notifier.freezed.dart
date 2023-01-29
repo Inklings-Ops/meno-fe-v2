@@ -20,6 +20,7 @@ mixin _$LoginState {
   IPassword get password => throw _privateConstructorUsedError;
   bool get showError => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
+  bool get googleButtonLoading => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get option =>
       throw _privateConstructorUsedError;
 
@@ -39,6 +40,7 @@ abstract class $LoginStateCopyWith<$Res> {
       IPassword password,
       bool showError,
       bool loading,
+      bool googleButtonLoading,
       Option<Either<AuthFailure, Unit>> option});
 }
 
@@ -59,6 +61,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? password = null,
     Object? showError = null,
     Object? loading = null,
+    Object? googleButtonLoading = null,
     Object? option = null,
   }) {
     return _then(_value.copyWith(
@@ -77,6 +80,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      googleButtonLoading: null == googleButtonLoading
+          ? _value.googleButtonLoading
+          : googleButtonLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       option: null == option
           ? _value.option
@@ -99,6 +106,7 @@ abstract class _$$_LoginStateCopyWith<$Res>
       IPassword password,
       bool showError,
       bool loading,
+      bool googleButtonLoading,
       Option<Either<AuthFailure, Unit>> option});
 }
 
@@ -117,6 +125,7 @@ class __$$_LoginStateCopyWithImpl<$Res>
     Object? password = null,
     Object? showError = null,
     Object? loading = null,
+    Object? googleButtonLoading = null,
     Object? option = null,
   }) {
     return _then(_$_LoginState(
@@ -136,6 +145,10 @@ class __$$_LoginStateCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      googleButtonLoading: null == googleButtonLoading
+          ? _value.googleButtonLoading
+          : googleButtonLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       option: null == option
           ? _value.option
           : option // ignore: cast_nullable_to_non_nullable
@@ -152,6 +165,7 @@ class _$_LoginState implements _LoginState {
       required this.password,
       required this.showError,
       required this.loading,
+      required this.googleButtonLoading,
       required this.option});
 
   @override
@@ -163,11 +177,13 @@ class _$_LoginState implements _LoginState {
   @override
   final bool loading;
   @override
+  final bool googleButtonLoading;
+  @override
   final Option<Either<AuthFailure, Unit>> option;
 
   @override
   String toString() {
-    return 'LoginState(email: $email, password: $password, showError: $showError, loading: $loading, option: $option)';
+    return 'LoginState(email: $email, password: $password, showError: $showError, loading: $loading, googleButtonLoading: $googleButtonLoading, option: $option)';
   }
 
   @override
@@ -181,12 +197,14 @@ class _$_LoginState implements _LoginState {
             (identical(other.showError, showError) ||
                 other.showError == showError) &&
             (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.googleButtonLoading, googleButtonLoading) ||
+                other.googleButtonLoading == googleButtonLoading) &&
             (identical(other.option, option) || other.option == option));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, email, password, showError, loading, option);
+  int get hashCode => Object.hash(runtimeType, email, password, showError,
+      loading, googleButtonLoading, option);
 
   @JsonKey(ignore: true)
   @override
@@ -201,6 +219,7 @@ abstract class _LoginState implements LoginState {
       required final IPassword password,
       required final bool showError,
       required final bool loading,
+      required final bool googleButtonLoading,
       required final Option<Either<AuthFailure, Unit>> option}) = _$_LoginState;
 
   @override
@@ -211,6 +230,8 @@ abstract class _LoginState implements LoginState {
   bool get showError;
   @override
   bool get loading;
+  @override
+  bool get googleButtonLoading;
   @override
   Option<Either<AuthFailure, Unit>> get option;
   @override

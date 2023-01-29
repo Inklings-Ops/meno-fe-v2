@@ -14,7 +14,7 @@ abstract class IAuthFacade {
   Future<User?> getUser();
 
   /// Google sign in or sign up facade
-  Future<Either<AuthFailure, Unit>> google({bool isSignUp = false});
+  Future<Either<AuthFailure, Unit>> google({bool isRegister = false});
 
   /// Checks if the authenticated user is verified
   Future<bool> isVerified();

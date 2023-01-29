@@ -7,6 +7,7 @@ class LoginState with _$LoginState {
     required IPassword password,
     required bool showError,
     required bool loading,
+    required bool googleButtonLoading,
     required Option<Either<AuthFailure, Unit>> option,
   }) = _LoginState;
 
@@ -15,6 +16,7 @@ class LoginState with _$LoginState {
         password: IPassword(''),
         showError: false,
         loading: false,
+        googleButtonLoading: false,
         option: none(),
       );
 }

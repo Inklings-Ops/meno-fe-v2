@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
@@ -5,6 +6,7 @@ import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_button.dart';
 import 'package:meno_fe_v2/common/widgets/m_text_button.dart';
 import 'package:meno_fe_v2/common/widgets/m_text_form_field.dart';
+import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/application/login/login_notifier.dart';
 
@@ -78,15 +80,16 @@ class LoginForm extends ConsumerWidget {
             alignment: Alignment.centerRight,
             child: MTextButton(
               title: 'Forgot Password?',
-              onPressed: () {},
-              // onPressed: () => context.router.push(const ForgotPasswordRoute()),
+              onPressed: () {
+                AutoRouter.of(context).push(const ForgotPasswordRoute());
+              },
             ),
           ),
           MSize.vS(30),
           MButton(
             title: 'Login',
             loading: state.loading,
-            disabled: !event.isFormValid,
+            disabled: !event.isFormValid || state.googleButtonLoading,
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 event.loginPressed();

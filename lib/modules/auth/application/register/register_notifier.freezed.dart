@@ -24,6 +24,7 @@ mixin _$RegisterState {
   IAvatar? get avatar => throw _privateConstructorUsedError;
   bool get showError => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
+  bool get googleButtonLoading => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get option =>
       throw _privateConstructorUsedError;
 
@@ -46,6 +47,7 @@ abstract class $RegisterStateCopyWith<$Res> {
       IAvatar? avatar,
       bool showError,
       bool loading,
+      bool googleButtonLoading,
       Option<Either<AuthFailure, Unit>> option});
 }
 
@@ -69,6 +71,7 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
     Object? avatar = freezed,
     Object? showError = null,
     Object? loading = null,
+    Object? googleButtonLoading = null,
     Object? option = null,
   }) {
     return _then(_value.copyWith(
@@ -100,6 +103,10 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      googleButtonLoading: null == googleButtonLoading
+          ? _value.googleButtonLoading
+          : googleButtonLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       option: null == option
           ? _value.option
           : option // ignore: cast_nullable_to_non_nullable
@@ -124,6 +131,7 @@ abstract class _$$_RegisterStateCopyWith<$Res>
       IAvatar? avatar,
       bool showError,
       bool loading,
+      bool googleButtonLoading,
       Option<Either<AuthFailure, Unit>> option});
 }
 
@@ -145,6 +153,7 @@ class __$$_RegisterStateCopyWithImpl<$Res>
     Object? avatar = freezed,
     Object? showError = null,
     Object? loading = null,
+    Object? googleButtonLoading = null,
     Object? option = null,
   }) {
     return _then(_$_RegisterState(
@@ -176,6 +185,10 @@ class __$$_RegisterStateCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      googleButtonLoading: null == googleButtonLoading
+          ? _value.googleButtonLoading
+          : googleButtonLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       option: null == option
           ? _value.option
           : option // ignore: cast_nullable_to_non_nullable
@@ -195,6 +208,7 @@ class _$_RegisterState implements _RegisterState {
       this.avatar,
       required this.showError,
       required this.loading,
+      required this.googleButtonLoading,
       required this.option});
 
   @override
@@ -212,11 +226,13 @@ class _$_RegisterState implements _RegisterState {
   @override
   final bool loading;
   @override
+  final bool googleButtonLoading;
+  @override
   final Option<Either<AuthFailure, Unit>> option;
 
   @override
   String toString() {
-    return 'RegisterState(fullName: $fullName, email: $email, password: $password, passwordController: $passwordController, avatar: $avatar, showError: $showError, loading: $loading, option: $option)';
+    return 'RegisterState(fullName: $fullName, email: $email, password: $password, passwordController: $passwordController, avatar: $avatar, showError: $showError, loading: $loading, googleButtonLoading: $googleButtonLoading, option: $option)';
   }
 
   @override
@@ -235,12 +251,23 @@ class _$_RegisterState implements _RegisterState {
             (identical(other.showError, showError) ||
                 other.showError == showError) &&
             (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.googleButtonLoading, googleButtonLoading) ||
+                other.googleButtonLoading == googleButtonLoading) &&
             (identical(other.option, option) || other.option == option));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, fullName, email, password,
-      passwordController, avatar, showError, loading, option);
+  int get hashCode => Object.hash(
+      runtimeType,
+      fullName,
+      email,
+      password,
+      passwordController,
+      avatar,
+      showError,
+      loading,
+      googleButtonLoading,
+      option);
 
   @JsonKey(ignore: true)
   @override
@@ -258,6 +285,7 @@ abstract class _RegisterState implements RegisterState {
           final IAvatar? avatar,
           required final bool showError,
           required final bool loading,
+          required final bool googleButtonLoading,
           required final Option<Either<AuthFailure, Unit>> option}) =
       _$_RegisterState;
 
@@ -275,6 +303,8 @@ abstract class _RegisterState implements RegisterState {
   bool get showError;
   @override
   bool get loading;
+  @override
+  bool get googleButtonLoading;
   @override
   Option<Either<AuthFailure, Unit>> get option;
   @override

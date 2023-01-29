@@ -101,7 +101,7 @@ class RegisterForm extends ConsumerWidget {
           MButton(
             title: 'Create Account',
             loading: state.loading,
-            disabled: !event.isFormValid,
+            disabled: !event.isFormValid || state.googleButtonLoading,
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 event.registerPressed();

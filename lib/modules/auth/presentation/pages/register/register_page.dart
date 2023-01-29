@@ -27,7 +27,7 @@ class RegisterPage extends StatelessWidget {
             ),
           ),
           MSize.vS(15),
-          const MGoogleButton('Create with Google'),
+          const MGoogleButton('Create with Google', isRegister: true),
           MSize.vS(50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

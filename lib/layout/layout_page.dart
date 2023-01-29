@@ -7,6 +7,7 @@ import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/layout/loading_page.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
+import 'package:meno_fe_v2/modules/auth/application/login_return/login_return_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
@@ -26,6 +27,15 @@ class LayoutPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(authProvider);
+
+    ref.listen<AuthState>(authProvider, (previous, next) {
+      next.maybeWhen(
+        orElse: () => null,
+        partiallyUnauthenticated: () {
+          ref.watch(loginReturnProvider.notifier).init();
+        },
+      );
+    });
 
     return state.maybeMap(
       orElse: () => const LoadingPage(),
