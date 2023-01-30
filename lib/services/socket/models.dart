@@ -2,9 +2,11 @@ import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast_listener.dart';
 
 abstract class SocketData {
-  List<Broadcast>? liveBroadcasts;
-  List<BroadcastListener>? listeners;
+  List<Broadcast?>? liveBroadcasts;
+  List<BroadcastListener?>? listeners;
   Broadcast? liveBroadcast;
+  Broadcast? newBroadcast;
+  Broadcast? endedBroadcast;
   bool? loading;
   int? numberOfLiveBroadcasts;
   int? numberOfListeners;
@@ -16,6 +18,8 @@ abstract class SocketData {
     this.liveBroadcasts,
     this.listeners,
     this.liveBroadcast,
+    this.newBroadcast,
+    this.endedBroadcast,
     this.loading,
     this.numberOfLiveBroadcasts,
     this.numberOfListeners,
@@ -42,7 +46,7 @@ class GetNumberOfLiveBroadcastsData extends SocketData {
 }
 
 class GetNumberOfBroadcastListenersData extends SocketData {
-  GetNumberOfBroadcastListenersData({required super.numberOfListeners});
+  GetNumberOfBroadcastListenersData({required super.numberOfLiveListeners});
 }
 
 class NewListenerData extends SocketData {
@@ -55,6 +59,13 @@ class NumberOfLiveBroadcastsData extends SocketData {
 
 class NumberOfLiveListenersData extends SocketData {
   NumberOfLiveListenersData({required super.numberOfLiveListeners});
+}
+
+class NewBroadcastData extends SocketData {
+  NewBroadcastData({required super.newBroadcast});
+}
+class EndedBroadcastData extends SocketData {
+  EndedBroadcastData({required super.endedBroadcast});
 }
 
 class SocketError extends SocketData {

@@ -39,7 +39,7 @@ class LayoutPage extends ConsumerWidget {
           ref.watch(loginReturnProvider.notifier).init();
         },
         authenticated: (_) {
-          ref.watch(profileProvider.notifier).authProfileLoaded();
+          ref.read(profileProvider.notifier).authProfileLoaded();
         },
       );
     });

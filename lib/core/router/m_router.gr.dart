@@ -104,6 +104,28 @@ class _$MRouter extends RootStackRouter {
         child: const LayoutPage(),
       );
     },
+    CreateBroadcastRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const CreateBroadcastPage(),
+      );
+    },
+    BroadcastRoute.name: (routeData) {
+      final args = routeData.argsAs<BroadcastRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: BroadcastPage(
+          key: args.key,
+          broadcast: args.broadcast,
+        ),
+      );
+    },
+    StreamRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const StreamPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -202,6 +224,18 @@ class _$MRouter extends RootStackRouter {
               parent: LayoutRoute.name,
             ),
           ],
+        ),
+        RouteConfig(
+          CreateBroadcastRoute.name,
+          path: '/create-broadcast-page',
+        ),
+        RouteConfig(
+          BroadcastRoute.name,
+          path: '/broadcast-page',
+        ),
+        RouteConfig(
+          StreamRoute.name,
+          path: '/stream-page',
         ),
       ];
 }
@@ -393,6 +427,64 @@ class LayoutRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LayoutRoute';
+}
+
+/// generated route for
+/// [CreateBroadcastPage]
+class CreateBroadcastRoute extends PageRouteInfo<void> {
+  const CreateBroadcastRoute()
+      : super(
+          CreateBroadcastRoute.name,
+          path: '/create-broadcast-page',
+        );
+
+  static const String name = 'CreateBroadcastRoute';
+}
+
+/// generated route for
+/// [BroadcastPage]
+class BroadcastRoute extends PageRouteInfo<BroadcastRouteArgs> {
+  BroadcastRoute({
+    Key? key,
+    required Broadcast broadcast,
+  }) : super(
+          BroadcastRoute.name,
+          path: '/broadcast-page',
+          args: BroadcastRouteArgs(
+            key: key,
+            broadcast: broadcast,
+          ),
+        );
+
+  static const String name = 'BroadcastRoute';
+}
+
+class BroadcastRouteArgs {
+  const BroadcastRouteArgs({
+    this.key,
+    required this.broadcast,
+  });
+
+  final Key? key;
+
+  final Broadcast broadcast;
+
+  @override
+  String toString() {
+    return 'BroadcastRouteArgs{key: $key, broadcast: $broadcast}';
+  }
+}
+
+/// generated route for
+/// [StreamPage]
+class StreamRoute extends PageRouteInfo<void> {
+  const StreamRoute()
+      : super(
+          StreamRoute.name,
+          path: '/stream-page',
+        );
+
+  static const String name = 'StreamRoute';
 }
 
 /// generated route for

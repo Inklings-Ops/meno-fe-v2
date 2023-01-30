@@ -23,7 +23,7 @@ class TokenInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     final token = await di<SecureStorageService>().read(key: MKeys.authToken);
-    Logger().wtf('THIS IS TOKEN FROM INTERCEPTOR ==> $token');
+    Logger().i('THIS IS TOKEN FROM INTERCEPTOR ==> $token');
 
     if (token != null) {
       options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';

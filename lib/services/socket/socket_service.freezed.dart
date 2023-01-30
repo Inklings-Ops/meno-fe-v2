@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'socket.dart';
+part of 'socket_service.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,14 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SocketState {
-  List<Broadcast>? get liveBroadcasts => throw _privateConstructorUsedError;
-  List<BroadcastListener>? get listeners => throw _privateConstructorUsedError;
-  BroadcastListener? get newListener => throw _privateConstructorUsedError;
-  Broadcast? get liveBroadcast => throw _privateConstructorUsedError;
-  bool? get loading => throw _privateConstructorUsedError;
+  List<Broadcast?>? get liveBroadcasts => throw _privateConstructorUsedError;
+  List<BroadcastListener?>? get listeners => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
+  int? get numberOfLiveListeners => throw _privateConstructorUsedError;
   int? get numberOfLiveBroadcasts => throw _privateConstructorUsedError;
   int? get numberOfListeners => throw _privateConstructorUsedError;
-  int? get numberOfLiveListeners => throw _privateConstructorUsedError;
+  BroadcastListener? get newListener => throw _privateConstructorUsedError;
+  Broadcast? get liveBroadcast => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,14 +38,14 @@ abstract class $SocketStateCopyWith<$Res> {
       _$SocketStateCopyWithImpl<$Res, SocketState>;
   @useResult
   $Res call(
-      {List<Broadcast>? liveBroadcasts,
-      List<BroadcastListener>? listeners,
-      BroadcastListener? newListener,
-      Broadcast? liveBroadcast,
-      bool? loading,
+      {List<Broadcast?>? liveBroadcasts,
+      List<BroadcastListener?>? listeners,
+      bool loading,
+      int? numberOfLiveListeners,
       int? numberOfLiveBroadcasts,
       int? numberOfListeners,
-      int? numberOfLiveListeners,
+      BroadcastListener? newListener,
+      Broadcast? liveBroadcast,
       String? error});
 
   $BroadcastListenerCopyWith<$Res>? get newListener;
@@ -67,35 +67,31 @@ class _$SocketStateCopyWithImpl<$Res, $Val extends SocketState>
   $Res call({
     Object? liveBroadcasts = freezed,
     Object? listeners = freezed,
-    Object? newListener = freezed,
-    Object? liveBroadcast = freezed,
-    Object? loading = freezed,
+    Object? loading = null,
+    Object? numberOfLiveListeners = freezed,
     Object? numberOfLiveBroadcasts = freezed,
     Object? numberOfListeners = freezed,
-    Object? numberOfLiveListeners = freezed,
+    Object? newListener = freezed,
+    Object? liveBroadcast = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       liveBroadcasts: freezed == liveBroadcasts
           ? _value.liveBroadcasts
           : liveBroadcasts // ignore: cast_nullable_to_non_nullable
-              as List<Broadcast>?,
+              as List<Broadcast?>?,
       listeners: freezed == listeners
           ? _value.listeners
           : listeners // ignore: cast_nullable_to_non_nullable
-              as List<BroadcastListener>?,
-      newListener: freezed == newListener
-          ? _value.newListener
-          : newListener // ignore: cast_nullable_to_non_nullable
-              as BroadcastListener?,
-      liveBroadcast: freezed == liveBroadcast
-          ? _value.liveBroadcast
-          : liveBroadcast // ignore: cast_nullable_to_non_nullable
-              as Broadcast?,
-      loading: freezed == loading
+              as List<BroadcastListener?>?,
+      loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
+      numberOfLiveListeners: freezed == numberOfLiveListeners
+          ? _value.numberOfLiveListeners
+          : numberOfLiveListeners // ignore: cast_nullable_to_non_nullable
+              as int?,
       numberOfLiveBroadcasts: freezed == numberOfLiveBroadcasts
           ? _value.numberOfLiveBroadcasts
           : numberOfLiveBroadcasts // ignore: cast_nullable_to_non_nullable
@@ -104,10 +100,14 @@ class _$SocketStateCopyWithImpl<$Res, $Val extends SocketState>
           ? _value.numberOfListeners
           : numberOfListeners // ignore: cast_nullable_to_non_nullable
               as int?,
-      numberOfLiveListeners: freezed == numberOfLiveListeners
-          ? _value.numberOfLiveListeners
-          : numberOfLiveListeners // ignore: cast_nullable_to_non_nullable
-              as int?,
+      newListener: freezed == newListener
+          ? _value.newListener
+          : newListener // ignore: cast_nullable_to_non_nullable
+              as BroadcastListener?,
+      liveBroadcast: freezed == liveBroadcast
+          ? _value.liveBroadcast
+          : liveBroadcast // ignore: cast_nullable_to_non_nullable
+              as Broadcast?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -149,14 +149,14 @@ abstract class _$$_SocketStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Broadcast>? liveBroadcasts,
-      List<BroadcastListener>? listeners,
-      BroadcastListener? newListener,
-      Broadcast? liveBroadcast,
-      bool? loading,
+      {List<Broadcast?>? liveBroadcasts,
+      List<BroadcastListener?>? listeners,
+      bool loading,
+      int? numberOfLiveListeners,
       int? numberOfLiveBroadcasts,
       int? numberOfListeners,
-      int? numberOfLiveListeners,
+      BroadcastListener? newListener,
+      Broadcast? liveBroadcast,
       String? error});
 
   @override
@@ -178,35 +178,31 @@ class __$$_SocketStateCopyWithImpl<$Res>
   $Res call({
     Object? liveBroadcasts = freezed,
     Object? listeners = freezed,
-    Object? newListener = freezed,
-    Object? liveBroadcast = freezed,
-    Object? loading = freezed,
+    Object? loading = null,
+    Object? numberOfLiveListeners = freezed,
     Object? numberOfLiveBroadcasts = freezed,
     Object? numberOfListeners = freezed,
-    Object? numberOfLiveListeners = freezed,
+    Object? newListener = freezed,
+    Object? liveBroadcast = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_SocketState(
       liveBroadcasts: freezed == liveBroadcasts
           ? _value._liveBroadcasts
           : liveBroadcasts // ignore: cast_nullable_to_non_nullable
-              as List<Broadcast>?,
+              as List<Broadcast?>?,
       listeners: freezed == listeners
           ? _value._listeners
           : listeners // ignore: cast_nullable_to_non_nullable
-              as List<BroadcastListener>?,
-      newListener: freezed == newListener
-          ? _value.newListener
-          : newListener // ignore: cast_nullable_to_non_nullable
-              as BroadcastListener?,
-      liveBroadcast: freezed == liveBroadcast
-          ? _value.liveBroadcast
-          : liveBroadcast // ignore: cast_nullable_to_non_nullable
-              as Broadcast?,
-      loading: freezed == loading
+              as List<BroadcastListener?>?,
+      loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
+      numberOfLiveListeners: freezed == numberOfLiveListeners
+          ? _value.numberOfLiveListeners
+          : numberOfLiveListeners // ignore: cast_nullable_to_non_nullable
+              as int?,
       numberOfLiveBroadcasts: freezed == numberOfLiveBroadcasts
           ? _value.numberOfLiveBroadcasts
           : numberOfLiveBroadcasts // ignore: cast_nullable_to_non_nullable
@@ -215,10 +211,14 @@ class __$$_SocketStateCopyWithImpl<$Res>
           ? _value.numberOfListeners
           : numberOfListeners // ignore: cast_nullable_to_non_nullable
               as int?,
-      numberOfLiveListeners: freezed == numberOfLiveListeners
-          ? _value.numberOfLiveListeners
-          : numberOfLiveListeners // ignore: cast_nullable_to_non_nullable
-              as int?,
+      newListener: freezed == newListener
+          ? _value.newListener
+          : newListener // ignore: cast_nullable_to_non_nullable
+              as BroadcastListener?,
+      liveBroadcast: freezed == liveBroadcast
+          ? _value.liveBroadcast
+          : liveBroadcast // ignore: cast_nullable_to_non_nullable
+              as Broadcast?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -231,21 +231,21 @@ class __$$_SocketStateCopyWithImpl<$Res>
 
 class _$_SocketState implements _SocketState {
   _$_SocketState(
-      {final List<Broadcast>? liveBroadcasts,
-      final List<BroadcastListener>? listeners,
-      this.newListener,
-      this.liveBroadcast,
-      this.loading,
+      {final List<Broadcast?>? liveBroadcasts,
+      final List<BroadcastListener?>? listeners,
+      required this.loading,
+      this.numberOfLiveListeners,
       this.numberOfLiveBroadcasts,
       this.numberOfListeners,
-      this.numberOfLiveListeners,
+      this.newListener,
+      this.liveBroadcast,
       this.error})
       : _liveBroadcasts = liveBroadcasts,
         _listeners = listeners;
 
-  final List<Broadcast>? _liveBroadcasts;
+  final List<Broadcast?>? _liveBroadcasts;
   @override
-  List<Broadcast>? get liveBroadcasts {
+  List<Broadcast?>? get liveBroadcasts {
     final value = _liveBroadcasts;
     if (value == null) return null;
     if (_liveBroadcasts is EqualUnmodifiableListView) return _liveBroadcasts;
@@ -253,9 +253,9 @@ class _$_SocketState implements _SocketState {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<BroadcastListener>? _listeners;
+  final List<BroadcastListener?>? _listeners;
   @override
-  List<BroadcastListener>? get listeners {
+  List<BroadcastListener?>? get listeners {
     final value = _listeners;
     if (value == null) return null;
     if (_listeners is EqualUnmodifiableListView) return _listeners;
@@ -264,23 +264,23 @@ class _$_SocketState implements _SocketState {
   }
 
   @override
-  final BroadcastListener? newListener;
+  final bool loading;
   @override
-  final Broadcast? liveBroadcast;
-  @override
-  final bool? loading;
+  final int? numberOfLiveListeners;
   @override
   final int? numberOfLiveBroadcasts;
   @override
   final int? numberOfListeners;
   @override
-  final int? numberOfLiveListeners;
+  final BroadcastListener? newListener;
+  @override
+  final Broadcast? liveBroadcast;
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'SocketState(liveBroadcasts: $liveBroadcasts, listeners: $listeners, newListener: $newListener, liveBroadcast: $liveBroadcast, loading: $loading, numberOfLiveBroadcasts: $numberOfLiveBroadcasts, numberOfListeners: $numberOfListeners, numberOfLiveListeners: $numberOfLiveListeners, error: $error)';
+    return 'SocketState(liveBroadcasts: $liveBroadcasts, listeners: $listeners, loading: $loading, numberOfLiveListeners: $numberOfLiveListeners, numberOfLiveBroadcasts: $numberOfLiveBroadcasts, numberOfListeners: $numberOfListeners, newListener: $newListener, liveBroadcast: $liveBroadcast, error: $error)';
   }
 
   @override
@@ -292,17 +292,17 @@ class _$_SocketState implements _SocketState {
                 .equals(other._liveBroadcasts, _liveBroadcasts) &&
             const DeepCollectionEquality()
                 .equals(other._listeners, _listeners) &&
-            (identical(other.newListener, newListener) ||
-                other.newListener == newListener) &&
-            (identical(other.liveBroadcast, liveBroadcast) ||
-                other.liveBroadcast == liveBroadcast) &&
             (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.numberOfLiveListeners, numberOfLiveListeners) ||
+                other.numberOfLiveListeners == numberOfLiveListeners) &&
             (identical(other.numberOfLiveBroadcasts, numberOfLiveBroadcasts) ||
                 other.numberOfLiveBroadcasts == numberOfLiveBroadcasts) &&
             (identical(other.numberOfListeners, numberOfListeners) ||
                 other.numberOfListeners == numberOfListeners) &&
-            (identical(other.numberOfLiveListeners, numberOfLiveListeners) ||
-                other.numberOfLiveListeners == numberOfLiveListeners) &&
+            (identical(other.newListener, newListener) ||
+                other.newListener == newListener) &&
+            (identical(other.liveBroadcast, liveBroadcast) ||
+                other.liveBroadcast == liveBroadcast) &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -311,12 +311,12 @@ class _$_SocketState implements _SocketState {
       runtimeType,
       const DeepCollectionEquality().hash(_liveBroadcasts),
       const DeepCollectionEquality().hash(_listeners),
-      newListener,
-      liveBroadcast,
       loading,
+      numberOfLiveListeners,
       numberOfLiveBroadcasts,
       numberOfListeners,
-      numberOfLiveListeners,
+      newListener,
+      liveBroadcast,
       error);
 
   @JsonKey(ignore: true)
@@ -328,32 +328,32 @@ class _$_SocketState implements _SocketState {
 
 abstract class _SocketState implements SocketState {
   factory _SocketState(
-      {final List<Broadcast>? liveBroadcasts,
-      final List<BroadcastListener>? listeners,
-      final BroadcastListener? newListener,
-      final Broadcast? liveBroadcast,
-      final bool? loading,
+      {final List<Broadcast?>? liveBroadcasts,
+      final List<BroadcastListener?>? listeners,
+      required final bool loading,
+      final int? numberOfLiveListeners,
       final int? numberOfLiveBroadcasts,
       final int? numberOfListeners,
-      final int? numberOfLiveListeners,
+      final BroadcastListener? newListener,
+      final Broadcast? liveBroadcast,
       final String? error}) = _$_SocketState;
 
   @override
-  List<Broadcast>? get liveBroadcasts;
+  List<Broadcast?>? get liveBroadcasts;
   @override
-  List<BroadcastListener>? get listeners;
+  List<BroadcastListener?>? get listeners;
   @override
-  BroadcastListener? get newListener;
+  bool get loading;
   @override
-  Broadcast? get liveBroadcast;
-  @override
-  bool? get loading;
+  int? get numberOfLiveListeners;
   @override
   int? get numberOfLiveBroadcasts;
   @override
   int? get numberOfListeners;
   @override
-  int? get numberOfLiveListeners;
+  BroadcastListener? get newListener;
+  @override
+  Broadcast? get liveBroadcast;
   @override
   String? get error;
   @override

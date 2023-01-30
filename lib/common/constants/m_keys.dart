@@ -39,6 +39,8 @@ class MKeys {
   static const String numberOfLiveBroadcasts = 'numberOfLiveBroadcasts';
   static const String newBroadcastListener = 'newBroadcastListener';
   static const String numberOfLiveListeners = 'numberOfLiveListeners';
+  static const String newBroadcast = 'newBroadcast';
+  static const String endedBroadcast = 'endedBroadcast';
 
   static const String stopBroadcast = 'stopBroadcast';
 }

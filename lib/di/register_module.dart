@@ -6,6 +6,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/remote/auth_remote_datasource.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/remote/broadcast_remote_datasource.dart';
 import 'package:meno_fe_v2/modules/profile/infrastructure/datasources/remote/profile_remote_datasource.dart';
+import 'package:meno_fe_v2/services/agora_service.dart';
 import 'package:meno_fe_v2/services/secure_storage_service.dart';
 import 'package:meno_fe_v2/services/shared_preferences_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,4 +50,7 @@ abstract class RegisterModule {
   @lazySingleton
   ProfileRemoteDatasource get profileRemote =>
       ProfileRemoteDatasource(_dio, baseUrl: Env.menoApi);
+
+  @lazySingleton
+  AgoraService get agoraService => AgoraService();
 }

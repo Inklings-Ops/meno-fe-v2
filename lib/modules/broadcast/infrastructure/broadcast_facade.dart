@@ -75,8 +75,19 @@ class BroadcastFacade implements IBroadcastFacade {
   @override
   Future<Either<BroadcastFailure, Unit>> deleteBroadcast({
     required String broadcastId,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    try {
+      await _remote.deleteBroadcast(broadcastId: broadcastId);
+
+      return right(unit);
+    } on DioError catch (error) {
+      final message = displayBroadcastError(error);
+      if (message != null) {
+        return left(BroadcastFailure.message(message));
+      } else {
+        return left(const BroadcastFailure.serverError());
+      }
+    }
   }
 
   @override

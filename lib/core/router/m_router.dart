@@ -11,8 +11,12 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/register/register_pag
 import 'package:meno_fe_v2/modules/auth/presentation/pages/onboarding/onboarding_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_page.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
+import 'package:meno_fe_v2/modules/broadcast/presentation/pages/broadcast_page.dart';
+import 'package:meno_fe_v2/modules/broadcast/presentation/pages/create_broadcast_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/pages/discover_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/pages/home_page.dart';
+import 'package:meno_fe_v2/modules/broadcast/presentation/pages/stream_page.dart';
 import 'package:meno_fe_v2/modules/notes/presentation/pages/notes_page.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/profile_page.dart';
 import 'package:meno_fe_v2/splash_page.dart';
@@ -45,6 +49,9 @@ part 'm_router.gr.dart';
         AutoRoute(page: ProfilePage),
       ],
     ),
+    AutoRoute(page: CreateBroadcastPage),
+    AutoRoute(page: BroadcastPage),
+    AutoRoute(page: StreamPage),
   ],
 )
 class MRouter extends _$MRouter {
