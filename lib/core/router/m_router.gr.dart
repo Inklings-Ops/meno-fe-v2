@@ -121,9 +121,13 @@ class _$MRouter extends RootStackRouter {
       );
     },
     StreamRoute.name: (routeData) {
+      final args = routeData.argsAs<StreamRouteArgs>();
       return AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const StreamPage(),
+        child: StreamPage(
+          key: args.key,
+          broadcast: args.broadcast,
+        ),
       );
     },
     HomeRoute.name: (routeData) {
@@ -477,14 +481,36 @@ class BroadcastRouteArgs {
 
 /// generated route for
 /// [StreamPage]
-class StreamRoute extends PageRouteInfo<void> {
-  const StreamRoute()
-      : super(
+class StreamRoute extends PageRouteInfo<StreamRouteArgs> {
+  StreamRoute({
+    Key? key,
+    required Broadcast broadcast,
+  }) : super(
           StreamRoute.name,
           path: '/stream-page',
+          args: StreamRouteArgs(
+            key: key,
+            broadcast: broadcast,
+          ),
         );
 
   static const String name = 'StreamRoute';
+}
+
+class StreamRouteArgs {
+  const StreamRouteArgs({
+    this.key,
+    required this.broadcast,
+  });
+
+  final Key? key;
+
+  final Broadcast broadcast;
+
+  @override
+  String toString() {
+    return 'StreamRouteArgs{key: $key, broadcast: $broadcast}';
+  }
 }
 
 /// generated route for

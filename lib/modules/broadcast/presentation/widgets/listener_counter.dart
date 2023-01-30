@@ -32,7 +32,7 @@ class ListenerCounter extends HookConsumerWidget {
     });
 
     var formattedNumber = NumberFormat.compact().format(
-      socketState.numberOfLiveListeners ?? 10000000,
+      socketState.numberOfLiveListeners ?? 0,
     );
 
     return Text(

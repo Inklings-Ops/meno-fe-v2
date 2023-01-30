@@ -1,17 +1,21 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_button.dart';
+import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 
-class BroadcastDetailsActionButtons extends ConsumerWidget {
+class BroadcastDetailsActionButtons extends HookConsumerWidget {
   const BroadcastDetailsActionButtons({super.key, required this.broadcast});
   final Broadcast broadcast;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final broadcastEvent = ref.watch(broadcastProvider.notifier);
+    final loading = useState<bool>(false);
 
     ref.listen<BroadcastState>(broadcastProvider, (previous, next) {
       next.joinedOption.fold(
@@ -28,7 +32,8 @@ class BroadcastDetailsActionButtons extends ConsumerWidget {
           ),
           (r) {
             ScaffoldMessenger.of(context).clearSnackBars();
-            // AutoRouter.of(context).push(StreamRoute(broadcast: broadcast));
+            AutoRouter.of(context).push(StreamRoute(broadcast: broadcast));
+            loading.value = false;
           },
         ),
       );
@@ -45,10 +50,14 @@ class BroadcastDetailsActionButtons extends ConsumerWidget {
               fontSize: MSize.fS(12),
               borderRadius: BorderRadius.circular(MSize.r(5)),
               padding: EdgeInsets.zero,
-              onPressed: () => broadcastEvent.joinPressed(
-                broadcast: broadcast,
-                context: context,
-              ),
+              loading: loading.value,
+              onPressed: () {
+                loading.value = true;
+                broadcastEvent.joinPressed(
+                  broadcast: broadcast,
+                  context: context,
+                );
+              },
             ),
           ),
           MSize.hS(8),

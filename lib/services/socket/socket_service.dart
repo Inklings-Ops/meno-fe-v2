@@ -186,9 +186,10 @@ class SocketService {
   // Subscribe to this event to get the name of a new Broadcast listener
   dynamic onNewBroadcastListener(dynamic data) {
     _log.i('New Broadcast Listener... => $data');
-    final dto = BroadcastListenerDto.fromJson(data);
-    final newListener = BroadcastListenerMapper().toDomain(dto);
-    socketResponse.sink.add(NewListenerData(newListener: newListener));
+    final decodedData = jsonDecode(jsonEncode(data));
+    socketResponse.sink.add(NewBroadcastListener(
+      newBroadcastListener: decodedData,
+    ));
   }
 
   // Subscribe to this event to automatically get the number

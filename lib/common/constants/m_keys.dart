@@ -15,6 +15,7 @@ class MKeys {
   static const allBibleTranslations = '_all_bible_translations_';
 
   static final homeScaffoldKey = GlobalKey<ScaffoldState>();
+  static final streamScaffoldKey = GlobalKey<ScaffoldState>();
   static final layoutScaffoldKey = GlobalKey<ScaffoldState>();
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 

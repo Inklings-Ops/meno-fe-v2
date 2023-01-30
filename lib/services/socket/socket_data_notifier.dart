@@ -69,6 +69,18 @@ class SocketDataNotifier extends StateNotifier<SocketState> {
     state = state.copyWith(loading: false);
   }
 
+  void joinBroadcast({required String broadcastId, required String fullName}) {
+    state = state.copyWith(loading: true);
+    _socket.joinBroadcast(broadcastId: broadcastId, fullName: fullName);
+    state = state.copyWith(loading: false);
+  }
+
+  void leaveBroadcast(String broadcastId) {
+    state = state.copyWith(loading: true);
+    _socket.leaveBroadcast(broadcastId);
+    state = state.copyWith(loading: false);
+  }
+
   void getNumberOfLiveBroadcasts() async {
     state = state.copyWith(loading: true);
     _socket.getNumberOfLiveBroadcast();

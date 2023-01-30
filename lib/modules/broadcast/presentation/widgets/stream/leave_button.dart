@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 
-class LeaveButton extends ConsumerWidget {
+class LeaveButton extends StatelessWidget {
   const LeaveButton({
     super.key,
-    this.broadcastId,
+    this.onLeavePressed,
     this.disabled = false,
   });
 
-  final String? broadcastId;
+  final void Function()? onLeavePressed;
   final bool disabled;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // final event = ref.watch(broadcastProvider.notifier);
-
+  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: disabled ? null : () {},
+      onTap: disabled ? null : onLeavePressed,
       child: Container(
         width: MSize.h(68),
         height: MSize.h(23),
