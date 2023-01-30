@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/common/widgets/bottom_sheets/edit_profile_bottom_sheet.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/edit_profile_bottom_sheet.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
 import 'package:meno_fe_v2/common/widgets/m_section_title.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile_form/profile_form_notifier.dart';
