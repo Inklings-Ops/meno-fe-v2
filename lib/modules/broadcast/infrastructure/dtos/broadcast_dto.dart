@@ -29,6 +29,7 @@ class BroadcastDto with _$BroadcastDto {
     CreatorDto? creator,
     int? liveListeners,
     int? timeElapsed,
+    int? totalListeners,
   }) = _BroadcastDto;
 
   factory BroadcastDto.fromDomain(Broadcast b) {

@@ -36,6 +36,7 @@ mixin _$BroadcastDto {
   CreatorDto? get creator => throw _privateConstructorUsedError;
   int? get liveListeners => throw _privateConstructorUsedError;
   int? get timeElapsed => throw _privateConstructorUsedError;
+  int? get totalListeners => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,7 +66,8 @@ abstract class $BroadcastDtoCopyWith<$Res> {
       String? creatorId,
       CreatorDto? creator,
       int? liveListeners,
-      int? timeElapsed});
+      int? timeElapsed,
+      int? totalListeners});
 
   $CreatorDtoCopyWith<$Res>? get creator;
 }
@@ -99,6 +101,7 @@ class _$BroadcastDtoCopyWithImpl<$Res, $Val extends BroadcastDto>
     Object? creator = freezed,
     Object? liveListeners = freezed,
     Object? timeElapsed = freezed,
+    Object? totalListeners = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -165,6 +168,10 @@ class _$BroadcastDtoCopyWithImpl<$Res, $Val extends BroadcastDto>
           ? _value.timeElapsed
           : timeElapsed // ignore: cast_nullable_to_non_nullable
               as int?,
+      totalListeners: freezed == totalListeners
+          ? _value.totalListeners
+          : totalListeners // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
@@ -205,7 +212,8 @@ abstract class _$$_BroadcastDtoCopyWith<$Res>
       String? creatorId,
       CreatorDto? creator,
       int? liveListeners,
-      int? timeElapsed});
+      int? timeElapsed,
+      int? totalListeners});
 
   @override
   $CreatorDtoCopyWith<$Res>? get creator;
@@ -238,6 +246,7 @@ class __$$_BroadcastDtoCopyWithImpl<$Res>
     Object? creator = freezed,
     Object? liveListeners = freezed,
     Object? timeElapsed = freezed,
+    Object? totalListeners = freezed,
   }) {
     return _then(_$_BroadcastDto(
       id: null == id
@@ -304,6 +313,10 @@ class __$$_BroadcastDtoCopyWithImpl<$Res>
           ? _value.timeElapsed
           : timeElapsed // ignore: cast_nullable_to_non_nullable
               as int?,
+      totalListeners: freezed == totalListeners
+          ? _value.totalListeners
+          : totalListeners // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -327,7 +340,8 @@ class _$_BroadcastDto implements _BroadcastDto {
       this.creatorId,
       this.creator,
       this.liveListeners,
-      this.timeElapsed});
+      this.timeElapsed,
+      this.totalListeners});
 
   factory _$_BroadcastDto.fromJson(Map<String, dynamic> json) =>
       _$$_BroadcastDtoFromJson(json);
@@ -364,10 +378,12 @@ class _$_BroadcastDto implements _BroadcastDto {
   final int? liveListeners;
   @override
   final int? timeElapsed;
+  @override
+  final int? totalListeners;
 
   @override
   String toString() {
-    return 'BroadcastDto(id: $id, title: $title, description: $description, status: $status, agoraToken: $agoraToken, timezone: $timezone, imageId: $imageId, imageUrl: $imageUrl, startTime: $startTime, endTime: $endTime, createdAt: $createdAt, deleted: $deleted, creatorId: $creatorId, creator: $creator, liveListeners: $liveListeners, timeElapsed: $timeElapsed)';
+    return 'BroadcastDto(id: $id, title: $title, description: $description, status: $status, agoraToken: $agoraToken, timezone: $timezone, imageId: $imageId, imageUrl: $imageUrl, startTime: $startTime, endTime: $endTime, createdAt: $createdAt, deleted: $deleted, creatorId: $creatorId, creator: $creator, liveListeners: $liveListeners, timeElapsed: $timeElapsed, totalListeners: $totalListeners)';
   }
 
   @override
@@ -399,7 +415,9 @@ class _$_BroadcastDto implements _BroadcastDto {
             (identical(other.liveListeners, liveListeners) ||
                 other.liveListeners == liveListeners) &&
             (identical(other.timeElapsed, timeElapsed) ||
-                other.timeElapsed == timeElapsed));
+                other.timeElapsed == timeElapsed) &&
+            (identical(other.totalListeners, totalListeners) ||
+                other.totalListeners == totalListeners));
   }
 
   @JsonKey(ignore: true)
@@ -421,7 +439,8 @@ class _$_BroadcastDto implements _BroadcastDto {
       creatorId,
       creator,
       liveListeners,
-      timeElapsed);
+      timeElapsed,
+      totalListeners);
 
   @JsonKey(ignore: true)
   @override
@@ -454,7 +473,8 @@ abstract class _BroadcastDto implements BroadcastDto {
       final String? creatorId,
       final CreatorDto? creator,
       final int? liveListeners,
-      final int? timeElapsed}) = _$_BroadcastDto;
+      final int? timeElapsed,
+      final int? totalListeners}) = _$_BroadcastDto;
 
   factory _BroadcastDto.fromJson(Map<String, dynamic> json) =
       _$_BroadcastDto.fromJson;
@@ -491,6 +511,8 @@ abstract class _BroadcastDto implements BroadcastDto {
   int? get liveListeners;
   @override
   int? get timeElapsed;
+  @override
+  int? get totalListeners;
   @override
   @JsonKey(ignore: true)
   _$$_BroadcastDtoCopyWith<_$_BroadcastDto> get copyWith =>

@@ -140,6 +140,16 @@ class _$MRouter extends RootStackRouter {
         ),
       );
     },
+    RecentBroadcastListRoute.name: (routeData) {
+      final args = routeData.argsAs<RecentBroadcastListRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: RecentBroadcastListPage(
+          key: args.key,
+          profile: args.profile,
+        ),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args =
           routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
@@ -259,6 +269,10 @@ class _$MRouter extends RootStackRouter {
         RouteConfig(
           StreamRoute.name,
           path: '/stream-page',
+        ),
+        RouteConfig(
+          RecentBroadcastListRoute.name,
+          path: '/recent-broadcast-list-page',
         ),
       ];
 }
@@ -563,6 +577,41 @@ class StreamRouteArgs {
   @override
   String toString() {
     return 'StreamRouteArgs{key: $key, broadcast: $broadcast}';
+  }
+}
+
+/// generated route for
+/// [RecentBroadcastListPage]
+class RecentBroadcastListRoute
+    extends PageRouteInfo<RecentBroadcastListRouteArgs> {
+  RecentBroadcastListRoute({
+    Key? key,
+    required Profile profile,
+  }) : super(
+          RecentBroadcastListRoute.name,
+          path: '/recent-broadcast-list-page',
+          args: RecentBroadcastListRouteArgs(
+            key: key,
+            profile: profile,
+          ),
+        );
+
+  static const String name = 'RecentBroadcastListRoute';
+}
+
+class RecentBroadcastListRouteArgs {
+  const RecentBroadcastListRouteArgs({
+    this.key,
+    required this.profile,
+  });
+
+  final Key? key;
+
+  final Profile profile;
+
+  @override
+  String toString() {
+    return 'RecentBroadcastListRouteArgs{key: $key, profile: $profile}';
   }
 }
 

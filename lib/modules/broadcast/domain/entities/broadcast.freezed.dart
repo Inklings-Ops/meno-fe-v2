@@ -32,6 +32,7 @@ mixin _$Broadcast {
   Creator? get creator => throw _privateConstructorUsedError;
   int? get liveListeners => throw _privateConstructorUsedError;
   int? get timeElapsed => throw _privateConstructorUsedError;
+  int? get totalListeners => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BroadcastCopyWith<Broadcast> get copyWith =>
@@ -59,7 +60,8 @@ abstract class $BroadcastCopyWith<$Res> {
       String? creatorId,
       Creator? creator,
       int? liveListeners,
-      int? timeElapsed});
+      int? timeElapsed,
+      int? totalListeners});
 
   $CreatorCopyWith<$Res>? get creator;
 }
@@ -93,6 +95,7 @@ class _$BroadcastCopyWithImpl<$Res, $Val extends Broadcast>
     Object? creator = freezed,
     Object? liveListeners = freezed,
     Object? timeElapsed = freezed,
+    Object? totalListeners = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -159,6 +162,10 @@ class _$BroadcastCopyWithImpl<$Res, $Val extends Broadcast>
           ? _value.timeElapsed
           : timeElapsed // ignore: cast_nullable_to_non_nullable
               as int?,
+      totalListeners: freezed == totalListeners
+          ? _value.totalListeners
+          : totalListeners // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
@@ -198,7 +205,8 @@ abstract class _$$_BroadcastCopyWith<$Res> implements $BroadcastCopyWith<$Res> {
       String? creatorId,
       Creator? creator,
       int? liveListeners,
-      int? timeElapsed});
+      int? timeElapsed,
+      int? totalListeners});
 
   @override
   $CreatorCopyWith<$Res>? get creator;
@@ -231,6 +239,7 @@ class __$$_BroadcastCopyWithImpl<$Res>
     Object? creator = freezed,
     Object? liveListeners = freezed,
     Object? timeElapsed = freezed,
+    Object? totalListeners = freezed,
   }) {
     return _then(_$_Broadcast(
       id: null == id
@@ -297,6 +306,10 @@ class __$$_BroadcastCopyWithImpl<$Res>
           ? _value.timeElapsed
           : timeElapsed // ignore: cast_nullable_to_non_nullable
               as int?,
+      totalListeners: freezed == totalListeners
+          ? _value.totalListeners
+          : totalListeners // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -320,7 +333,8 @@ class _$_Broadcast implements _Broadcast {
       this.creatorId,
       this.creator,
       this.liveListeners,
-      this.timeElapsed});
+      this.timeElapsed,
+      this.totalListeners});
 
   @override
   final String id;
@@ -354,10 +368,12 @@ class _$_Broadcast implements _Broadcast {
   final int? liveListeners;
   @override
   final int? timeElapsed;
+  @override
+  final int? totalListeners;
 
   @override
   String toString() {
-    return 'Broadcast(id: $id, title: $title, description: $description, status: $status, agoraToken: $agoraToken, timezone: $timezone, imageId: $imageId, imageUrl: $imageUrl, startTime: $startTime, endTime: $endTime, createdAt: $createdAt, deleted: $deleted, creatorId: $creatorId, creator: $creator, liveListeners: $liveListeners, timeElapsed: $timeElapsed)';
+    return 'Broadcast(id: $id, title: $title, description: $description, status: $status, agoraToken: $agoraToken, timezone: $timezone, imageId: $imageId, imageUrl: $imageUrl, startTime: $startTime, endTime: $endTime, createdAt: $createdAt, deleted: $deleted, creatorId: $creatorId, creator: $creator, liveListeners: $liveListeners, timeElapsed: $timeElapsed, totalListeners: $totalListeners)';
   }
 
   @override
@@ -389,7 +405,9 @@ class _$_Broadcast implements _Broadcast {
             (identical(other.liveListeners, liveListeners) ||
                 other.liveListeners == liveListeners) &&
             (identical(other.timeElapsed, timeElapsed) ||
-                other.timeElapsed == timeElapsed));
+                other.timeElapsed == timeElapsed) &&
+            (identical(other.totalListeners, totalListeners) ||
+                other.totalListeners == totalListeners));
   }
 
   @override
@@ -410,7 +428,8 @@ class _$_Broadcast implements _Broadcast {
       creatorId,
       creator,
       liveListeners,
-      timeElapsed);
+      timeElapsed,
+      totalListeners);
 
   @JsonKey(ignore: true)
   @override
@@ -436,7 +455,8 @@ abstract class _Broadcast implements Broadcast {
       final String? creatorId,
       final Creator? creator,
       final int? liveListeners,
-      final int? timeElapsed}) = _$_Broadcast;
+      final int? timeElapsed,
+      final int? totalListeners}) = _$_Broadcast;
 
   @override
   String get id;
@@ -470,6 +490,8 @@ abstract class _Broadcast implements Broadcast {
   int? get liveListeners;
   @override
   int? get timeElapsed;
+  @override
+  int? get totalListeners;
   @override
   @JsonKey(ignore: true)
   _$$_BroadcastCopyWith<_$_Broadcast> get copyWith =>

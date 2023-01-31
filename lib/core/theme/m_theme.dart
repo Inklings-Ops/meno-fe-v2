@@ -41,6 +41,25 @@ class MTheme {
           borderSide: const BorderSide(color: MColors.primary),
         ),
       ),
+      chipTheme: ChipThemeData(
+        brightness: Brightness.light,
+        selectedColor: MColors.primary,
+        checkmarkColor: Colors.white,
+        showCheckmark: true,
+        labelStyle: const TextStyle(
+          fontFamily: 'SFProDisplay',
+          color: Colors.black,
+        ),
+        secondaryLabelStyle: const TextStyle(
+          fontFamily: 'SFProDisplay',
+          color: Colors.white,
+        ),
+        secondarySelectedColor: MColors.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(MSize.r(20)),
+        ),
+        side: BorderSide.none,
+      ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         elevation: 0,
         backgroundColor: MColors.primaryLight,

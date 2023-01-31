@@ -3,6 +3,7 @@ part of 'broadcast_notifier.dart';
 @freezed
 class BroadcastState with _$BroadcastState {
   const factory BroadcastState({
+    required List<Broadcast?> currentUserBroadcasts,
     required Broadcast broadcast,
     required BroadcastStatus status,
     required bool isAudioMute,
@@ -17,6 +18,7 @@ class BroadcastState with _$BroadcastState {
   }) = _BroadcastState;
 
   factory BroadcastState.initial() => BroadcastState(
+        currentUserBroadcasts: [],
         broadcast: Broadcast.empty(),
         status: BroadcastStatus.offAir,
         isAudioMute: false,

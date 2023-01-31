@@ -48,9 +48,9 @@ class LayoutPage extends HookConsumerWidget {
           if (preferences.hasKey(MKeys.initLogin) == false) {
             preferences.write(key: MKeys.initLogin, value: 1);
           }
-          ref.read(profileProvider.notifier).authProfileLoaded();
-          ref.read(bibleProvider.notifier).getAllTranslations();
-          ref.read(bibleProvider.notifier).init();
+          await ref.read(profileProvider.notifier).authProfileLoaded();
+          await ref.read(bibleProvider.notifier).getAllTranslations();
+          await ref.read(bibleProvider.notifier).init();
         },
       );
     });

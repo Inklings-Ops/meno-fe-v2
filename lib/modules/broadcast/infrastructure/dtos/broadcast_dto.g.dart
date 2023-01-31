@@ -32,6 +32,7 @@ Map<String, dynamic> _$BroadcastDtoToJson(BroadcastDto instance) {
   writeNotNull('creator', instance.creator?.toJson());
   writeNotNull('liveListeners', instance.liveListeners);
   writeNotNull('timeElapsed', instance.timeElapsed);
+  writeNotNull('totalListeners', instance.totalListeners);
   return val;
 }
 
@@ -59,6 +60,7 @@ _$_BroadcastDto _$$_BroadcastDtoFromJson(Map<String, dynamic> json) =>
           : CreatorDto.fromJson(json['creator'] as Map<String, dynamic>),
       liveListeners: json['liveListeners'] as int?,
       timeElapsed: json['timeElapsed'] as int?,
+      totalListeners: json['totalListeners'] as int?,
     );
 
 Map<String, dynamic> _$$_BroadcastDtoToJson(_$_BroadcastDto instance) =>
@@ -79,4 +81,5 @@ Map<String, dynamic> _$$_BroadcastDtoToJson(_$_BroadcastDto instance) =>
       'creator': instance.creator,
       'liveListeners': instance.liveListeners,
       'timeElapsed': instance.timeElapsed,
+      'totalListeners': instance.totalListeners,
     };

@@ -5,6 +5,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meno_fe_v2/core/responses/broadcast_response.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/dtos/broadcast_dto.dart';
+import 'package:meno_fe_v2/modules/broadcast/infrastructure/dtos/broadcast_list_data_dto.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/dtos/join_broadcast_data_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -63,5 +64,11 @@ abstract class BroadcastRemoteDatasource {
   @PUT("/api/v1/broadcasts/{broadcastId}/start")
   Future<BroadcastResponse<BroadcastDto?>> startBroadcast({
     @Path("broadcastId") required String broadcastId,
+  });
+
+  @GET("/api/v1/broadcasts/")
+  Future<BroadcastResponse<BroadcastListDataDto?>> getAllCurrentUserBroadcasts({
+    @Query('creatorId') required String creatorId,
+    @Query('include') String? include,
   });
 }

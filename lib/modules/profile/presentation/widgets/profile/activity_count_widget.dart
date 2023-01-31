@@ -11,7 +11,7 @@ class ActivityCountWidget extends StatelessWidget {
     this.loading = false,
   });
 
-  final double? count;
+  final String? count;
   final String? title;
   final void Function()? onTap;
   final bool loading;
@@ -29,7 +29,7 @@ class ActivityCountWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              count!.round().toString(),
+              '$count',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: MSize.fS(22),

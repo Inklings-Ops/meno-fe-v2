@@ -23,6 +23,7 @@ class Broadcast with _$Broadcast {
     Creator? creator,
     int? liveListeners,
     int? timeElapsed,
+    int? totalListeners,
   }) = _Broadcast;
 
   factory Broadcast.empty() => Broadcast(id: '', title: IBroadcastTitle(''));

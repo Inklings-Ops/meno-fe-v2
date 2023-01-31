@@ -106,4 +106,20 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
   void mutePressed() {
     state = state.copyWith(isAudioMute: !state.isAudioMute);
   }
+
+  Future<void> getCurrentUserBroadcasts() async {
+    state = state.copyWith(loading: true);
+
+    final res = await _facade.getCurrentUserBroadcasts();
+
+    res.fold(
+      (l) => null,
+      (broadcasts) {
+        state = state.copyWith(
+          currentUserBroadcasts: broadcasts,
+          loading: false,
+        );
+      },
+    );
+  }
 }

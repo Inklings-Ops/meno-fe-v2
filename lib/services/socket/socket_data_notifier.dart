@@ -35,7 +35,9 @@ class SocketDataNotifier extends StateNotifier<SocketState> {
             isLive: socketData!.isLive,
             liveBroadcastId: socketData.liveBroadcastId,
           );
-          getBroadcastListeners(socketData.liveBroadcastId!);
+          if (socketData.liveBroadcastId != null) {
+            getBroadcastListeners(state.liveBroadcastId!);
+          }
           break;
         case NewBroadcastData:
           updateLiveBroadcasts();

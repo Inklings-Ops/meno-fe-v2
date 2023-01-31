@@ -23,7 +23,6 @@ class BroadcastFacade implements IBroadcastFacade {
   final BroadcastRemoteDatasource _remote;
   final BroadcastMapper _mapper;
 
-
   BroadcastFacade(this._local, this._remote, this._mapper);
   @override
   Future<Either<BroadcastFailure, Unit>> addBroadcastCoHost({
@@ -175,5 +174,23 @@ class BroadcastFacade implements IBroadcastFacade {
   Future<UserCredentials> getUserCredentials() async {
     final dto = await _local.getUserCredentials();
     return UserCredentialsMapper().toDomain(dto)!;
+  }
+
+  @override
+  Future<Either<BroadcastFailure, List<Broadcast?>>>
+      getCurrentUserBroadcasts() async {
+    try {
+      final credentials = await _local.getUserCredentials();
+
+      final res = await _remote.getAllCurrentUserBroadcasts(
+        creatorId: credentials!.user!.id,
+        include: 'totalListeners',
+      );
+      final dto = res.data!.broadcasts;
+      final broadcasts = dto.map((e) => _mapper.toDomain(e)).toList();
+      return right(broadcasts);
+    } on DioError {
+      return left(const BroadcastFailure.serverError());
+    }
   }
 }

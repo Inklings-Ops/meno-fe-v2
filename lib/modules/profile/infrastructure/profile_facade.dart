@@ -26,15 +26,10 @@ class ProfileFacade implements IProfileFacade {
   @override
   Future<Option<Profile?>> authProfile() async {
     final authUserId = await _local.getAuthUserId();
-    final localProfile = await _local.getProfile();
 
-    if (localProfile == null) {
-      final res = await _remote.getProfile(userId: authUserId!);
-      await _local.storeProfile(res.data);
-      return optionOf(_mapper.toDomain(res.data));
-    }
-
-    return optionOf(_mapper.toDomain(localProfile));
+    final res = await _remote.getProfile(userId: authUserId!);
+    await _local.storeProfile(res.data);
+    return optionOf(_mapper.toDomain(res.data));
   }
 
   @override

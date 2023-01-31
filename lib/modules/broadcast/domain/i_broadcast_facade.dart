@@ -48,4 +48,6 @@ abstract class IBroadcastFacade {
   Future<Either<BroadcastFailure, Broadcast>> startBroadcast({
     required String broadcastId,
   });
+
+  Future<Either<BroadcastFailure, List<Broadcast?>>> getCurrentUserBroadcasts();
 }

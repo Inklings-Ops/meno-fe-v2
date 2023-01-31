@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:meno_fe_v2/core/router/onboarding_guard.dart';
 import 'package:meno_fe_v2/layout/layout_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/forgot_password/forgot_password_otp_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/forgot_password/forgot_password_page.dart';
@@ -7,8 +8,8 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/forgot_password/reset
 import 'package:meno_fe_v2/modules/auth/presentation/pages/forgot_password/reset_password_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_page.dart';
-import 'package:meno_fe_v2/modules/auth/presentation/pages/register/register_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/onboarding/onboarding_page.dart';
+import 'package:meno_fe_v2/modules/auth/presentation/pages/register/register_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
@@ -19,9 +20,10 @@ import 'package:meno_fe_v2/modules/broadcast/presentation/pages/discover_page.da
 import 'package:meno_fe_v2/modules/broadcast/presentation/pages/home_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/pages/stream_page.dart';
 import 'package:meno_fe_v2/modules/notes/presentation/pages/notes_page.dart';
+import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/profile_page.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/pages/recent_broadcasts_list_page.dart';
 import 'package:meno_fe_v2/splash_page.dart';
-import 'package:meno_fe_v2/core/router/onboarding_guard.dart';
 
 part 'm_router.gr.dart';
 
@@ -54,6 +56,7 @@ part 'm_router.gr.dart';
     AutoRoute(page: BroadcastPage),
     AutoRoute(page: BroadcastFeedbackPage),
     AutoRoute(page: StreamPage),
+    AutoRoute(page: RecentBroadcastListPage),
   ],
 )
 class MRouter extends _$MRouter {

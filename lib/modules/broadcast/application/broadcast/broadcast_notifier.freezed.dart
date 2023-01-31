@@ -16,6 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BroadcastState {
+  List<Broadcast?> get currentUserBroadcasts =>
+      throw _privateConstructorUsedError;
   Broadcast get broadcast => throw _privateConstructorUsedError;
   BroadcastStatus get status => throw _privateConstructorUsedError;
   bool get isAudioMute => throw _privateConstructorUsedError;
@@ -44,7 +46,8 @@ abstract class $BroadcastStateCopyWith<$Res> {
       _$BroadcastStateCopyWithImpl<$Res, BroadcastState>;
   @useResult
   $Res call(
-      {Broadcast broadcast,
+      {List<Broadcast?> currentUserBroadcasts,
+      Broadcast broadcast,
       BroadcastStatus status,
       bool isAudioMute,
       User authUser,
@@ -73,6 +76,7 @@ class _$BroadcastStateCopyWithImpl<$Res, $Val extends BroadcastState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? currentUserBroadcasts = null,
     Object? broadcast = null,
     Object? status = null,
     Object? isAudioMute = null,
@@ -86,6 +90,10 @@ class _$BroadcastStateCopyWithImpl<$Res, $Val extends BroadcastState>
     Object? deleteOption = null,
   }) {
     return _then(_value.copyWith(
+      currentUserBroadcasts: null == currentUserBroadcasts
+          ? _value.currentUserBroadcasts
+          : currentUserBroadcasts // ignore: cast_nullable_to_non_nullable
+              as List<Broadcast?>,
       broadcast: null == broadcast
           ? _value.broadcast
           : broadcast // ignore: cast_nullable_to_non_nullable
@@ -159,7 +167,8 @@ abstract class _$$_BroadcastStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Broadcast broadcast,
+      {List<Broadcast?> currentUserBroadcasts,
+      Broadcast broadcast,
       BroadcastStatus status,
       bool isAudioMute,
       User authUser,
@@ -188,6 +197,7 @@ class __$$_BroadcastStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? currentUserBroadcasts = null,
     Object? broadcast = null,
     Object? status = null,
     Object? isAudioMute = null,
@@ -201,6 +211,10 @@ class __$$_BroadcastStateCopyWithImpl<$Res>
     Object? deleteOption = null,
   }) {
     return _then(_$_BroadcastState(
+      currentUserBroadcasts: null == currentUserBroadcasts
+          ? _value._currentUserBroadcasts
+          : currentUserBroadcasts // ignore: cast_nullable_to_non_nullable
+              as List<Broadcast?>,
       broadcast: null == broadcast
           ? _value.broadcast
           : broadcast // ignore: cast_nullable_to_non_nullable
@@ -253,7 +267,8 @@ class __$$_BroadcastStateCopyWithImpl<$Res>
 
 class _$_BroadcastState implements _BroadcastState {
   const _$_BroadcastState(
-      {required this.broadcast,
+      {required final List<Broadcast?> currentUserBroadcasts,
+      required this.broadcast,
       required this.status,
       required this.isAudioMute,
       required this.authUser,
@@ -263,7 +278,17 @@ class _$_BroadcastState implements _BroadcastState {
       required this.joinedOption,
       required this.startedOption,
       required this.leaveOption,
-      required this.deleteOption});
+      required this.deleteOption})
+      : _currentUserBroadcasts = currentUserBroadcasts;
+
+  final List<Broadcast?> _currentUserBroadcasts;
+  @override
+  List<Broadcast?> get currentUserBroadcasts {
+    if (_currentUserBroadcasts is EqualUnmodifiableListView)
+      return _currentUserBroadcasts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_currentUserBroadcasts);
+  }
 
   @override
   final Broadcast broadcast;
@@ -290,7 +315,7 @@ class _$_BroadcastState implements _BroadcastState {
 
   @override
   String toString() {
-    return 'BroadcastState(broadcast: $broadcast, status: $status, isAudioMute: $isAudioMute, authUser: $authUser, agoraToken: $agoraToken, showError: $showError, loading: $loading, joinedOption: $joinedOption, startedOption: $startedOption, leaveOption: $leaveOption, deleteOption: $deleteOption)';
+    return 'BroadcastState(currentUserBroadcasts: $currentUserBroadcasts, broadcast: $broadcast, status: $status, isAudioMute: $isAudioMute, authUser: $authUser, agoraToken: $agoraToken, showError: $showError, loading: $loading, joinedOption: $joinedOption, startedOption: $startedOption, leaveOption: $leaveOption, deleteOption: $deleteOption)';
   }
 
   @override
@@ -298,6 +323,8 @@ class _$_BroadcastState implements _BroadcastState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BroadcastState &&
+            const DeepCollectionEquality()
+                .equals(other._currentUserBroadcasts, _currentUserBroadcasts) &&
             (identical(other.broadcast, broadcast) ||
                 other.broadcast == broadcast) &&
             (identical(other.status, status) || other.status == status) &&
@@ -323,6 +350,7 @@ class _$_BroadcastState implements _BroadcastState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(_currentUserBroadcasts),
       broadcast,
       status,
       isAudioMute,
@@ -344,7 +372,8 @@ class _$_BroadcastState implements _BroadcastState {
 
 abstract class _BroadcastState implements BroadcastState {
   const factory _BroadcastState(
-      {required final Broadcast broadcast,
+      {required final List<Broadcast?> currentUserBroadcasts,
+      required final Broadcast broadcast,
       required final BroadcastStatus status,
       required final bool isAudioMute,
       required final User authUser,
@@ -357,6 +386,8 @@ abstract class _BroadcastState implements BroadcastState {
       required final Option<Either<BroadcastFailure, Unit>>
           deleteOption}) = _$_BroadcastState;
 
+  @override
+  List<Broadcast?> get currentUserBroadcasts;
   @override
   Broadcast get broadcast;
   @override
