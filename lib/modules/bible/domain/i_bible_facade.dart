@@ -8,9 +8,11 @@ abstract class IBibleFacade {
 
   Future<Chapter> getChapter(String reference, String version);
 
-  Future<List<Translation>> getTranslations();
+  Future<int> getChapterNumber(String book);
 
-  Future<Verse> getVerse(String reference, String version);
+  Future<List<Translation>?> getTranslations();
 
-  Future<List<Verse>> getVerses(String reference, String version);
+  Future<Verse?> getVerse(String reference, String version);
+
+  Future<List<Verse?>> getVerses(String reference, String version);
 }
