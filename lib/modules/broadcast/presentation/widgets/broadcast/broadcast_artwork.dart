@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-
 import 'package:skeletons/skeletons.dart';
 
 class Blob extends StatelessWidget {
@@ -71,7 +71,7 @@ class BroadcastArtwork extends StatelessWidget {
                 backgroundColor: Theme.of(context).primaryColor,
                 foregroundImage:
                     imageUrl != null ? NetworkImage(imageUrl!) : null,
-                child: Icon(Icons.audiotrack, size: MSize.r(25)),
+                child: Icon(MIcons.Image, size: MSize.r(25)),
               ),
             ),
         ],

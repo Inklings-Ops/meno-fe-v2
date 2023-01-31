@@ -11,6 +11,7 @@ class SocketState with _$SocketState {
     int? numberOfListeners,
     BroadcastListener? newListener,
     Broadcast? liveBroadcast,
+    required bool isLive,
     String? error,
   }) = _SocketState;
 

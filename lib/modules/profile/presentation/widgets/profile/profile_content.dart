@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/edit_profile_bottom_sheet.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
 import 'package:meno_fe_v2/common/widgets/m_section_title.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile_form/profile_form_notifier.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/activity_count_widget.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/edit_profile_bottom_sheet.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/scheduled_broadcast_card.dart';
 
 class ProfileContent extends ConsumerWidget {
@@ -118,7 +118,7 @@ class ProfileContent extends ConsumerWidget {
             ),
             MSize.vS(31),
             SizedBox(
-              height: MSize.h(47),
+              height: MSize.h(54),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

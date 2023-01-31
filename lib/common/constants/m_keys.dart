@@ -8,6 +8,7 @@ class MKeys {
   static const authToken = 'auth_token_';
   static const profile = 'auth_profile_';
   static const onboardingInit = 'meno_initScreen_';
+  static const initLogin = 'init_login_';
   static const avatarKey = 'avatar_key_';
   static const bottomNavIndex = '_bottom_nav_index_';
   static const liveBroadcasts = '_live_broadcasts_';
@@ -18,6 +19,8 @@ class MKeys {
   static final streamScaffoldKey = GlobalKey<ScaffoldState>();
   static final layoutScaffoldKey = GlobalKey<ScaffoldState>();
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
+  static final broadcastPageMainTabKey = GlobalKey();
 
   // Socket keys
   static const String connect = "connect";

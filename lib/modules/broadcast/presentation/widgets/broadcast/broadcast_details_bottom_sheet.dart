@@ -1,10 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/bottom_sheets/m_bottom_sheet_close_button.dart';
 import 'package:meno_fe_v2/common/widgets/bottom_sheets/m_bottom_sheet_handle.dart';
-import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:meno_fe_v2/common/widgets/m_section_title.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_details_action_buttons.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_details_artwork.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/listener_counter.dart';
@@ -20,7 +20,7 @@ class BroadcastDetailsBottomSheet extends StatelessWidget {
     return DraggableScrollableSheet(
       initialChildSize: MSize.r(0.35),
       minChildSize: MSize.r(0.35),
-      maxChildSize: MSize.r(0.9),
+      // maxChildSize: MSize.r(0.9),
       builder: (context, scrollController) => Column(
         children: [
           const Align(

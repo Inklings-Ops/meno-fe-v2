@@ -45,10 +45,6 @@ abstract class IBroadcastFacade {
     required String broadcastId,
   });
 
-  Future<Either<BroadcastFailure, Unit>> leaveBroadcast({
-    required String broadcastId,
-  });
-
   Future<Either<BroadcastFailure, Broadcast>> startBroadcast({
     required String broadcastId,
   });

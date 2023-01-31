@@ -2,13 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
+import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_button.dart';
 import 'package:meno_fe_v2/common/widgets/m_text_button.dart';
 import 'package:meno_fe_v2/common/widgets/m_text_form_field.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
+import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/application/login/login_notifier.dart';
+import 'package:meno_fe_v2/services/shared_preferences_service.dart';
 
 class LoginForm extends ConsumerWidget {
   final formKey = GlobalKey<FormState>();
@@ -19,6 +22,8 @@ class LoginForm extends ConsumerWidget {
     final state = ref.watch(loginProvider);
     final event = ref.watch(loginProvider.notifier);
     final authEvent = ref.watch(authProvider.notifier);
+    final preferences = di<SharedPreferencesService>();
+
 
     ref.listen<LoginState>(loginProvider, (previous, next) {
       next.option.fold(
@@ -37,6 +42,9 @@ class LoginForm extends ConsumerWidget {
           },
           (_) {
             ScaffoldMessenger.of(context).clearSnackBars();
+            if ( preferences.hasKey(MKeys.initLogin) == false) {
+              AutoRouter.of(context).replaceAll([const LayoutRoute()]);
+            }
             authEvent.checkAuthenticated();
           },
         ),

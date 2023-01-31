@@ -11,10 +11,8 @@ import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast_listener.dart';
-import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/mapper/broadcast_listener_mapper.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/mapper/broadcast_mapper.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/dtos/broadcast_dto.dart';
-import 'package:meno_fe_v2/modules/broadcast/infrastructure/dtos/broadcast_listener_dto.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/dtos/creator_dto.dart';
 import 'package:meno_fe_v2/modules/profile/domain/i_profile_facade.dart';
 import 'package:meno_fe_v2/services/socket/models.dart';
@@ -80,7 +78,7 @@ class SocketService {
     socket?.emitWithAck(
       MKeys.startedBroadcast,
       {"broadcastId": broadcastId},
-      ack: (_) => null,
+      ack: (_) => socketResponse.sink.add(IsLiveData(isLive: true)),
     );
   }
 
@@ -88,7 +86,7 @@ class SocketService {
     socket?.emitWithAck(
       MKeys.endBroadcast,
       {'broadcastId': broadcastId},
-      ack: (data) => null,
+      ack: (_) => socketResponse.sink.add(IsLiveData(isLive: false)),
     );
   }
 

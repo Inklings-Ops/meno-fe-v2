@@ -6,10 +6,10 @@ import 'package:meno_fe_v2/common/widgets/bottom_sheets/m_bottom_sheet_title.dar
 
 class MImageSourceBottomSheet extends StatelessWidget {
   const MImageSourceBottomSheet({
-    Key? key,
+    super.key,
     required this.fromCamera,
     required this.fromGallery,
-  }) : super(key: key);
+  });
 
   final void Function() fromGallery;
   final void Function() fromCamera;
@@ -22,7 +22,7 @@ class MImageSourceBottomSheet extends StatelessWidget {
         children: [
           MBottomSheetTile(
             title: 'Pick from Gallery',
-            icon: MIcons.Image1,
+            icon: MIcons.Image,
             onTap: fromGallery,
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(MSize.r(16)),
@@ -31,7 +31,7 @@ class MImageSourceBottomSheet extends StatelessWidget {
           const Divider(height: 2),
           MBottomSheetTile(
             title: 'Use Camera',
-            icon: MIcons.Camera1,
+            icon: MIcons.Camera,
             onTap: fromCamera,
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(MSize.r(16)),

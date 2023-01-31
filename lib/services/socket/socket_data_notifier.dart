@@ -15,7 +15,9 @@ final socketService = StreamProvider((ref) {
 
 class SocketDataNotifier extends StateNotifier<SocketState> {
   final StateNotifierProviderRef _ref;
-  SocketDataNotifier(this._ref) : super(SocketState(loading: true)) {
+  SocketDataNotifier(
+    this._ref,
+  ) : super(SocketState(loading: true, isLive: false)) {
     _ref.listen(socketService, (_, AsyncValue<SocketData> data) {
       var socketData = data.value;
 
@@ -24,6 +26,9 @@ class SocketDataNotifier extends StateNotifier<SocketState> {
           state = state.copyWith(
             numberOfLiveListeners: socketData?.numberOfLiveListeners,
           );
+          break;
+        case IsLiveData:
+          state = state.copyWith(isLive: socketData!.isLive);
           break;
         case NewBroadcastData:
           updateLiveBroadcasts();
@@ -78,6 +83,18 @@ class SocketDataNotifier extends StateNotifier<SocketState> {
   void leaveBroadcast(String broadcastId) {
     state = state.copyWith(loading: true);
     _socket.leaveBroadcast(broadcastId);
+    state = state.copyWith(loading: false);
+  }
+
+  void endBroadcast(String broadcastId) {
+    state = state.copyWith(loading: true);
+    _socket.endBroadcast(broadcastId);
+    state = state.copyWith(loading: false);
+  }
+
+  void startBroadcast(String broadcastId) {
+    state = state.copyWith(loading: true);
+    _socket.startedBroadcast(broadcastId);
     state = state.copyWith(loading: false);
   }
 

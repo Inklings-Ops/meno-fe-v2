@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
+import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/layout/loading_page.dart';
 import 'package:meno_fe_v2/layout/widgets/m_app_bar.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar.dart';
@@ -16,6 +17,7 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verifica
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/home_app_bar.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_app_bar.dart';
+import 'package:meno_fe_v2/services/shared_preferences_service.dart';
 
 const items = [
   BottomNavigationBarItem(label: 'Home', icon: Icon(MIcons.Home1)),
@@ -30,6 +32,8 @@ class LayoutPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final preferences = di<SharedPreferencesService>();
+
     final state = ref.watch(authProvider);
 
     ref.listen<AuthState>(authProvider, (previous, next) {
@@ -38,7 +42,10 @@ class LayoutPage extends ConsumerWidget {
         partiallyUnauthenticated: () {
           ref.watch(loginReturnProvider.notifier).init();
         },
-        authenticated: (_) {
+        authenticated: (_) async {
+          if (preferences.hasKey(MKeys.initLogin) == false) {
+            preferences.write(key: MKeys.initLogin, value: 1);
+          }
           ref.read(profileProvider.notifier).authProfileLoaded();
         },
       );

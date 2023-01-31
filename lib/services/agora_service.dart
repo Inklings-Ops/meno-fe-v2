@@ -13,7 +13,7 @@ class AgoraService {
     _agora.release(sync: true);
   }
 
-  Future<void> initialize([bool isHost = true]) async {
+  Future<void> initialize({bool isHost = true}) async {
     _log.i('Initializing Agora...');
 
     _agora = createAgoraRtcEngine();
@@ -54,6 +54,7 @@ class AgoraService {
 
   Future<void> leave() async {
     _agora.leaveChannel();
+    _agora.release(sync: true);
   }
 
   Future<void> muteAudio(bool enabled) async {

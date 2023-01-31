@@ -10,14 +10,15 @@ class BroadcastNestedTabBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(broadcastProvider);
     final controller = useTabController(initialLength: 2);
+
+    final broadcast = ref.watch(broadcastProvider).broadcast;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: MSize.h(30),
+          height: MSize.h(24),
           child: TabBar(
             controller: controller,
             indicatorSize: TabBarIndicatorSize.label,
@@ -31,24 +32,17 @@ class BroadcastNestedTabBar extends HookConsumerWidget {
             indicatorWeight: MSize.r(0.6),
             padding: EdgeInsets.zero,
             tabs: [
-              SizedBox(
-                width: MSize.w(60),
-                child: const Tab(text: 'Co-host(s)'),
-              ),
-              SizedBox(
-                width: MSize.w(110),
-                child: Tab(
-                  child: ListenerCounter(
-                    broadcast: state.broadcast,
-                    fontSize: MSize.fS(16),
-                  ),
+              const Tab(text: 'Co-host(s)'),
+              Tab(
+                child: ListenerCounter(
+                  broadcast: broadcast,
+                  fontSize: MSize.fS(16),
                 ),
               ),
             ],
           ),
         ),
-        Container(
-          padding: MSize.pAll(16),
+        SizedBox(
           height: MSize.h(350),
           width: MSize.sw(1),
           child: TabBarView(

@@ -8,7 +8,7 @@ import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broa
 import 'package:skeletons/skeletons.dart';
 
 class BroadcastTabViewSkeleton extends StatelessWidget {
-  const BroadcastTabViewSkeleton({Key? key}) : super(key: key);
+  const BroadcastTabViewSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class BroadcastTabViewSkeleton extends StatelessWidget {
           MSize.vS(20),
           const BroadcastArtwork(loading: true),
           MSize.vS(20),
-          const BroadcastTimer(placeholderTimer: '00:00:00'),
+          const BroadcastTimer(placeholder: '00:00:00'),
           MSize.vS(30),
           Wrap(
             runAlignment: WrapAlignment.center,

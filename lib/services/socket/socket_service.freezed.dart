@@ -24,6 +24,7 @@ mixin _$SocketState {
   int? get numberOfListeners => throw _privateConstructorUsedError;
   BroadcastListener? get newListener => throw _privateConstructorUsedError;
   Broadcast? get liveBroadcast => throw _privateConstructorUsedError;
+  bool get isLive => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -46,6 +47,7 @@ abstract class $SocketStateCopyWith<$Res> {
       int? numberOfListeners,
       BroadcastListener? newListener,
       Broadcast? liveBroadcast,
+      bool isLive,
       String? error});
 
   $BroadcastListenerCopyWith<$Res>? get newListener;
@@ -73,6 +75,7 @@ class _$SocketStateCopyWithImpl<$Res, $Val extends SocketState>
     Object? numberOfListeners = freezed,
     Object? newListener = freezed,
     Object? liveBroadcast = freezed,
+    Object? isLive = null,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -108,6 +111,10 @@ class _$SocketStateCopyWithImpl<$Res, $Val extends SocketState>
           ? _value.liveBroadcast
           : liveBroadcast // ignore: cast_nullable_to_non_nullable
               as Broadcast?,
+      isLive: null == isLive
+          ? _value.isLive
+          : isLive // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -157,6 +164,7 @@ abstract class _$$_SocketStateCopyWith<$Res>
       int? numberOfListeners,
       BroadcastListener? newListener,
       Broadcast? liveBroadcast,
+      bool isLive,
       String? error});
 
   @override
@@ -184,6 +192,7 @@ class __$$_SocketStateCopyWithImpl<$Res>
     Object? numberOfListeners = freezed,
     Object? newListener = freezed,
     Object? liveBroadcast = freezed,
+    Object? isLive = null,
     Object? error = freezed,
   }) {
     return _then(_$_SocketState(
@@ -219,6 +228,10 @@ class __$$_SocketStateCopyWithImpl<$Res>
           ? _value.liveBroadcast
           : liveBroadcast // ignore: cast_nullable_to_non_nullable
               as Broadcast?,
+      isLive: null == isLive
+          ? _value.isLive
+          : isLive // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -239,6 +252,7 @@ class _$_SocketState implements _SocketState {
       this.numberOfListeners,
       this.newListener,
       this.liveBroadcast,
+      required this.isLive,
       this.error})
       : _liveBroadcasts = liveBroadcasts,
         _listeners = listeners;
@@ -276,11 +290,13 @@ class _$_SocketState implements _SocketState {
   @override
   final Broadcast? liveBroadcast;
   @override
+  final bool isLive;
+  @override
   final String? error;
 
   @override
   String toString() {
-    return 'SocketState(liveBroadcasts: $liveBroadcasts, listeners: $listeners, loading: $loading, numberOfLiveListeners: $numberOfLiveListeners, numberOfLiveBroadcasts: $numberOfLiveBroadcasts, numberOfListeners: $numberOfListeners, newListener: $newListener, liveBroadcast: $liveBroadcast, error: $error)';
+    return 'SocketState(liveBroadcasts: $liveBroadcasts, listeners: $listeners, loading: $loading, numberOfLiveListeners: $numberOfLiveListeners, numberOfLiveBroadcasts: $numberOfLiveBroadcasts, numberOfListeners: $numberOfListeners, newListener: $newListener, liveBroadcast: $liveBroadcast, isLive: $isLive, error: $error)';
   }
 
   @override
@@ -303,6 +319,7 @@ class _$_SocketState implements _SocketState {
                 other.newListener == newListener) &&
             (identical(other.liveBroadcast, liveBroadcast) ||
                 other.liveBroadcast == liveBroadcast) &&
+            (identical(other.isLive, isLive) || other.isLive == isLive) &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -317,6 +334,7 @@ class _$_SocketState implements _SocketState {
       numberOfListeners,
       newListener,
       liveBroadcast,
+      isLive,
       error);
 
   @JsonKey(ignore: true)
@@ -336,6 +354,7 @@ abstract class _SocketState implements SocketState {
       final int? numberOfListeners,
       final BroadcastListener? newListener,
       final Broadcast? liveBroadcast,
+      required final bool isLive,
       final String? error}) = _$_SocketState;
 
   @override
@@ -354,6 +373,8 @@ abstract class _SocketState implements SocketState {
   BroadcastListener? get newListener;
   @override
   Broadcast? get liveBroadcast;
+  @override
+  bool get isLive;
   @override
   String? get error;
   @override

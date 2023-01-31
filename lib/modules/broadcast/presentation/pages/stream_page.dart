@@ -13,6 +13,7 @@ import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/listene
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_bottom_sheet.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_page_skeleton.dart';
 import 'package:meno_fe_v2/services/agora_service.dart';
+import 'package:meno_fe_v2/services/socket/models.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 
 class StreamPage extends StatefulHookConsumerWidget {
@@ -35,6 +36,21 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     if (loading) {
       return StreamPageSkeleton(broadcast: widget.broadcast);
     }
+
+    ref.listen(socketService, (_, AsyncValue<SocketData> data) {
+      if (data.value.runtimeType == EndedBroadcastData) {
+        _agora.leave();
+        AutoRouter.of(context).popUntilRoot();
+        ScaffoldMessenger.of(MKeys.layoutScaffoldKey.currentContext!)
+            .showSnackBar(
+          SnackBar(
+            content: Text(
+              '${widget.broadcast.creator?.fullName} has ended the broadcast.',
+            ),
+          ),
+        );
+      }
+    });
 
     return WillPopScope(
       onWillPop: onWillPop,
@@ -73,16 +89,11 @@ class _StreamPageState extends ConsumerState<StreamPage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
     loading = true;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _agora.initialize().whenComplete(() => _joinBroadcast());
+      _agora.initialize(isHost: false).whenComplete(() => _joinBroadcast());
     });
   }
 

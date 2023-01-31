@@ -18,48 +18,64 @@ class ActivityCountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (loading) {
+      return const _Skeleton();
+    }
+
     return GestureDetector(
       onTap: onTap,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (loading)
-              SkeletonLine(
-                style: SkeletonLineStyle(
-                  height: MSize.fS(26),
-                  width: MSize.w(28),
-                ),
-              )
-            else
-              Text(
-                count!.round().toString(),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: MSize.fS(22),
-                  fontWeight: FontWeight.w600,
-                  height: MSize.r(1),
-                ),
+            Text(
+              count!.round().toString(),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: MSize.fS(22),
+                fontWeight: FontWeight.w600,
+                height: MSize.h(1),
               ),
-            if (loading) ...[
-              SkeletonLine(
-                style: SkeletonLineStyle(
-                  height: MSize.fS(12),
-                  width: MSize.w(65),
-                ),
-              )
-            ] else ...[
-              MSize.vS(7),
-              Text(
-                '$title',
-                style: TextStyle(
-                  fontSize: MSize.fS(12),
-                  color: const Color(0xFF898A8D),
-                ),
+            ),
+            MSize.vS(7),
+            Text(
+              '$title',
+              style: TextStyle(
+                fontSize: MSize.fS(12),
+                height: MSize.h(1),
+                color: const Color(0xFF898A8D),
               ),
-            ]
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _Skeleton extends StatelessWidget {
+  const _Skeleton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SkeletonLine(
+            style: SkeletonLineStyle(
+              height: MSize.fS(26),
+              width: MSize.w(28),
+            ),
+          ),
+          MSize.vS(7),
+          SkeletonLine(
+            style: SkeletonLineStyle(
+              height: MSize.fS(12),
+              width: MSize.w(65),
+            ),
+          )
+        ],
       ),
     );
   }

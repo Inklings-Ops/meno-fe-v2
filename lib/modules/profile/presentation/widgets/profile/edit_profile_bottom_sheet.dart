@@ -74,7 +74,7 @@ class EditProfileBottomSheet extends ConsumerWidget {
                     MSize.vS(14),
                     GestureDetector(
                       onTap: () async {
-                        await Future.delayed(const Duration(seconds: 0));
+                        await Future.delayed(Duration.zero);
 
                         if (context.mounted) {
                           await showModalBottomSheet(

@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/utils/display_broadcast_error.dart';
 import 'package:meno_fe_v2/core/value/value_objects.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user_credentials.dart';
@@ -24,7 +23,6 @@ class BroadcastFacade implements IBroadcastFacade {
   final BroadcastRemoteDatasource _remote;
   final BroadcastMapper _mapper;
 
-  final _log = Logger();
 
   BroadcastFacade(this._local, this._remote, this._mapper);
   @override
@@ -154,23 +152,12 @@ class BroadcastFacade implements IBroadcastFacade {
   }
 
   @override
-  Future<Either<BroadcastFailure, Unit>> leaveBroadcast({
-    required String broadcastId,
-  }) {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Either<BroadcastFailure, Broadcast>> startBroadcast({
     required String broadcastId,
   }) async {
     final credentials = await _local.getUserCredentials();
 
     final res = await _remote.startBroadcast(broadcastId: broadcastId);
-
-    if (res.statusCode != HttpStatus.ok) {
-      return left(BroadcastFailure.message(res.message!));
-    }
 
     final broadcast = res.data?.copyWith(
       status: 'active',

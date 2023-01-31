@@ -14,6 +14,7 @@ abstract class SocketData {
   BroadcastListener? newListener;
   String? newBroadcastListener;
   int? numberOfLiveListeners;
+  bool isLive;
 
   SocketData({
     this.liveBroadcasts,
@@ -28,6 +29,7 @@ abstract class SocketData {
     this.newListener,
     this.newBroadcastListener,
     this.numberOfLiveListeners,
+    this.isLive = false,
   });
 }
 
@@ -73,6 +75,10 @@ class EndedBroadcastData extends SocketData {
 
 class NewBroadcastListener extends SocketData {
   NewBroadcastListener({required super.newBroadcastListener});
+}
+
+class IsLiveData extends SocketData {
+  IsLiveData({required super.isLive});
 }
 
 class SocketError extends SocketData {

@@ -12,6 +12,7 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/onboarding/onboarding
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
+import 'package:meno_fe_v2/modules/broadcast/presentation/pages/broadcast_feedback_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/pages/broadcast_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/pages/create_broadcast_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/pages/discover_page.dart';
@@ -51,6 +52,7 @@ part 'm_router.gr.dart';
     ),
     AutoRoute(page: CreateBroadcastPage),
     AutoRoute(page: BroadcastPage),
+    AutoRoute(page: BroadcastFeedbackPage),
     AutoRoute(page: StreamPage),
   ],
 )

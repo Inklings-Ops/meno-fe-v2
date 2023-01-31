@@ -14,9 +14,9 @@ class SplashPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SafeArea(
-      child: Container(
-        color: MColors.splashScreenBg,
+    return Scaffold(
+      backgroundColor: MColors.splashScreenBg,
+      body: SizedBox(
         height: MSize.sh(1),
         width: MSize.sw(1),
         child: CustomPaint(

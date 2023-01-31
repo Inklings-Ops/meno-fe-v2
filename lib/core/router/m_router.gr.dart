@@ -120,6 +120,16 @@ class _$MRouter extends RootStackRouter {
         ),
       );
     },
+    BroadcastFeedbackRoute.name: (routeData) {
+      final args = routeData.argsAs<BroadcastFeedbackRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: BroadcastFeedbackPage(
+          key: args.key,
+          broadcast: args.broadcast,
+        ),
+      );
+    },
     StreamRoute.name: (routeData) {
       final args = routeData.argsAs<StreamRouteArgs>();
       return AdaptivePage<dynamic>(
@@ -236,6 +246,10 @@ class _$MRouter extends RootStackRouter {
         RouteConfig(
           BroadcastRoute.name,
           path: '/broadcast-page',
+        ),
+        RouteConfig(
+          BroadcastFeedbackRoute.name,
+          path: '/broadcast-feedback-page',
         ),
         RouteConfig(
           StreamRoute.name,
@@ -476,6 +490,40 @@ class BroadcastRouteArgs {
   @override
   String toString() {
     return 'BroadcastRouteArgs{key: $key, broadcast: $broadcast}';
+  }
+}
+
+/// generated route for
+/// [BroadcastFeedbackPage]
+class BroadcastFeedbackRoute extends PageRouteInfo<BroadcastFeedbackRouteArgs> {
+  BroadcastFeedbackRoute({
+    Key? key,
+    required Broadcast broadcast,
+  }) : super(
+          BroadcastFeedbackRoute.name,
+          path: '/broadcast-feedback-page',
+          args: BroadcastFeedbackRouteArgs(
+            key: key,
+            broadcast: broadcast,
+          ),
+        );
+
+  static const String name = 'BroadcastFeedbackRoute';
+}
+
+class BroadcastFeedbackRouteArgs {
+  const BroadcastFeedbackRouteArgs({
+    this.key,
+    required this.broadcast,
+  });
+
+  final Key? key;
+
+  final Broadcast broadcast;
+
+  @override
+  String toString() {
+    return 'BroadcastFeedbackRouteArgs{key: $key, broadcast: $broadcast}';
   }
 }
 

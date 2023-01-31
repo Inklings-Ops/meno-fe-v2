@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user.dart';
@@ -64,20 +63,6 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
     );
   }
 
-  Future<void> leavePressed(String broadcastId) async {
-    state = state.copyWith(loading: true, joinedOption: none());
-
-    Either<BroadcastFailure, Unit> r;
-
-    r = await _facade.leaveBroadcast(broadcastId: broadcastId);
-
-    state = state.copyWith(
-      loading: false,
-      showError: false,
-      leaveOption: some(r),
-    );
-  }
-
   Future<void> deletePressed(String broadcastId) async {
     state = state.copyWith(loading: true, deleteOption: none());
 
@@ -92,13 +77,13 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
     );
   }
 
-  Future<void> startPressed(e) async {
+  Future<void> startPressed(String broadcastId) async {
     state = state.copyWith(loading: true, startedOption: none());
 
     Either<BroadcastFailure, Broadcast> r;
 
     final credentials = await _facade.getUserCredentials();
-    r = await _facade.startBroadcast(broadcastId: e.broadcastId);
+    r = await _facade.startBroadcast(broadcastId: broadcastId);
 
     r.fold(
       (l) => null,

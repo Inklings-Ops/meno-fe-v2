@@ -31,7 +31,7 @@ class _MBottomNavigationBarState extends State<MBottomNavigationBar> {
     switch (status) {
       case PermissionStatus.limited:
       case PermissionStatus.granted:
-        await Future.delayed(const Duration(seconds: 0));
+        await Future.delayed(Duration.zero);
 
         if (context.mounted) {
           showModalBottomSheet(
