@@ -21,7 +21,7 @@ class MAppBar extends StatelessWidget with PreferredSizeWidget {
   final void Function() onAvatarPressed;
 
   @override
-  Size get preferredSize => Size.fromHeight(MSize.r(100));
+  Size get preferredSize => Size.fromHeight(MSize.r(70));
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +48,11 @@ class MAppBar extends StatelessWidget with PreferredSizeWidget {
     );
 
     return AppBar(
-      toolbarHeight: MSize.r(100),
+      toolbarHeight: MSize.r(70),
       leading: const SizedBox(),
       leadingWidth: MSize.r(0),
+      elevation: 0,
+      scrolledUnderElevation: 0,
       title: appBarTitle,
       actions: [
         _Avatar(onAvatarPressed: onAvatarPressed),

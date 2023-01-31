@@ -1,6 +1,5 @@
 import 'package:meno_fe_v2/modules/bible/domain/entities/book.dart';
 import 'package:meno_fe_v2/modules/bible/domain/entities/chapter.dart';
-import 'package:meno_fe_v2/modules/bible/domain/entities/translation.dart';
 import 'package:meno_fe_v2/modules/bible/domain/entities/verse.dart';
 
 abstract class IBibleFacade {
@@ -10,7 +9,7 @@ abstract class IBibleFacade {
 
   Future<int> getChapterNumber(String book);
 
-  Future<List<Translation>?> getTranslations();
+  Future<List<String>?> getTranslations();
 
   Future<Verse?> getVerse(String reference, String version);
 

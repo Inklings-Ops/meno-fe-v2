@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:meno_fe_v2/core/responses/bible_response.dart';
 import 'package:meno_fe_v2/modules/bible/infrastructure/dtos/book_dto.dart';
 import 'package:meno_fe_v2/modules/bible/infrastructure/dtos/chapter_dto.dart';
-import 'package:meno_fe_v2/modules/bible/infrastructure/dtos/translation_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'bible_remote_datasource.g.dart';
@@ -20,7 +19,7 @@ abstract class BibleRemoteDatasource {
   Future<BibleResponse<List<BookDto>>> getBooks();
 
   @GET("/api/translations")
-  Future<BibleResponse<List<TranslationDto>>> getTranslations();
+  Future<BibleResponse<List<String>>> getTranslations();
 
   @GET("/api/{version}/")
   Future<BibleResponse<ChapterDto>> getChapter({

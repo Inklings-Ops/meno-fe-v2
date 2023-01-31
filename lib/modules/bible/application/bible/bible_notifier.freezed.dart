@@ -21,10 +21,10 @@ mixin _$BibleState {
   Book get book => throw _privateConstructorUsedError;
   List<Book> get books => throw _privateConstructorUsedError; //
   Chapter get chapter => throw _privateConstructorUsedError;
-  String get chapterNumber => throw _privateConstructorUsedError;
-  int get numberOfChapters => throw _privateConstructorUsedError; //
-  Translation get translation => throw _privateConstructorUsedError;
-  List<Translation>? get translations => throw _privateConstructorUsedError;
+  int get numberOfChapters => throw _privateConstructorUsedError;
+  String get chapterNumber => throw _privateConstructorUsedError; //
+  String get translation => throw _privateConstructorUsedError;
+  List<String>? get translations => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BibleStateCopyWith<BibleState> get copyWith =>
@@ -43,14 +43,13 @@ abstract class $BibleStateCopyWith<$Res> {
       Book book,
       List<Book> books,
       Chapter chapter,
-      String chapterNumber,
       int numberOfChapters,
-      Translation translation,
-      List<Translation>? translations});
+      String chapterNumber,
+      String translation,
+      List<String>? translations});
 
   $BookCopyWith<$Res> get book;
   $ChapterCopyWith<$Res> get chapter;
-  $TranslationCopyWith<$Res> get translation;
 }
 
 /// @nodoc
@@ -71,8 +70,8 @@ class _$BibleStateCopyWithImpl<$Res, $Val extends BibleState>
     Object? book = null,
     Object? books = null,
     Object? chapter = null,
-    Object? chapterNumber = null,
     Object? numberOfChapters = null,
+    Object? chapterNumber = null,
     Object? translation = null,
     Object? translations = freezed,
   }) {
@@ -97,22 +96,22 @@ class _$BibleStateCopyWithImpl<$Res, $Val extends BibleState>
           ? _value.chapter
           : chapter // ignore: cast_nullable_to_non_nullable
               as Chapter,
-      chapterNumber: null == chapterNumber
-          ? _value.chapterNumber
-          : chapterNumber // ignore: cast_nullable_to_non_nullable
-              as String,
       numberOfChapters: null == numberOfChapters
           ? _value.numberOfChapters
           : numberOfChapters // ignore: cast_nullable_to_non_nullable
               as int,
+      chapterNumber: null == chapterNumber
+          ? _value.chapterNumber
+          : chapterNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       translation: null == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
-              as Translation,
+              as String,
       translations: freezed == translations
           ? _value.translations
           : translations // ignore: cast_nullable_to_non_nullable
-              as List<Translation>?,
+              as List<String>?,
     ) as $Val);
   }
 
@@ -131,14 +130,6 @@ class _$BibleStateCopyWithImpl<$Res, $Val extends BibleState>
       return _then(_value.copyWith(chapter: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TranslationCopyWith<$Res> get translation {
-    return $TranslationCopyWith<$Res>(_value.translation, (value) {
-      return _then(_value.copyWith(translation: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -155,17 +146,15 @@ abstract class _$$_BibleStateCopyWith<$Res>
       Book book,
       List<Book> books,
       Chapter chapter,
-      String chapterNumber,
       int numberOfChapters,
-      Translation translation,
-      List<Translation>? translations});
+      String chapterNumber,
+      String translation,
+      List<String>? translations});
 
   @override
   $BookCopyWith<$Res> get book;
   @override
   $ChapterCopyWith<$Res> get chapter;
-  @override
-  $TranslationCopyWith<$Res> get translation;
 }
 
 /// @nodoc
@@ -184,8 +173,8 @@ class __$$_BibleStateCopyWithImpl<$Res>
     Object? book = null,
     Object? books = null,
     Object? chapter = null,
-    Object? chapterNumber = null,
     Object? numberOfChapters = null,
+    Object? chapterNumber = null,
     Object? translation = null,
     Object? translations = freezed,
   }) {
@@ -210,22 +199,22 @@ class __$$_BibleStateCopyWithImpl<$Res>
           ? _value.chapter
           : chapter // ignore: cast_nullable_to_non_nullable
               as Chapter,
-      chapterNumber: null == chapterNumber
-          ? _value.chapterNumber
-          : chapterNumber // ignore: cast_nullable_to_non_nullable
-              as String,
       numberOfChapters: null == numberOfChapters
           ? _value.numberOfChapters
           : numberOfChapters // ignore: cast_nullable_to_non_nullable
               as int,
+      chapterNumber: null == chapterNumber
+          ? _value.chapterNumber
+          : chapterNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       translation: null == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
-              as Translation,
+              as String,
       translations: freezed == translations
           ? _value._translations
           : translations // ignore: cast_nullable_to_non_nullable
-              as List<Translation>?,
+              as List<String>?,
     ));
   }
 }
@@ -239,10 +228,10 @@ class _$_BibleState implements _BibleState {
       required this.book,
       required final List<Book> books,
       required this.chapter,
-      required this.chapterNumber,
       required this.numberOfChapters,
+      required this.chapterNumber,
       required this.translation,
-      required final List<Translation>? translations})
+      required final List<String>? translations})
       : _books = books,
         _translations = translations;
 
@@ -265,15 +254,15 @@ class _$_BibleState implements _BibleState {
   @override
   final Chapter chapter;
   @override
-  final String chapterNumber;
-  @override
   final int numberOfChapters;
+  @override
+  final String chapterNumber;
 //
   @override
-  final Translation translation;
-  final List<Translation>? _translations;
+  final String translation;
+  final List<String>? _translations;
   @override
-  List<Translation>? get translations {
+  List<String>? get translations {
     final value = _translations;
     if (value == null) return null;
     if (_translations is EqualUnmodifiableListView) return _translations;
@@ -283,7 +272,7 @@ class _$_BibleState implements _BibleState {
 
   @override
   String toString() {
-    return 'BibleState(loading: $loading, reference: $reference, book: $book, books: $books, chapter: $chapter, chapterNumber: $chapterNumber, numberOfChapters: $numberOfChapters, translation: $translation, translations: $translations)';
+    return 'BibleState(loading: $loading, reference: $reference, book: $book, books: $books, chapter: $chapter, numberOfChapters: $numberOfChapters, chapterNumber: $chapterNumber, translation: $translation, translations: $translations)';
   }
 
   @override
@@ -297,10 +286,10 @@ class _$_BibleState implements _BibleState {
             (identical(other.book, book) || other.book == book) &&
             const DeepCollectionEquality().equals(other._books, _books) &&
             (identical(other.chapter, chapter) || other.chapter == chapter) &&
-            (identical(other.chapterNumber, chapterNumber) ||
-                other.chapterNumber == chapterNumber) &&
             (identical(other.numberOfChapters, numberOfChapters) ||
                 other.numberOfChapters == numberOfChapters) &&
+            (identical(other.chapterNumber, chapterNumber) ||
+                other.chapterNumber == chapterNumber) &&
             (identical(other.translation, translation) ||
                 other.translation == translation) &&
             const DeepCollectionEquality()
@@ -315,8 +304,8 @@ class _$_BibleState implements _BibleState {
       book,
       const DeepCollectionEquality().hash(_books),
       chapter,
-      chapterNumber,
       numberOfChapters,
+      chapterNumber,
       translation,
       const DeepCollectionEquality().hash(_translations));
 
@@ -334,10 +323,10 @@ abstract class _BibleState implements BibleState {
       required final Book book,
       required final List<Book> books,
       required final Chapter chapter,
-      required final String chapterNumber,
       required final int numberOfChapters,
-      required final Translation translation,
-      required final List<Translation>? translations}) = _$_BibleState;
+      required final String chapterNumber,
+      required final String translation,
+      required final List<String>? translations}) = _$_BibleState;
 
   @override
   bool get loading;
@@ -350,13 +339,13 @@ abstract class _BibleState implements BibleState {
   @override //
   Chapter get chapter;
   @override
-  String get chapterNumber;
-  @override
   int get numberOfChapters;
-  @override //
-  Translation get translation;
   @override
-  List<Translation>? get translations;
+  String get chapterNumber;
+  @override //
+  String get translation;
+  @override
+  List<String>? get translations;
   @override
   @JsonKey(ignore: true)
   _$$_BibleStateCopyWith<_$_BibleState> get copyWith =>

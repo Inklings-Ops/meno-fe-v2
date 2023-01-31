@@ -20,7 +20,7 @@ class HomePage extends HookConsumerWidget {
       return null;
     });
     return SingleChildScrollView(
-      padding: MSize.pOnly(t: 150, b: 20),
+      padding: MSize.pOnly(t: 110, b: 20),
       child: Column(
         children: [
           LiveForYouSection(onDiscoverPressed: onDiscoverPressed),

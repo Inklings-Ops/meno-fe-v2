@@ -15,6 +15,7 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_page.dart';
+import 'package:meno_fe_v2/modules/bible/application/bible/bible_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/home_app_bar.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_app_bar.dart';
@@ -48,6 +49,8 @@ class LayoutPage extends HookConsumerWidget {
             preferences.write(key: MKeys.initLogin, value: 1);
           }
           ref.read(profileProvider.notifier).authProfileLoaded();
+          ref.read(bibleProvider.notifier).getAllTranslations();
+          ref.read(bibleProvider.notifier).init();
         },
       );
     });

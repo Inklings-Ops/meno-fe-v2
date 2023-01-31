@@ -1,12 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meno_fe_v2/modules/bible/domain/entities/book.dart';
 import 'package:meno_fe_v2/modules/bible/domain/entities/chapter.dart';
-import 'package:meno_fe_v2/modules/bible/domain/entities/translation.dart';
 import 'package:meno_fe_v2/modules/bible/domain/entities/verse.dart';
 import 'package:meno_fe_v2/modules/bible/domain/i_bible_facade.dart';
 import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/local/bible_local_datasource.dart';
 import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/mapper/chapter_mapper.dart';
-import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/mapper/translation_mapper.dart';
 import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/remote/bible_remote_datasource.dart';
 
 @Injectable(as: IBibleFacade)
@@ -17,7 +16,6 @@ class BibleFacade implements IBibleFacade {
   final BibleRemoteDatasource _remote;
 
   final _chapterMapper = ChapterMapper();
-  final _translationMapper = TranslationMapper();
 
   @override
   Future<List<Book>> getBooks() async {
@@ -26,8 +24,12 @@ class BibleFacade implements IBibleFacade {
 
   @override
   Future<Chapter> getChapter(String reference, String version) async {
-    final res = await _remote.getChapter(version: version, q: reference);
-    return _chapterMapper.toDomain(res.data)!;
+    try {
+      final res = await _remote.getChapter(version: version, q: reference);
+      return _chapterMapper.toDomain(res.data)!;
+    } on DioError {
+      return Chapter.empty();
+    }
   }
 
   @override
@@ -36,13 +38,13 @@ class BibleFacade implements IBibleFacade {
   }
 
   @override
-  Future<List<Translation>?> getTranslations() async {
+  Future<List<String>?> getTranslations() async {
     final res = await _remote.getTranslations();
     await _local.storeAllTranslations(res.data);
     if (res.data == null) {
       return null;
     }
-    return res.data!.map((e) => _translationMapper.toDomain(e)!).toList();
+    return res.data;
   }
 
   @override

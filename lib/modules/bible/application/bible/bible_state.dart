@@ -13,8 +13,8 @@ class BibleState with _$BibleState {
     required int numberOfChapters,
     required String chapterNumber,
     //
-    required Translation translation,
-    required List<Translation>? translations,
+    required String translation,
+    required List<String>? translations,
   }) = _BibleState;
 
   factory BibleState.initial() {
@@ -30,7 +30,7 @@ class BibleState with _$BibleState {
       chapterNumber: '1',
       //
       translations: [],
-      translation: const Translation(name: 'kjv'),
+      translation: 'kjv',
     );
   }
 }

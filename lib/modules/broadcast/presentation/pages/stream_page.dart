@@ -57,8 +57,10 @@ class _StreamPageState extends ConsumerState<StreamPage> {
       child: Scaffold(
         key: MKeys.streamScaffoldKey,
         appBar: AppBar(
+          toolbarHeight: MSize.h(46),
           backgroundColor: Colors.transparent,
           scrolledUnderElevation: 0,
+          elevation: 0,
           automaticallyImplyLeading: false,
           actions: [LeaveButton(onLeavePressed: onLeavePressed), MSize.hS(16)],
         ),
@@ -70,7 +72,7 @@ class _StreamPageState extends ConsumerState<StreamPage> {
           height: MSize.sh(1),
           child: Column(
             children: [
-              MSize.vS(80),
+              MSize.vS(70),
               BroadcastArtwork(imageUrl: widget.broadcast.imageUrl),
               MSize.vS(10),
               const Align(

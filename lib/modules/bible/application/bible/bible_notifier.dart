@@ -3,9 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/bible/domain/entities/book.dart';
 import 'package:meno_fe_v2/modules/bible/domain/entities/chapter.dart';
-import 'package:meno_fe_v2/modules/bible/domain/entities/translation.dart';
 import 'package:meno_fe_v2/modules/bible/domain/i_bible_facade.dart';
-import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/local/books.dart';
+import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/local/books_list.dart';
+import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/local/get_chapter_number.dart';
 
 part 'bible_notifier.freezed.dart';
 part 'bible_state.dart';
@@ -20,7 +20,10 @@ class BibleNotifier extends StateNotifier<BibleState> {
 
   /// Select a book; e.g. Genesis
   void updateBook(Book book) {
-    state = state.copyWith(book: book);
+    state = state.copyWith(
+      book: book,
+      numberOfChapters: getChapterNumber(book.name!.last),
+    );
   }
 
   /// Shows the number of chapters
@@ -44,24 +47,28 @@ class BibleNotifier extends StateNotifier<BibleState> {
   }
 
   /// Select a translation; e.g. KJV
-  Future<void> updateTranslation(Translation translation) async {
+  Future<void> updateTranslation(String translation) async {
     state = state.copyWith(translation: translation);
   }
 
   /// Returns the chapter - Genesis 1, with all the verses in that
   /// chapter
   Future<void> getChapter(String chapterNumber, [String? verseNumber]) async {
-    final ref1 = '${state.book.name} $chapterNumber';
-    final ref2 = '${state.book.name} $chapterNumber:$verseNumber';
+    final ref1 = '${state.book.name?.last} $chapterNumber';
+    final ref2 = '${state.book.name?.last} $chapterNumber:$verseNumber';
     state = state.copyWith(
       chapterNumber: chapterNumber,
       reference: verseNumber == null ? ref1 : ref2,
+      translation: state.translation,
       loading: true,
     );
-    final res = await _facade.getChapter(
-      state.reference,
-      state.translation.name!,
-    );
+    final res = await _facade.getChapter(state.reference, state.translation);
+    state = state.copyWith(chapter: res, loading: false);
+  }
+
+  Future<void> init() async {
+    state = state.copyWith(loading: true);
+    final res = await _facade.getChapter(state.reference, state.translation);
     state = state.copyWith(chapter: res, loading: false);
   }
 

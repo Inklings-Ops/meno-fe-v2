@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
+import 'package:meno_fe_v2/modules/bible/presentation/pages/bible_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_bottom_sheet_title.dart';
 
@@ -19,12 +20,12 @@ class StreamBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       expand: false,
-      minChildSize: 0.66,
+      minChildSize: 0.67,
       maxChildSize: 0.9,
-      initialChildSize: 0.66,
+      initialChildSize: 0.67,
       builder: (context, scrollController) {
         return SingleChildScrollView(
-          controller: loading ? null : scrollController,
+          controller: scrollController,
           primary: false,
           child: Container(
             height: MSize.sh(0.9),
@@ -40,17 +41,16 @@ class StreamBottomSheet extends StatelessWidget {
                 StreamBottomSheetTitle(
                   broadcast: broadcast,
                   tabController: tabController,
-                  loading: loading,
                 ),
                 Expanded(
                   child: Container(
                     color: Colors.white,
                     child: TabBarView(
                       controller: tabController,
-                      children: const [
-                        Center(child: Text('Chat Page')),
-                        Center(child: Text('Live Bible')),
-                        Center(child: Text('Take Notes')),
+                      children: [
+                        const Center(child: Text('Chat Page')),
+                        BiblePage(scrollController: scrollController),
+                        const Center(child: Text('Take Notes')),
                       ],
                     ),
                   ),

@@ -47,13 +47,13 @@ class _BibleRemoteDatasource implements BibleRemoteDatasource {
   }
 
   @override
-  Future<BibleResponse<List<TranslationDto>>> getTranslations() async {
+  Future<BibleResponse<List<String>>> getTranslations() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BibleResponse<List<TranslationDto>>>(Options(
+        _setStreamType<BibleResponse<List<String>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -65,12 +65,10 @@ class _BibleRemoteDatasource implements BibleRemoteDatasource {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BibleResponse<List<TranslationDto>>.fromJson(
+    final value = BibleResponse<List<String>>.fromJson(
       _result.data!,
-      (json) => (json as List<dynamic>)
-          .map<TranslationDto>(
-              (i) => TranslationDto.fromJson(i as Map<String, dynamic>))
-          .toList(),
+      (json) =>
+          (json as List<dynamic>).map<String>((i) => i as String).toList(),
     );
     return value;
   }
