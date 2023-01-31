@@ -15,15 +15,15 @@ Map<String, dynamic> _$BookDtoToJson(BookDto instance) {
     }
   }
 
-  writeNotNull('book', instance.book);
+  writeNotNull('name', instance.name);
   return val;
 }
 
 _$_BookDto _$$_BookDtoFromJson(Map<String, dynamic> json) => _$_BookDto(
-      book: (json['book'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      name: (json['name'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$_BookDtoToJson(_$_BookDto instance) =>
     <String, dynamic>{
-      'book': instance.book,
+      'name': instance.name,
     };

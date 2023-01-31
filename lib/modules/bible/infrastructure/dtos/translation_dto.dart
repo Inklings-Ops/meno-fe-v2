@@ -10,7 +10,7 @@ part 'translation_dto.g.dart';
   includeIfNull: false,
 )
 class TranslationDto with _$TranslationDto {
-  factory TranslationDto({String? translation}) = _TranslationDto;
+  factory TranslationDto({String? name}) = _TranslationDto;
 
   factory TranslationDto.fromJson(Map<String, dynamic> json) =>
       _$TranslationDtoFromJson(json);

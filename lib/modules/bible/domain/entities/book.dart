@@ -4,9 +4,9 @@ part 'book.freezed.dart';
 
 @freezed
 class Book with _$Book {
-  const factory Book({List<String>? book}) = _Book;
+  const factory Book({List<String>? name}) = _Book;
 
   factory Book.empty() {
-    return const Book(book: ['Gen', 'Genesis']);
+    return const Book(name: ['Gen', 'Genesis']);
   }
 }

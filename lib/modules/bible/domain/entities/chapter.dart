@@ -10,5 +10,5 @@ class Chapter with _$Chapter {
     required List<Verse?> verses,
   }) = _Chapter;
 
-  factory Chapter.empty() => const Chapter(reference: '', verses: []);
+  factory Chapter.empty() => const Chapter(reference: 'Genesis 1', verses: []);
 }

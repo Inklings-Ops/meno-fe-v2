@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Book {
-  List<String>? get book => throw _privateConstructorUsedError;
+  List<String>? get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookCopyWith<Book> get copyWith => throw _privateConstructorUsedError;
@@ -27,7 +27,7 @@ abstract class $BookCopyWith<$Res> {
   factory $BookCopyWith(Book value, $Res Function(Book) then) =
       _$BookCopyWithImpl<$Res, Book>;
   @useResult
-  $Res call({List<String>? book});
+  $Res call({List<String>? name});
 }
 
 /// @nodoc
@@ -43,12 +43,12 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? book = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      book: freezed == book
-          ? _value.book
-          : book // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as List<String>?,
     ) as $Val);
   }
@@ -60,7 +60,7 @@ abstract class _$$_BookCopyWith<$Res> implements $BookCopyWith<$Res> {
       __$$_BookCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String>? book});
+  $Res call({List<String>? name});
 }
 
 /// @nodoc
@@ -72,12 +72,12 @@ class __$$_BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res, _$_Book>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? book = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$_Book(
-      book: freezed == book
-          ? _value._book
-          : book // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value._name
+          : name // ignore: cast_nullable_to_non_nullable
               as List<String>?,
     ));
   }
@@ -86,21 +86,21 @@ class __$$_BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res, _$_Book>
 /// @nodoc
 
 class _$_Book implements _Book {
-  const _$_Book({final List<String>? book}) : _book = book;
+  const _$_Book({final List<String>? name}) : _name = name;
 
-  final List<String>? _book;
+  final List<String>? _name;
   @override
-  List<String>? get book {
-    final value = _book;
+  List<String>? get name {
+    final value = _name;
     if (value == null) return null;
-    if (_book is EqualUnmodifiableListView) return _book;
+    if (_name is EqualUnmodifiableListView) return _name;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'Book(book: $book)';
+    return 'Book(name: $name)';
   }
 
   @override
@@ -108,12 +108,12 @@ class _$_Book implements _Book {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Book &&
-            const DeepCollectionEquality().equals(other._book, _book));
+            const DeepCollectionEquality().equals(other._name, _name));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_book));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_name));
 
   @JsonKey(ignore: true)
   @override
@@ -123,10 +123,10 @@ class _$_Book implements _Book {
 }
 
 abstract class _Book implements Book {
-  const factory _Book({final List<String>? book}) = _$_Book;
+  const factory _Book({final List<String>? name}) = _$_Book;
 
   @override
-  List<String>? get book;
+  List<String>? get name;
   @override
   @JsonKey(ignore: true)
   _$$_BookCopyWith<_$_Book> get copyWith => throw _privateConstructorUsedError;

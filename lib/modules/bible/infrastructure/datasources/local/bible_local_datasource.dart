@@ -13,7 +13,7 @@ class BibleLocalDatasource {
 
   BibleLocalDatasource(this._storage);
 
-  List<Book> getBooks() => books;
+  List<Book> getBooks() => allBooks;
 
   Future<void> storeAllTranslations(List<TranslationDto>? translations) async {
     return await _storage.write(

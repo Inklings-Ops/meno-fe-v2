@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Translation {
-  String? get translation => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TranslationCopyWith<Translation> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $TranslationCopyWith<$Res> {
           Translation value, $Res Function(Translation) then) =
       _$TranslationCopyWithImpl<$Res, Translation>;
   @useResult
-  $Res call({String? translation});
+  $Res call({String? name});
 }
 
 /// @nodoc
@@ -45,12 +45,12 @@ class _$TranslationCopyWithImpl<$Res, $Val extends Translation>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? translation = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      translation: freezed == translation
-          ? _value.translation
-          : translation // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -64,7 +64,7 @@ abstract class _$$_TranslationCopyWith<$Res>
       __$$_TranslationCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? translation});
+  $Res call({String? name});
 }
 
 /// @nodoc
@@ -78,12 +78,12 @@ class __$$_TranslationCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? translation = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$_Translation(
-      translation: freezed == translation
-          ? _value.translation
-          : translation // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -92,14 +92,14 @@ class __$$_TranslationCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Translation implements _Translation {
-  const _$_Translation({this.translation});
+  const _$_Translation({this.name});
 
   @override
-  final String? translation;
+  final String? name;
 
   @override
   String toString() {
-    return 'Translation(translation: $translation)';
+    return 'Translation(name: $name)';
   }
 
   @override
@@ -107,12 +107,11 @@ class _$_Translation implements _Translation {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Translation &&
-            (identical(other.translation, translation) ||
-                other.translation == translation));
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, translation);
+  int get hashCode => Object.hash(runtimeType, name);
 
   @JsonKey(ignore: true)
   @override
@@ -122,10 +121,10 @@ class _$_Translation implements _Translation {
 }
 
 abstract class _Translation implements Translation {
-  const factory _Translation({final String? translation}) = _$_Translation;
+  const factory _Translation({final String? name}) = _$_Translation;
 
   @override
-  String? get translation;
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$$_TranslationCopyWith<_$_Translation> get copyWith =>

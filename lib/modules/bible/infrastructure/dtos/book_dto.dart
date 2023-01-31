@@ -10,7 +10,7 @@ part 'book_dto.g.dart';
   includeIfNull: false,
 )
 class BookDto with _$BookDto {
-  factory BookDto({List<String>? book}) = _BookDto;
+  factory BookDto({List<String>? name}) = _BookDto;
 
   factory BookDto.fromJson(Map<String, dynamic> json) =>
       _$BookDtoFromJson(json);

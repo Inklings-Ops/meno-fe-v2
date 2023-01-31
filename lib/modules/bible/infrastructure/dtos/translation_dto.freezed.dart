@@ -20,7 +20,7 @@ TranslationDto _$TranslationDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TranslationDto {
-  String? get translation => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $TranslationDtoCopyWith<$Res> {
           TranslationDto value, $Res Function(TranslationDto) then) =
       _$TranslationDtoCopyWithImpl<$Res, TranslationDto>;
   @useResult
-  $Res call({String? translation});
+  $Res call({String? name});
 }
 
 /// @nodoc
@@ -50,12 +50,12 @@ class _$TranslationDtoCopyWithImpl<$Res, $Val extends TranslationDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? translation = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      translation: freezed == translation
-          ? _value.translation
-          : translation // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -69,7 +69,7 @@ abstract class _$$_TranslationDtoCopyWith<$Res>
       __$$_TranslationDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? translation});
+  $Res call({String? name});
 }
 
 /// @nodoc
@@ -83,12 +83,12 @@ class __$$_TranslationDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? translation = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$_TranslationDto(
-      translation: freezed == translation
-          ? _value.translation
-          : translation // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -97,17 +97,17 @@ class __$$_TranslationDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_TranslationDto implements _TranslationDto {
-  _$_TranslationDto({this.translation});
+  _$_TranslationDto({this.name});
 
   factory _$_TranslationDto.fromJson(Map<String, dynamic> json) =>
       _$$_TranslationDtoFromJson(json);
 
   @override
-  final String? translation;
+  final String? name;
 
   @override
   String toString() {
-    return 'TranslationDto(translation: $translation)';
+    return 'TranslationDto(name: $name)';
   }
 
   @override
@@ -115,13 +115,12 @@ class _$_TranslationDto implements _TranslationDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TranslationDto &&
-            (identical(other.translation, translation) ||
-                other.translation == translation));
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, translation);
+  int get hashCode => Object.hash(runtimeType, name);
 
   @JsonKey(ignore: true)
   @override
@@ -138,13 +137,13 @@ class _$_TranslationDto implements _TranslationDto {
 }
 
 abstract class _TranslationDto implements TranslationDto {
-  factory _TranslationDto({final String? translation}) = _$_TranslationDto;
+  factory _TranslationDto({final String? name}) = _$_TranslationDto;
 
   factory _TranslationDto.fromJson(Map<String, dynamic> json) =
       _$_TranslationDto.fromJson;
 
   @override
-  String? get translation;
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$$_TranslationDtoCopyWith<_$_TranslationDto> get copyWith =>

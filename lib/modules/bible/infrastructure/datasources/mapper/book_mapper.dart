@@ -7,6 +7,6 @@ class BookMapper {
   Book? toDomain(BookDto? dto) {
     if (dto == null) return null;
 
-    return Book(book: dto.book);
+    return Book(name: dto.name);
   }
 }

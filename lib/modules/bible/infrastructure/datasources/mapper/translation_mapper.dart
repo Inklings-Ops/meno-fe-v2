@@ -7,6 +7,6 @@ class TranslationMapper {
   Translation? toDomain(TranslationDto? dto) {
     if (dto == null) return null;
 
-    return Translation(translation: dto.translation);
+    return Translation(name: dto.name);
   }
 }

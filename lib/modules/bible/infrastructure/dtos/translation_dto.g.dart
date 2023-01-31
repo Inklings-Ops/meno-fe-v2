@@ -15,16 +15,16 @@ Map<String, dynamic> _$TranslationDtoToJson(TranslationDto instance) {
     }
   }
 
-  writeNotNull('translation', instance.translation);
+  writeNotNull('name', instance.name);
   return val;
 }
 
 _$_TranslationDto _$$_TranslationDtoFromJson(Map<String, dynamic> json) =>
     _$_TranslationDto(
-      translation: json['translation'] as String?,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$$_TranslationDtoToJson(_$_TranslationDto instance) =>
     <String, dynamic>{
-      'translation': instance.translation,
+      'name': instance.name,
     };
