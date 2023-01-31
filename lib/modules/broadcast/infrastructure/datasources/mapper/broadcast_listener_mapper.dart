@@ -7,6 +7,10 @@ class BroadcastListenerMapper {
   BroadcastListener? toDomain(BroadcastListenerDto? dto) {
     if (dto == null) return null;
 
-    return BroadcastListener(id: dto.id, fullName: dto.fullName);
+    return BroadcastListener(
+      id: dto.id,
+      fullName: dto.fullName,
+      imageUrl: dto.imageUrl,
+    );
   }
 }

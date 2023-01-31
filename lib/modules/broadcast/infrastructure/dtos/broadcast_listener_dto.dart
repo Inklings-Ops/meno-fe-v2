@@ -14,12 +14,14 @@ class BroadcastListenerDto with _$BroadcastListenerDto {
   factory BroadcastListenerDto({
     required String id,
     required String fullName,
+    String? imageUrl,
   }) = _BroadcastListenerDto;
 
   factory BroadcastListenerDto.fromDomain(BroadcastListener b) {
     return BroadcastListenerDto(
       id: b.id,
       fullName: b.fullName,
+      imageUrl: b.imageUrl,
     );
   }
 

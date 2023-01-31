@@ -2,6 +2,7 @@ import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast_listener.dart';
 
 abstract class SocketData {
+  String? liveBroadcastId;
   List<Broadcast?>? liveBroadcasts;
   List<BroadcastListener?>? listeners;
   Broadcast? liveBroadcast;
@@ -17,6 +18,7 @@ abstract class SocketData {
   bool isLive;
 
   SocketData({
+    this.liveBroadcastId,
     this.liveBroadcasts,
     this.listeners,
     this.liveBroadcast,
@@ -73,12 +75,12 @@ class EndedBroadcastData extends SocketData {
   EndedBroadcastData({required super.endedBroadcast});
 }
 
-class NewBroadcastListener extends SocketData {
-  NewBroadcastListener({required super.newBroadcastListener});
+class NewBroadcastListenerData extends SocketData {
+  NewBroadcastListenerData({required super.newBroadcastListener});
 }
 
 class IsLiveData extends SocketData {
-  IsLiveData({required super.isLive});
+  IsLiveData({required super.isLive, super.liveBroadcastId});
 }
 
 class SocketError extends SocketData {

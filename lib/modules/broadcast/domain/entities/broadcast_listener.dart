@@ -7,9 +7,10 @@ class BroadcastListener with _$BroadcastListener {
   const factory BroadcastListener({
     required String id,
     required String fullName,
+    String? imageUrl,
   }) = _BroadcastListener;
 
   factory BroadcastListener.empty() {
-    return const BroadcastListener(id: '', fullName: '');
+    return const BroadcastListener(id: '', fullName: '', imageUrl: '');
   }
 }

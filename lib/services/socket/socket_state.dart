@@ -3,6 +3,7 @@ part of 'socket_service.dart';
 @freezed
 class SocketState with _$SocketState {
   factory SocketState({
+    String? liveBroadcastId,
     List<Broadcast?>? liveBroadcasts,
     List<BroadcastListener?>? listeners,
     required bool loading,

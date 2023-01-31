@@ -22,6 +22,7 @@ BroadcastListenerDto _$BroadcastListenerDtoFromJson(Map<String, dynamic> json) {
 mixin _$BroadcastListenerDto {
   String get id => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $BroadcastListenerDtoCopyWith<$Res> {
           $Res Function(BroadcastListenerDto) then) =
       _$BroadcastListenerDtoCopyWithImpl<$Res, BroadcastListenerDto>;
   @useResult
-  $Res call({String id, String fullName});
+  $Res call({String id, String fullName, String? imageUrl});
 }
 
 /// @nodoc
@@ -54,6 +55,7 @@ class _$BroadcastListenerDtoCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? fullName = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -64,6 +66,10 @@ class _$BroadcastListenerDtoCopyWithImpl<$Res,
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -76,7 +82,7 @@ abstract class _$$_BroadcastListenerDtoCopyWith<$Res>
       __$$_BroadcastListenerDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String fullName});
+  $Res call({String id, String fullName, String? imageUrl});
 }
 
 /// @nodoc
@@ -92,6 +98,7 @@ class __$$_BroadcastListenerDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? fullName = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$_BroadcastListenerDto(
       id: null == id
@@ -102,6 +109,10 @@ class __$$_BroadcastListenerDtoCopyWithImpl<$Res>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -109,7 +120,8 @@ class __$$_BroadcastListenerDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_BroadcastListenerDto implements _BroadcastListenerDto {
-  _$_BroadcastListenerDto({required this.id, required this.fullName});
+  _$_BroadcastListenerDto(
+      {required this.id, required this.fullName, this.imageUrl});
 
   factory _$_BroadcastListenerDto.fromJson(Map<String, dynamic> json) =>
       _$$_BroadcastListenerDtoFromJson(json);
@@ -118,10 +130,12 @@ class _$_BroadcastListenerDto implements _BroadcastListenerDto {
   final String id;
   @override
   final String fullName;
+  @override
+  final String? imageUrl;
 
   @override
   String toString() {
-    return 'BroadcastListenerDto(id: $id, fullName: $fullName)';
+    return 'BroadcastListenerDto(id: $id, fullName: $fullName, imageUrl: $imageUrl)';
   }
 
   @override
@@ -131,12 +145,14 @@ class _$_BroadcastListenerDto implements _BroadcastListenerDto {
             other is _$_BroadcastListenerDto &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.fullName, fullName) ||
-                other.fullName == fullName));
+                other.fullName == fullName) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, fullName);
+  int get hashCode => Object.hash(runtimeType, id, fullName, imageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -156,7 +172,8 @@ class _$_BroadcastListenerDto implements _BroadcastListenerDto {
 abstract class _BroadcastListenerDto implements BroadcastListenerDto {
   factory _BroadcastListenerDto(
       {required final String id,
-      required final String fullName}) = _$_BroadcastListenerDto;
+      required final String fullName,
+      final String? imageUrl}) = _$_BroadcastListenerDto;
 
   factory _BroadcastListenerDto.fromJson(Map<String, dynamic> json) =
       _$_BroadcastListenerDto.fromJson;
@@ -165,6 +182,8 @@ abstract class _BroadcastListenerDto implements BroadcastListenerDto {
   String get id;
   @override
   String get fullName;
+  @override
+  String? get imageUrl;
   @override
   @JsonKey(ignore: true)
   _$$_BroadcastListenerDtoCopyWith<_$_BroadcastListenerDto> get copyWith =>

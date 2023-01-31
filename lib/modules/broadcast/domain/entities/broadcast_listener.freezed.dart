@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BroadcastListener {
   String get id => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BroadcastListenerCopyWith<BroadcastListener> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $BroadcastListenerCopyWith<$Res> {
           BroadcastListener value, $Res Function(BroadcastListener) then) =
       _$BroadcastListenerCopyWithImpl<$Res, BroadcastListener>;
   @useResult
-  $Res call({String id, String fullName});
+  $Res call({String id, String fullName, String? imageUrl});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$BroadcastListenerCopyWithImpl<$Res, $Val extends BroadcastListener>
   $Res call({
     Object? id = null,
     Object? fullName = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -58,6 +60,10 @@ class _$BroadcastListenerCopyWithImpl<$Res, $Val extends BroadcastListener>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$_BroadcastListenerCopyWith<$Res>
       __$$_BroadcastListenerCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String fullName});
+  $Res call({String id, String fullName, String? imageUrl});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$_BroadcastListenerCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? fullName = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$_BroadcastListener(
       id: null == id
@@ -96,6 +103,10 @@ class __$$_BroadcastListenerCopyWithImpl<$Res>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -103,16 +114,19 @@ class __$$_BroadcastListenerCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BroadcastListener implements _BroadcastListener {
-  const _$_BroadcastListener({required this.id, required this.fullName});
+  const _$_BroadcastListener(
+      {required this.id, required this.fullName, this.imageUrl});
 
   @override
   final String id;
   @override
   final String fullName;
+  @override
+  final String? imageUrl;
 
   @override
   String toString() {
-    return 'BroadcastListener(id: $id, fullName: $fullName)';
+    return 'BroadcastListener(id: $id, fullName: $fullName, imageUrl: $imageUrl)';
   }
 
   @override
@@ -122,11 +136,13 @@ class _$_BroadcastListener implements _BroadcastListener {
             other is _$_BroadcastListener &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.fullName, fullName) ||
-                other.fullName == fullName));
+                other.fullName == fullName) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, fullName);
+  int get hashCode => Object.hash(runtimeType, id, fullName, imageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -139,12 +155,15 @@ class _$_BroadcastListener implements _BroadcastListener {
 abstract class _BroadcastListener implements BroadcastListener {
   const factory _BroadcastListener(
       {required final String id,
-      required final String fullName}) = _$_BroadcastListener;
+      required final String fullName,
+      final String? imageUrl}) = _$_BroadcastListener;
 
   @override
   String get id;
   @override
   String get fullName;
+  @override
+  String? get imageUrl;
   @override
   @JsonKey(ignore: true)
   _$$_BroadcastListenerCopyWith<_$_BroadcastListener> get copyWith =>

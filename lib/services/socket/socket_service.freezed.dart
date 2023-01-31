@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SocketState {
+  String? get liveBroadcastId => throw _privateConstructorUsedError;
   List<Broadcast?>? get liveBroadcasts => throw _privateConstructorUsedError;
   List<BroadcastListener?>? get listeners => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
@@ -39,7 +40,8 @@ abstract class $SocketStateCopyWith<$Res> {
       _$SocketStateCopyWithImpl<$Res, SocketState>;
   @useResult
   $Res call(
-      {List<Broadcast?>? liveBroadcasts,
+      {String? liveBroadcastId,
+      List<Broadcast?>? liveBroadcasts,
       List<BroadcastListener?>? listeners,
       bool loading,
       int? numberOfLiveListeners,
@@ -67,6 +69,7 @@ class _$SocketStateCopyWithImpl<$Res, $Val extends SocketState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? liveBroadcastId = freezed,
     Object? liveBroadcasts = freezed,
     Object? listeners = freezed,
     Object? loading = null,
@@ -79,6 +82,10 @@ class _$SocketStateCopyWithImpl<$Res, $Val extends SocketState>
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
+      liveBroadcastId: freezed == liveBroadcastId
+          ? _value.liveBroadcastId
+          : liveBroadcastId // ignore: cast_nullable_to_non_nullable
+              as String?,
       liveBroadcasts: freezed == liveBroadcasts
           ? _value.liveBroadcasts
           : liveBroadcasts // ignore: cast_nullable_to_non_nullable
@@ -156,7 +163,8 @@ abstract class _$$_SocketStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Broadcast?>? liveBroadcasts,
+      {String? liveBroadcastId,
+      List<Broadcast?>? liveBroadcasts,
       List<BroadcastListener?>? listeners,
       bool loading,
       int? numberOfLiveListeners,
@@ -184,6 +192,7 @@ class __$$_SocketStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? liveBroadcastId = freezed,
     Object? liveBroadcasts = freezed,
     Object? listeners = freezed,
     Object? loading = null,
@@ -196,6 +205,10 @@ class __$$_SocketStateCopyWithImpl<$Res>
     Object? error = freezed,
   }) {
     return _then(_$_SocketState(
+      liveBroadcastId: freezed == liveBroadcastId
+          ? _value.liveBroadcastId
+          : liveBroadcastId // ignore: cast_nullable_to_non_nullable
+              as String?,
       liveBroadcasts: freezed == liveBroadcasts
           ? _value._liveBroadcasts
           : liveBroadcasts // ignore: cast_nullable_to_non_nullable
@@ -244,7 +257,8 @@ class __$$_SocketStateCopyWithImpl<$Res>
 
 class _$_SocketState implements _SocketState {
   _$_SocketState(
-      {final List<Broadcast?>? liveBroadcasts,
+      {this.liveBroadcastId,
+      final List<Broadcast?>? liveBroadcasts,
       final List<BroadcastListener?>? listeners,
       required this.loading,
       this.numberOfLiveListeners,
@@ -257,6 +271,8 @@ class _$_SocketState implements _SocketState {
       : _liveBroadcasts = liveBroadcasts,
         _listeners = listeners;
 
+  @override
+  final String? liveBroadcastId;
   final List<Broadcast?>? _liveBroadcasts;
   @override
   List<Broadcast?>? get liveBroadcasts {
@@ -296,7 +312,7 @@ class _$_SocketState implements _SocketState {
 
   @override
   String toString() {
-    return 'SocketState(liveBroadcasts: $liveBroadcasts, listeners: $listeners, loading: $loading, numberOfLiveListeners: $numberOfLiveListeners, numberOfLiveBroadcasts: $numberOfLiveBroadcasts, numberOfListeners: $numberOfListeners, newListener: $newListener, liveBroadcast: $liveBroadcast, isLive: $isLive, error: $error)';
+    return 'SocketState(liveBroadcastId: $liveBroadcastId, liveBroadcasts: $liveBroadcasts, listeners: $listeners, loading: $loading, numberOfLiveListeners: $numberOfLiveListeners, numberOfLiveBroadcasts: $numberOfLiveBroadcasts, numberOfListeners: $numberOfListeners, newListener: $newListener, liveBroadcast: $liveBroadcast, isLive: $isLive, error: $error)';
   }
 
   @override
@@ -304,6 +320,8 @@ class _$_SocketState implements _SocketState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SocketState &&
+            (identical(other.liveBroadcastId, liveBroadcastId) ||
+                other.liveBroadcastId == liveBroadcastId) &&
             const DeepCollectionEquality()
                 .equals(other._liveBroadcasts, _liveBroadcasts) &&
             const DeepCollectionEquality()
@@ -326,6 +344,7 @@ class _$_SocketState implements _SocketState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      liveBroadcastId,
       const DeepCollectionEquality().hash(_liveBroadcasts),
       const DeepCollectionEquality().hash(_listeners),
       loading,
@@ -346,7 +365,8 @@ class _$_SocketState implements _SocketState {
 
 abstract class _SocketState implements SocketState {
   factory _SocketState(
-      {final List<Broadcast?>? liveBroadcasts,
+      {final String? liveBroadcastId,
+      final List<Broadcast?>? liveBroadcasts,
       final List<BroadcastListener?>? listeners,
       required final bool loading,
       final int? numberOfLiveListeners,
@@ -357,6 +377,8 @@ abstract class _SocketState implements SocketState {
       required final bool isLive,
       final String? error}) = _$_SocketState;
 
+  @override
+  String? get liveBroadcastId;
   @override
   List<Broadcast?>? get liveBroadcasts;
   @override

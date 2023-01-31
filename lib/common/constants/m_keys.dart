@@ -35,7 +35,7 @@ class MKeys {
   static const String leaveBroadcast = 'leaveBroadcast';
   static const String getLiveBroadcast = 'getLiveBroadcast';
   static const String getLiveBroadcasts = 'getLiveBroadcasts';
-  static const String getLiveBroadcastListeners = 'getLiveBroadcastListeners';
+  static const String getBroadcastListeners = 'getBroadcastListeners';
   static const String getNumberOfLiveBroadcasts = 'getNumberOfLiveBroadcasts';
   static const String getNumberOfBroadcastListeners =
       'getNumberOfBroadcastListeners';
