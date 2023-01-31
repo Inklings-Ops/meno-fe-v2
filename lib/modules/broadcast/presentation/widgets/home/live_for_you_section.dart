@@ -4,7 +4,9 @@ import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_section_title.dart';
 
 class LiveForYouSection extends ConsumerWidget {
-  const LiveForYouSection({Key? key}) : super(key: key);
+  const LiveForYouSection({super.key, this.onDiscoverPressed});
+
+  final void Function()? onDiscoverPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +43,7 @@ class LiveForYouSection extends ConsumerWidget {
                     ),
                     MSize.vS(6),
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: onDiscoverPressed,
                       style: OutlinedButton.styleFrom(
                         fixedSize: Size(MSize.w(107), MSize.h(34)),
                         minimumSize: Size(MSize.w(107), MSize.h(30)),

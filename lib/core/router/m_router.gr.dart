@@ -141,9 +141,14 @@ class _$MRouter extends RootStackRouter {
       );
     },
     HomeRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
       return AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const HomePage(),
+        child: HomePage(
+          key: args.key,
+          onDiscoverPressed: args.onDiscoverPressed,
+        ),
       );
     },
     DiscoverRoute.name: (routeData) {
@@ -563,14 +568,36 @@ class StreamRouteArgs {
 
 /// generated route for
 /// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute()
-      : super(
+class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({
+    Key? key,
+    void Function()? onDiscoverPressed,
+  }) : super(
           HomeRoute.name,
           path: 'home-page',
+          args: HomeRouteArgs(
+            key: key,
+            onDiscoverPressed: onDiscoverPressed,
+          ),
         );
 
   static const String name = 'HomeRoute';
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({
+    this.key,
+    this.onDiscoverPressed,
+  });
+
+  final Key? key;
+
+  final void Function()? onDiscoverPressed;
+
+  @override
+  String toString() {
+    return 'HomeRouteArgs{key: $key, onDiscoverPressed: $onDiscoverPressed}';
+  }
 }
 
 /// generated route for

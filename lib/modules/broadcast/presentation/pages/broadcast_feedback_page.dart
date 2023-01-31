@@ -40,7 +40,6 @@ class BroadcastFeedbackPage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Todo: Add name, but populate creator prop
                 Text(
                   '${broadcast.creator?.fullName}',
                   style: TextStyle(fontSize: MSize.fS(14)),

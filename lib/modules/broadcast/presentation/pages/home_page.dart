@@ -7,7 +7,9 @@ import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/now_live_
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 
 class HomePage extends HookConsumerWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, this.onDiscoverPressed});
+
+  final void Function()? onDiscoverPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,12 +19,11 @@ class HomePage extends HookConsumerWidget {
       });
       return null;
     });
-
     return SingleChildScrollView(
       padding: MSize.pOnly(t: 150, b: 20),
       child: Column(
         children: [
-          const LiveForYouSection(),
+          LiveForYouSection(onDiscoverPressed: onDiscoverPressed),
           MSize.vS(30),
 
           const NowLiveSection(),

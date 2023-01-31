@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
@@ -25,9 +26,8 @@ const items = [
   BottomNavigationBarItem(label: 'Notes', icon: Icon(MIcons.Paper1)),
   BottomNavigationBarItem(label: 'Profile', icon: Icon(MIcons.Profile1)),
 ];
-const routes = [HomeRoute(), DiscoverRoute(), NotesRoute(), ProfileRoute()];
 
-class LayoutPage extends ConsumerWidget {
+class LayoutPage extends HookConsumerWidget {
   const LayoutPage({super.key});
 
   @override
@@ -35,6 +35,7 @@ class LayoutPage extends ConsumerWidget {
     final preferences = di<SharedPreferencesService>();
 
     final state = ref.watch(authProvider);
+    final layoutTabRouter = useState<TabsRouter?>(null);
 
     ref.listen<AuthState>(authProvider, (previous, next) {
       next.maybeWhen(
@@ -60,12 +61,21 @@ class LayoutPage extends ConsumerWidget {
         showLeading: AutoRouter.of(context).canNavigateBack,
       ),
       authenticated: (a) => AutoTabsScaffold(
-        key: MKeys.layoutScaffoldKey,
+        scaffoldKey: MKeys.layoutScaffoldKey,
         extendBodyBehindAppBar: true,
-        routes: routes,
+        routes: [
+          HomeRoute(
+            onDiscoverPressed: () => layoutTabRouter.value?.setActiveIndex(1),
+          ),
+          const DiscoverRoute(),
+          const NotesRoute(),
+          const ProfileRoute(),
+        ],
         appBarBuilder: (context, tabsRouter) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            layoutTabRouter.value = tabsRouter;
+          });
           void onAvatarPressed() => tabsRouter.setActiveIndex(3);
-
           switch (tabsRouter.activeIndex) {
             case 0:
               return HomeAppBar(onAvatarPressed: onAvatarPressed);

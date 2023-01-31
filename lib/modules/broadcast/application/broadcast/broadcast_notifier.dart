@@ -100,7 +100,6 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
   }
 
   Future<void> endPressed(String broadcastId) async {
-    // Todo add dialogue box
     await _facade.endBroadcast(broadcastId: broadcastId);
   }
 
