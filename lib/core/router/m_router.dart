@@ -21,6 +21,7 @@ import 'package:meno_fe_v2/modules/broadcast/presentation/pages/home_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/pages/stream_page.dart';
 import 'package:meno_fe_v2/modules/notes/presentation/pages/notes_page.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/pages/other_user_profile_page.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/profile_page.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/recent_broadcasts_list_page.dart';
 import 'package:meno_fe_v2/splash_page.dart';
@@ -56,6 +57,7 @@ part 'm_router.gr.dart';
     AutoRoute(page: BroadcastPage),
     AutoRoute(page: BroadcastFeedbackPage),
     AutoRoute(page: StreamPage),
+    AutoRoute(page: OtherUserProfilePage),
     AutoRoute(page: RecentBroadcastListPage),
   ],
 )

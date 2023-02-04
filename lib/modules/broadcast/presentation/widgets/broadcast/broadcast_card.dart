@@ -4,6 +4,7 @@ import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_details_bottom_sheet.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_card_artwork.dart';
+import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/creator_widget.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/listener_counter.dart';
 
 class BroadcastCard extends StatelessWidget {
@@ -62,19 +63,7 @@ class BroadcastCard extends StatelessWidget {
             MSize.vS(6),
             ListenerCounter(broadcast: broadcast, isListening: false),
             MSize.vS(6),
-            AutoSizeText(
-              broadcast.creator!.fullName!,
-              maxLines: 1,
-              minFontSize: 11,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              maxFontSize: 12,
-              style: TextStyle(
-                fontSize: MSize.fS(12),
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFF6F6F6F),
-              ),
-            ),
+            CreatorWidget(creator: broadcast.creator!),
           ],
         ),
       ),

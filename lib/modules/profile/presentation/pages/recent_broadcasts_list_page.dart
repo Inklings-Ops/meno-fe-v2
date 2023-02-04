@@ -34,7 +34,7 @@ class _RecentBroadcastListPageState
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(MSize.h(30)),
           child: const MSectionTitle(
-            title: 'Recently Live Broadcasts',
+            title: 'Recent Broadcasts',
             showSeeAllButton: false,
             addSideMargin: true,
           ),
@@ -48,7 +48,7 @@ class _RecentBroadcastListPageState
             padding: MSize.pSymmetric(h: 16),
             child: TextFormField(
               decoration: InputDecoration(
-                hintText: 'Search recently live broadcasts',
+                hintText: 'Search your recent broadcasts',
                 prefixIcon: const Icon(MIcons.Search1),
                 filled: true,
                 fillColor: const Color(0xFFF0F0F0),
@@ -73,17 +73,17 @@ class _RecentBroadcastListPageState
               ),
             ),
           ),
-          MSize.vS(20),
-          Padding(
-            padding: MSize.pSymmetric(h: 16),
-            child: Row(
-              children: [
-                const ChoiceChip(label: Text('All'), selected: true),
-                MSize.hS(20),
-                const ChoiceChip(label: Text('Subscribed'), selected: false),
-              ],
-            ),
-          ),
+          // MSize.vS(20),
+          // Padding(
+          //   padding: MSize.pSymmetric(h: 16),
+          //   child: Row(
+          //     children: [
+          //       const ChoiceChip(label: Text('All'), selected: true),
+          //       MSize.hS(20),
+          //       const ChoiceChip(label: Text('Subscribed'), selected: false),
+          //     ],
+          //   ),
+          // ),
           MSize.vS(20),
           if (broadcasts.isEmpty)
             GridView.count(
@@ -146,6 +146,7 @@ class _RecentBroadcastListPageState
                           image: broadcast.imageUrl != null
                               ? DecorationImage(
                                   image: NetworkImage(broadcast.imageUrl!),
+                                  fit: BoxFit.cover,
                                 )
                               : null,
                         ),

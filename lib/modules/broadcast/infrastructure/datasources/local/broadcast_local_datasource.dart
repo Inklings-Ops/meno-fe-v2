@@ -9,10 +9,11 @@ import 'package:meno_fe_v2/services/shared_preferences_service.dart';
 
 @injectable
 class BroadcastLocalDatasource {
-  final SecureStorageService _secure;
   final SharedPreferencesService _storage;
 
-  BroadcastLocalDatasource(this._secure, this._storage);
+  BroadcastLocalDatasource(this._storage);
+
+  final _secure = SecureStorageService();
 
   Future<List<BroadcastDto?>> addLiveBroadcastToList(
       BroadcastDto broadcast) async {

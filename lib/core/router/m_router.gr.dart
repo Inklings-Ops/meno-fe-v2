@@ -140,6 +140,16 @@ class _$MRouter extends RootStackRouter {
         ),
       );
     },
+    OtherUserProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<OtherUserProfileRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: OtherUserProfilePage(
+          key: args.key,
+          userId: args.userId,
+        ),
+      );
+    },
     RecentBroadcastListRoute.name: (routeData) {
       final args = routeData.argsAs<RecentBroadcastListRouteArgs>();
       return AdaptivePage<dynamic>(
@@ -269,6 +279,10 @@ class _$MRouter extends RootStackRouter {
         RouteConfig(
           StreamRoute.name,
           path: '/stream-page',
+        ),
+        RouteConfig(
+          OtherUserProfileRoute.name,
+          path: '/other-user-profile-page',
         ),
         RouteConfig(
           RecentBroadcastListRoute.name,
@@ -577,6 +591,40 @@ class StreamRouteArgs {
   @override
   String toString() {
     return 'StreamRouteArgs{key: $key, broadcast: $broadcast}';
+  }
+}
+
+/// generated route for
+/// [OtherUserProfilePage]
+class OtherUserProfileRoute extends PageRouteInfo<OtherUserProfileRouteArgs> {
+  OtherUserProfileRoute({
+    Key? key,
+    required String userId,
+  }) : super(
+          OtherUserProfileRoute.name,
+          path: '/other-user-profile-page',
+          args: OtherUserProfileRouteArgs(
+            key: key,
+            userId: userId,
+          ),
+        );
+
+  static const String name = 'OtherUserProfileRoute';
+}
+
+class OtherUserProfileRouteArgs {
+  const OtherUserProfileRouteArgs({
+    this.key,
+    required this.userId,
+  });
+
+  final Key? key;
+
+  final String userId;
+
+  @override
+  String toString() {
+    return 'OtherUserProfileRouteArgs{key: $key, userId: $userId}';
   }
 }
 

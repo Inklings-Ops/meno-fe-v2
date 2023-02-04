@@ -1,9 +1,13 @@
 // ignore_for_file: file_names
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable()
 class SecureStorageService {
-  final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions);
+  final _storage = const FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  );
 
   Future<void> write({required String key, required String? value}) async {
     await _storage.write(key: key, value: value);
@@ -19,6 +23,3 @@ class SecureStorageService {
 
   Future<void> deleteAll() async => await _storage.deleteAll();
 }
-
-AndroidOptions get _getAndroidOptions =>
-    const AndroidOptions(encryptedSharedPreferences: true);

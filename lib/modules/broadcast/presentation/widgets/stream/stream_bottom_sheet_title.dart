@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/bottom_sheets/m_bottom_sheet_handle.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
+import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/creator_widget.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/status_indicator.dart';
-import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/broadcast_name.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/subscribe_button.dart';
 
 class StreamBottomSheetTitle extends StatelessWidget {
@@ -50,7 +50,7 @@ class StreamBottomSheetTitle extends StatelessWidget {
           MSize.vS(9),
           Padding(
             padding: MSize.pSymmetric(h: 16),
-            child: BroadcasterName(broadcast: broadcast),
+            child: CreatorWidget(creator: broadcast.creator!, showAvatar: true),
           ),
           MSize.vS(12),
           Padding(

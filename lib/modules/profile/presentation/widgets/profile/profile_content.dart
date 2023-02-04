@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
@@ -6,10 +7,17 @@ import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/edit_pro
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/go_pro_button.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_activity_count_widget.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_recent_broadcasts_list.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_subscribe_button.dart';
 
 class ProfileContent extends StatelessWidget {
-  const ProfileContent({super.key, required this.profile});
+  const ProfileContent({
+    super.key,
+    required this.profile,
+    this.isAuthUser = true,
+  });
+
   final Profile profile;
+  final bool isAuthUser;
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +63,9 @@ class ProfileContent extends StatelessWidget {
             ],
             Padding(
               padding: MSize.pSymmetric(h: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const EditProfileButton(),
-                  MSize.hS(13),
-                  const GoProButton(),
-                ],
-              ),
+              child: isAuthUser
+                  ? const _AuthUserActionButtons()
+                  : const _OtherUserActionButtons(),
             ),
             MSize.vS(26),
             const ProfileActivityCountWidget(),
@@ -82,6 +85,42 @@ class ProfileContent extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _AuthUserActionButtons extends StatelessWidget {
+  const _AuthUserActionButtons();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const EditProfileButton(),
+        MSize.hS(13),
+        const GoProButton(),
+      ],
+    );
+  }
+}
+
+class _OtherUserActionButtons extends StatelessWidget {
+  const _OtherUserActionButtons();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const ProfileSubscribeButton(),
+        MSize.hS(13),
+        CircleAvatar(
+          radius: MSize.h(37 / 2),
+          backgroundColor: const Color(0xFFF4F0FF),
+          child: const Icon(MIcons.Notification),
+        ),
+      ],
     );
   }
 }
