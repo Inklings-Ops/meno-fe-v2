@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:dio/dio.dart' hide Headers;
 import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
-import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/services/secure_storage_service.dart';
 
 class TokenInterceptor extends Interceptor {
@@ -22,7 +21,7 @@ class TokenInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = await di<SecureStorageService>().read(key: MKeys.authToken);
+    final token = await SecureStorageService().read(key: MKeys.authToken);
     Logger().i('THIS IS TOKEN FROM INTERCEPTOR ==> $token');
 
     if (token != null) {

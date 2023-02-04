@@ -7,9 +7,7 @@ import 'package:meno_fe_v2/services/secure_storage_service.dart';
 
 @injectable
 class AuthLocalDatasource {
-  AuthLocalDatasource(this._storage);
-
-  final SecureStorageService _storage;
+  final _storage = SecureStorageService();
 
   Future<void> deleteAll() async => await _storage.deleteAll();
 

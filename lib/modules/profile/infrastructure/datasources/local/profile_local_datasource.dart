@@ -8,8 +8,7 @@ import 'package:meno_fe_v2/services/secure_storage_service.dart';
 
 @Injectable()
 class ProfileLocalDatasource {
-  ProfileLocalDatasource(this._storage);
-  final SecureStorageService _storage;
+  final _storage = SecureStorageService();
 
   Future<String?> getAuthUserId() async {
     final jsonString = await _storage.read(key: MKeys.authCredentials);

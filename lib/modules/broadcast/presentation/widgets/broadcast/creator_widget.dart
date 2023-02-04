@@ -1,0 +1,94 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meno_fe_v2/common/utils/m_size.dart';
+import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/creator.dart';
+import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
+import 'package:skeletons/skeletons.dart';
+
+class CreatorWidget extends ConsumerWidget {
+  const CreatorWidget({
+    super.key,
+    required this.creator,
+    this.loading = false,
+    this.showAvatar = false,
+  });
+
+  final Creator creator;
+  final bool loading;
+  final bool showAvatar;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (loading) {
+      return _Skeleton(showAvatar: showAvatar);
+    }
+
+    return GestureDetector(
+      onTap: () {
+        ref.read(profileProvider.notifier).profileLoaded(creator.id!);
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          if (showAvatar) ...[
+            MAvatar(
+              radius: MSize.r(13),
+              showBorder: false,
+              image: creator.imageUrl != null
+                  ? NetworkImage(creator.imageUrl!)
+                  : null,
+            ),
+            MSize.hS(10),
+          ] else
+            AutoSizeText(
+              creator.fullName!,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              minFontSize: 11,
+              maxFontSize: 12,
+              style: TextStyle(
+                fontSize: MSize.fS(12),
+                fontWeight: FontWeight.w400,
+                color: const Color(0xFF6F6F6F),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Skeleton extends StatelessWidget {
+  const _Skeleton({required this.showAvatar});
+  final bool showAvatar;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        if (showAvatar) ...[
+          SkeletonAvatar(
+            style: SkeletonAvatarStyle(
+              height: MSize.r(26),
+              width: MSize.r(26),
+              shape: BoxShape.circle,
+            ),
+          ),
+          MSize.hS(10),
+        ],
+        SkeletonLine(
+          style: SkeletonLineStyle(
+            height: MSize.r(12),
+            width: MSize.r(70),
+          ),
+        )
+      ],
+    );
+  }
+}

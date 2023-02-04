@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/utils/display_auth_error.dart';
 import 'package:meno_fe_v2/core/responses/auth_response.dart';
 import 'package:meno_fe_v2/core/value/value_objects.dart';
@@ -17,16 +18,16 @@ import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/local/auth_lo
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/mapper/user_credentials_mapper.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/remote/auth_remote_datasource.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/dtos/user_credentials_dto.dart';
-import 'package:logger/logger.dart';
 
 @LazySingleton(as: IAuthFacade)
 class AuthFacade implements IAuthFacade {
-  final GoogleSignIn _google;
   final AuthLocalDatasource _local;
   final AuthRemoteDatasource _remote;
-  final UserCredentialsMapper _mapper;
 
-  AuthFacade(this._google, this._local, this._remote, this._mapper);
+  AuthFacade(this._local, this._remote);
+
+  final _google = GoogleSignIn();
+  final _mapper = UserCredentialsMapper();
 
   @override
   Future<Option<UserCredentials?>> authCredentials() async {
