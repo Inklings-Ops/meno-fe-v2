@@ -17,7 +17,7 @@ class BooksListView extends ConsumerWidget {
       itemBuilder: (context, i) {
         return ListTile(
           title: Text(
-            books[i].name!.last,
+            books[i].name.last,
             style: TextStyle(
               fontSize: MSize.fS(14),
               fontWeight: FontWeight.w500,

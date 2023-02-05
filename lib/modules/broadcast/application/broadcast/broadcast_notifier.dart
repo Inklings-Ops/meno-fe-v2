@@ -32,7 +32,13 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
     required Broadcast broadcast,
     required BuildContext context,
   }) async {
-    state = state.copyWith(loading: true, joinedOption: none());
+    state = state.copyWith(
+      loading: true,
+      joinedOption: none(),
+      startedOption: none(),
+      deleteOption: none(),
+      leaveOption: none(),
+    );
 
     Either<BroadcastFailure, String> r;
 
@@ -58,13 +64,22 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
           authUser: credentials.user!,
           showError: false,
           joinedOption: some(r),
+          startedOption: none(),
+          deleteOption: none(),
+          leaveOption: none(),
         );
       },
     );
   }
 
   Future<void> deletePressed(String broadcastId) async {
-    state = state.copyWith(loading: true, deleteOption: none());
+    state = state.copyWith(
+      loading: true,
+      deleteOption: none(),
+      startedOption: none(),
+      joinedOption: none(),
+      leaveOption: none(),
+    );
 
     Either<BroadcastFailure, Unit> r;
 
@@ -74,11 +89,20 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
       loading: false,
       showError: false,
       deleteOption: some(r),
+      startedOption: none(),
+      joinedOption: none(),
+      leaveOption: none(),
     );
   }
 
   Future<void> startPressed(String broadcastId) async {
-    state = state.copyWith(loading: true, startedOption: none());
+    state = state.copyWith(
+      loading: true,
+      startedOption: none(),
+      deleteOption: none(),
+      joinedOption: none(),
+      leaveOption: none(),
+    );
 
     Either<BroadcastFailure, Broadcast> r;
 
@@ -94,6 +118,9 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
           loading: false,
           authUser: credentials.user!,
           startedOption: some(r),
+          deleteOption: none(),
+          joinedOption: none(),
+          leaveOption: none(),
         );
       },
     );
@@ -104,13 +131,34 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
   }
 
   void mutePressed() {
-    state = state.copyWith(isAudioMute: !state.isAudioMute);
+    state = state.copyWith(
+      isAudioMute: !state.isAudioMute,
+      startedOption: none(),
+      deleteOption: none(),
+      joinedOption: none(),
+      leaveOption: none(),
+    );
   }
 
   Future<void> getCurrentUserBroadcasts() async {
-    state = state.copyWith(loading: true);
+    state = state.copyWith(
+      loading: true,
+      startedOption: none(),
+      deleteOption: none(),
+      joinedOption: none(),
+      leaveOption: none(),
+    );
 
-    final res = await _facade.getCurrentUserBroadcasts();
+    // final res = await _facade.getCurrentUserBroadcasts();
+    final credentials = await _facade.getUserCredentials();
+    final res = await _facade.getBroadcasts(
+      creatorId: credentials.user?.id,
+      include: 'totalListeners',
+      sortBy: 'endTime',
+      orderBy: 'DESC',
+      page: 1,
+      size: 10,
+    );
 
     res.fold(
       (l) => null,
@@ -118,6 +166,10 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
         state = state.copyWith(
           currentUserBroadcasts: broadcasts,
           loading: false,
+          startedOption: none(),
+          deleteOption: none(),
+          joinedOption: none(),
+          leaveOption: none(),
         );
       },
     );

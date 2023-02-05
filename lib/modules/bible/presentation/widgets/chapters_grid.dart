@@ -17,7 +17,7 @@ class ChapterGrid extends ConsumerWidget {
       childAspectRatio: 1.8,
       padding: MSize.pOnly(t: 10, b: 20),
       children: List.generate(
-        state.numberOfChapters,
+        state.book.numberOfChapters,
         (index) => GridTile(
           child: InkWell(
             onTap: () {

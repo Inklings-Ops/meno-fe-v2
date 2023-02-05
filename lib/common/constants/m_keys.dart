@@ -14,6 +14,7 @@ class MKeys {
   static const liveBroadcasts = '_live_broadcasts_';
   static const allBibleBooks = '_all_bible_books_';
   static const allBibleTranslations = '_all_bible_translations_';
+  static const broadcastListeners = 'broadcast_listeners_';
 
   static final homeScaffoldKey = GlobalKey<ScaffoldState>();
   static final streamScaffoldKey = GlobalKey<ScaffoldState>();

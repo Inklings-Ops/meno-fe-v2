@@ -6,11 +6,12 @@ part 'profile_error.g.dart';
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ProfileError extends Equatable {
-  const ProfileError({this.fullName, this.bio, this.image});
+  const ProfileError({this.fullName, this.bio, this.image, this.size});
 
   final String? fullName;
   final String? bio;
   final String? image;
+  final String? size;
 
   factory ProfileError.fromJson(Map<String, dynamic> json) =>
       _$ProfileErrorFromJson(json);

@@ -26,7 +26,7 @@ class BibleState with _$BibleState {
       books: allBooks,
       //
       chapter: Chapter.empty(/*Genesis*/),
-      numberOfChapters: 50,
+      numberOfChapters: allBooks[0].numberOfChapters,
       chapterNumber: '1',
       //
       translations: [],

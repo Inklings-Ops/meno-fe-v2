@@ -39,7 +39,7 @@ class MAvatar extends StatelessWidget {
               ? Border.all(color: const Color.fromARGB(255, 172, 172, 172))
               : null,
           image: image != null
-              ? DecorationImage(image: image!, fit: BoxFit.contain)
+              ? DecorationImage(image: image!, fit: BoxFit.cover)
               : null,
         ),
         child: image == null

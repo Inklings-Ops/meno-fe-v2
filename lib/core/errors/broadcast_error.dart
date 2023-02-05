@@ -14,6 +14,7 @@ class BroadcastError extends Equatable {
     this.cohosts,
     this.image,
     this.mimetype,
+    this.size,
   });
 
   final String? title;
@@ -23,6 +24,7 @@ class BroadcastError extends Equatable {
   final String? cohosts;
   final String? image;
   final String? mimetype;
+  final String? size;
 
   factory BroadcastError.fromJson(Map<String, dynamic> json) =>
       _$BroadcastErrorFromJson(json);
@@ -38,5 +40,6 @@ class BroadcastError extends Equatable {
         cohosts,
         image,
         mimetype,
+        size,
       ];
 }

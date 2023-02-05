@@ -40,7 +40,6 @@ class BroadcastFacade implements IBroadcastFacade {
     List<String>? cohosts,
     File? artwork,
   }) async {
-    final credentials = await _local.getUserCredentials();
     try {
       final res = await _remote.createBroadcast(
         title: title.get()!,
@@ -50,15 +49,7 @@ class BroadcastFacade implements IBroadcastFacade {
         timezone: timezone,
       );
 
-      final dto = res.data?.copyWith(
-        creator: CreatorDto(
-          id: credentials?.user?.id,
-          fullName: credentials?.user?.fullName,
-          imageUrl: credentials?.user?.imageUrl,
-        ),
-      );
-
-      return right(_mapper.toDomain(dto)!);
+      return right(_mapper.toDomain(res.data)!);
     } on DioError catch (error) {
       final message = displayBroadcastError(error);
       if (message != null) {
@@ -185,6 +176,52 @@ class BroadcastFacade implements IBroadcastFacade {
       final res = await _remote.getAllCurrentUserBroadcasts(
         creatorId: credentials!.user!.id,
         include: 'totalListeners',
+      );
+      final dto = res.data!.broadcasts;
+      final broadcasts = dto.map((e) => _mapper.toDomain(e)).toList();
+      return right(broadcasts);
+    } on DioError {
+      return left(const BroadcastFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<BroadcastFailure, List<Broadcast?>>> getBroadcasts({
+    String? status,
+    String? include,
+    String? gtEndTime,
+    String? ltEndTime,
+    String? eqEndTime,
+    String? gtStartTime,
+    String? ltStartTime,
+    String? eqStartTime,
+    String? creatorId,
+    String? notCreatorId,
+    String? orderBy,
+    String? sortBy,
+    bool? onlySubscriptions,
+    String? keywords,
+    int? page,
+    int? size,
+  }) async {
+    try {
+      final res = await _remote.getBroadcasts(
+        creatorId: creatorId,
+        status: status,
+        include: include,
+        gtEndTime: gtEndTime,
+        ltEndTime: ltEndTime,
+        eqEndTime: eqEndTime,
+        gtStartTime: gtStartTime,
+        ltStartTime: ltStartTime,
+        eqStartTime: eqStartTime,
+        notCreatorId: notCreatorId,
+        orderBy: orderBy,
+        sortBy: sortBy,
+        onlySubscriptions: onlySubscriptions,
+        keywords: keywords,
+        page: page,
+        size: size,
       );
       final dto = res.data!.broadcasts;
       final broadcasts = dto.map((e) => _mapper.toDomain(e)).toList();

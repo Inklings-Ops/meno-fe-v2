@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_notifier.dart';
-import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_cohosts_tab_view.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_listeners_tab_view.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/listener_counter.dart';
 
@@ -12,7 +11,7 @@ class BroadcastNestedTabBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = useTabController(initialLength: 2);
+    final controller = useTabController(initialLength: 1);
 
     final broadcast = ref.watch(broadcastProvider).broadcast;
 
@@ -34,7 +33,7 @@ class BroadcastNestedTabBar extends HookConsumerWidget {
             indicatorWeight: MSize.r(0.6),
             padding: EdgeInsets.zero,
             tabs: [
-              const Tab(text: 'Co-host(s)'),
+              // const Tab(text: 'Co-host(s)'),
               Tab(
                 child: ListenerCounter(
                   broadcast: broadcast,
@@ -50,7 +49,7 @@ class BroadcastNestedTabBar extends HookConsumerWidget {
           child: TabBarView(
             controller: controller,
             children: [
-              const BroadcastCohostsTabView(),
+              // const BroadcastCohostsTabView(),
               BroadcastListenersTabView(broadcastId: broadcast.id),
             ],
           ),

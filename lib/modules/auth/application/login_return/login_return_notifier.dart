@@ -5,6 +5,7 @@ import 'package:meno_fe_v2/core/value/value_objects.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/auth/domain/errors/auth_failure.dart';
 import 'package:meno_fe_v2/modules/auth/domain/i_auth_facade.dart';
+import 'package:meno_fe_v2/services/secure_storage_service.dart';
 
 part 'login_return_notifier.freezed.dart';
 part 'login_return_state.dart';
@@ -15,7 +16,13 @@ final loginReturnProvider =
 );
 
 class LoginReturnNotifier extends StateNotifier<LoginReturnState> {
-  LoginReturnNotifier(this._facade) : super(LoginReturnState.initial());
+  LoginReturnNotifier(this._facade) : super(LoginReturnState.initial()) {
+    SecureStorageService().isAuthenticated().then((value) {
+      if (!value) {
+        init();
+      }
+    });
+  }
   final IAuthFacade _facade;
 
   bool get isFormValid =>

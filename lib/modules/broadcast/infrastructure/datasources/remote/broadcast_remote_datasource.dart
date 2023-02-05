@@ -71,4 +71,45 @@ abstract class BroadcastRemoteDatasource {
     @Query('creatorId') required String creatorId,
     @Query('include') String? include,
   });
+
+  @GET("/api/v1/broadcasts/")
+  Future<BroadcastResponse<BroadcastListDataDto?>> getBroadcasts({
+    /// Status of broadcast: `active` or `inactive`
+    @Query("status") String? status,
+
+    /// Whether to include number of total listeners or not
+    @Query("include") String? include,
+
+    /// Greater than end time
+    @Query("endTime[gt]") String? gtEndTime,
+
+    /// Less than end time
+    @Query("endTime[lt]") String? ltEndTime,
+
+    /// Equal to end time
+    @Query("endTime[eq]") String? eqEndTime,
+
+    /// Greater than start time
+    @Query("startTime[gt]") String? gtStartTime,
+
+    /// Less than start time
+    @Query("startTime[lt]") String? ltStartTime,
+
+    /// Equal to start time
+    @Query("startTime[eq]") String? eqStartTime,
+
+    /// returns broadcasts by this creator id
+    @Query("creatorId") String? creatorId,
+
+    /// returns all broadcasts excluding this creator id
+    @Query("creatorId!") String? notCreatorId,
+
+    /// Order by either `ASC` or `DESC`
+    @Query("orderBy") String? orderBy,
+    @Query("sortBy") String? sortBy,
+    @Query("onlySubscriptions") bool? onlySubscriptions,
+    @Query("keywords") String? keywords,
+    @Query("page") int? page,
+    @Query("size") int? size,
+  });
 }

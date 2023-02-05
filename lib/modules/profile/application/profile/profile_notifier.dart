@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
 import 'package:meno_fe_v2/modules/profile/domain/i_profile_facade.dart';
+import 'package:meno_fe_v2/services/secure_storage_service.dart';
 
 part 'profile_notifier.freezed.dart';
 part 'profile_state.dart';
@@ -14,7 +15,13 @@ final profileProvider = StateNotifierProvider<ProfileNotifier, ProfileState>(
 );
 
 class ProfileNotifier extends StateNotifier<ProfileState> {
-  ProfileNotifier(this._facade) : super(const ProfileState.loading());
+  ProfileNotifier(this._facade) : super(const ProfileState.loading()) {
+    SecureStorageService().isAuthenticated().then((value) {
+      if (value) {
+        authProfileLoaded();
+      }
+    });
+  }
   final IProfileFacade _facade;
 
   Future<void> authProfileLoaded() async {

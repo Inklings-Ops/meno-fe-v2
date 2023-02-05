@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 
-class BroadcastListenersTabView extends ConsumerWidget {
+class BroadcastListenersTabView extends HookConsumerWidget {
   const BroadcastListenersTabView({super.key, required this.broadcastId});
   final String broadcastId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // useEffect(() {
+    //   Future.delayed(Duration.zero, () {
+    //     final event = ref.read(socketDataProvider.notifier);
+    //     event.getBroadcastListeners(broadcastId);
+    //   });
+    //   return null;
+    // });
+
     final listeners = ref.watch(socketDataProvider).listeners;
 
     if (listeners == null || listeners.isEmpty) {

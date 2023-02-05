@@ -12,8 +12,8 @@ String? displayBroadcastError(DioError err) {
   }
 
   final error = BroadcastError.fromJson(err.response!.data['error']);
-  for (var i = 0; i < error.props.length; i++) {
-    if (error.props[i] != null) {
+  if (error.props.isNotEmpty) {
+    for (var i = 0; i < error.props.length; i++) {
       result = error.props[i].toString();
     }
   }

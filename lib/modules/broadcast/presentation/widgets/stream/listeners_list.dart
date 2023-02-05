@@ -13,6 +13,8 @@ class ListenersList extends ConsumerWidget {
     var formattedNumber = NumberFormat.compact().format(
       ref.watch(socketDataProvider).numberOfLiveListeners ?? 0,
     );
+    
+    final listeners = ref.read(socketDataProvider).listeners;
 
     return SizedBox(
       width: MSize.w(130),
@@ -21,28 +23,21 @@ class ListenersList extends ConsumerWidget {
         children: [
           SizedBox(
             height: MSize.h(28),
-            width: MSize.w(80),
+            width: MSize.w(24 * (listeners?.length ?? 0)),
             child: Stack(
               clipBehavior: Clip.none,
+              alignment: Alignment.centerLeft,
               children: [
-                const MAvatar(
-                  radius: 14,
-                  image: AssetImage('assets/images/move-mountains.jpeg'),
-                ),
-                Positioned(
-                  left: MSize.r(24),
-                  child: const MAvatar(
-                    radius: 14,
-                    image: AssetImage('assets/images/move-mountains.jpeg'),
+                for (var i = 0; i < (listeners?.length ?? 0) && i < 6; i++)
+                  Positioned(
+                    left: MSize.r(24 * i),
+                    child: MAvatar(
+                      radius: 14,
+                      image: listeners![i]?.imageUrl != null
+                          ? NetworkImage(listeners[i]!.imageUrl!)
+                          : null,
+                    ),
                   ),
-                ),
-                Positioned(
-                  left: MSize.r(24 * 2),
-                  child: const MAvatar(
-                    radius: 14,
-                    image: AssetImage('assets/images/move-mountains.jpeg'),
-                  ),
-                ),
               ],
             ),
           ),
