@@ -18,14 +18,12 @@ class BibleFacade implements IBibleFacade {
   final _chapterMapper = ChapterMapper();
 
   @override
-  Future<List<Book>> getBooks() async {
-    return _local.getBooks();
-  }
-
-  @override
-  Future<Chapter> getChapter(String reference, String version) async {
+  Future<Chapter> getChapter(String reference, String translation) async {
     try {
-      final res = await _remote.getChapter(version: version, q: reference);
+      final res = await _remote.getChapter(
+        translation: translation,
+        reference: reference,
+      );
       return _chapterMapper.toDomain(res.data)!;
     } on DioError {
       return Chapter.empty();
@@ -35,6 +33,16 @@ class BibleFacade implements IBibleFacade {
   @override
   Future<int> getChapterNumber(String book) async {
     return getChapterNumber(book);
+  }
+
+  @override
+  Future<List<Book>> getNewTestamentBooks() async {
+    return _local.getNewTestamentBooks();
+  }
+
+  @override
+  Future<List<Book>> getOldTestamentBooks() async {
+    return _local.getOldTestamentBooks();
   }
 
   @override
@@ -48,8 +56,11 @@ class BibleFacade implements IBibleFacade {
   }
 
   @override
-  Future<Verse?> getVerse(String reference, String version) async {
-    final res = await _remote.getVerses(version: version, q: reference);
+  Future<Verse?> getVerse(String reference, String translation) async {
+    final res = await _remote.getVerses(
+      translation: translation,
+      reference: reference,
+    );
     final chapter = _chapterMapper.toDomain(res.data)!;
     if (chapter.verses.isEmpty) {
       return null;
@@ -58,8 +69,9 @@ class BibleFacade implements IBibleFacade {
   }
 
   @override
-  Future<List<Verse?>> getVerses(String reference, String version) async {
-    final res = await _remote.getVerses(version: version, q: reference);
+  Future<List<Verse?>> getVerses(String reference, String translation) async {
+    final res = await _remote.getVerses( translation: translation,
+        reference: reference,);
     final chapter = _chapterMapper.toDomain(res.data)!;
     return chapter.verses;
   }

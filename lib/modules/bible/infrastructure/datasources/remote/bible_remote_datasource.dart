@@ -21,15 +21,15 @@ abstract class BibleRemoteDatasource {
   @GET("/api/translations")
   Future<BibleResponse<List<String>>> getTranslations();
 
-  @GET("/api/{version}/")
+  @GET("/api/version/")
   Future<BibleResponse<ChapterDto>> getChapter({
-    @Path("version") required String version,
-    @Query("q") required String q,
+    @Query("q") required String reference,
+    @Query("v") required String translation,
   });
 
-  @GET("/api/{version}/")
+  @GET("/api/version/")
   Future<BibleResponse<ChapterDto>> getVerses({
-    @Path("version") required String version,
-    @Query("q") required String q,
+    @Query("q") required String reference,
+    @Query("v") required String translation,
   });
 }

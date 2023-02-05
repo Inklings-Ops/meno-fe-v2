@@ -95,7 +95,9 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     super.initState();
     loading = true;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _agora.initialize(isHost: false).whenComplete(() => _joinBroadcast());
+      await _agora
+          .initialize(isHost: false)
+          .whenComplete(() => _joinBroadcast());
     });
   }
 

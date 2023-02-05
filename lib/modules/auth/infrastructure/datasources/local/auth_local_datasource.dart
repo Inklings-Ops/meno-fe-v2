@@ -23,6 +23,8 @@ class AuthLocalDatasource {
     await _storage.write(key: MKeys.authCredentials, value: encodedString);
   }
 
+  Future<void> deleteToken() => _storage.delete(key: MKeys.authToken);
+
   Future<UserCredentialsDto?> getCredentials() async {
     String? jsonString = await _storage.read(key: MKeys.authCredentials);
     if (jsonString == null) return null;

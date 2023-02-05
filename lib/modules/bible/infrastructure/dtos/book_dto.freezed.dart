@@ -20,7 +20,8 @@ BookDto _$BookDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BookDto {
-  List<String>? get name => throw _privateConstructorUsedError;
+  List<String> get name => throw _privateConstructorUsedError;
+  int get numberOfChapters => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -32,7 +33,7 @@ abstract class $BookDtoCopyWith<$Res> {
   factory $BookDtoCopyWith(BookDto value, $Res Function(BookDto) then) =
       _$BookDtoCopyWithImpl<$Res, BookDto>;
   @useResult
-  $Res call({List<String>? name});
+  $Res call({List<String> name, int numberOfChapters});
 }
 
 /// @nodoc
@@ -48,13 +49,18 @@ class _$BookDtoCopyWithImpl<$Res, $Val extends BookDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? name = null,
+    Object? numberOfChapters = null,
   }) {
     return _then(_value.copyWith(
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
+      numberOfChapters: null == numberOfChapters
+          ? _value.numberOfChapters
+          : numberOfChapters // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -66,7 +72,7 @@ abstract class _$$_BookDtoCopyWith<$Res> implements $BookDtoCopyWith<$Res> {
       __$$_BookDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String>? name});
+  $Res call({List<String> name, int numberOfChapters});
 }
 
 /// @nodoc
@@ -79,13 +85,18 @@ class __$$_BookDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? name = null,
+    Object? numberOfChapters = null,
   }) {
     return _then(_$_BookDto(
-      name: freezed == name
+      name: null == name
           ? _value._name
           : name // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
+      numberOfChapters: null == numberOfChapters
+          ? _value.numberOfChapters
+          : numberOfChapters // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -93,24 +104,26 @@ class __$$_BookDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_BookDto implements _BookDto {
-  _$_BookDto({final List<String>? name}) : _name = name;
+  _$_BookDto({required final List<String> name, required this.numberOfChapters})
+      : _name = name;
 
   factory _$_BookDto.fromJson(Map<String, dynamic> json) =>
       _$$_BookDtoFromJson(json);
 
-  final List<String>? _name;
+  final List<String> _name;
   @override
-  List<String>? get name {
-    final value = _name;
-    if (value == null) return null;
+  List<String> get name {
     if (_name is EqualUnmodifiableListView) return _name;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_name);
   }
 
   @override
+  final int numberOfChapters;
+
+  @override
   String toString() {
-    return 'BookDto(name: $name)';
+    return 'BookDto(name: $name, numberOfChapters: $numberOfChapters)';
   }
 
   @override
@@ -118,13 +131,15 @@ class _$_BookDto implements _BookDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BookDto &&
-            const DeepCollectionEquality().equals(other._name, _name));
+            const DeepCollectionEquality().equals(other._name, _name) &&
+            (identical(other.numberOfChapters, numberOfChapters) ||
+                other.numberOfChapters == numberOfChapters));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_name));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_name), numberOfChapters);
 
   @JsonKey(ignore: true)
   @override
@@ -141,12 +156,16 @@ class _$_BookDto implements _BookDto {
 }
 
 abstract class _BookDto implements BookDto {
-  factory _BookDto({final List<String>? name}) = _$_BookDto;
+  factory _BookDto(
+      {required final List<String> name,
+      required final int numberOfChapters}) = _$_BookDto;
 
   factory _BookDto.fromJson(Map<String, dynamic> json) = _$_BookDto.fromJson;
 
   @override
-  List<String>? get name;
+  List<String> get name;
+  @override
+  int get numberOfChapters;
   @override
   @JsonKey(ignore: true)
   _$$_BookDtoCopyWith<_$_BookDto> get copyWith =>

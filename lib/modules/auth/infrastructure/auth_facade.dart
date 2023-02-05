@@ -166,7 +166,10 @@ class AuthFacade implements IAuthFacade {
   Future<void> logout() => Future.wait([_local.deleteAll()]);
 
   @override
-  Future<void> partialLogout() async => await _local.deleteCredentialToken();
+  Future<void> partialLogout() => Future.wait([
+        _local.deleteCredentialToken(),
+        _local.deleteToken(),
+      ]);
 
   @override
   Future<Either<AuthFailure, Unit>> register({

@@ -16,6 +16,7 @@ AuthError _$AuthErrorFromJson(Map<String, dynamic> json) => AuthError(
       type: json['type'] as String?,
       mimetype: json['mimetype'] as String?,
       idToken: json['idToken'] as String?,
+      size: json['size'] as String?,
     );
 
 Map<String, dynamic> _$AuthErrorToJson(AuthError instance) {
@@ -36,5 +37,6 @@ Map<String, dynamic> _$AuthErrorToJson(AuthError instance) {
   writeNotNull('type', instance.type);
   writeNotNull('mimetype', instance.mimetype);
   writeNotNull('idToken', instance.idToken);
+  writeNotNull('size', instance.size);
   return val;
 }

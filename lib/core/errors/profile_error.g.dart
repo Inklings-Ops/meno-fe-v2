@@ -10,6 +10,7 @@ ProfileError _$ProfileErrorFromJson(Map<String, dynamic> json) => ProfileError(
       fullName: json['fullName'] as String?,
       bio: json['bio'] as String?,
       image: json['image'] as String?,
+      size: json['size'] as String?,
     );
 
 Map<String, dynamic> _$ProfileErrorToJson(ProfileError instance) {
@@ -24,5 +25,6 @@ Map<String, dynamic> _$ProfileErrorToJson(ProfileError instance) {
   writeNotNull('fullName', instance.fullName);
   writeNotNull('bio', instance.bio);
   writeNotNull('image', instance.image);
+  writeNotNull('size', instance.size);
   return val;
 }

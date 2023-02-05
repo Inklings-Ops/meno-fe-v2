@@ -75,11 +75,14 @@ class _BibleRemoteDatasource implements BibleRemoteDatasource {
 
   @override
   Future<BibleResponse<ChapterDto>> getChapter({
-    required version,
-    required q,
+    required reference,
+    required translation,
   }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': q};
+    final queryParameters = <String, dynamic>{
+      r'q': reference,
+      r'v': translation,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -90,7 +93,7 @@ class _BibleRemoteDatasource implements BibleRemoteDatasource {
     )
             .compose(
               _dio.options,
-              '/api/${version}/',
+              '/api/version/',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -104,11 +107,14 @@ class _BibleRemoteDatasource implements BibleRemoteDatasource {
 
   @override
   Future<BibleResponse<ChapterDto>> getVerses({
-    required version,
-    required q,
+    required reference,
+    required translation,
   }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': q};
+    final queryParameters = <String, dynamic>{
+      r'q': reference,
+      r'v': translation,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -119,7 +125,7 @@ class _BibleRemoteDatasource implements BibleRemoteDatasource {
     )
             .compose(
               _dio.options,
-              '/api/${version}/',
+              '/api/version/',
               queryParameters: queryParameters,
               data: _data,
             )

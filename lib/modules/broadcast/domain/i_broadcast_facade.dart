@@ -50,4 +50,43 @@ abstract class IBroadcastFacade {
   });
 
   Future<Either<BroadcastFailure, List<Broadcast?>>> getCurrentUserBroadcasts();
+  Future<Either<BroadcastFailure, List<Broadcast?>>> getBroadcasts({
+    /// Status of broadcast: `active` or `inactive`
+    String? status,
+
+    /// Whether to include number of total listeners or not
+    String? include,
+
+    /// Greater than end time
+    String? gtEndTime,
+
+    /// Less than end time
+    String? ltEndTime,
+
+    /// Equal to end time
+    String? eqEndTime,
+
+    /// Greater than start time
+    String? gtStartTime,
+
+    /// Less than start time
+    String? ltStartTime,
+
+    /// Equal to start time
+    String? eqStartTime,
+
+    /// returns broadcasts by this creator id
+    String? creatorId,
+
+    /// returns all broadcasts excluding this creator id
+    String? notCreatorId,
+
+    /// Order by either `ASC` or `DESC`
+    String? orderBy,
+    String? sortBy,
+    bool? onlySubscriptions,
+    String? keywords,
+    int? page,
+    int? size,
+  });
 }

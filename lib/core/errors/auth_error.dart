@@ -16,6 +16,7 @@ class AuthError extends Equatable {
     this.type,
     this.mimetype,
     this.idToken,
+    this.size,
   });
 
   final String? fullName;
@@ -27,6 +28,7 @@ class AuthError extends Equatable {
   final String? type;
   final String? mimetype;
   final String? idToken;
+  final String? size;
 
   factory AuthError.fromJson(Map<String, dynamic> json) =>
       _$AuthErrorFromJson(json);
@@ -43,5 +45,6 @@ class AuthError extends Equatable {
         type,
         mimetype,
         idToken,
+        size,
       ];
 }

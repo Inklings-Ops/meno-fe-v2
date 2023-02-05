@@ -13,11 +13,13 @@ class CreatorWidget extends ConsumerWidget {
     required this.creator,
     this.loading = false,
     this.showAvatar = false,
+    this.alignment = MainAxisAlignment.start,
   });
 
   final Creator creator;
   final bool loading;
   final bool showAvatar;
+  final MainAxisAlignment alignment;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +33,7 @@ class CreatorWidget extends ConsumerWidget {
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment:alignment,
         children: [
           if (showAvatar) ...[
             MAvatar(

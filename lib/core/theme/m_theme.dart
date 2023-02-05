@@ -117,6 +117,7 @@ class MTheme {
       snackBarTheme: SnackBarThemeData(
         backgroundColor: MColors.danger,
         behavior: SnackBarBehavior.floating,
+        // insetPadding: MSize.pFromLTRB(16, 0, 16, 30),
         contentTextStyle: textTheme.bodyLarge?.copyWith(
           fontSize: MSize.fS(14),
           fontWeight: FontWeight.w400,

@@ -16,7 +16,6 @@ import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/mapper/b
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/mapper/broadcast_mapper.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/dtos/broadcast_dto.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/dtos/broadcast_listener_dto.dart';
-import 'package:meno_fe_v2/modules/broadcast/infrastructure/dtos/creator_dto.dart';
 import 'package:meno_fe_v2/modules/profile/domain/i_profile_facade.dart';
 import 'package:meno_fe_v2/services/socket/models.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -36,14 +35,17 @@ class SocketService {
   final String? _token;
   late final IO.Socket? socket;
   final socketResponse = StreamController<SocketData>();
+  StreamSink<SocketData> get sink => socketResponse.sink;
 
   final Logger _log = Logger();
+
+  final _mapper = BroadcastMapper();
 
   SocketService(this._token) {
     init();
   }
 
-  dynamic init() {
+  void init() {
     socket = IO.io(
       Env.menoApi,
       IO.OptionBuilder()
@@ -80,10 +82,9 @@ class SocketService {
     socket?.emitWithAck(
       MKeys.startedBroadcast,
       {"broadcastId": broadcastId},
-      ack: (_) => socketResponse.sink.add(IsLiveData(
-        isLive: true,
-        liveBroadcastId: broadcastId,
-      )),
+      ack: (_) => sink.add(
+        IsLiveData(isLive: true, liveBroadcastId: broadcastId),
+      ),
     );
   }
 
@@ -91,10 +92,7 @@ class SocketService {
     socket?.emitWithAck(
       MKeys.endBroadcast,
       {'broadcastId': broadcastId},
-      ack: (_) => socketResponse.sink.add(IsLiveData(
-        isLive: false,
-        liveBroadcastId: null,
-      )),
+      ack: (_) => sink.add(IsLiveData(isLive: false, liveBroadcastId: null)),
     );
   }
 
@@ -112,8 +110,8 @@ class SocketService {
       {"broadcastId": broadcastId},
       ack: (data) {
         final dto = BroadcastDto.fromJson(data);
-        final b = BroadcastMapper().toDomain(dto);
-        socketResponse.sink.add(GetLiveBroadcastData(liveBroadcast: b));
+        final b = _mapper.toDomain(dto);
+        sink.add(GetLiveBroadcastData(liveBroadcast: b));
       },
     );
   }
@@ -125,31 +123,17 @@ class SocketService {
       ack: (data) async {
         final res = (jsonDecode(jsonEncode(data))['data']);
         if (res != null) {
-          final dtos =
-              (res as List).map((b) => BroadcastDto.fromJson(b)).toList();
-          final liveBroadcasts = await Future.wait(dtos.map((dto) async {
-            final creator = await di<IProfileFacade>().getProfile(
-              id: dto.creatorId!,
-            );
-            final updateDto = dto.copyWith(
-              status: 'active',
-              creator: CreatorDto(
-                id: creator?.id,
-                fullName: creator?.fullName.get(),
-                imageUrl: creator?.imageUrl,
-              ),
-            );
-            return BroadcastMapper().toDomain(updateDto);
-          }));
-          socketResponse.sink.add(
-            GetLiveBroadcastsData(liveBroadcasts: liveBroadcasts),
-          );
+          final list = (res as List);
+          final dtos = list.map((b) => BroadcastDto.fromJson(b)).toList();
+          final broadcasts = dtos.map((e) => _mapper.toDomain(e)).toList();
+          sink.add(GetLiveBroadcastsData(liveBroadcasts: broadcasts));
         }
       },
     );
   }
 
-  void getBroadcastListeners(String broadcastId) {
+  void getBroadcastListeners(String? broadcastId) {
+    if (broadcastId == null) return;
     socket?.emitWithAck(
       MKeys.getBroadcastListeners,
       {"broadcastId": broadcastId},
@@ -157,16 +141,14 @@ class SocketService {
         final res = jsonDecode(jsonEncode(data))['data'];
         if (res != null) {
           final dtos = (res as List)
-              .map((b) => BroadcastListenerDto(id: b[0], fullName: b[1]))
+              .map((b) => BroadcastListenerDto.fromJson(b))
               .toList();
           final liveBroadcasts = await Future.wait(dtos.map((dto) async {
             final creator = await di<IProfileFacade>().getProfile(id: dto.id);
             final updateDto = dto.copyWith(imageUrl: creator?.imageUrl);
             return BroadcastListenerMapper().toDomain(updateDto);
           }));
-          socketResponse.sink.add(
-            GetBroadcastListenersData(listeners: liveBroadcasts),
-          );
+          sink.add(GetBroadcastListenersData(listeners: liveBroadcasts));
         }
       },
     );
@@ -178,7 +160,7 @@ class SocketService {
       {"broadcastId": broadcastId},
       ack: (data) {
         final decodedData = jsonDecode(jsonEncode(data))['data'];
-        socketResponse.sink.add(GetNumberOfBroadcastListenersData(
+        sink.add(GetNumberOfBroadcastListenersData(
           numberOfLiveListeners: decodedData,
         ));
       },
@@ -191,7 +173,7 @@ class SocketService {
       {},
       ack: (data) {
         final decodedData = jsonDecode(jsonEncode(data))['data'];
-        socketResponse.sink.add(GetNumberOfLiveBroadcastsData(
+        sink.add(GetNumberOfLiveBroadcastsData(
           numberOfLiveBroadcasts: decodedData,
         ));
       },
@@ -199,9 +181,11 @@ class SocketService {
   }
 
   // Listeners
-
+  //
   // Get This Event After Successful Connection To Socket
-  dynamic onConnect(_) => _log.i('Socket Connected');
+  dynamic onConnect(_) {
+    _log.i('Socket Connected');
+  }
 
   // Get This Event After Successful Disconnection To Socket
   dynamic onDisconnect(_) => _log.i('Socket Disconnected');
@@ -209,16 +193,14 @@ class SocketService {
   // Get This Event After Connection Error To Socket With Error
   dynamic onSocketError(error) {
     _log.e("Socket Error => $error");
-    socketResponse.sink.add(SocketError(error: error));
+    sink.add(SocketError(error: error));
   }
 
   // Subscribe to this event to get the name of a new Broadcast listener
   dynamic onNewBroadcastListener(dynamic data) {
     _log.i('New Broadcast Listener... => $data');
     final decodedData = jsonDecode(jsonEncode(data));
-    socketResponse.sink.add(NewBroadcastListenerData(
-      newBroadcastListener: decodedData,
-    ));
+    sink.add(NewBroadcastListenerData(newBroadcastListener: decodedData));
   }
 
   // Subscribe to this event to automatically get the number
@@ -227,7 +209,7 @@ class SocketService {
     _log.i('Number of Live Broadcasts... => $data');
     _log.i('Number of Live Broadcasts... => ${jsonDecode(jsonEncode(data))}');
     // getLiveBroadcasts();
-    socketResponse.sink.add(NumberOfLiveBroadcastsData(
+    sink.add(NumberOfLiveBroadcastsData(
       numberOfLiveBroadcasts: jsonDecode(jsonEncode(data)),
     ));
   }
@@ -238,30 +220,19 @@ class SocketService {
   dynamic onNumberOfLiveListeners(dynamic data) {
     _log.i('Number of Live Listeners... => $data');
     final decodedData = jsonDecode(jsonEncode(data));
-    socketResponse.sink.add(NumberOfLiveListenersData(
-      numberOfLiveListeners: decodedData,
-    ));
+    sink.add(NumberOfLiveListenersData(numberOfLiveListeners: decodedData));
   }
 
   dynamic onNewBroadcast(dynamic data) async {
     _log.i('New broadcast... => $data');
     final decodedData = jsonDecode(jsonEncode(data));
     final dto = BroadcastDto.fromJson(decodedData);
-    final creator = await di<IProfileFacade>().getProfile(id: dto.creatorId!);
-    final updateDto = dto.copyWith(
-      status: 'active',
-      creator: CreatorDto(
-        id: creator?.id,
-        fullName: creator?.fullName.get(),
-        imageUrl: creator?.imageUrl,
-      ),
-    );
-    final b = BroadcastMapper().toDomain(updateDto);
-    socketResponse.sink.add(NewBroadcastData(newBroadcast: b));
+    final b = _mapper.toDomain(dto);
+    sink.add(NewBroadcastData(newBroadcast: b));
   }
 
   dynamic onEndedBroadcast(dynamic data) {
     _log.i('Ended broadcast... => $data');
-    socketResponse.sink.add(EndedBroadcastData(endedBroadcast: null));
+    sink.add(EndedBroadcastData(endedBroadcast: null));
   }
 }

@@ -15,6 +15,7 @@ BroadcastError _$BroadcastErrorFromJson(Map<String, dynamic> json) =>
       cohosts: json['cohosts'] as String?,
       image: json['image'] as String?,
       mimetype: json['mimetype'] as String?,
+      size: json['size'] as String?,
     );
 
 Map<String, dynamic> _$BroadcastErrorToJson(BroadcastError instance) {
@@ -33,5 +34,6 @@ Map<String, dynamic> _$BroadcastErrorToJson(BroadcastError instance) {
   writeNotNull('cohosts', instance.cohosts);
   writeNotNull('image', instance.image);
   writeNotNull('mimetype', instance.mimetype);
+  writeNotNull('size', instance.size);
   return val;
 }

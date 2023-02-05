@@ -9,6 +9,7 @@ import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/timer/timer_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_timer.dart';
+import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 
 class BroadcastFeedbackPage extends ConsumerWidget {
   const BroadcastFeedbackPage({super.key, required this.broadcast});
@@ -17,6 +18,7 @@ class BroadcastFeedbackPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final timerEvent = ref.watch(timerProvider.notifier);
+    final listeners = ref.read(socketDataProvider).listeners;
 
     String durationString(int duration) {
       return Duration(seconds: duration).toString().split('.').first;
@@ -26,6 +28,7 @@ class BroadcastFeedbackPage extends ConsumerWidget {
       body: Padding(
         padding: MSize.pSymmetric(v: 123, h: 16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               broadcast.title.get()!,
@@ -84,42 +87,21 @@ class BroadcastFeedbackPage extends ConsumerWidget {
             MSize.vS(24),
             SizedBox(
               height: MSize.h(36),
-              width: MSize.w(156),
+              width: MSize.w(30 * (listeners?.length ?? 0)),
               child: Stack(
                 clipBehavior: Clip.none,
+                alignment: Alignment.center,
                 children: [
-                  const MAvatar(
-                    radius: 18,
-                    image: AssetImage('assets/images/move-mountains.jpeg'),
-                  ),
-                  Positioned(
-                    left: MSize.r(30),
-                    child: const MAvatar(
-                      radius: 18,
-                      image: AssetImage('assets/images/move-mountains.jpeg'),
+                  for (var i = 0; i < (listeners?.length ?? 0) && i < 6; i++)
+                    Positioned(
+                      left: MSize.r(30 * i),
+                      child: MAvatar(
+                        radius: 18,
+                        image: listeners![i]?.imageUrl != null
+                            ? NetworkImage(listeners[i]!.imageUrl!)
+                            : null,
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    left: MSize.r(30 * 2),
-                    child: const MAvatar(
-                      radius: 18,
-                      image: AssetImage('assets/images/move-mountains.jpeg'),
-                    ),
-                  ),
-                  Positioned(
-                    left: MSize.r(30 * 3),
-                    child: const MAvatar(
-                      radius: 18,
-                      image: AssetImage('assets/images/move-mountains.jpeg'),
-                    ),
-                  ),
-                  Positioned(
-                    left: MSize.r(30 * 4),
-                    child: const MAvatar(
-                      radius: 18,
-                      image: AssetImage('assets/images/move-mountains.jpeg'),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -151,6 +133,6 @@ class BroadcastFeedbackPage extends ConsumerWidget {
       return '${broadcast.liveListeners} person tuned in.';
     }
 
-    return '${broadcast.liveListeners} person tuned in.';
+    return '${broadcast.liveListeners} persons tuned in.';
   }
 }

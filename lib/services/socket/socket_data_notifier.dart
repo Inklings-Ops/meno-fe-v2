@@ -26,25 +26,27 @@ class SocketDataNotifier extends StateNotifier<SocketState> {
           state = state.copyWith(
             numberOfLiveListeners: socketData?.numberOfLiveListeners,
           );
-          if (socketData?.liveBroadcastId != null) {
-            getBroadcastListeners(state.liveBroadcastId!);
-          }
+          getBroadcastListeners(state.liveBroadcastId);
+
           break;
         case IsLiveData:
           state = state.copyWith(
             isLive: socketData!.isLive,
             liveBroadcastId: socketData.liveBroadcastId,
           );
-          if (socketData.liveBroadcastId != null) {
-            getBroadcastListeners(state.liveBroadcastId!);
-          }
+          updateLiveBroadcasts();
+          getBroadcastListeners(state.liveBroadcastId);
+
           break;
         case NewBroadcastData:
           updateLiveBroadcasts();
+          getBroadcastListeners(state.liveBroadcastId);
+
           break;
         case EndedBroadcastData:
           state = state.copyWith(liveBroadcastId: null);
           updateLiveBroadcasts();
+          getBroadcastListeners(state.liveBroadcastId);
           break;
         case GetNumberOfBroadcastListenersData:
           state = state.copyWith(
@@ -128,7 +130,7 @@ class SocketDataNotifier extends StateNotifier<SocketState> {
     state = state.copyWith(loading: false);
   }
 
-  void getBroadcastListeners(String broadcastId) async {
+  void getBroadcastListeners(String? broadcastId) async {
     // state = state.copyWith(loading: true);
     _socket.getBroadcastListeners(broadcastId);
     state = state.copyWith(loading: false);

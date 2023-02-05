@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
+import 'package:meno_fe_v2/layout/coming_soon_page.dart';
 import 'package:meno_fe_v2/modules/bible/presentation/pages/bible_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_bottom_sheet_title.dart';
@@ -48,9 +49,9 @@ class StreamBottomSheet extends StatelessWidget {
                     child: TabBarView(
                       controller: tabController,
                       children: [
-                        const Center(child: Text('Chat Page')),
+                        const ComingSoonPage(),
                         BiblePage(scrollController: scrollController),
-                        const Center(child: Text('Take Notes')),
+                        const ComingSoonPage(),
                       ],
                     ),
                   ),

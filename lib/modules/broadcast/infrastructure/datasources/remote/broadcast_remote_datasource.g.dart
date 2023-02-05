@@ -328,6 +328,69 @@ class _BroadcastRemoteDatasource implements BroadcastRemoteDatasource {
     return value;
   }
 
+  @override
+  Future<BroadcastResponse<BroadcastListDataDto?>> getBroadcasts({
+    status,
+    include,
+    gtEndTime,
+    ltEndTime,
+    eqEndTime,
+    gtStartTime,
+    ltStartTime,
+    eqStartTime,
+    creatorId,
+    notCreatorId,
+    orderBy,
+    sortBy,
+    onlySubscriptions,
+    keywords,
+    page,
+    size,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'status': status,
+      r'include': include,
+      r'endTime[gt]': gtEndTime,
+      r'endTime[lt]': ltEndTime,
+      r'endTime[eq]': eqEndTime,
+      r'startTime[gt]': gtStartTime,
+      r'startTime[lt]': ltStartTime,
+      r'startTime[eq]': eqStartTime,
+      r'creatorId': creatorId,
+      r'creatorId!': notCreatorId,
+      r'orderBy': orderBy,
+      r'sortBy': sortBy,
+      r'onlySubscriptions': onlySubscriptions,
+      r'keywords': keywords,
+      r'page': page,
+      r'size': size,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BroadcastResponse<BroadcastListDataDto>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/broadcasts/',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BroadcastResponse<BroadcastListDataDto?>.fromJson(
+      _result.data!,
+      (json) => json == null
+          ? null
+          : BroadcastListDataDto.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
