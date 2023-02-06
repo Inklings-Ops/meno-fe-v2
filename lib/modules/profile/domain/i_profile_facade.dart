@@ -17,4 +17,17 @@ abstract class IProfileFacade {
   Future<Profile?> getProfile({required String id});
 
   Future<Option<Profile?>> profile({required String id});
+
+  Future<Either<ProfileFailure, Unit>> subscribe(String userId);
+
+  Future<Either<ProfileFailure, List<Profile?>>> subscribers({
+    required String subscriptionId,
+    required String subscriberId,
+    String? include,
+    String? keywords,
+    int? page,
+    int? size,
+  });
+
+  Future<Either<ProfileFailure, Unit>> unSubscribe(String userId);
 }

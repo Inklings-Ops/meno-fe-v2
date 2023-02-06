@@ -16,11 +16,11 @@ import 'package:meno_fe_v2/modules/profile/infrastructure/datasources/remote/pro
 @Injectable(as: IProfileFacade)
 class ProfileFacade implements IProfileFacade {
   ProfileFacade(this._local, this._remote);
+
   final ProfileLocalDatasource _local;
-
   final ProfileRemoteDatasource _remote;
-  final _mapper = ProfileMapper();
 
+  final _mapper = ProfileMapper();
   final _log = Logger();
 
   @override
@@ -100,5 +100,55 @@ class ProfileFacade implements IProfileFacade {
     }
 
     return optionOf(_mapper.toDomain(res.data));
+  }
+
+  @override
+  Future<Either<ProfileFailure, Unit>> subscribe(String userId) async {
+    try {
+      final res = await _remote.subscribe(userId);
+      _log.wtf(res.toString());
+      return right(unit);
+    } on DioError catch (e) {
+      _log.wtf(e.response);
+      return left(ProfileFailure.message(e.message));
+    }
+  }
+
+  @override
+  Future<Either<ProfileFailure, List<Profile?>>> subscribers({
+    required String subscriptionId,
+    required String subscriberId,
+    String? include,
+    String? keywords,
+    int? page,
+    int? size,
+  }) async {
+    try {
+      final res = await _remote.subscribers(
+        subscriptionId: subscriptionId,
+        subscriberId: subscriberId,
+        include: include,
+        keywords: keywords,
+        page: page,
+        size: size,
+      );
+      _log.wtf(res.toString());
+      return right([]);
+    } on DioError catch (e) {
+      _log.wtf(e.response);
+      return left(ProfileFailure.message(e.message));
+    }
+  }
+
+  @override
+  Future<Either<ProfileFailure, Unit>> unSubscribe(String userId) async {
+    try {
+      final res = await _remote.unSubscribe(userId);
+      _log.wtf(res.toString());
+      return right(unit);
+    } on DioError catch (e) {
+      _log.wtf(e.response);
+      return left(ProfileFailure.message(e.message));
+    }
   }
 }

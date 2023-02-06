@@ -48,4 +48,20 @@ abstract class ProfileRemoteDatasource {
     @Field() required String otp,
     @Field() required String newPassword,
   });
+
+  @POST("/api/v1/subscribers")
+  Future<ProfileResponse<dynamic>> subscribe(@Field() String userId);
+
+  @GET("/api/v1/subscribers")
+  Future<ProfileResponse<dynamic>> subscribers({
+    @Query('subscriptionId') required String subscriptionId,
+    @Query('subscriberId') required String subscriberId,
+    @Query('include') String? include,
+    @Query('keywords') String? keywords,
+    @Query('page') int? page,
+    @Query('size') int? size,
+  });
+
+  @DELETE("/api/v1/subscribers")
+  Future<ProfileResponse<dynamic>> unSubscribe(@Field() String userId);
 }
