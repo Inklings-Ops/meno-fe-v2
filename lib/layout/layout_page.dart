@@ -16,6 +16,7 @@ import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_pa
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/home_app_bar.dart';
+import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_app_bar.dart';
 import 'package:meno_fe_v2/services/shared_preferences_service.dart';
 
@@ -43,6 +44,7 @@ class LayoutPage extends HookConsumerWidget {
           if (preferences.hasKey(MKeys.initLogin) == false) {
             preferences.write(key: MKeys.initLogin, value: 1);
           }
+          ref.read(profileProvider.notifier).authProfileLoaded();
         },
       );
     });
