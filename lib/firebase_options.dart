@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'meno-fe.appspot.com',
     androidClientId: '10193767589-bgfhcdkrn598u3m2dfak4c11dpt8cff9.apps.googleusercontent.com',
     iosClientId: '10193767589-acu08vga8sqcpj3vc5l1cml8qonsc72o.apps.googleusercontent.com',
-    iosBundleId: 'com.example.menoFeV2',
+    iosBundleId: 'com.inklings.meno',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -80,6 +80,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'meno-fe.appspot.com',
     androidClientId: '10193767589-bgfhcdkrn598u3m2dfak4c11dpt8cff9.apps.googleusercontent.com',
     iosClientId: '10193767589-acu08vga8sqcpj3vc5l1cml8qonsc72o.apps.googleusercontent.com',
-    iosBundleId: 'com.example.menoFeV2',
+    iosBundleId: 'com.inklings.meno',
   );
 }
