@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 
 class MButton extends StatelessWidget {
@@ -47,7 +48,10 @@ class MButton extends StatelessWidget {
             padding: EdgeInsets.zero,
             backgroundColor: filled ? color : Colors.transparent,
             shape: borderRadius != null
-                ? RoundedRectangleBorder(borderRadius: borderRadius!)
+                ? RoundedRectangleBorder(
+                    borderRadius: borderRadius!,
+                    side: const BorderSide(color: MColors.primary),
+                  )
                 : null,
           ),
           child: loading

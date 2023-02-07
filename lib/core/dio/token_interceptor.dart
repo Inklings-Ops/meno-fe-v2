@@ -1,11 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:io';
-
 import 'package:dio/dio.dart' hide Headers;
 import 'package:logger/logger.dart';
-import 'package:meno_fe_v2/common/constants/m_keys.dart';
-import 'package:meno_fe_v2/services/secure_storage_service.dart';
 
 class TokenInterceptor extends Interceptor {
   @override
@@ -21,13 +17,6 @@ class TokenInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = await SecureStorageService().read(key: MKeys.authToken);
-    Logger().i('THIS IS TOKEN FROM INTERCEPTOR ==> $token');
-
-    if (token != null) {
-      options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-    }
-
     return super.onRequest(options, handler);
   }
 

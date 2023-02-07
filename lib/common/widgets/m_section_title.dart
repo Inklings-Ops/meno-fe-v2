@@ -67,6 +67,7 @@ class MSectionTitle extends StatelessWidget {
                       )
                     : Text(
                         title!,
+                        
                         style: TextStyle(
                           fontSize: fontSize ?? MSize.fS(20),
                           height: MSize.r(1),
