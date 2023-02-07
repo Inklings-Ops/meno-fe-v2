@@ -64,5 +64,7 @@
     <string>Meno needs to access the camera to upload media.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>Meno needs to access the camera to view media from your photo library.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Meno needs to access the microphone to capture audio for broadcasts and streams</string>
 </dict>
 </plist>
