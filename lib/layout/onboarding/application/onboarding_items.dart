@@ -12,7 +12,7 @@ List<OnboardingItem> onboardingItems = [
     imageUrl: 'assets/images/onboarding/onboarding_2.png',
   ),
   OnboardingItem(
-    title: 'Read Bible & Devotionals',
+    title: 'Read Bible & Blogs',
     body: 'as you stream, have an immersive \nexperience',
     imageUrl: 'assets/images/onboarding/onboarding_3.png',
   ),

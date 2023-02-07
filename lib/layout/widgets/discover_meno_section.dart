@@ -36,6 +36,7 @@ class DiscoverMenoSection extends ConsumerWidget {
                       onPressed: () {
                         AutoRouter.of(context).push(const AboutRoute());
                       },
+                      elevation: 0,
                       title: 'About Menō',
                       borderRadius: BorderRadius.circular(MSize.r(10)),
                       filled: false,
