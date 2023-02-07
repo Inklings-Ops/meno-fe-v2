@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/modules/bible/presentation/widgets/scripture_selector.dart';
 
 class MAppBar extends StatelessWidget with PreferredSizeWidget {
   const MAppBar({
@@ -36,4 +35,3 @@ class MAppBar extends StatelessWidget with PreferredSizeWidget {
     );
   }
 }
-

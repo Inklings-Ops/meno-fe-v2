@@ -37,7 +37,8 @@ class NowLiveSection extends StatelessWidget {
 }
 
 class ReadSection extends StatelessWidget {
-  const ReadSection({Key? key}) : super(key: key);
+  const ReadSection({Key? key, required this.goToBible}) : super(key: key);
+  final void Function() goToBible;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,7 @@ class ReadSection extends StatelessWidget {
               ),
               const Spacer(),
               MButton(
-                onPressed: () {},
+                onPressed: goToBible,
                 title: 'Menō Bible',
                 borderRadius: BorderRadius.circular(MSize.r(10)),
                 filled: false,

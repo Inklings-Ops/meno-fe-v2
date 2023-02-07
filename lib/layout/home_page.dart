@@ -4,8 +4,8 @@ import 'package:meno_fe_v2/layout/widgets/discover_meno_section.dart';
 import 'package:meno_fe_v2/layout/widgets/now_live_section.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+  const HomePage({super.key, required this.goToBible});
+  final void Function() goToBible;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
         children: [
           const DiscoverMenoSection(),
           MSize.vS(30),
-          const ReadSection(),
+          ReadSection(goToBible: goToBible),
           MSize.vS(30),
           const NowLiveSection(),
         ],

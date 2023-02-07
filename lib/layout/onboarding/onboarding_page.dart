@@ -5,12 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_button.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
+import 'package:meno_fe_v2/layout/onboarding/application/onboarding_item.dart';
 import 'package:meno_fe_v2/layout/onboarding/application/onboarding_items.dart';
 import 'package:meno_fe_v2/layout/onboarding/application/onboarding_notifier.dart';
 import 'package:meno_fe_v2/layout/onboarding/widgets/dots.dart';
 import 'package:meno_fe_v2/layout/onboarding/widgets/onboarding_content.dart';
 import 'package:meno_fe_v2/layout/onboarding/widgets/skip_button.dart';
-import 'package:meno_fe_v2/layout/onboarding/application/onboarding_item.dart';
 
 class OnboardingPage extends StatefulHookConsumerWidget {
   const OnboardingPage({super.key});
@@ -66,7 +66,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   fixedSize: Size(MSize.w(223), MSize.r(53)),
                   onPressed: () {
                     event.onboardComplete();
-                    AutoRouter.of(context).push(const LayoutRoute());
+                    AutoRouter.of(context).replaceAll([const LayoutRoute()]);
                   },
                 ),
                 MSize.vS(56),

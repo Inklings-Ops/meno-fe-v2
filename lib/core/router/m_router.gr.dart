@@ -47,9 +47,13 @@ class _$MRouter extends RootStackRouter {
       );
     },
     HomeRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeRouteArgs>();
       return AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const HomePage(),
+        child: HomePage(
+          key: args.key,
+          goToBible: args.goToBible,
+        ),
       );
     },
     BibleRoute.name: (routeData) {
@@ -167,14 +171,36 @@ class AboutRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute()
-      : super(
+class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({
+    Key? key,
+    required void Function() goToBible,
+  }) : super(
           HomeRoute.name,
           path: 'home-page',
+          args: HomeRouteArgs(
+            key: key,
+            goToBible: goToBible,
+          ),
         );
 
   static const String name = 'HomeRoute';
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({
+    this.key,
+    required this.goToBible,
+  });
+
+  final Key? key;
+
+  final void Function() goToBible;
+
+  @override
+  String toString() {
+    return 'HomeRouteArgs{key: $key, goToBible: $goToBible}';
+  }
 }
 
 /// generated route for

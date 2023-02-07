@@ -9,7 +9,7 @@ class BiblePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chapter = ref.watch(bibleProvider).chapter;
-    final loading = ref.watch(bibleProvider).loading;
+    // final loading = ref.watch(bibleProvider).loading;
 
     List<Widget> children = [MSize.vS(10)];
     List<InlineSpan> spans = [];
@@ -71,7 +71,6 @@ class BiblePage extends ConsumerWidget {
     //   return SingleChildScrollView(
     //     child: Column(
     //       children: const [
-    //         ScriptureSelector(),
     //         BibleSkeleton(),
     //       ],
     //     ),
@@ -80,9 +79,7 @@ class BiblePage extends ConsumerWidget {
 
     return SingleChildScrollView(
       child: Column(
-        children: [
-          ...children,
-        ],
+        children: children,
       ),
     );
   }
