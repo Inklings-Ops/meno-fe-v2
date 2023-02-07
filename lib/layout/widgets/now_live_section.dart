@@ -65,7 +65,6 @@ class ReadSection extends StatelessWidget {
               const Spacer(),
               MButton(
                 onPressed: goToBible,
-                elevation: 0,
                 title: 'Menō Bible',
                 borderRadius: BorderRadius.circular(MSize.r(10)),
                 filled: false,

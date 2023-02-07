@@ -40,18 +40,6 @@ class _$MRouter extends RootStackRouter {
         child: const LayoutPage(),
       );
     },
-    TermsAndConditionsRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const TermsAndConditionsPage(),
-      );
-    },
-    PrivacyPolicyRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const PrivacyPolicyPage(),
-      );
-    },
     AboutRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -80,10 +68,10 @@ class _$MRouter extends RootStackRouter {
         child: const NotesPage(),
       );
     },
-    BlogRoute.name: (routeData) {
+    DevotionalRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const BlogPage(),
+        child: const DevotionalPage(),
       );
     },
   };
@@ -119,19 +107,11 @@ class _$MRouter extends RootStackRouter {
               parent: LayoutRoute.name,
             ),
             RouteConfig(
-              BlogRoute.name,
-              path: 'blog-page',
+              DevotionalRoute.name,
+              path: 'devotional-page',
               parent: LayoutRoute.name,
             ),
           ],
-        ),
-        RouteConfig(
-          TermsAndConditionsRoute.name,
-          path: '/terms-and-conditions-page',
-        ),
-        RouteConfig(
-          PrivacyPolicyRoute.name,
-          path: '/privacy-policy-page',
         ),
         RouteConfig(
           AboutRoute.name,
@@ -175,30 +155,6 @@ class LayoutRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LayoutRoute';
-}
-
-/// generated route for
-/// [TermsAndConditionsPage]
-class TermsAndConditionsRoute extends PageRouteInfo<void> {
-  const TermsAndConditionsRoute()
-      : super(
-          TermsAndConditionsRoute.name,
-          path: '/terms-and-conditions-page',
-        );
-
-  static const String name = 'TermsAndConditionsRoute';
-}
-
-/// generated route for
-/// [PrivacyPolicyPage]
-class PrivacyPolicyRoute extends PageRouteInfo<void> {
-  const PrivacyPolicyRoute()
-      : super(
-          PrivacyPolicyRoute.name,
-          path: '/privacy-policy-page',
-        );
-
-  static const String name = 'PrivacyPolicyRoute';
 }
 
 /// generated route for
@@ -272,13 +228,13 @@ class NotesRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [BlogPage]
-class BlogRoute extends PageRouteInfo<void> {
-  const BlogRoute()
+/// [DevotionalPage]
+class DevotionalRoute extends PageRouteInfo<void> {
+  const DevotionalRoute()
       : super(
-          BlogRoute.name,
-          path: 'blog-page',
+          DevotionalRoute.name,
+          path: 'devotional-page',
         );
 
-  static const String name = 'BlogRoute';
+  static const String name = 'DevotionalRoute';
 }

@@ -22,7 +22,7 @@ class ComingSoonPage extends StatelessWidget {
           Padding(
             padding: MSize.pSymmetric(h: 40),
             child: Text(
-              'This feature will be available in the coming versions of Menō.',
+              'This feature will be available in the coming versions of Meno',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: MSize.fS(16),

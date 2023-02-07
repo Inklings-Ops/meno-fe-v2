@@ -60,18 +60,14 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 const OnboardingContent(),
                 MSize.vS(23),
                 const Dots(),
-                MSize.vS(50),
-                Visibility(
-                  visible: count == 3,
-                  child: MButton(
-                    title: 'Get Started',
-                    fontSize: MSize.fS(16),
-                    fixedSize: Size(MSize.w(223), MSize.r(53)),
-                    onPressed: () {
-                      event.onboardComplete();
-                      AutoRouter.of(context).replaceAll([const LayoutRoute()]);
-                    },
-                  ),
+                MButton(
+                  title: 'Get Started',
+                  fontSize: MSize.fS(16),
+                  fixedSize: Size(MSize.w(223), MSize.r(53)),
+                  onPressed: () {
+                    event.onboardComplete();
+                    AutoRouter.of(context).replaceAll([const LayoutRoute()]);
+                  },
                 ),
                 MSize.vS(56),
               ],

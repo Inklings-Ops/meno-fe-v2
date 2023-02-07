@@ -37,7 +37,7 @@ class LayoutPage extends HookWidget {
         routes: [
           HomeRoute(goToBible: () => layoutTabRouter.value?.setActiveIndex(1)),
           const BibleRoute(),
-          const BlogRoute(),
+          const DevotionalRoute(),
           const NotesRoute(),
         ],
         appBarBuilder: (context, tabsRouter) {

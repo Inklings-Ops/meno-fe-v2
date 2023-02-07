@@ -23,7 +23,7 @@ class ComingSoonDialog extends StatelessWidget {
         ),
       ),
       content: Text(
-        'This feature will be available in the coming versions of Menō.',
+        'This feature will be available in the coming versions of Meno',
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: MSize.fS(16),
