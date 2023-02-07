@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_section_title.dart';
+import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/layout/widgets/m_app_bar.dart';
 
 class AboutPage extends StatelessWidget {
@@ -37,12 +39,7 @@ class AboutPage extends StatelessWidget {
             ),
             MSize.vS(10),
             Text(
-              "Menō is a suite of software solutions that have been carefully designed and developed to aid and enhance the interaction between believers, specifically for the purpose of fellowshipping together and edifying one another.",
-              style: TextStyle(fontSize: MSize.fS(14)),
-            ),
-            MSize.vS(10),
-            Text(
-              "It serves as a real-time connectivity platform that includes features and functionalities that make it easier for believers all over the world to edify one another and fellowship together.",
+              "Menō is a software application enhanced with real-time connectivity, and other features that have been carefully integrated to foster the interaction between believers, specifically for the purpose of fellowshipping together and edifying one another.",
               style: TextStyle(fontSize: MSize.fS(14)),
             ),
             MSize.vS(30),
@@ -81,9 +78,12 @@ class AboutPage extends StatelessWidget {
             ),
             MSize.vS(50),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                AutoRouter.of(context).push(const TermsAndConditionsRoute());
+              },
               child: Text(
-                "Privacy Policy",
+                "Terms & Conditions",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: MSize.fS(14),
                   fontWeight: FontWeight.w500,
@@ -93,9 +93,12 @@ class AboutPage extends StatelessWidget {
             ),
             MSize.vS(10),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                AutoRouter.of(context).push(const PrivacyPolicyRoute());
+              },
               child: Text(
-                "Terms & Conditions",
+                "Privacy Policy",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: MSize.fS(14),
                   fontWeight: FontWeight.w500,
