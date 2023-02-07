@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
@@ -65,11 +66,11 @@ class MSectionTitle extends StatelessWidget {
                           width: MSize.w(170),
                         ),
                       )
-                    : Text(
+                    : AutoSizeText(
                         title!,
-                        
+                        minFontSize: 19,
+                        // maxFontSize: 20,
                         style: TextStyle(
-                          fontSize: fontSize ?? MSize.fS(20),
                           height: MSize.r(1),
                           fontWeight: FontWeight.bold,
                           color: textColor,

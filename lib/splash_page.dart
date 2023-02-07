@@ -6,6 +6,7 @@ import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/splash_page_background_painter.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/di/injection.dart';
+import 'package:meno_fe_v2/modules/bible/application/bible/bible_notifier.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
 
 class SplashPage extends ConsumerWidget {
@@ -24,6 +25,7 @@ class SplashPage extends ConsumerWidget {
             width: MSize.sw(0.8),
             name: 'assets/animations/meno_splash.riv',
             onSuccess: (data) async {
+              ref.read(bibleProvider.notifier).init();
               AutoRouter.of(context).replaceAll([const LayoutRoute()]);
             },
             onError: (err, stack) {},

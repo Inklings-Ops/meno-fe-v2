@@ -44,7 +44,7 @@ class ScriptureBottomSheet extends HookWidget {
                   tabs: <Widget>[
                     SizedBox(
                       height: MSize.h(24),
-                      child: const Tab(text: 'BIBLE'),
+                      child: const Tab(text: 'BOOKS'),
                     ),
                     SizedBox(
                       height: MSize.h(24),

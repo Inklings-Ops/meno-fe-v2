@@ -28,6 +28,7 @@ class MAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       toolbarHeight: MSize.r(kToolbarHeight),
       leading: showLeading ? const AutoLeadingButton() : null,
+      leadingWidth: MSize.w(50),
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: true,
