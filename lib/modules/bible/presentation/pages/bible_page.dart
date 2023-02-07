@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/modules/bible/application/bible/bible_notifier.dart';
-import 'package:meno_fe_v2/modules/bible/presentation/widgets/bible_skeleton.dart';
-import 'package:meno_fe_v2/modules/bible/presentation/widgets/scripture_selector.dart';
 
 class BiblePage extends ConsumerWidget {
-  const BiblePage({super.key,  this.scrollController});
-  final ScrollController? scrollController;
+  const BiblePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -70,23 +67,20 @@ class BiblePage extends ConsumerWidget {
 
     children.add(MSize.vS(40));
 
-    if (loading) {
-      return SingleChildScrollView(
-        controller: scrollController,
-        child: Column(
-          children: const [
-            ScriptureSelector(),
-            BibleSkeleton(),
-          ],
-        ),
-      );
-    }
+    // if (loading) {
+    //   return SingleChildScrollView(
+    //     child: Column(
+    //       children: const [
+    //         ScriptureSelector(),
+    //         BibleSkeleton(),
+    //       ],
+    //     ),
+    //   );
+    // }
 
     return SingleChildScrollView(
-      controller: scrollController,
       child: Column(
         children: [
-          const ScriptureSelector(),
           ...children,
         ],
       ),

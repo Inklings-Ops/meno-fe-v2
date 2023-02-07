@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/common/widgets/bottom_sheets/start_broadcast_bottom_sheet.dart';
+import 'package:meno_fe_v2/layout/widgets/coming_soon_dialog.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar_item.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -34,11 +34,9 @@ class _MBottomNavigationBarState extends State<MBottomNavigationBar> {
         await Future.delayed(Duration.zero);
 
         if (context.mounted) {
-          showModalBottomSheet(
+          showDialog(
             context: context,
-            isScrollControlled: true,
-            elevation: 0,
-            builder: (context) => const StartBroadcastBottomSheet(),
+            builder: (context) => const ComingSoonDialog(),
           );
         }
         return;

@@ -79,6 +79,7 @@ dependencies:
   riverpod_annotation: ^1.1.1
   google_sign_in: ^5.4.3
   pull_to_refresh: ^2.0.0
+  phosphor_flutter: ^1.4.0
 
 dev_dependencies:
   flutter_test:
