@@ -3,7 +3,6 @@ import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/layout/widgets/coming_soon_dialog.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar_item.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class MBottomNavigationBar extends StatefulWidget {
   const MBottomNavigationBar({
@@ -23,35 +22,10 @@ class MBottomNavigationBar extends StatefulWidget {
 
 class _MBottomNavigationBarState extends State<MBottomNavigationBar> {
   Future<void> onCreateBroadcast() async {
-    final scaffoldContext = ScaffoldMessenger.of(context);
-
-    await [Permission.microphone].request();
-    PermissionStatus status = await Permission.microphone.status;
-
-    switch (status) {
-      case PermissionStatus.limited:
-      case PermissionStatus.granted:
-        await Future.delayed(Duration.zero);
-
-        if (context.mounted) {
-          showDialog(
-            context: context,
-            builder: (context) => const ComingSoonDialog(),
-          );
-        }
-        return;
-      case PermissionStatus.denied:
-      case PermissionStatus.permanentlyDenied:
-      case PermissionStatus.restricted:
-        scaffoldContext.showSnackBar(
-          const SnackBar(
-            content: Text('Please allow microphone permission for Meno'),
-          ),
-        );
-        return;
-      default:
-        return;
-    }
+    await showDialog(
+      context: context,
+      builder: (context) => const ComingSoonDialog(),
+    );
   }
 
   @override
