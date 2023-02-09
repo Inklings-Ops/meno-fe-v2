@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/core/router/onboarding_guard.dart';
 import 'package:meno_fe_v2/layout/about_page.dart';
+import 'package:meno_fe_v2/layout/blog_details_page.dart';
 import 'package:meno_fe_v2/layout/blog_page.dart';
 import 'package:meno_fe_v2/layout/home_page.dart';
 import 'package:meno_fe_v2/layout/layout_page.dart';
@@ -32,6 +33,7 @@ part 'm_router.gr.dart';
     AutoRoute(page: TermsAndConditionsPage),
     AutoRoute(page: PrivacyPolicyPage),
     AutoRoute(page: AboutPage),
+    AutoRoute(page: BlogDetailsPage),
   ],
 )
 class MRouter extends _$MRouter {

@@ -12,7 +12,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 const items = [
   BottomNavigationBarItem(label: 'Home', icon: Icon(PhosphorIcons.houseSimple)),
   BottomNavigationBarItem(label: 'Bible', icon: Icon(PhosphorIcons.book)),
-  BottomNavigationBarItem(label: 'Read', icon: Icon(PhosphorIcons.eyeglasses)),
+  BottomNavigationBarItem(label: 'Blog', icon: Icon(PhosphorIcons.eyeglasses)),
   BottomNavigationBarItem(label: 'Notes', icon: Icon(PhosphorIcons.notepad)),
 ];
 

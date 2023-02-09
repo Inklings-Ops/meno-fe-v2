@@ -58,6 +58,12 @@ class _$MRouter extends RootStackRouter {
         child: const AboutPage(),
       );
     },
+    BlogDetailsRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const BlogDetailsPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return AdaptivePage<dynamic>(
@@ -137,6 +143,10 @@ class _$MRouter extends RootStackRouter {
           AboutRoute.name,
           path: '/about-page',
         ),
+        RouteConfig(
+          BlogDetailsRoute.name,
+          path: '/blog-details-page',
+        ),
       ];
 }
 
@@ -211,6 +221,18 @@ class AboutRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AboutRoute';
+}
+
+/// generated route for
+/// [BlogDetailsPage]
+class BlogDetailsRoute extends PageRouteInfo<void> {
+  const BlogDetailsRoute()
+      : super(
+          BlogDetailsRoute.name,
+          path: '/blog-details-page',
+        );
+
+  static const String name = 'BlogDetailsRoute';
 }
 
 /// generated route for
