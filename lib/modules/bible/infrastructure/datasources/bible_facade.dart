@@ -70,8 +70,10 @@ class BibleFacade implements IBibleFacade {
 
   @override
   Future<List<Verse?>> getVerses(String reference, String translation) async {
-    final res = await _remote.getVerses( translation: translation,
-        reference: reference,);
+    final res = await _remote.getVerses(
+      translation: translation,
+      reference: reference,
+    );
     final chapter = _chapterMapper.toDomain(res.data)!;
     return chapter.verses;
   }

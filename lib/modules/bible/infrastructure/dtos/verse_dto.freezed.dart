@@ -27,7 +27,7 @@ mixin _$VerseDto {
   int get chapter => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   int get verse => throw _privateConstructorUsedError;
-  String get vid => throw _privateConstructorUsedError;
+  String? get vid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +46,7 @@ abstract class $VerseDtoCopyWith<$Res> {
       int chapter,
       String text,
       int verse,
-      String vid});
+      String? vid});
 }
 
 /// @nodoc
@@ -67,7 +67,7 @@ class _$VerseDtoCopyWithImpl<$Res, $Val extends VerseDto>
     Object? chapter = null,
     Object? text = null,
     Object? verse = null,
-    Object? vid = null,
+    Object? vid = freezed,
   }) {
     return _then(_value.copyWith(
       bookId: null == bookId
@@ -90,10 +90,10 @@ class _$VerseDtoCopyWithImpl<$Res, $Val extends VerseDto>
           ? _value.verse
           : verse // ignore: cast_nullable_to_non_nullable
               as int,
-      vid: null == vid
+      vid: freezed == vid
           ? _value.vid
           : vid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -111,7 +111,7 @@ abstract class _$$_VerseDtoCopyWith<$Res> implements $VerseDtoCopyWith<$Res> {
       int chapter,
       String text,
       int verse,
-      String vid});
+      String? vid});
 }
 
 /// @nodoc
@@ -130,7 +130,7 @@ class __$$_VerseDtoCopyWithImpl<$Res>
     Object? chapter = null,
     Object? text = null,
     Object? verse = null,
-    Object? vid = null,
+    Object? vid = freezed,
   }) {
     return _then(_$_VerseDto(
       bookId: null == bookId
@@ -153,10 +153,10 @@ class __$$_VerseDtoCopyWithImpl<$Res>
           ? _value.verse
           : verse // ignore: cast_nullable_to_non_nullable
               as int,
-      vid: null == vid
+      vid: freezed == vid
           ? _value.vid
           : vid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -170,7 +170,7 @@ class _$_VerseDto implements _VerseDto {
       required this.chapter,
       required this.text,
       required this.verse,
-      required this.vid});
+      this.vid});
 
   factory _$_VerseDto.fromJson(Map<String, dynamic> json) =>
       _$$_VerseDtoFromJson(json);
@@ -188,7 +188,7 @@ class _$_VerseDto implements _VerseDto {
   @override
   final int verse;
   @override
-  final String vid;
+  final String? vid;
 
   @override
   String toString() {
@@ -235,7 +235,7 @@ abstract class _VerseDto implements VerseDto {
       required final int chapter,
       required final String text,
       required final int verse,
-      required final String vid}) = _$_VerseDto;
+      final String? vid}) = _$_VerseDto;
 
   factory _VerseDto.fromJson(Map<String, dynamic> json) = _$_VerseDto.fromJson;
 
@@ -252,7 +252,7 @@ abstract class _VerseDto implements VerseDto {
   @override
   int get verse;
   @override
-  String get vid;
+  String? get vid;
   @override
   @JsonKey(ignore: true)
   _$$_VerseDtoCopyWith<_$_VerseDto> get copyWith =>

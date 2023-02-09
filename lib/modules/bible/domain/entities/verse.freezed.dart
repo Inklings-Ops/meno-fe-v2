@@ -21,7 +21,7 @@ mixin _$Verse {
   int get chapter => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   int get verse => throw _privateConstructorUsedError;
-  String get vid => throw _privateConstructorUsedError;
+  String? get vid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VerseCopyWith<Verse> get copyWith => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $VerseCopyWith<$Res> {
       int chapter,
       String text,
       int verse,
-      String vid});
+      String? vid});
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$VerseCopyWithImpl<$Res, $Val extends Verse>
     Object? chapter = null,
     Object? text = null,
     Object? verse = null,
-    Object? vid = null,
+    Object? vid = freezed,
   }) {
     return _then(_value.copyWith(
       bookId: null == bookId
@@ -82,10 +82,10 @@ class _$VerseCopyWithImpl<$Res, $Val extends Verse>
           ? _value.verse
           : verse // ignore: cast_nullable_to_non_nullable
               as int,
-      vid: null == vid
+      vid: freezed == vid
           ? _value.vid
           : vid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -102,7 +102,7 @@ abstract class _$$_VerseCopyWith<$Res> implements $VerseCopyWith<$Res> {
       int chapter,
       String text,
       int verse,
-      String vid});
+      String? vid});
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ class __$$_VerseCopyWithImpl<$Res> extends _$VerseCopyWithImpl<$Res, _$_Verse>
     Object? chapter = null,
     Object? text = null,
     Object? verse = null,
-    Object? vid = null,
+    Object? vid = freezed,
   }) {
     return _then(_$_Verse(
       bookId: null == bookId
@@ -142,10 +142,10 @@ class __$$_VerseCopyWithImpl<$Res> extends _$VerseCopyWithImpl<$Res, _$_Verse>
           ? _value.verse
           : verse // ignore: cast_nullable_to_non_nullable
               as int,
-      vid: null == vid
+      vid: freezed == vid
           ? _value.vid
           : vid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -159,7 +159,7 @@ class _$_Verse implements _Verse {
       required this.chapter,
       required this.text,
       required this.verse,
-      required this.vid});
+      this.vid});
 
   @override
   final String bookId;
@@ -172,7 +172,7 @@ class _$_Verse implements _Verse {
   @override
   final int verse;
   @override
-  final String vid;
+  final String? vid;
 
   @override
   String toString() {
@@ -211,7 +211,7 @@ abstract class _Verse implements Verse {
       required final int chapter,
       required final String text,
       required final int verse,
-      required final String vid}) = _$_Verse;
+      final String? vid}) = _$_Verse;
 
   @override
   String get bookId;
@@ -224,7 +224,7 @@ abstract class _Verse implements Verse {
   @override
   int get verse;
   @override
-  String get vid;
+  String? get vid;
   @override
   @JsonKey(ignore: true)
   _$$_VerseCopyWith<_$_Verse> get copyWith =>

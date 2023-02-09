@@ -10,7 +10,7 @@ class Verse with _$Verse {
     required int chapter,
     required String text,
     required int verse,
-    required String vid,
+    String? vid,
   }) = _Verse;
 
   factory Verse.empty() {

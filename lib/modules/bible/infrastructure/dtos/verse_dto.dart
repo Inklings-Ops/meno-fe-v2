@@ -19,7 +19,7 @@ class VerseDto with _$VerseDto {
     required int chapter,
     required String text,
     required int verse,
-    required String vid,
+    String? vid,
   }) = _VerseDto;
 
   factory VerseDto.fromDomain(Verse v) {
