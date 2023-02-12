@@ -48,7 +48,7 @@ class BlogCard extends StatelessWidget {
                       left: Radius.circular(MSize.r(20)),
                     ),
                     image: const DecorationImage(
-                      image: AssetImage('assets/images/abide.jpg'),
+                      image: AssetImage('assets/images/a-call-to-abide.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),

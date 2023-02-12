@@ -32,7 +32,7 @@ class BlogDetailsPage extends StatelessWidget {
                   Hero(
                     tag: 'blog-image',
                     child: Image.asset(
-                      'assets/images/abide.jpg',
+                      'assets/images/a-call-to-abide.jpg',
                       width: MSize.sw(1),
                       fit: BoxFit.cover,
                     ),
