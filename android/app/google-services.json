@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "10193767589-bderck4ul78uev9g0i93p2hp00q90nf9.apps.googleusercontent.com",
+              "client_id": "10193767589-acu08vga8sqcpj3vc5l1cml8qonsc72o.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.menoFlutter"
+                "bundle_id": "com.example.menoFeV2"
               }
             }
           ]
@@ -51,9 +51,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:10193767589:android:471fd2ba2db943bb45d14c",
+        "mobilesdk_app_id": "1:10193767589:android:afef358e54e3ff0245d14c",
         "android_client_info": {
-          "package_name": "com.example.meno_fe_v2"
+          "package_name": "com.inklings.meno"
         }
       },
       "oauth_client": [
@@ -75,10 +75,10 @@
               "client_type": 3
             },
             {
-              "client_id": "10193767589-bderck4ul78uev9g0i93p2hp00q90nf9.apps.googleusercontent.com",
+              "client_id": "10193767589-acu08vga8sqcpj3vc5l1cml8qonsc72o.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.menoFlutter"
+                "bundle_id": "com.example.menoFeV2"
               }
             }
           ]

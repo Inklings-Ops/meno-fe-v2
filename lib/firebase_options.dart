@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDmL4Atwkmws3phMMqDA81NfdRFCENq4Ho',
-    appId: '1:10193767589:android:471fd2ba2db943bb45d14c',
+    appId: '1:10193767589:android:afef358e54e3ff0245d14c',
     messagingSenderId: '10193767589',
     projectId: 'meno-fe',
     storageBucket: 'meno-fe.appspot.com',
@@ -63,23 +63,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyALBEsQEwUEmZ-6BcGXBDs2O2KqBTvdo3M',
-    appId: '1:10193767589:ios:c197a3c44eb6aa5745d14c',
+    appId: '1:10193767589:ios:4b3d32d9b4bc879845d14c',
     messagingSenderId: '10193767589',
     projectId: 'meno-fe',
     storageBucket: 'meno-fe.appspot.com',
     androidClientId: '10193767589-bgfhcdkrn598u3m2dfak4c11dpt8cff9.apps.googleusercontent.com',
-    iosClientId: '10193767589-acu08vga8sqcpj3vc5l1cml8qonsc72o.apps.googleusercontent.com',
+    iosClientId: '10193767589-5j0918bjrqct02dpkgf5ivolnne859ra.apps.googleusercontent.com',
     iosBundleId: 'com.inklings.meno',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyALBEsQEwUEmZ-6BcGXBDs2O2KqBTvdo3M',
-    appId: '1:10193767589:ios:c197a3c44eb6aa5745d14c',
+    appId: '1:10193767589:ios:4b3d32d9b4bc879845d14c',
     messagingSenderId: '10193767589',
     projectId: 'meno-fe',
     storageBucket: 'meno-fe.appspot.com',
     androidClientId: '10193767589-bgfhcdkrn598u3m2dfak4c11dpt8cff9.apps.googleusercontent.com',
-    iosClientId: '10193767589-acu08vga8sqcpj3vc5l1cml8qonsc72o.apps.googleusercontent.com',
+    iosClientId: '10193767589-5j0918bjrqct02dpkgf5ivolnne859ra.apps.googleusercontent.com',
     iosBundleId: 'com.inklings.meno',
   );
 }
