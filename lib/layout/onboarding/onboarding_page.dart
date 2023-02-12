@@ -44,38 +44,35 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         backgroundColor: Colors.transparent,
         actions: [SkipButton(visible: event.isSkipVisible())],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onHorizontalDragEnd: event.handleSwipe,
+        child: Padding(
           padding: MSize.pFromLTRB(16, 20, 16, 0),
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onHorizontalDragEnd: event.handleSwipe,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                MSize.vS(56),
-                Image.asset(item.imageUrl, width: MSize.w(268)),
-                MSize.vS(94),
-                const OnboardingContent(),
-                MSize.vS(23),
-                const Dots(),
-                MSize.vS(50),
-                Visibility(
-                  visible: count == 3,
-                  child: MButton(
-                    title: 'Get Started',
-                    fontSize: MSize.fS(16),
-                    fixedSize: Size(MSize.w(223), MSize.r(53)),
-                    onPressed: () {
-                      event.onboardComplete();
-                      AutoRouter.of(context).replaceAll([const LayoutRoute()]);
-                    },
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Spacer(),
+              Image.asset(item.imageUrl, width: MSize.w(268)),
+              const Spacer(),
+              const OnboardingContent(),
+              MSize.vS(23),
+              const Dots(),
+              const Spacer(),
+              Visibility(
+                visible: count == 3,
+                child: MButton(
+                  title: 'Get Started',
+                  fontSize: MSize.fS(16),
+                  fixedSize: Size(MSize.w(223), MSize.r(53)),
+                  onPressed: () {
+                    event.onboardComplete();
+                    AutoRouter.of(context).replaceAll([const LayoutRoute()]);
+                  },
                 ),
-                MSize.vS(56),
-              ],
-            ),
+              ),
+              const Spacer(),
+            ],
           ),
         ),
       ),
