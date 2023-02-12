@@ -19,11 +19,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -35,8 +33,16 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Meno needs to access the camera to upload media.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Meno needs to access the microphone to capture audio for broadcasts and streams</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Meno needs to access the camera to view media from your photo library.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -60,11 +66,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-    <string>Meno needs to access the camera to upload media.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>Meno needs to access the camera to view media from your photo library.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Meno needs to access the microphone to capture audio for broadcasts and streams</string>
 </dict>
 </plist>
