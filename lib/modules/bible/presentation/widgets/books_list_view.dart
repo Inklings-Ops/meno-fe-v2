@@ -13,6 +13,7 @@ class BooksListView extends ConsumerWidget {
     final books = ref.watch(bibleProvider).books;
 
     return ListView.separated(
+      padding: MSize.pOnly(t: 8, b: 16),
       itemCount: books.length,
       itemBuilder: (context, i) {
         return ListTile(
@@ -23,7 +24,6 @@ class BooksListView extends ConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          dense: true,
           contentPadding: MSize.pSymmetric(h: 20, v: 0),
           onTap: () {
             event.updateBook(books[i]);

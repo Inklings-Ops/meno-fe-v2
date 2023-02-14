@@ -69,7 +69,7 @@ class MSectionTitle extends StatelessWidget {
                     : AutoSizeText(
                         title!,
                         minFontSize: 19,
-                        // maxFontSize: 20,
+                        maxFontSize: 22,
                         style: TextStyle(
                           height: MSize.r(1),
                           fontWeight: FontWeight.bold,

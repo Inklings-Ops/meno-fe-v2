@@ -13,7 +13,7 @@ class TermsAndConditionsPage extends StatelessWidget {
     return Scaffold(
       appBar: const MAppBar(title: 'Terms & Conditions'),
       body: ListView.builder(
-        padding: MSize.pSymmetric(h: 16, v: 16),
+        padding: MSize.pSymmetric(h: 18, v: 16),
         itemCount: termsOfUse.length,
         itemBuilder: (context, index) {
           String key = termsOfUse.keys.elementAt(index);
@@ -47,7 +47,7 @@ class TermsAndConditionsPage extends StatelessWidget {
                   ),
                 ),
                 MSize.vS(4),
-                Text(value),
+                AutoSizeText(value),
               ],
             ),
           );

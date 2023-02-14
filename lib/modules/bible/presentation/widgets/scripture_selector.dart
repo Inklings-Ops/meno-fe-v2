@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
@@ -37,7 +38,7 @@ class ScriptureSelector extends ConsumerWidget {
                 color: const Color(0xFFE0E0E0),
                 borderRadius: BorderRadius.circular(MSize.r(6)),
               ),
-              child: Text(
+              child: AutoSizeText(
                 state.reference,
                 style: TextStyle(
                   fontSize: MSize.fS(12),
@@ -65,7 +66,7 @@ class ScriptureSelector extends ConsumerWidget {
                 color: const Color(0xFFE0E0E0),
                 borderRadius: BorderRadius.circular(MSize.r(6)),
               ),
-              child: Text(
+              child: AutoSizeText(
                 state.translation.toUpperCase(),
                 style: TextStyle(
                   fontSize: MSize.fS(12),

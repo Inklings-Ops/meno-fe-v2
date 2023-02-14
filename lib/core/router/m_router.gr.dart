@@ -52,12 +52,6 @@ class _$MRouter extends RootStackRouter {
         child: const PrivacyPolicyPage(),
       );
     },
-    AboutRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const AboutPage(),
-      );
-    },
     BlogDetailsRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -70,7 +64,7 @@ class _$MRouter extends RootStackRouter {
         routeData: routeData,
         child: HomePage(
           key: args.key,
-          goToBible: args.goToBible,
+          goTo: args.goTo,
         ),
       );
     },
@@ -80,10 +74,10 @@ class _$MRouter extends RootStackRouter {
         child: const BiblePage(),
       );
     },
-    NotesRoute.name: (routeData) {
+    AboutRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const NotesPage(),
+        child: const AboutPage(),
       );
     },
     BlogRoute.name: (routeData) {
@@ -120,8 +114,8 @@ class _$MRouter extends RootStackRouter {
               parent: LayoutRoute.name,
             ),
             RouteConfig(
-              NotesRoute.name,
-              path: 'notes-page',
+              AboutRoute.name,
+              path: 'about-page',
               parent: LayoutRoute.name,
             ),
             RouteConfig(
@@ -138,10 +132,6 @@ class _$MRouter extends RootStackRouter {
         RouteConfig(
           PrivacyPolicyRoute.name,
           path: '/privacy-policy-page',
-        ),
-        RouteConfig(
-          AboutRoute.name,
-          path: '/about-page',
         ),
         RouteConfig(
           BlogDetailsRoute.name,
@@ -212,18 +202,6 @@ class PrivacyPolicyRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [AboutPage]
-class AboutRoute extends PageRouteInfo<void> {
-  const AboutRoute()
-      : super(
-          AboutRoute.name,
-          path: '/about-page',
-        );
-
-  static const String name = 'AboutRoute';
-}
-
-/// generated route for
 /// [BlogDetailsPage]
 class BlogDetailsRoute extends PageRouteInfo<void> {
   const BlogDetailsRoute()
@@ -240,13 +218,13 @@ class BlogDetailsRoute extends PageRouteInfo<void> {
 class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
     Key? key,
-    required void Function() goToBible,
+    required void Function(int) goTo,
   }) : super(
           HomeRoute.name,
           path: 'home-page',
           args: HomeRouteArgs(
             key: key,
-            goToBible: goToBible,
+            goTo: goTo,
           ),
         );
 
@@ -256,16 +234,16 @@ class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
 class HomeRouteArgs {
   const HomeRouteArgs({
     this.key,
-    required this.goToBible,
+    required this.goTo,
   });
 
   final Key? key;
 
-  final void Function() goToBible;
+  final void Function(int) goTo;
 
   @override
   String toString() {
-    return 'HomeRouteArgs{key: $key, goToBible: $goToBible}';
+    return 'HomeRouteArgs{key: $key, goTo: $goTo}';
   }
 }
 
@@ -282,15 +260,15 @@ class BibleRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [NotesPage]
-class NotesRoute extends PageRouteInfo<void> {
-  const NotesRoute()
+/// [AboutPage]
+class AboutRoute extends PageRouteInfo<void> {
+  const AboutRoute()
       : super(
-          NotesRoute.name,
-          path: 'notes-page',
+          AboutRoute.name,
+          path: 'about-page',
         );
 
-  static const String name = 'NotesRoute';
+  static const String name = 'AboutRoute';
 }
 
 /// generated route for

@@ -13,7 +13,7 @@ const items = [
   BottomNavigationBarItem(label: 'Home', icon: Icon(PhosphorIcons.houseSimple)),
   BottomNavigationBarItem(label: 'Bible', icon: Icon(PhosphorIcons.book)),
   BottomNavigationBarItem(label: 'Blog', icon: Icon(PhosphorIcons.eyeglasses)),
-  BottomNavigationBarItem(label: 'Notes', icon: Icon(PhosphorIcons.notepad)),
+  BottomNavigationBarItem(label: 'About', icon: Icon(PhosphorIcons.info)),
 ];
 
 class LayoutPage extends HookWidget {
@@ -35,10 +35,10 @@ class LayoutPage extends HookWidget {
       child: AutoTabsScaffold(
         scaffoldKey: MKeys.layoutScaffoldKey,
         routes: [
-          HomeRoute(goToBible: () => layoutTabRouter.value?.setActiveIndex(1)),
+          HomeRoute(goTo: (v) => layoutTabRouter.value?.setActiveIndex(v)),
           const BibleRoute(),
           const BlogRoute(),
-          const NotesRoute(),
+          const AboutRoute(),
         ],
         appBarBuilder: (context, tabsRouter) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -49,6 +49,10 @@ class LayoutPage extends HookWidget {
             return BibleAppBar(
               title: tabsRouter.current.name.split('R')[0],
             );
+          }
+
+          if (tabsRouter.activeIndex == 3) {
+            return const MAppBar(title: 'About Menō', showLeading: false);
           }
 
           return MAppBar(

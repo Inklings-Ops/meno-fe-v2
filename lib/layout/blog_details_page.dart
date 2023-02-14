@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
@@ -9,15 +10,6 @@ class BlogDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.white30,
-        ),
-      ),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
@@ -25,54 +17,54 @@ class BlogDetailsPage extends StatelessWidget {
               automaticallyImplyLeading: false,
               floating: true,
               expandedHeight: MSize.sh(0.3),
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: Colors.white30,
+              ),
               forceElevated: innerBoxIsScrolled,
-              flexibleSpace: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Hero(
-                    tag: 'blog-image',
-                    child: Image.asset(
-                      'assets/images/a-call-to-abide.jpg',
-                      width: MSize.sw(1),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Container(
+              flexibleSpace: FlexibleSpaceBar(
+                background: Hero(
+                  tag: 'blog-image',
+                  child: Image.asset(
+                    'assets/images/a-call-to-abide.jpg',
                     width: MSize.sw(1),
-                    alignment: Alignment.bottomLeft,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.black,
-                          Colors.black26,
-                          Colors.transparent
-                        ],
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                titlePadding: EdgeInsets.zero,
+                centerTitle: false,
+                title: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Container(
+                      alignment: Alignment.bottomLeft,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Colors.black,
+                            Colors.black26,
+                            Colors.transparent
+                          ],
+                        ),
                       ),
-                    ),
-                    child: SingleChildScrollView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const AutoLeadingButton(color: Colors.white),
                           Hero(
                             tag: 'blog-title',
                             child: Padding(
-                              padding: MSize.pOnly(b: 16, l: 16, r: 16),
-                              child: Material(
+                              padding: MSize.pOnly(l: 4, r: 18),
+                              child: const Material(
                                 color: Colors.transparent,
-                                child: Text(
+                                child: AutoSizeText(
                                   'A Call to Abide',
                                   maxLines: 2,
+                                  minFontSize: 18,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: MSize.fS(24),
                                     fontWeight: FontWeight.w600,
-                                    height: MSize.r(1),
                                   ),
                                 ),
                               ),
@@ -81,24 +73,21 @@ class BlogDetailsPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ];
         },
         body: SingleChildScrollView(
-          padding: MSize.pAll(16),
+          padding: MSize.pAll(18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: MSize.fS(14),
-                  ),
-                  children: const [
+            children: const [
+              AutoSizeText.rich(
+                TextSpan(
+                  style: TextStyle(color: Colors.black87),
+                  children: [
                     TextSpan(
                       text:
                           'And having this confidence, I know that I shall abide and continue with you all for your furtherance and joy of faith; (Phil. 1:25)',
@@ -169,6 +158,7 @@ class BlogDetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                minFontSize: 14,
               ),
             ],
           ),

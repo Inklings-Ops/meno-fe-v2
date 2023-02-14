@@ -9,7 +9,6 @@ class BiblePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chapter = ref.watch(bibleProvider).chapter;
-    // final loading = ref.watch(bibleProvider).loading;
 
     List<Widget> children = [MSize.vS(10)];
     List<InlineSpan> spans = [];
@@ -22,7 +21,6 @@ class BiblePage extends ConsumerWidget {
           style: TextStyle(
             fontSize: MSize.fS(14),
             fontWeight: FontWeight.w400,
-            height: MSize.h(1.5),
           ),
         ),
       ),
@@ -47,17 +45,13 @@ class BiblePage extends ConsumerWidget {
       );
 
       spans.add(
-        TextSpan(children: [
-          TextSpan(text: '${item?.text}\n'),
-          TextSpan(
-            text: ' ',
-            style: TextStyle(
-              fontSize: MSize.fS(14),
-              fontWeight: FontWeight.w400,
-              height: MSize.h(2.4),
-            ),
-          ),
-        ]),
+        TextSpan(
+          children: [
+            TextSpan(text: '${item?.text}\n'),
+            TextSpan(text: '\n', style: TextStyle(height: MSize.r(0.5))),
+          ],
+          style: TextStyle(fontSize: MSize.fS(14), fontWeight: FontWeight.w400),
+        ),
       );
 
       if (!(i == chapter.verses.length - 1)) {
@@ -66,16 +60,6 @@ class BiblePage extends ConsumerWidget {
     }
 
     children.add(MSize.vS(40));
-
-    // if (loading) {
-    //   return SingleChildScrollView(
-    //     child: Column(
-    //       children: const [
-    //         BibleSkeleton(),
-    //       ],
-    //     ),
-    //   );
-    // }
 
     return SingleChildScrollView(
       child: Column(

@@ -14,7 +14,7 @@ class PrivacyPolicyPage extends StatelessWidget {
       appBar: const MAppBar(title: 'Privacy Policy'),
       body: ListView.builder(
         shrinkWrap: true,
-        padding: MSize.pSymmetric(h: 16, v: 16),
+        padding: MSize.pSymmetric(h: 18, v: 16),
         itemCount: privacyPolicy.length,
         itemBuilder: (context, index) {
           String key = privacyPolicy.keys.elementAt(index);
@@ -48,7 +48,7 @@ class PrivacyPolicyPage extends StatelessWidget {
                   ),
                 ),
                 MSize.vS(4),
-                Text(value),
+                AutoSizeText(value),
               ],
             ),
           );

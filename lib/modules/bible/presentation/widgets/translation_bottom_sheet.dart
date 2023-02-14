@@ -55,7 +55,6 @@ class TranslationBottomSheet extends HookConsumerWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        dense: true,
                         contentPadding: MSize.pSymmetric(h: 20, v: 0),
                         onTap: () {
                           event.updateTranslation(translations[index]);

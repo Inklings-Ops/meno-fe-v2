@@ -14,7 +14,7 @@ class ChapterGrid extends ConsumerWidget {
 
     return GridView.count(
       crossAxisCount: 4,
-      childAspectRatio: 1.8,
+      childAspectRatio: MSize.r(1.6),
       padding: MSize.pOnly(t: 10, b: 20),
       children: List.generate(
         state.book.numberOfChapters,

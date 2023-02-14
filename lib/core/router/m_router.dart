@@ -6,7 +6,6 @@ import 'package:meno_fe_v2/layout/blog_details_page.dart';
 import 'package:meno_fe_v2/layout/blog_page.dart';
 import 'package:meno_fe_v2/layout/home_page.dart';
 import 'package:meno_fe_v2/layout/layout_page.dart';
-import 'package:meno_fe_v2/layout/notes_page.dart';
 import 'package:meno_fe_v2/layout/onboarding/onboarding_page.dart';
 import 'package:meno_fe_v2/layout/privacy_policy_page.dart';
 import 'package:meno_fe_v2/layout/terms_and_conditions_page.dart';
@@ -26,13 +25,12 @@ part 'm_router.gr.dart';
       children: [
         AutoRoute(page: HomePage),
         AutoRoute(page: BiblePage),
-        AutoRoute(page: NotesPage),
+        AutoRoute(page: AboutPage),
         AutoRoute(page: BlogPage),
       ],
     ),
     AutoRoute(page: TermsAndConditionsPage),
     AutoRoute(page: PrivacyPolicyPage),
-    AutoRoute(page: AboutPage),
     AutoRoute(page: BlogDetailsPage),
   ],
 )

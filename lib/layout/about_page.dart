@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_section_title.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
-import 'package:meno_fe_v2/layout/widgets/m_app_bar.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -12,7 +12,6 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MAppBar(title: 'About Menō'),
       body: SingleChildScrollView(
         padding: MSize.pSymmetric(h: 16, v: 16),
         child: Column(
@@ -24,12 +23,9 @@ class AboutPage extends StatelessWidget {
               showSeeAllButton: false,
             ),
             MSize.vS(10),
-            Text(
+            const AutoSizeText(
               "μένω ménō, men'-o; a primary verb; to stay (in a given place, state, relation or expectancy):—abide, continue, dwell, endure, be present, remain, stand, tarry (for)",
-              style: TextStyle(
-                fontSize: MSize.fS(14),
-                fontStyle: FontStyle.italic,
-              ),
+              style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
             ),
             MSize.vS(30),
             const MSectionTitle(
@@ -38,9 +34,9 @@ class AboutPage extends StatelessWidget {
               showSeeAllButton: false,
             ),
             MSize.vS(10),
-            Text(
-              "Menō is a software application enhanced with real-time connectivity, and other features that have been carefully integrated to foster the interaction between believers, specifically for the purpose of fellowshipping together and edifying one another.",
-              style: TextStyle(fontSize: MSize.fS(14)),
+            const AutoSizeText(
+              "Menō is a devotional app for Christians that allows users to read different translations of the Christian Bible while also being able to read articles and blogs to help them grow spiritually.",
+              style: TextStyle(fontSize: 14),
             ),
             MSize.vS(30),
             const MSectionTitle(
@@ -49,9 +45,9 @@ class AboutPage extends StatelessWidget {
               showSeeAllButton: false,
             ),
             MSize.vS(10),
-            Text(
-              "The vision of menō is to see all Christians being able to connect and fellowship seamlessly with each other from anywhere in the world and we are on a mission to build the world's most effective live streaming/connectivity platform for believers.",
-              style: TextStyle(fontSize: MSize.fS(14)),
+            const AutoSizeText(
+              "The vision of Menō is to see every Christian be able to easily access resources and tools beneficial for their spiritual growth.",
+              style: TextStyle(fontSize: 14),
             ),
             MSize.vS(30),
             const MSectionTitle(
@@ -60,32 +56,32 @@ class AboutPage extends StatelessWidget {
               showSeeAllButton: false,
             ),
             MSize.vS(10),
-            Text(
+            const AutoSizeText(
               "Read Bible & Blogs",
-              style: TextStyle(fontSize: MSize.fS(14)),
+              style: TextStyle(fontSize: 14),
             ),
-            Text(
+            const AutoSizeText(
               "Create Live Broadcasts (Coming Soon)",
-              style: TextStyle(fontSize: MSize.fS(14)),
+              style: TextStyle(fontSize: 14),
             ),
-            Text(
+            const AutoSizeText(
               "Join Broadcasts you subscribe to (Coming Soon)",
-              style: TextStyle(fontSize: MSize.fS(14)),
+              style: TextStyle(fontSize: 14),
             ),
-            Text(
+            const AutoSizeText(
               "Take Notes (Coming Soon)",
-              style: TextStyle(fontSize: MSize.fS(14)),
+              style: TextStyle(fontSize: 14),
             ),
             MSize.vS(50),
             GestureDetector(
               onTap: () {
                 AutoRouter.of(context).push(const TermsAndConditionsRoute());
               },
-              child: Text(
+              child: const AutoSizeText(
                 "Terms & Conditions",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: MSize.fS(14),
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: MColors.primary,
                 ),
@@ -96,11 +92,11 @@ class AboutPage extends StatelessWidget {
               onTap: () {
                 AutoRouter.of(context).push(const PrivacyPolicyRoute());
               },
-              child: Text(
+              child: const AutoSizeText(
                 "Privacy Policy",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: MSize.fS(14),
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: MColors.primary,
                 ),

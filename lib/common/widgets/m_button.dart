@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
@@ -95,11 +96,11 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AutoSizeText(
       title,
       style: TextStyle(
         color: titleColor ?? Theme.of(context).colorScheme.onPrimary,
-        fontSize: fontSize ?? MSize.fS(18),
+        fontSize: fontSize ?? 18,
         fontWeight: fontWeight ?? FontWeight.w600,
       ),
     );

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/layout/widgets/coming_soon_dialog.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar_item.dart';
 
 class MBottomNavigationBar extends StatefulWidget {
@@ -21,30 +19,11 @@ class MBottomNavigationBar extends StatefulWidget {
 }
 
 class _MBottomNavigationBarState extends State<MBottomNavigationBar> {
-  Future<void> onCreateBroadcast() async {
-    await showDialog(
-      context: context,
-      builder: (context) => const ComingSoonDialog(),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final List<Widget> tiles = <Widget>[];
 
     for (var i = 0; i < 4; i++) {
-      if (i == 2) {
-        tiles.add(
-          MBottomNavigationBarItem(
-            selected: false,
-            onTap: onCreateBroadcast,
-            item: const BottomNavigationBarItem(
-              icon: Icon(MIcons.Voice3),
-              label: 'Create',
-            ),
-          ),
-        );
-      }
       tiles.add(
         MBottomNavigationBarItem(
           onTap: () => widget.onTap?.call(i),
@@ -55,7 +34,7 @@ class _MBottomNavigationBarState extends State<MBottomNavigationBar> {
     }
 
     return Container(
-      height: MSize.h(94),
+      height: MSize.h(70),
       width: MSize.sw(1),
       decoration: BoxDecoration(
         color: Colors.white,
