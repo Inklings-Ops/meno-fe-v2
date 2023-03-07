@@ -25,6 +25,7 @@ mixin _$User {
   String? get imageId => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
   DateTime? get deleted => throw _privateConstructorUsedError;
+  Role get role => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -44,7 +45,8 @@ abstract class $UserCopyWith<$Res> {
       bool? verified,
       String? imageId,
       String? imageUrl,
-      DateTime? deleted});
+      DateTime? deleted,
+      Role role});
 }
 
 /// @nodoc
@@ -69,6 +71,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? imageId = freezed,
     Object? imageUrl = freezed,
     Object? deleted = freezed,
+    Object? role = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -107,6 +110,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.deleted
           : deleted // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role,
     ) as $Val);
   }
 }
@@ -126,7 +133,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool? verified,
       String? imageId,
       String? imageUrl,
-      DateTime? deleted});
+      DateTime? deleted,
+      Role role});
 }
 
 /// @nodoc
@@ -147,6 +155,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? imageId = freezed,
     Object? imageUrl = freezed,
     Object? deleted = freezed,
+    Object? role = null,
   }) {
     return _then(_$_User(
       id: null == id
@@ -185,6 +194,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.deleted
           : deleted // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role,
     ));
   }
 }
@@ -201,7 +214,8 @@ class _$_User implements _User {
       this.verified,
       this.imageId,
       this.imageUrl,
-      this.deleted});
+      this.deleted,
+      required this.role});
 
   @override
   final String id;
@@ -221,10 +235,12 @@ class _$_User implements _User {
   final String? imageUrl;
   @override
   final DateTime? deleted;
+  @override
+  final Role role;
 
   @override
   String toString() {
-    return 'User(id: $id, fullName: $fullName, bio: $bio, email: $email, emailAccountType: $emailAccountType, verified: $verified, imageId: $imageId, imageUrl: $imageUrl, deleted: $deleted)';
+    return 'User(id: $id, fullName: $fullName, bio: $bio, email: $email, emailAccountType: $emailAccountType, verified: $verified, imageId: $imageId, imageUrl: $imageUrl, deleted: $deleted, role: $role)';
   }
 
   @override
@@ -244,12 +260,13 @@ class _$_User implements _User {
             (identical(other.imageId, imageId) || other.imageId == imageId) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
-            (identical(other.deleted, deleted) || other.deleted == deleted));
+            (identical(other.deleted, deleted) || other.deleted == deleted) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, fullName, bio, email,
-      emailAccountType, verified, imageId, imageUrl, deleted);
+      emailAccountType, verified, imageId, imageUrl, deleted, role);
 
   @JsonKey(ignore: true)
   @override
@@ -268,7 +285,8 @@ abstract class _User implements User {
       final bool? verified,
       final String? imageId,
       final String? imageUrl,
-      final DateTime? deleted}) = _$_User;
+      final DateTime? deleted,
+      required final Role role}) = _$_User;
 
   @override
   String get id;
@@ -288,6 +306,8 @@ abstract class _User implements User {
   String? get imageUrl;
   @override
   DateTime? get deleted;
+  @override
+  Role get role;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

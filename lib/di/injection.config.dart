@@ -76,7 +76,7 @@ import 'package:meno_fe_v2/modules/profile/infrastructure/profile_facade.dart'
     as _i40;
 import 'package:meno_fe_v2/services/agora_service.dart' as _i3;
 import 'package:meno_fe_v2/services/media_service.dart' as _i20;
-import 'package:meno_fe_v2/services/secure_storage_service.dart' as _i25;
+import 'package:meno_fe_v2/services/secure_storage_Service.dart' as _i25;
 import 'package:meno_fe_v2/services/shared_preferences_service.dart' as _i27;
 import 'package:shared_preferences/shared_preferences.dart' as _i26;
 

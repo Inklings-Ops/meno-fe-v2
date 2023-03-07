@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meno_fe_v2/core/value/value_objects.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 
 part 'user.freezed.dart';
 
@@ -15,6 +16,7 @@ class User with _$User {
     String? imageId,
     String? imageUrl,
     DateTime? deleted,
+    required Role role,
   }) = _User;
 
   factory User.empty() => User(
@@ -27,5 +29,6 @@ class User with _$User {
         imageId: '',
         imageUrl: '',
         deleted: null,
+        role: Role.guest,
       );
 }
