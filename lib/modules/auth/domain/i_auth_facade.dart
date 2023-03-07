@@ -1,13 +1,26 @@
 import 'package:dartz/dartz.dart';
 import 'package:meno_fe_v2/core/value/value_objects.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/otp_type.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user_credentials.dart';
 import 'package:meno_fe_v2/modules/auth/domain/errors/auth_failure.dart';
 
 /// Meno Authentication Facade
 abstract class IAuthFacade {
+  /// Get the [Role] of the currently signed in user.
+  Future<Role> get role;
+
   Future<Option<UserCredentials?>> authCredentials();
+
+  /// Change Password facade
+  Future<Either<AuthFailure, Unit>> changePassword({
+    required IPassword newPassword,
+    required IPassword currentPassword,
+  });
+
+  /// Forgot password facade
+  Future<Either<AuthFailure, Unit>> forgotPassword(IEmail email);
 
   Future<String?> getToken();
 
@@ -23,22 +36,6 @@ abstract class IAuthFacade {
   Future<Either<AuthFailure, Unit>> login({
     required IEmail email,
     required IPassword password,
-  });
-
-  /// Forgot password facade
-  Future<Either<AuthFailure, Unit>> forgotPassword(IEmail email);
-
-  /// Reset Password facade
-  Future<Either<AuthFailure, Unit>> resetPassword({
-    required IEmail email,
-    required IOtp code,
-    required IPassword newPassword,
-  });
-
-  /// Change Password facade
-  Future<Either<AuthFailure, Unit>> changePassword({
-    required IPassword newPassword,
-    required IPassword currentPassword,
   });
 
   /// Sign out facade
@@ -58,6 +55,13 @@ abstract class IAuthFacade {
 
   /// Request one time password for verification of user email facade
   Future<Either<AuthFailure, Unit>> requestOTP(OtpType type);
+
+  /// Reset Password facade
+  Future<Either<AuthFailure, Unit>> resetPassword({
+    required IEmail email,
+    required IOtp code,
+    required IPassword newPassword,
+  });
 
   /// User email verification facade;
   Future<Either<AuthFailure, bool>> verify({

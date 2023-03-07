@@ -10,6 +10,7 @@ import 'package:meno_fe_v2/common/utils/display_auth_error.dart';
 import 'package:meno_fe_v2/core/responses/auth_response.dart';
 import 'package:meno_fe_v2/core/value/value_objects.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/otp_type.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user_credentials.dart';
 import 'package:meno_fe_v2/modules/auth/domain/errors/auth_failure.dart';
@@ -24,10 +25,16 @@ class AuthFacade implements IAuthFacade {
   final AuthLocalDatasource _local;
   final AuthRemoteDatasource _remote;
 
+  final _google = GoogleSignIn();
+
+  final _mapper = UserCredentialsMapper();
   AuthFacade(this._local, this._remote);
 
-  final _google = GoogleSignIn();
-  final _mapper = UserCredentialsMapper();
+  @override
+  Future<Role> get role async {
+    final credentials = await _local.getCredentials();
+    return credentials!.user!.role;
+  }
 
   @override
   Future<Option<UserCredentials?>> authCredentials() async {
