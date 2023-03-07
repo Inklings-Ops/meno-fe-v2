@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user.dart';
 
 part 'user_dto.freezed.dart';
@@ -21,6 +22,7 @@ class UserDto with _$UserDto {
     String? imageId,
     String? imageUrl,
     DateTime? deleted,
+    required Role role,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -34,6 +36,7 @@ class UserDto with _$UserDto {
       imageId: user.imageId,
       imageUrl: user.imageUrl,
       deleted: user.deleted,
+      role: user.role,
     );
   }
 

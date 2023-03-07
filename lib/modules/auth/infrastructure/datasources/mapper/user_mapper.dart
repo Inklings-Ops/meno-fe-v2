@@ -18,6 +18,7 @@ class UserMapper {
       imageId: dto.imageId,
       imageUrl: dto.imageUrl,
       deleted: dto.deleted,
+      role: dto.role,
     );
   }
 }

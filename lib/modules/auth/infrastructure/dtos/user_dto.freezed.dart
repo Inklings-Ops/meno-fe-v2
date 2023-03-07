@@ -29,6 +29,7 @@ mixin _$UserDto {
   String? get imageId => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
   DateTime? get deleted => throw _privateConstructorUsedError;
+  Role get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +50,8 @@ abstract class $UserDtoCopyWith<$Res> {
       bool? verified,
       String? imageId,
       String? imageUrl,
-      DateTime? deleted});
+      DateTime? deleted,
+      Role role});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? imageId = freezed,
     Object? imageUrl = freezed,
     Object? deleted = freezed,
+    Object? role = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -112,6 +115,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.deleted
           : deleted // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role,
     ) as $Val);
   }
 }
@@ -132,7 +139,8 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       bool? verified,
       String? imageId,
       String? imageUrl,
-      DateTime? deleted});
+      DateTime? deleted,
+      Role role});
 }
 
 /// @nodoc
@@ -154,6 +162,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? imageId = freezed,
     Object? imageUrl = freezed,
     Object? deleted = freezed,
+    Object? role = null,
   }) {
     return _then(_$_UserDto(
       id: null == id
@@ -192,6 +201,10 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value.deleted
           : deleted // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role,
     ));
   }
 }
@@ -208,7 +221,8 @@ class _$_UserDto implements _UserDto {
       this.verified,
       this.imageId,
       this.imageUrl,
-      this.deleted});
+      this.deleted,
+      required this.role});
 
   factory _$_UserDto.fromJson(Map<String, dynamic> json) =>
       _$$_UserDtoFromJson(json);
@@ -231,10 +245,12 @@ class _$_UserDto implements _UserDto {
   final String? imageUrl;
   @override
   final DateTime? deleted;
+  @override
+  final Role role;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, fullName: $fullName, bio: $bio, email: $email, emailAccountType: $emailAccountType, verified: $verified, imageId: $imageId, imageUrl: $imageUrl, deleted: $deleted)';
+    return 'UserDto(id: $id, fullName: $fullName, bio: $bio, email: $email, emailAccountType: $emailAccountType, verified: $verified, imageId: $imageId, imageUrl: $imageUrl, deleted: $deleted, role: $role)';
   }
 
   @override
@@ -254,13 +270,14 @@ class _$_UserDto implements _UserDto {
             (identical(other.imageId, imageId) || other.imageId == imageId) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
-            (identical(other.deleted, deleted) || other.deleted == deleted));
+            (identical(other.deleted, deleted) || other.deleted == deleted) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, fullName, bio, email,
-      emailAccountType, verified, imageId, imageUrl, deleted);
+      emailAccountType, verified, imageId, imageUrl, deleted, role);
 
   @JsonKey(ignore: true)
   @override
@@ -286,7 +303,8 @@ abstract class _UserDto implements UserDto {
       final bool? verified,
       final String? imageId,
       final String? imageUrl,
-      final DateTime? deleted}) = _$_UserDto;
+      final DateTime? deleted,
+      required final Role role}) = _$_UserDto;
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
 
@@ -308,6 +326,8 @@ abstract class _UserDto implements UserDto {
   String? get imageUrl;
   @override
   DateTime? get deleted;
+  @override
+  Role get role;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

@@ -25,8 +25,14 @@ Map<String, dynamic> _$UserDtoToJson(UserDto instance) {
   writeNotNull('imageId', instance.imageId);
   writeNotNull('imageUrl', instance.imageUrl);
   writeNotNull('deleted', instance.deleted?.toIso8601String());
+  val['role'] = _$RoleEnumMap[instance.role]!;
   return val;
 }
+
+const _$RoleEnumMap = {
+  Role.admin: 'admin',
+  Role.guest: 'guest',
+};
 
 _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       id: json['id'] as String,
@@ -40,6 +46,7 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       deleted: json['deleted'] == null
           ? null
           : DateTime.parse(json['deleted'] as String),
+      role: $enumDecode(_$RoleEnumMap, json['role']),
     );
 
 Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
@@ -53,4 +60,5 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'imageId': instance.imageId,
       'imageUrl': instance.imageUrl,
       'deleted': instance.deleted?.toIso8601String(),
+      'role': _$RoleEnumMap[instance.role]!,
     };
