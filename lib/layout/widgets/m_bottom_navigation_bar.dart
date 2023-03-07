@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/bottom_sheets/start_broadcast_bottom_sheet.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar_item.dart';
+import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class MBottomNavigationBar extends StatefulWidget {
+class MBottomNavigationBar extends ConsumerStatefulWidget {
   const MBottomNavigationBar({
     super.key,
     required this.currentIndex,
@@ -18,10 +21,11 @@ class MBottomNavigationBar extends StatefulWidget {
   final ValueChanged<int>? onTap;
 
   @override
-  State<MBottomNavigationBar> createState() => _MBottomNavigationBarState();
+  ConsumerState<MBottomNavigationBar> createState() =>
+      _MBottomNavigationBarState();
 }
 
-class _MBottomNavigationBarState extends State<MBottomNavigationBar> {
+class _MBottomNavigationBarState extends ConsumerState<MBottomNavigationBar> {
   Future<void> onCreateBroadcast() async {
     final scaffoldContext = ScaffoldMessenger.of(context);
 
@@ -58,11 +62,14 @@ class _MBottomNavigationBarState extends State<MBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> tiles = <Widget>[];
+    final role = ref.watch(roleProvider).value;
+
+    final List<Widget> adminTiles = <Widget>[];
+    final List<Widget> guestTiles = <Widget>[];
 
     for (var i = 0; i < 4; i++) {
       if (i == 2) {
-        tiles.add(
+        adminTiles.add(
           MBottomNavigationBarItem(
             selected: false,
             onTap: onCreateBroadcast,
@@ -73,7 +80,14 @@ class _MBottomNavigationBarState extends State<MBottomNavigationBar> {
           ),
         );
       }
-      tiles.add(
+      adminTiles.add(
+        MBottomNavigationBarItem(
+          onTap: () => widget.onTap?.call(i),
+          item: widget.items[i],
+          selected: i == widget.currentIndex,
+        ),
+      );
+      guestTiles.add(
         MBottomNavigationBarItem(
           onTap: () => widget.onTap?.call(i),
           item: widget.items[i],
@@ -98,7 +112,7 @@ class _MBottomNavigationBarState extends State<MBottomNavigationBar> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: tiles,
+        children: role == Role.admin ? adminTiles : guestTiles,
       ),
     );
   }

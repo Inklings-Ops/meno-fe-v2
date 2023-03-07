@@ -104,6 +104,12 @@ class _$MRouter extends RootStackRouter {
         child: const LayoutPage(),
       );
     },
+    AboutRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const AboutPage(),
+      );
+    },
     CreateBroadcastRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -160,14 +166,31 @@ class _$MRouter extends RootStackRouter {
         ),
       );
     },
+    BlogDetailsRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const BlogDetailsPage(),
+      );
+    },
+    TermsAndConditionsRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const TermsAndConditionsPage(),
+      );
+    },
+    PrivacyPolicyRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const PrivacyPolicyPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
+      final args = routeData.argsAs<HomeRouteArgs>();
       return AdaptivePage<dynamic>(
         routeData: routeData,
         child: HomePage(
           key: args.key,
-          onDiscoverPressed: args.onDiscoverPressed,
+          goTo: args.goTo,
         ),
       );
     },
@@ -187,6 +210,29 @@ class _$MRouter extends RootStackRouter {
       return AdaptivePage<dynamic>(
         routeData: routeData,
         child: const ProfilePage(),
+      );
+    },
+    BlogRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const BlogPage(),
+      );
+    },
+    GuestProfileRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const GuestProfilePage(),
+      );
+    },
+    BibleRoute.name: (routeData) {
+      final args = routeData.argsAs<BibleRouteArgs>(
+          orElse: () => const BibleRouteArgs());
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: BiblePage(
+          key: args.key,
+          scrollController: args.scrollController,
+        ),
       );
     },
   };
@@ -262,7 +308,26 @@ class _$MRouter extends RootStackRouter {
               path: 'profile-page',
               parent: LayoutRoute.name,
             ),
+            RouteConfig(
+              BlogRoute.name,
+              path: 'blog-page',
+              parent: LayoutRoute.name,
+            ),
+            RouteConfig(
+              GuestProfileRoute.name,
+              path: 'guest-profile-page',
+              parent: LayoutRoute.name,
+            ),
+            RouteConfig(
+              BibleRoute.name,
+              path: 'bible-page',
+              parent: LayoutRoute.name,
+            ),
           ],
+        ),
+        RouteConfig(
+          AboutRoute.name,
+          path: '/about-page',
         ),
         RouteConfig(
           CreateBroadcastRoute.name,
@@ -287,6 +352,18 @@ class _$MRouter extends RootStackRouter {
         RouteConfig(
           RecentBroadcastListRoute.name,
           path: '/recent-broadcast-list-page',
+        ),
+        RouteConfig(
+          BlogDetailsRoute.name,
+          path: '/blog-details-page',
+        ),
+        RouteConfig(
+          TermsAndConditionsRoute.name,
+          path: '/terms-and-conditions-page',
+        ),
+        RouteConfig(
+          PrivacyPolicyRoute.name,
+          path: '/privacy-policy-page',
         ),
       ];
 }
@@ -481,6 +558,18 @@ class LayoutRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AboutPage]
+class AboutRoute extends PageRouteInfo<void> {
+  const AboutRoute()
+      : super(
+          AboutRoute.name,
+          path: '/about-page',
+        );
+
+  static const String name = 'AboutRoute';
+}
+
+/// generated route for
 /// [CreateBroadcastPage]
 class CreateBroadcastRoute extends PageRouteInfo<void> {
   const CreateBroadcastRoute()
@@ -664,17 +753,53 @@ class RecentBroadcastListRouteArgs {
 }
 
 /// generated route for
+/// [BlogDetailsPage]
+class BlogDetailsRoute extends PageRouteInfo<void> {
+  const BlogDetailsRoute()
+      : super(
+          BlogDetailsRoute.name,
+          path: '/blog-details-page',
+        );
+
+  static const String name = 'BlogDetailsRoute';
+}
+
+/// generated route for
+/// [TermsAndConditionsPage]
+class TermsAndConditionsRoute extends PageRouteInfo<void> {
+  const TermsAndConditionsRoute()
+      : super(
+          TermsAndConditionsRoute.name,
+          path: '/terms-and-conditions-page',
+        );
+
+  static const String name = 'TermsAndConditionsRoute';
+}
+
+/// generated route for
+/// [PrivacyPolicyPage]
+class PrivacyPolicyRoute extends PageRouteInfo<void> {
+  const PrivacyPolicyRoute()
+      : super(
+          PrivacyPolicyRoute.name,
+          path: '/privacy-policy-page',
+        );
+
+  static const String name = 'PrivacyPolicyRoute';
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
     Key? key,
-    void Function()? onDiscoverPressed,
+    required void Function(int) goTo,
   }) : super(
           HomeRoute.name,
           path: 'home-page',
           args: HomeRouteArgs(
             key: key,
-            onDiscoverPressed: onDiscoverPressed,
+            goTo: goTo,
           ),
         );
 
@@ -684,16 +809,16 @@ class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
 class HomeRouteArgs {
   const HomeRouteArgs({
     this.key,
-    this.onDiscoverPressed,
+    required this.goTo,
   });
 
   final Key? key;
 
-  final void Function()? onDiscoverPressed;
+  final void Function(int) goTo;
 
   @override
   String toString() {
-    return 'HomeRouteArgs{key: $key, onDiscoverPressed: $onDiscoverPressed}';
+    return 'HomeRouteArgs{key: $key, goTo: $goTo}';
   }
 }
 
@@ -731,4 +856,62 @@ class ProfileRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProfileRoute';
+}
+
+/// generated route for
+/// [BlogPage]
+class BlogRoute extends PageRouteInfo<void> {
+  const BlogRoute()
+      : super(
+          BlogRoute.name,
+          path: 'blog-page',
+        );
+
+  static const String name = 'BlogRoute';
+}
+
+/// generated route for
+/// [GuestProfilePage]
+class GuestProfileRoute extends PageRouteInfo<void> {
+  const GuestProfileRoute()
+      : super(
+          GuestProfileRoute.name,
+          path: 'guest-profile-page',
+        );
+
+  static const String name = 'GuestProfileRoute';
+}
+
+/// generated route for
+/// [BiblePage]
+class BibleRoute extends PageRouteInfo<BibleRouteArgs> {
+  BibleRoute({
+    Key? key,
+    ScrollController? scrollController,
+  }) : super(
+          BibleRoute.name,
+          path: 'bible-page',
+          args: BibleRouteArgs(
+            key: key,
+            scrollController: scrollController,
+          ),
+        );
+
+  static const String name = 'BibleRoute';
+}
+
+class BibleRouteArgs {
+  const BibleRouteArgs({
+    this.key,
+    this.scrollController,
+  });
+
+  final Key? key;
+
+  final ScrollController? scrollController;
+
+  @override
+  String toString() {
+    return 'BibleRouteArgs{key: $key, scrollController: $scrollController}';
+  }
 }

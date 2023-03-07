@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:meno_fe_v2/common/utils/privacy_policy.dart';
+import 'package:meno_fe_v2/common/utils/terms_of_use.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/otp_type.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
@@ -15,6 +17,24 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
 });
 
 final roleProvider = FutureProvider<Role>((ref) => di<IAuthFacade>().role);
+
+final termsOfUseProvider = Provider<Map<String, String>>((ref) {
+  final role = ref.watch(roleProvider).value;
+  if (role == Role.admin) {
+    return adminTermsOfUse;
+  } else {
+    return guestTermsOfUse;
+  }
+});
+
+final privacyPolicyProvider = Provider<Map<String, String>>((ref) {
+  final role = ref.watch(roleProvider).value;
+  if (role == Role.admin) {
+    return adminPrivacyPolicy;
+  } else {
+    return guestPrivacyPolicy;
+  }
+});
 
 @injectable
 class AuthNotifier extends StateNotifier<AuthState> {

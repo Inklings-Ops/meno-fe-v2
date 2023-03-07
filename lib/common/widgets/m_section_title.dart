@@ -1,7 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:skeletons/skeletons.dart';
 
 class MSectionTitle extends StatelessWidget {
   final String? title;
@@ -32,74 +32,27 @@ class MSectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.centerLeft,
       margin: addSideMargin ? MSize.pSymmetric(h: 16.0) : null,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              if (showBorder) ...[
-                if (loading)
-                  SkeletonLine(
-                    style: SkeletonLineStyle(
-                      height: MSize.fS(20),
-                      width: MSize.r(4),
-                    ),
-                  )
-                else
-                  Container(
-                    height: MSize.fS(20),
-                    width: MSize.r(4),
-                    color: MColors.danger,
-                  ),
-                MSize.hS(6),
-              ],
-              Container(
-                alignment: Alignment.centerLeft,
-                height: showBorder ? MSize.r(27) : null,
-                child: loading
-                    ? SkeletonLine(
-                        style: SkeletonLineStyle(
-                          height: MSize.fS(20),
-                          width: MSize.w(170),
-                        ),
-                      )
-                    : Text(
-                        title!,
-                        style: TextStyle(
-                          fontSize: fontSize ?? MSize.fS(20),
-                          height: MSize.r(1),
-                          fontWeight: FontWeight.bold,
-                          color: textColor,
-                        ),
-                      ),
-              ),
-            ],
+      constraints: BoxConstraints(minHeight: MSize.fS(20)),
+      decoration: BoxDecoration(
+        border: Border(
+          left: BorderSide(
+            color: MColors.danger,
+            width: MSize.r(4),
           ),
-          if (!showSeeAllButton)
-            const SizedBox()
-          else if (loading)
-            SkeletonLine(
-              style: SkeletonLineStyle(
-                height: MSize.fS(14),
-                width: MSize.w(40),
-              ),
-            )
-          else
-            GestureDetector(
-              onTap: seeAllAction,
-              child: Text(
-                'See All',
-                style: TextStyle(
-                  fontSize: MSize.fS(14),
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black54,
-                ),
-              ),
-            ),
-          if (showAvatar && avatar != null) ...[avatar!]
-        ],
+        ),
+      ),
+      padding: MSize.pOnly(l: 6),
+      child: AutoSizeText(
+        title!,
+        minFontSize: 19,
+        maxFontSize: 22,
+        style: TextStyle(
+          height: MSize.r(1),
+          fontWeight: FontWeight.bold,
+          color: textColor,
+        ),
       ),
     );
   }

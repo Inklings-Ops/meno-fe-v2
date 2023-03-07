@@ -1,8 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
+import 'package:meno_fe_v2/core/router/m_router.dart';
+import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/edit_profile_button.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/go_pro_button.dart';
@@ -22,67 +27,107 @@ class ProfileContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final role = ref.watch(roleProvider).value;
+    final isAdmin = role == Role.admin;
+    final router = AutoRouter.of(context);
+
     return SingleChildScrollView(
-      padding: MSize.pFromLTRB(0, 80, 0, 16),
-      child: Column(
-        children: [
-          MAvatar(
-            radius: MSize.r(50),
-            showBorder: true,
-            image: profile.imageUrl != null
-                ? NetworkImage(profile.imageUrl!)
-                : null,
-          ),
-          MSize.vS(15),
-          Padding(
-            padding: MSize.pSymmetric(h: 16),
-            child: Text(
-              profile.fullName.get()!,
-              style: TextStyle(
-                fontSize: MSize.fS(18),
-                fontWeight: FontWeight.w500,
-              ),
+      padding: MSize.pFromLTRB(0, 30, 0, 16),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            MAvatar(
+              radius: isAdmin ? MSize.r(50) : MSize.r(70),
+              showBorder: true,
+              image: profile.imageUrl != null
+                  ? NetworkImage(profile.imageUrl!)
+                  : null,
             ),
-          ),
-          MSize.vS(18),
-          if (profile.bio?.get() != null) ...[
+            MSize.vS(15),
             Padding(
               padding: MSize.pSymmetric(h: 16),
               child: Text(
-                profile.bio!.get()!,
-                textAlign: TextAlign.center,
+                profile.fullName.get()!,
                 style: TextStyle(
-                  fontSize: MSize.fS(14),
+                  fontSize: isAdmin ? MSize.fS(18) : MSize.fS(20),
                   fontWeight: FontWeight.w500,
-                  height: MSize.fS(1.3),
-                  color: const Color(0xFF898A8D),
                 ),
               ),
             ),
-            MSize.vS(16),
+            MSize.vS(18),
+            if (profile.bio?.get() != null) ...[
+              Padding(
+                padding: MSize.pSymmetric(h: 16),
+                child: Text(
+                  profile.bio!.get()!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: MSize.fS(14),
+                    fontWeight: FontWeight.w500,
+                    height: MSize.fS(1.3),
+                    color: const Color(0xFF898A8D),
+                  ),
+                ),
+              ),
+              MSize.vS(16),
+            ],
+            if (isAdmin) ...[
+              Padding(
+                padding: MSize.pSymmetric(h: 16),
+                child: isAuthUser
+                    ? const _AuthUserActionButtons()
+                    : const _OtherUserActionButtons(),
+              ),
+              MSize.vS(26),
+              const ProfileActivityCountWidget(),
+              MSize.vS(30),
+              ProfileRecentBroadcastList(profile: profile),
+            ] else
+              Container(
+                constraints: BoxConstraints(
+                  minHeight: MSize.h(60),
+                  maxWidth: MSize.sw(1),
+                  minWidth: MSize.sw(1),
+                ),
+                margin: MSize.pSymmetric(h: 18, v: 20),
+                decoration: BoxDecoration(
+                  color: MColors.primaryLight,
+                  borderRadius: BorderRadius.circular(MSize.r(20)),
+                ),
+                child: ListView(
+                  padding: MSize.pAll(16),
+                  primary: false,
+                  shrinkWrap: true,
+                  children: [
+                    ListTile(
+                      title: const Text('About'),
+                      trailing: const Icon(MIcons.InfoCircle1),
+                      onTap: () => router.push(const AboutRoute()),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      title: const Text('Terms & Conditions'),
+                      trailing: const Icon(MIcons.Paper1),
+                      onTap: () => router.push(const TermsAndConditionsRoute()),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      title: const Text('Privacy Policy'),
+                      trailing: const Icon(MIcons.Paper1),
+                      onTap: () => router.push(const PrivacyPolicyRoute()),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      title: const Text('Logout'),
+                      trailing: const Icon(MIcons.Logout1),
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              ),
           ],
-          Padding(
-            padding: MSize.pSymmetric(h: 16),
-            child: isAuthUser
-                ? const _AuthUserActionButtons()
-                : const _OtherUserActionButtons(),
-          ),
-          MSize.vS(26),
-          const ProfileActivityCountWidget(),
-          MSize.vS(30),
-          // Padding(
-          //   padding: MSize.pSymmetric(h: 16),
-          //   child: Column(
-          //     children: [
-          //       const MSectionTitle(title: 'My Scheduled Broadcasts'),
-          //       MSize.vS(6),
-          //       const ScheduledBroadcastCard(),
-          //     ],
-          //   ),
-          // ),
-          // MSize.vS(40),
-          ProfileRecentBroadcastList(profile: profile),
-        ],
+        ),
       ),
     );
   }

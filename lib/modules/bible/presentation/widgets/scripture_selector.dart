@@ -13,10 +13,10 @@ class ScriptureSelector extends ConsumerWidget {
     final state = ref.watch(bibleProvider);
 
     return Container(
-      height: MSize.h(60),
+      // height: MSize.h(60),
       width: MSize.sh(1),
       alignment: Alignment.center,
-      padding: MSize.pAll(16),
+      padding: MSize.pFromLTRB(16, 0, 16, 8),
       child: Row(
         children: [
           GestureDetector(

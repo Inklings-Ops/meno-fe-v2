@@ -11,7 +11,7 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
   final void Function() onAvatarPressed;
 
   @override
-  Size get preferredSize => Size.fromHeight(MSize.r(70));
+  Size get preferredSize => Size.fromHeight(MSize.r(kToolbarHeight));
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +20,7 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
     return profileState.maybeWhen(
       orElse: () => const _AppBarSkeleton(),
       authUserLoaded: (profile) => AppBar(
-        toolbarHeight: MSize.r(70),
+        toolbarHeight: MSize.r(kToolbarHeight),
         leading: const SizedBox(),
         leadingWidth: MSize.r(0),
         backgroundColor: Colors.white,

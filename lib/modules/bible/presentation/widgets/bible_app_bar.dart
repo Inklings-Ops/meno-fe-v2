@@ -1,68 +1,43 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
+import 'package:meno_fe_v2/modules/bible/presentation/widgets/scripture_selector.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:skeletons/skeletons.dart';
 
-class MAppBar extends StatelessWidget with PreferredSizeWidget {
-  const MAppBar({
-    super.key,
-    this.actions,
-    this.customTitle,
-    required this.title,
-    this.onAvatarPressed,
-    this.leading,
-    this.showBorder = true,
-    this.showAvatar = true,
-  });
+class BibleAppBar extends StatelessWidget with PreferredSizeWidget {
+  const BibleAppBar({super.key, this.onAvatarPressed});
 
-  final List<Widget>? actions;
-  final Widget? customTitle;
-  final String title;
-  final Widget? leading;
   final void Function()? onAvatarPressed;
-  final bool showBorder;
-  final bool showAvatar;
 
   @override
-  Size get preferredSize => Size.fromHeight(MSize.r(kToolbarHeight));
+  Size get preferredSize => Size.fromHeight(MSize.r(90));
 
   @override
   Widget build(BuildContext context) {
-    Widget titleWidget = Text(
-      title,
+    Widget titleWidget = AutoSizeText(
+      'Bible',
       style: TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: MSize.fS(18),
       ),
     );
 
-    if (customTitle != null) {
-      titleWidget = customTitle!;
-    }
-
-    Widget appBarTitle = Container(
-      padding: MSize.pOnly(l: 4),
-      decoration: BoxDecoration(
-        border: Border(
-          left: BorderSide(color: MColors.danger, width: MSize.w(4)),
-        ),
-      ),
-      child: titleWidget,
-    );
-
     return AppBar(
-      toolbarHeight: MSize.r(kToolbarHeight),
-      leading: leading ?? const SizedBox(),
-      leadingWidth: leading == null ? MSize.r(0) : null,
+      toolbarHeight: MSize.r(90),
       elevation: 0,
       scrolledUnderElevation: 0,
-      title: showBorder ? appBarTitle : titleWidget,
-      actions: showAvatar
-          ? [_Avatar(onAvatarPressed: onAvatarPressed), MSize.hS(16)]
-          : null,
+      title: titleWidget,
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(MSize.h(0)),
+        child: const ScriptureSelector(),
+      ),
+      actions: [
+        _Avatar(onAvatarPressed: onAvatarPressed),
+        MSize.hS(16),
+      ],
     );
   }
 }
