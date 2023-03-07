@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/otp_type.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user_credentials.dart';
 import 'package:meno_fe_v2/modules/auth/domain/i_auth_facade.dart';
 
@@ -12,6 +13,8 @@ part 'auth_state.dart';
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   return AuthNotifier(di<IAuthFacade>());
 });
+
+final roleProvider = FutureProvider<Role>((ref) => di<IAuthFacade>().role);
 
 @injectable
 class AuthNotifier extends StateNotifier<AuthState> {
