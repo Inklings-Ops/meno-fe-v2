@@ -21,13 +21,12 @@ VerseDto _$VerseDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$VerseDto {
   @JsonKey(name: 'book_id')
-  String get bookId => throw _privateConstructorUsedError;
+  String? get bookId => throw _privateConstructorUsedError;
   @JsonKey(name: 'book_name')
-  String get bookName => throw _privateConstructorUsedError;
-  int get chapter => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-  int get verse => throw _privateConstructorUsedError;
-  String get vid => throw _privateConstructorUsedError;
+  String? get bookName => throw _privateConstructorUsedError;
+  int? get chapter => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
+  int? get verse => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,12 +40,11 @@ abstract class $VerseDtoCopyWith<$Res> {
       _$VerseDtoCopyWithImpl<$Res, VerseDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'book_id') String bookId,
-      @JsonKey(name: 'book_name') String bookName,
-      int chapter,
-      String text,
-      int verse,
-      String vid});
+      {@JsonKey(name: 'book_id') String? bookId,
+      @JsonKey(name: 'book_name') String? bookName,
+      int? chapter,
+      String? text,
+      int? verse});
 }
 
 /// @nodoc
@@ -62,38 +60,33 @@ class _$VerseDtoCopyWithImpl<$Res, $Val extends VerseDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bookId = null,
-    Object? bookName = null,
-    Object? chapter = null,
-    Object? text = null,
-    Object? verse = null,
-    Object? vid = null,
+    Object? bookId = freezed,
+    Object? bookName = freezed,
+    Object? chapter = freezed,
+    Object? text = freezed,
+    Object? verse = freezed,
   }) {
     return _then(_value.copyWith(
-      bookId: null == bookId
+      bookId: freezed == bookId
           ? _value.bookId
           : bookId // ignore: cast_nullable_to_non_nullable
-              as String,
-      bookName: null == bookName
+              as String?,
+      bookName: freezed == bookName
           ? _value.bookName
           : bookName // ignore: cast_nullable_to_non_nullable
-              as String,
-      chapter: null == chapter
+              as String?,
+      chapter: freezed == chapter
           ? _value.chapter
           : chapter // ignore: cast_nullable_to_non_nullable
-              as int,
-      text: null == text
+              as int?,
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      verse: null == verse
+              as String?,
+      verse: freezed == verse
           ? _value.verse
           : verse // ignore: cast_nullable_to_non_nullable
-              as int,
-      vid: null == vid
-          ? _value.vid
-          : vid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
     ) as $Val);
   }
 }
@@ -106,12 +99,11 @@ abstract class _$$_VerseDtoCopyWith<$Res> implements $VerseDtoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'book_id') String bookId,
-      @JsonKey(name: 'book_name') String bookName,
-      int chapter,
-      String text,
-      int verse,
-      String vid});
+      {@JsonKey(name: 'book_id') String? bookId,
+      @JsonKey(name: 'book_name') String? bookName,
+      int? chapter,
+      String? text,
+      int? verse});
 }
 
 /// @nodoc
@@ -125,38 +117,33 @@ class __$$_VerseDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bookId = null,
-    Object? bookName = null,
-    Object? chapter = null,
-    Object? text = null,
-    Object? verse = null,
-    Object? vid = null,
+    Object? bookId = freezed,
+    Object? bookName = freezed,
+    Object? chapter = freezed,
+    Object? text = freezed,
+    Object? verse = freezed,
   }) {
     return _then(_$_VerseDto(
-      bookId: null == bookId
+      bookId: freezed == bookId
           ? _value.bookId
           : bookId // ignore: cast_nullable_to_non_nullable
-              as String,
-      bookName: null == bookName
+              as String?,
+      bookName: freezed == bookName
           ? _value.bookName
           : bookName // ignore: cast_nullable_to_non_nullable
-              as String,
-      chapter: null == chapter
+              as String?,
+      chapter: freezed == chapter
           ? _value.chapter
           : chapter // ignore: cast_nullable_to_non_nullable
-              as int,
-      text: null == text
+              as int?,
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      verse: null == verse
+              as String?,
+      verse: freezed == verse
           ? _value.verse
           : verse // ignore: cast_nullable_to_non_nullable
-              as int,
-      vid: null == vid
-          ? _value.vid
-          : vid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
     ));
   }
 }
@@ -165,34 +152,31 @@ class __$$_VerseDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_VerseDto implements _VerseDto {
   _$_VerseDto(
-      {@JsonKey(name: 'book_id') required this.bookId,
-      @JsonKey(name: 'book_name') required this.bookName,
-      required this.chapter,
-      required this.text,
-      required this.verse,
-      required this.vid});
+      {@JsonKey(name: 'book_id') this.bookId,
+      @JsonKey(name: 'book_name') this.bookName,
+      this.chapter,
+      this.text,
+      this.verse});
 
   factory _$_VerseDto.fromJson(Map<String, dynamic> json) =>
       _$$_VerseDtoFromJson(json);
 
   @override
   @JsonKey(name: 'book_id')
-  final String bookId;
+  final String? bookId;
   @override
   @JsonKey(name: 'book_name')
-  final String bookName;
+  final String? bookName;
   @override
-  final int chapter;
+  final int? chapter;
   @override
-  final String text;
+  final String? text;
   @override
-  final int verse;
-  @override
-  final String vid;
+  final int? verse;
 
   @override
   String toString() {
-    return 'VerseDto(bookId: $bookId, bookName: $bookName, chapter: $chapter, text: $text, verse: $verse, vid: $vid)';
+    return 'VerseDto(bookId: $bookId, bookName: $bookName, chapter: $chapter, text: $text, verse: $verse)';
   }
 
   @override
@@ -205,14 +189,13 @@ class _$_VerseDto implements _VerseDto {
                 other.bookName == bookName) &&
             (identical(other.chapter, chapter) || other.chapter == chapter) &&
             (identical(other.text, text) || other.text == text) &&
-            (identical(other.verse, verse) || other.verse == verse) &&
-            (identical(other.vid, vid) || other.vid == vid));
+            (identical(other.verse, verse) || other.verse == verse));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, bookId, bookName, chapter, text, verse, vid);
+      Object.hash(runtimeType, bookId, bookName, chapter, text, verse);
 
   @JsonKey(ignore: true)
   @override
@@ -230,29 +213,26 @@ class _$_VerseDto implements _VerseDto {
 
 abstract class _VerseDto implements VerseDto {
   factory _VerseDto(
-      {@JsonKey(name: 'book_id') required final String bookId,
-      @JsonKey(name: 'book_name') required final String bookName,
-      required final int chapter,
-      required final String text,
-      required final int verse,
-      required final String vid}) = _$_VerseDto;
+      {@JsonKey(name: 'book_id') final String? bookId,
+      @JsonKey(name: 'book_name') final String? bookName,
+      final int? chapter,
+      final String? text,
+      final int? verse}) = _$_VerseDto;
 
   factory _VerseDto.fromJson(Map<String, dynamic> json) = _$_VerseDto.fromJson;
 
   @override
   @JsonKey(name: 'book_id')
-  String get bookId;
+  String? get bookId;
   @override
   @JsonKey(name: 'book_name')
-  String get bookName;
+  String? get bookName;
   @override
-  int get chapter;
+  int? get chapter;
   @override
-  String get text;
+  String? get text;
   @override
-  int get verse;
-  @override
-  String get vid;
+  int? get verse;
   @override
   @JsonKey(ignore: true)
   _$$_VerseDtoCopyWith<_$_VerseDto> get copyWith =>

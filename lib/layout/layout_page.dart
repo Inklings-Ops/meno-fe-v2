@@ -112,19 +112,13 @@ class _Layout extends HookConsumerWidget {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           layoutTabRouter.value = tabsRouter;
         });
-        void onAvatarPressed() {
-          if (role == Role.admin) {
-            tabsRouter.setActiveIndex(3);
-          } else {
-            AutoRouter.of(context).push(const GuestProfileRoute());
-          }
-        }
+        void onAvatarPressed() => tabsRouter.setActiveIndex(3);
 
         switch (tabsRouter.activeIndex) {
           case 0:
             return HomeAppBar(onAvatarPressed: onAvatarPressed);
           case 1:
-            return const BibleAppBar();
+            return BibleAppBar(onAvatarPressed: onAvatarPressed);
           case 3:
             return const ProfileAppBar();
           default:

@@ -28,7 +28,7 @@ class HomePage extends HookConsumerWidget {
       return null;
     });
 
-    if (ref.read(roleProvider).value == Role.guest) {
+    if (ref.watch(roleProvider).value == Role.guest) {
       return _GuestHome(goTo: goTo);
     }
 

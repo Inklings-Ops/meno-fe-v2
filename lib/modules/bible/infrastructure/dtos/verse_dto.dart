@@ -14,12 +14,11 @@ part 'verse_dto.g.dart';
 )
 class VerseDto with _$VerseDto {
   factory VerseDto({
-    @JsonKey(name: 'book_id') required String bookId,
-    @JsonKey(name: 'book_name') required String bookName,
-    required int chapter,
-    required String text,
-    required int verse,
-    required String vid,
+    @JsonKey(name: 'book_id') String? bookId,
+    @JsonKey(name: 'book_name') String? bookName,
+    int? chapter,
+    String? text,
+    int? verse,
   }) = _VerseDto;
 
   factory VerseDto.fromDomain(Verse v) {
@@ -29,7 +28,6 @@ class VerseDto with _$VerseDto {
       chapter: v.chapter,
       text: v.text,
       verse: v.verse,
-      vid: v.vid,
     );
   }
 

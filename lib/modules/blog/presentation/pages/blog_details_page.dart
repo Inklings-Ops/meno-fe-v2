@@ -61,7 +61,7 @@ class BlogDetailsPage extends StatelessWidget {
                                 child: AutoSizeText(
                                   'A Call to Abide',
                                   maxLines: 2,
-                                  minFontSize: 18,
+                                  // minFontSize: 18,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,

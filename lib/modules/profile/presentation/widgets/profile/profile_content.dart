@@ -1,7 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
@@ -84,17 +84,7 @@ class ProfileContent extends ConsumerWidget {
               MSize.vS(30),
               ProfileRecentBroadcastList(profile: profile),
             ] else
-              Container(
-                constraints: BoxConstraints(
-                  minHeight: MSize.h(60),
-                  maxWidth: MSize.sw(1),
-                  minWidth: MSize.sw(1),
-                ),
-                margin: MSize.pSymmetric(h: 18, v: 20),
-                decoration: BoxDecoration(
-                  color: MColors.primaryLight,
-                  borderRadius: BorderRadius.circular(MSize.r(20)),
-                ),
+              _ListContainer(
                 child: ListView(
                   padding: MSize.pAll(16),
                   primary: false,
@@ -105,30 +95,63 @@ class ProfileContent extends ConsumerWidget {
                       trailing: const Icon(MIcons.InfoCircle1),
                       onTap: () => router.push(const AboutRoute()),
                     ),
-                    const Divider(),
                     ListTile(
                       title: const Text('Terms & Conditions'),
                       trailing: const Icon(MIcons.Paper1),
                       onTap: () => router.push(const TermsAndConditionsRoute()),
                     ),
-                    const Divider(),
                     ListTile(
                       title: const Text('Privacy Policy'),
                       trailing: const Icon(MIcons.Paper1),
                       onTap: () => router.push(const PrivacyPolicyRoute()),
                     ),
-                    const Divider(),
-                    ListTile(
-                      title: const Text('Logout'),
-                      trailing: const Icon(MIcons.Logout1),
-                      onTap: () {},
-                    ),
                   ],
                 ),
               ),
+            _ListContainer(
+              child: ListView(
+                padding: MSize.pAll(16),
+                primary: false,
+                shrinkWrap: true,
+                children: [
+                  ListTile(
+                    title: const Text('Delete Account'),
+                    trailing: const Icon(MIcons.Paper1),
+                    onTap: () => router.push(const PrivacyPolicyRoute()),
+                  ),
+                  ListTile(
+                    title: const Text('Logout'),
+                    trailing: const Icon(MIcons.Logout1),
+                    onTap: ref.watch(authProvider.notifier).logoutPartially,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ListContainer extends StatelessWidget {
+  const _ListContainer({Key? key, required this.child}) : super(key: key);
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: MSize.h(60),
+        maxWidth: MSize.sw(1),
+        minWidth: MSize.sw(1),
+      ),
+      margin: MSize.pSymmetric(h: 18, v: 20),
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(244, 240, 255, 0.4),
+        borderRadius: BorderRadius.circular(MSize.r(20)),
+      ),
+      child: child,
     );
   }
 }

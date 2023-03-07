@@ -16,12 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Verse {
-  String get bookId => throw _privateConstructorUsedError;
-  String get bookName => throw _privateConstructorUsedError;
-  int get chapter => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-  int get verse => throw _privateConstructorUsedError;
-  String get vid => throw _privateConstructorUsedError;
+  String? get bookId => throw _privateConstructorUsedError;
+  String? get bookName => throw _privateConstructorUsedError;
+  int? get chapter => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
+  int? get verse => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VerseCopyWith<Verse> get copyWith => throw _privateConstructorUsedError;
@@ -33,12 +32,11 @@ abstract class $VerseCopyWith<$Res> {
       _$VerseCopyWithImpl<$Res, Verse>;
   @useResult
   $Res call(
-      {String bookId,
-      String bookName,
-      int chapter,
-      String text,
-      int verse,
-      String vid});
+      {String? bookId,
+      String? bookName,
+      int? chapter,
+      String? text,
+      int? verse});
 }
 
 /// @nodoc
@@ -54,38 +52,33 @@ class _$VerseCopyWithImpl<$Res, $Val extends Verse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bookId = null,
-    Object? bookName = null,
-    Object? chapter = null,
-    Object? text = null,
-    Object? verse = null,
-    Object? vid = null,
+    Object? bookId = freezed,
+    Object? bookName = freezed,
+    Object? chapter = freezed,
+    Object? text = freezed,
+    Object? verse = freezed,
   }) {
     return _then(_value.copyWith(
-      bookId: null == bookId
+      bookId: freezed == bookId
           ? _value.bookId
           : bookId // ignore: cast_nullable_to_non_nullable
-              as String,
-      bookName: null == bookName
+              as String?,
+      bookName: freezed == bookName
           ? _value.bookName
           : bookName // ignore: cast_nullable_to_non_nullable
-              as String,
-      chapter: null == chapter
+              as String?,
+      chapter: freezed == chapter
           ? _value.chapter
           : chapter // ignore: cast_nullable_to_non_nullable
-              as int,
-      text: null == text
+              as int?,
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      verse: null == verse
+              as String?,
+      verse: freezed == verse
           ? _value.verse
           : verse // ignore: cast_nullable_to_non_nullable
-              as int,
-      vid: null == vid
-          ? _value.vid
-          : vid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
     ) as $Val);
   }
 }
@@ -97,12 +90,11 @@ abstract class _$$_VerseCopyWith<$Res> implements $VerseCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String bookId,
-      String bookName,
-      int chapter,
-      String text,
-      int verse,
-      String vid});
+      {String? bookId,
+      String? bookName,
+      int? chapter,
+      String? text,
+      int? verse});
 }
 
 /// @nodoc
@@ -114,38 +106,33 @@ class __$$_VerseCopyWithImpl<$Res> extends _$VerseCopyWithImpl<$Res, _$_Verse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bookId = null,
-    Object? bookName = null,
-    Object? chapter = null,
-    Object? text = null,
-    Object? verse = null,
-    Object? vid = null,
+    Object? bookId = freezed,
+    Object? bookName = freezed,
+    Object? chapter = freezed,
+    Object? text = freezed,
+    Object? verse = freezed,
   }) {
     return _then(_$_Verse(
-      bookId: null == bookId
+      bookId: freezed == bookId
           ? _value.bookId
           : bookId // ignore: cast_nullable_to_non_nullable
-              as String,
-      bookName: null == bookName
+              as String?,
+      bookName: freezed == bookName
           ? _value.bookName
           : bookName // ignore: cast_nullable_to_non_nullable
-              as String,
-      chapter: null == chapter
+              as String?,
+      chapter: freezed == chapter
           ? _value.chapter
           : chapter // ignore: cast_nullable_to_non_nullable
-              as int,
-      text: null == text
+              as int?,
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      verse: null == verse
+              as String?,
+      verse: freezed == verse
           ? _value.verse
           : verse // ignore: cast_nullable_to_non_nullable
-              as int,
-      vid: null == vid
-          ? _value.vid
-          : vid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
     ));
   }
 }
@@ -154,29 +141,22 @@ class __$$_VerseCopyWithImpl<$Res> extends _$VerseCopyWithImpl<$Res, _$_Verse>
 
 class _$_Verse implements _Verse {
   const _$_Verse(
-      {required this.bookId,
-      required this.bookName,
-      required this.chapter,
-      required this.text,
-      required this.verse,
-      required this.vid});
+      {this.bookId, this.bookName, this.chapter, this.text, this.verse});
 
   @override
-  final String bookId;
+  final String? bookId;
   @override
-  final String bookName;
+  final String? bookName;
   @override
-  final int chapter;
+  final int? chapter;
   @override
-  final String text;
+  final String? text;
   @override
-  final int verse;
-  @override
-  final String vid;
+  final int? verse;
 
   @override
   String toString() {
-    return 'Verse(bookId: $bookId, bookName: $bookName, chapter: $chapter, text: $text, verse: $verse, vid: $vid)';
+    return 'Verse(bookId: $bookId, bookName: $bookName, chapter: $chapter, text: $text, verse: $verse)';
   }
 
   @override
@@ -189,13 +169,12 @@ class _$_Verse implements _Verse {
                 other.bookName == bookName) &&
             (identical(other.chapter, chapter) || other.chapter == chapter) &&
             (identical(other.text, text) || other.text == text) &&
-            (identical(other.verse, verse) || other.verse == verse) &&
-            (identical(other.vid, vid) || other.vid == vid));
+            (identical(other.verse, verse) || other.verse == verse));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, bookId, bookName, chapter, text, verse, vid);
+      Object.hash(runtimeType, bookId, bookName, chapter, text, verse);
 
   @JsonKey(ignore: true)
   @override
@@ -206,25 +185,22 @@ class _$_Verse implements _Verse {
 
 abstract class _Verse implements Verse {
   const factory _Verse(
-      {required final String bookId,
-      required final String bookName,
-      required final int chapter,
-      required final String text,
-      required final int verse,
-      required final String vid}) = _$_Verse;
+      {final String? bookId,
+      final String? bookName,
+      final int? chapter,
+      final String? text,
+      final int? verse}) = _$_Verse;
 
   @override
-  String get bookId;
+  String? get bookId;
   @override
-  String get bookName;
+  String? get bookName;
   @override
-  int get chapter;
+  int? get chapter;
   @override
-  String get text;
+  String? get text;
   @override
-  int get verse;
-  @override
-  String get vid;
+  int? get verse;
   @override
   @JsonKey(ignore: true)
   _$$_VerseCopyWith<_$_Verse> get copyWith =>

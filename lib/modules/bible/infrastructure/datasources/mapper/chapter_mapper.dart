@@ -10,7 +10,7 @@ class ChapterMapper {
     if (dto == null) return null;
 
     List<VerseDto> verses = List.from(dto.verses);
-    verses.sort((a, b) => a.verse.compareTo(b.verse));
+    verses.sort((a, b) => a.verse!.compareTo(b.verse!));
 
     return Chapter(
       reference: dto.reference,

@@ -13,7 +13,6 @@ class VerseMapper {
       chapter: dto.chapter,
       text: dto.text,
       verse: dto.verse,
-      vid: dto.vid,
     );
   }
 }
