@@ -28,24 +28,34 @@ class _RecentBroadcastListPageState
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: const AutoLeadingButton(),
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0.0,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(MSize.h(30)),
-          child: const MSectionTitle(
-            title: 'Recent Broadcasts',
-            showSeeAllButton: false,
-            addSideMargin: true,
+        leadingWidth: MSize.w(70),
+        leading: GestureDetector(
+          onTap: () => AutoRouter.of(context).pop(),
+          child: Padding(
+            padding: MSize.pOnly(l: 10.0),
+            child: Row(
+              children: const [
+                Icon(Icons.chevron_left),
+                Text('Back', style: TextStyle(fontWeight: FontWeight.w500))
+              ],
+            ),
           ),
         ),
       ),
       body: ListView(
         children: [
+          const MSectionTitle(
+            title: 'Recent Broadcasts',
+            addSideMargin: true,
+            showSeeAllButton: false,
+          ),
+          MSize.vS(10),
           MSize.vS(30),
           Container(
             height: MSize.h(37),
-            padding: MSize.pSymmetric(h: 16),
+            padding: MSize.pSymmetric(h: 18),
             child: TextFormField(
               decoration: InputDecoration(
                 hintText: 'Search your recent broadcasts',
@@ -85,7 +95,7 @@ class _RecentBroadcastListPageState
           //   ),
           // ),
           MSize.vS(20),
-          if (broadcasts.isEmpty)
+          if (broadcasts == null || broadcasts.isEmpty)
             GridView.count(
               physics: const NeverScrollableScrollPhysics(),
               primary: false,

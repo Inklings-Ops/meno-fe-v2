@@ -24,6 +24,10 @@ class _ProfileRecentBroadcastListState
   Widget build(BuildContext context) {
     final broadcasts = ref.watch(broadcastProvider).currentUserBroadcasts;
 
+    if (broadcasts == null) {
+      return const SizedBox();
+    }
+
     return Column(
       children: [
         MSectionTitle(

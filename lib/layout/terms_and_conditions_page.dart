@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/layout/widgets/m_app_bar.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 
 class TermsAndConditionsPage extends ConsumerWidget {
@@ -15,11 +14,22 @@ class TermsAndConditionsPage extends ConsumerWidget {
     final termsOfUse = ref.watch(termsOfUseProvider);
 
     return Scaffold(
-      appBar: const MAppBar(
-        title: 'Terms & Conditions',
-        showBorder: false,
-        showAvatar: false,
-        leading: AutoLeadingButton(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0.0,
+        leadingWidth: MSize.w(70),
+        leading: GestureDetector(
+          onTap: () => AutoRouter.of(context).pop(),
+          child: Padding(
+            padding: MSize.pOnly(l: 10.0),
+            child: Row(
+              children: const [
+                Icon(Icons.chevron_left),
+                Text('Back', style: TextStyle(fontWeight: FontWeight.w500))
+              ],
+            ),
+          ),
+        ),
       ),
       body: ListView.builder(
         padding: MSize.pSymmetric(h: 20, v: 16),

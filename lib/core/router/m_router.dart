@@ -31,6 +31,8 @@ import 'package:meno_fe_v2/modules/profile/presentation/pages/guest_profile_page
 import 'package:meno_fe_v2/modules/profile/presentation/pages/other_user_profile_page.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/profile_page.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/recent_broadcasts_list_page.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/pages/security_page.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/pages/settings_page.dart';
 import 'package:meno_fe_v2/splash_page.dart';
 
 part 'm_router.gr.dart';
@@ -73,6 +75,8 @@ part 'm_router.gr.dart';
     AutoRoute(page: BlogDetailsPage),
     AutoRoute(page: TermsAndConditionsPage),
     AutoRoute(page: PrivacyPolicyPage),
+    AutoRoute(page: SettingsPage),
+    AutoRoute(page: SecurityPage),
   ],
 )
 class MRouter extends _$MRouter {

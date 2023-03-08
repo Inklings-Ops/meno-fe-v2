@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
+import 'package:skeletons/skeletons.dart';
 
 class MSectionTitle extends StatelessWidget {
   final String? title;
@@ -31,28 +32,84 @@ class MSectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (loading) {
+      return Container(
+        alignment: Alignment.centerLeft,
+        margin: addSideMargin ? MSize.pSymmetric(h: 18.0) : null,
+        constraints: BoxConstraints(minHeight: MSize.fS(20)),
+        child: Row(
+          children: [
+            SkeletonLine(
+              style: SkeletonLineStyle(
+                height: MSize.h(20),
+                width: MSize.w(4),
+              ),
+            ),
+            MSize.hS(6),
+            SkeletonLine(
+              style: SkeletonLineStyle(
+                height: MSize.h(20),
+                width: MSize.sw(0.5),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Container(
-      alignment: Alignment.centerLeft,
       margin: addSideMargin ? MSize.pSymmetric(h: 16.0) : null,
-      constraints: BoxConstraints(minHeight: MSize.fS(20)),
-      decoration: BoxDecoration(
-        border: Border(
-          left: BorderSide(
-            color: MColors.danger,
-            width: MSize.r(4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            constraints: BoxConstraints(minHeight: MSize.fS(20)),
+            decoration: BoxDecoration(
+              border: !showBorder
+                  ? null
+                  : Border(
+                      left: BorderSide(
+                        color: MColors.danger,
+                        width: MSize.r(4),
+                      ),
+                    ),
+            ),
+            padding: MSize.pOnly(l: 6),
+            child: AutoSizeText(
+              title!,
+              minFontSize: 19,
+              maxFontSize: 22,
+              style: TextStyle(
+                height: MSize.r(1),
+                fontWeight: FontWeight.bold,
+                color: textColor,
+              ),
+            ),
           ),
-        ),
-      ),
-      padding: MSize.pOnly(l: 6),
-      child: AutoSizeText(
-        title!,
-        minFontSize: 19,
-        maxFontSize: 22,
-        style: TextStyle(
-          height: MSize.r(1),
-          fontWeight: FontWeight.bold,
-          color: textColor,
-        ),
+          if (!showSeeAllButton)
+            const SizedBox()
+          else if (loading)
+            SkeletonLine(
+              style: SkeletonLineStyle(
+                height: MSize.fS(14),
+                width: MSize.w(40),
+              ),
+            )
+          else
+            GestureDetector(
+              onTap: seeAllAction,
+              child: Text(
+                'See All',
+                style: TextStyle(
+                  fontSize: MSize.fS(14),
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }

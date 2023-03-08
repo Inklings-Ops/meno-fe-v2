@@ -184,6 +184,18 @@ class _$MRouter extends RootStackRouter {
         child: const PrivacyPolicyPage(),
       );
     },
+    SettingsRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const SettingsPage(),
+      );
+    },
+    SecurityRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const SecurityPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return AdaptivePage<dynamic>(
@@ -364,6 +376,14 @@ class _$MRouter extends RootStackRouter {
         RouteConfig(
           PrivacyPolicyRoute.name,
           path: '/privacy-policy-page',
+        ),
+        RouteConfig(
+          SettingsRoute.name,
+          path: '/settings-page',
+        ),
+        RouteConfig(
+          SecurityRoute.name,
+          path: '/security-page',
         ),
       ];
 }
@@ -786,6 +806,30 @@ class PrivacyPolicyRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'PrivacyPolicyRoute';
+}
+
+/// generated route for
+/// [SettingsPage]
+class SettingsRoute extends PageRouteInfo<void> {
+  const SettingsRoute()
+      : super(
+          SettingsRoute.name,
+          path: '/settings-page',
+        );
+
+  static const String name = 'SettingsRoute';
+}
+
+/// generated route for
+/// [SecurityPage]
+class SecurityRoute extends PageRouteInfo<void> {
+  const SecurityRoute()
+      : super(
+          SecurityRoute.name,
+          path: '/security-page',
+        );
+
+  static const String name = 'SecurityRoute';
 }
 
 /// generated route for

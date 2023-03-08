@@ -10,7 +10,6 @@ import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/edit_profile_button.dart';
-import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/go_pro_button.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_activity_count_widget.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_recent_broadcasts_list.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_subscribe_button.dart';
@@ -27,12 +26,11 @@ class ProfileContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final role = ref.watch(roleProvider).value;
-    final isAdmin = role == Role.admin;
+    final isAdmin = ref.watch(roleProvider).value == Role.admin;
     final router = AutoRouter.of(context);
 
     return SingleChildScrollView(
-      padding: MSize.pFromLTRB(0, 30, 0, 16),
+      padding: isAdmin ? MSize.pOnly(t: 80) : MSize.pFromLTRB(0, 0, 0, 16),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,7 +81,7 @@ class ProfileContent extends ConsumerWidget {
               const ProfileActivityCountWidget(),
               MSize.vS(30),
               ProfileRecentBroadcastList(profile: profile),
-            ] else
+            ] else ...[
               _ListContainer(
                 child: ListView(
                   padding: MSize.pAll(16),
@@ -108,25 +106,26 @@ class ProfileContent extends ConsumerWidget {
                   ],
                 ),
               ),
-            _ListContainer(
-              child: ListView(
-                padding: MSize.pAll(16),
-                primary: false,
-                shrinkWrap: true,
-                children: [
-                  ListTile(
-                    title: const Text('Delete Account'),
-                    trailing: const Icon(MIcons.Paper1),
-                    onTap: () => router.push(const PrivacyPolicyRoute()),
-                  ),
-                  ListTile(
-                    title: const Text('Logout'),
-                    trailing: const Icon(MIcons.Logout1),
-                    onTap: ref.watch(authProvider.notifier).logoutPartially,
-                  ),
-                ],
+              _ListContainer(
+                child: ListView(
+                  padding: MSize.pAll(16),
+                  primary: false,
+                  shrinkWrap: true,
+                  children: [
+                    ListTile(
+                      title: const Text('Delete Account'),
+                      trailing: const Icon(MIcons.Paper1),
+                      onTap: () => router.push(const PrivacyPolicyRoute()),
+                    ),
+                    ListTile(
+                      title: const Text('Logout'),
+                      trailing: const Icon(MIcons.Logout1),
+                      onTap: ref.watch(authProvider.notifier).logoutPartially,
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ]
           ],
         ),
       ),
@@ -163,10 +162,10 @@ class _AuthUserActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const EditProfileButton(),
-        MSize.hS(13),
-        const GoProButton(),
+      children: const [
+        EditProfileButton(),
+        // MSize.hS(13),
+        // const GoProButton(),
       ],
     );
   }

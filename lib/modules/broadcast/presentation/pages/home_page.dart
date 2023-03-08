@@ -75,7 +75,7 @@ class HomePage extends HookConsumerWidget {
         },
       ),
       child: SingleChildScrollView(
-        padding: MSize.pOnly(t: 20, b: 20),
+        padding: MSize.pOnly(t: 100, b: 20),
         child: Column(
           children: [
             LiveForYouSection(onDiscoverPressed: () => goTo(1)),

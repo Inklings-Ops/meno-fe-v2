@@ -29,34 +29,22 @@ class _MBottomNavigationBarState extends ConsumerState<MBottomNavigationBar> {
   Future<void> onCreateBroadcast() async {
     final scaffoldContext = ScaffoldMessenger.of(context);
 
-    await [Permission.microphone].request();
-    PermissionStatus status = await Permission.microphone.status;
-
-    switch (status) {
-      case PermissionStatus.limited:
-      case PermissionStatus.granted:
-        await Future.delayed(Duration.zero);
-
-        if (context.mounted) {
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            elevation: 0,
-            builder: (context) => const StartBroadcastBottomSheet(),
-          );
-        }
-        return;
-      case PermissionStatus.denied:
-      case PermissionStatus.permanentlyDenied:
-      case PermissionStatus.restricted:
-        scaffoldContext.showSnackBar(
-          const SnackBar(
-            content: Text('Please allow microphone permission for Meno'),
-          ),
+    final status = await Permission.microphone.request();
+    if (status.isGranted || status.isLimited) {
+      if (context.mounted) {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          elevation: 0,
+          builder: (context) => const StartBroadcastBottomSheet(),
         );
-        return;
-      default:
-        return;
+      }
+    } else {
+      scaffoldContext.showSnackBar(
+        const SnackBar(
+          content: Text('Please allow microphone permission for Menō'),
+        ),
+      );
     }
   }
 

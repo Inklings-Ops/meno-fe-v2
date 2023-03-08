@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/layout/widgets/m_app_bar.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 
 class PrivacyPolicyPage extends ConsumerWidget {
@@ -15,14 +14,26 @@ class PrivacyPolicyPage extends ConsumerWidget {
     final privacyPolicy = ref.watch(privacyPolicyProvider);
 
     return Scaffold(
-      appBar: const MAppBar(
-        title: 'Privacy Policy',
-        showBorder: false,
-        showAvatar: false,
-        leading: AutoLeadingButton(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0.0,
+        leadingWidth: MSize.w(70),
+        leading: GestureDetector(
+          onTap: () => AutoRouter.of(context).pop(),
+          child: Padding(
+            padding: MSize.pOnly(l: 10.0),
+            child: Row(
+              children: const [
+                Icon(Icons.chevron_left),
+                Text('Back', style: TextStyle(fontWeight: FontWeight.w500))
+              ],
+            ),
+          ),
+        ),
       ),
       body: ListView.builder(
         shrinkWrap: true,
+        primary: false,
         padding: MSize.pSymmetric(h: 20, v: 16),
         itemCount: privacyPolicy.length,
         itemBuilder: (context, index) {

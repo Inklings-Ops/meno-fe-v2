@@ -7,7 +7,6 @@ import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/di/injection.dart';
-import 'package:meno_fe_v2/layout/coming_soon_page.dart';
 import 'package:meno_fe_v2/modules/bible/presentation/pages/bible_page.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/timer/timer_notifier.dart';
@@ -15,6 +14,7 @@ import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_tab_view.dart';
 import 'package:meno_fe_v2/services/agora_service.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class BroadcastPage extends StatefulHookConsumerWidget {
   const BroadcastPage({super.key, required this.broadcast});
@@ -30,7 +30,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
   @override
   Widget build(BuildContext context) {
     final tinker = useSingleTickerProvider();
-    final tabController = useTabController(initialLength: 4, vsync: tinker);
+    final tabController = useTabController(initialLength: 2, vsync: tinker);
 
     final timerEvent = ref.watch(timerProvider.notifier);
     final socketEvent = ref.read(socketDataProvider.notifier);
@@ -83,18 +83,18 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
                     height: MSize.h(24),
                     child: const Tab(text: 'Broadcast'),
                   ),
-                  SizedBox(
-                    height: MSize.h(24),
-                    child: const Tab(text: 'Notes'),
-                  ),
+                  // SizedBox(
+                  //   height: MSize.h(24),
+                  //   child: const Tab(text: 'Notes'),
+                  // ),
                   SizedBox(
                     height: MSize.h(24),
                     child: const Tab(text: 'Live Bible'),
                   ),
-                  SizedBox(
-                    height: MSize.h(24),
-                    child: const Tab(text: 'Chat'),
-                  ),
+                  // SizedBox(
+                  //   height: MSize.h(24),
+                  //   child: const Tab(text: 'Chat'),
+                  // ),
                 ],
               ),
             ),
@@ -114,9 +114,9 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
                 },
                 onStart: onStart,
               ),
-              const ComingSoonPage(),
+              // const ComingSoonPage(),
               const BiblePage(),
-              const ComingSoonPage(),
+              // const ComingSoonPage(),
             ],
           ),
         ),
@@ -181,7 +181,25 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
 
   Future<void> onMute(bool isMute) async => _agora.muteAudio(!isMute);
 
-  void onStart() {
-    ref.read(broadcastProvider.notifier).startPressed(widget.broadcast.id);
+  Future<void> onStart() async {
+    final scaffoldContext = ScaffoldMessenger.of(context);
+
+    if (await isMicrophoneInUse()) {
+      scaffoldContext.showSnackBar(
+        const SnackBar(content: Text('Your microphone is already in use.')),
+      );
+    } else {
+      ref.read(broadcastProvider.notifier).startPressed(widget.broadcast.id);
+    }
+  }
+
+  Future<bool> isMicrophoneInUse() async {
+    final permissionStatus = await Permission.microphone.status;
+    if (permissionStatus != PermissionStatus.granted) {
+      final result = await Permission.microphone.request();
+      return result == PermissionStatus.granted;
+    } else {
+      return true;
+    }
   }
 }

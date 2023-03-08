@@ -41,7 +41,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
       onRefresh: onRefresh,
       onLoading: onLoading,
       enablePullDown: true,
-      enablePullUp: true,
+      enablePullUp: false,
       header: CustomHeader(
         builder: (BuildContext context, RefreshStatus? status) {
           return Container(
@@ -75,7 +75,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
       child: state.whenOrNull(
         loading: () => const ProfileContentSkeleton(),
         authUserLoaded: (profile) => ProfileContent(profile: profile),
-        otherUserLoaded: (profile) => const ProfileContentSkeleton(),
+        otherUserLoaded: (_) => const ProfileContentSkeleton(),
         failed: () => const ProfileContentSkeleton(),
       ),
     );

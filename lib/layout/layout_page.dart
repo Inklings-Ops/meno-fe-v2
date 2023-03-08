@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
+import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/layout/loading_page.dart';
@@ -23,15 +24,8 @@ import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_
 import 'package:meno_fe_v2/services/shared_preferences_service.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-const adminBottomNavItems = [
+const items = [
   BottomNavigationBarItem(label: 'Home', icon: Icon(MIcons.Home1)),
-  BottomNavigationBarItem(label: 'Search', icon: Icon(MIcons.Search1)),
-  BottomNavigationBarItem(label: 'Notes', icon: Icon(MIcons.Paper1)),
-  BottomNavigationBarItem(label: 'Profile', icon: Icon(MIcons.Profile1)),
-];
-
-const guestBottomNavItems = [
-  BottomNavigationBarItem(label: 'Home', icon: Icon(PhosphorIcons.houseSimple)),
   BottomNavigationBarItem(label: 'Bible', icon: Icon(PhosphorIcons.book)),
   BottomNavigationBarItem(label: 'Blog', icon: Icon(PhosphorIcons.eyeglasses)),
   BottomNavigationBarItem(label: 'Profile', icon: Icon(MIcons.Profile1)),
@@ -92,8 +86,8 @@ class _Layout extends HookConsumerWidget {
 
     final adminRoutes = <PageRouteInfo<dynamic>>[
       HomeRoute(goTo: (v) => layoutTabRouter.value?.setActiveIndex(v)),
-      const DiscoverRoute(),
-      const NotesRoute(),
+      BibleRoute(),
+      const BlogRoute(),
       const ProfileRoute(),
     ];
 
@@ -106,7 +100,7 @@ class _Layout extends HookConsumerWidget {
 
     return AutoTabsScaffold(
       scaffoldKey: MKeys.layoutScaffoldKey,
-      // extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: role == Role.admin,
       routes: role == Role.admin ? adminRoutes : guestRoutes,
       appBarBuilder: (context, tabsRouter) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -120,7 +114,11 @@ class _Layout extends HookConsumerWidget {
           case 1:
             return BibleAppBar(onAvatarPressed: onAvatarPressed);
           case 3:
-            return const ProfileAppBar();
+            if (role == Role.guest) {
+              return AppBar(toolbarHeight: MSize.r(0));
+            } else {
+              return const ProfileAppBar();
+            }
           default:
             return MAppBar(
               title: tabsRouter.current.name.split('R')[0],
@@ -132,7 +130,7 @@ class _Layout extends HookConsumerWidget {
       bottomNavigationBuilder: (context, tabsRouter) => MBottomNavigationBar(
         currentIndex: tabsRouter.activeIndex,
         onTap: tabsRouter.setActiveIndex,
-        items: role == Role.guest ? guestBottomNavItems : adminBottomNavItems,
+        items: items,
       ),
     );
   }
