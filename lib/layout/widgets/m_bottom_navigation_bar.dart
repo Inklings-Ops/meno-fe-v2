@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/bottom_sheets/start_broadcast_bottom_sheet.dart';
@@ -26,28 +27,6 @@ class MBottomNavigationBar extends ConsumerStatefulWidget {
 }
 
 class _MBottomNavigationBarState extends ConsumerState<MBottomNavigationBar> {
-  Future<void> onCreateBroadcast() async {
-    final scaffoldContext = ScaffoldMessenger.of(context);
-
-    final status = await Permission.microphone.request();
-    if (status.isGranted || status.isLimited) {
-      if (context.mounted) {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          elevation: 0,
-          builder: (context) => const StartBroadcastBottomSheet(),
-        );
-      }
-    } else {
-      scaffoldContext.showSnackBar(
-        const SnackBar(
-          content: Text('Please allow microphone permission for Menō'),
-        ),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final role = ref.watch(roleProvider).value;
@@ -60,7 +39,7 @@ class _MBottomNavigationBarState extends ConsumerState<MBottomNavigationBar> {
         adminTiles.add(
           MBottomNavigationBarItem(
             selected: false,
-            onTap: onCreateBroadcast,
+            onTap: () => onCreateBroadcast(context),
             item: const BottomNavigationBarItem(
               icon: Icon(MIcons.Voice3),
               label: 'Create',
@@ -103,5 +82,30 @@ class _MBottomNavigationBarState extends ConsumerState<MBottomNavigationBar> {
         children: role == Role.admin ? adminTiles : guestTiles,
       ),
     );
+  }
+
+  Future<void> onCreateBroadcast(BuildContext context) async {
+    final scaffoldContext = ScaffoldMessenger.of(context);
+
+    final status = await Permission.microphone.request();
+    Logger().wtf(status);
+    if (status.isGranted || status.isLimited) {
+      if (context.mounted) {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          elevation: 0,
+          builder: (context) => const StartBroadcastBottomSheet(),
+        );
+      }
+    } else if (status == PermissionStatus.permanentlyDenied) {
+      openAppSettings();
+    } else {
+      scaffoldContext.showSnackBar(
+        const SnackBar(
+          content: Text('Please allow microphone permission for Menō'),
+        ),
+      );
+    }
   }
 }
