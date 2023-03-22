@@ -266,4 +266,24 @@ class AuthFacade implements IAuthFacade {
       }
     }
   }
+
+  @override
+  Future<Either<AuthFailure, Unit>> deleteUser() async {
+    try {
+      final res = await _remote.delete();
+      if (res.statusCode == 201) {
+        await _local.deleteAll();
+        return right(unit);
+      } else {
+        return left(const AuthFailure.message('Trouble deleting user'));
+      }
+    } on DioError catch (error) {
+      final message = displayAuthError(error);
+      if (message != null) {
+        return left(AuthFailure.message(message));
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
+  }
 }

@@ -29,7 +29,7 @@ import 'package:meno_fe_v2/modules/notes/presentation/pages/notes_page.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/guest_profile_page.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/other_user_profile_page.dart';
-import 'package:meno_fe_v2/modules/profile/presentation/pages/profile_page.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/pages/admin_profile_page.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/recent_broadcasts_list_page.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/security_page.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/pages/settings_page.dart';
@@ -60,7 +60,7 @@ part 'm_router.gr.dart';
         AutoRoute(page: GuestHomePage),
         AutoRoute(page: DiscoverPage),
         AutoRoute(page: NotesPage),
-        AutoRoute(page: ProfilePage),
+        AutoRoute(page: AdminProfilePage),
         AutoRoute(page: BlogPage),
         AutoRoute(page: GuestProfilePage),
         AutoRoute(page: BiblePage),

@@ -6,6 +6,7 @@ import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
+import 'package:meno_fe_v2/layout/widgets/delete_account_alert_dialog.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
@@ -29,8 +30,15 @@ class ProfileContent extends ConsumerWidget {
     final isAdmin = profile.role == Role.admin;
     final router = AutoRouter.of(context);
 
+    Future<bool> onDeleteAccount() async {
+      return await showDialog(
+        context: context,
+        builder: (context) => const DeleteAccountAlertDialog(),
+      );
+    }
+
     return SingleChildScrollView(
-      padding: isAdmin ? MSize.pOnly(t: 80) : MSize.pFromLTRB(0, 30, 0, 16),
+      padding: isAdmin ? MSize.pOnly(t: 0) : MSize.pFromLTRB(0, 30, 0, 16),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -89,6 +97,11 @@ class ProfileContent extends ConsumerWidget {
                   shrinkWrap: true,
                   children: [
                     ListTile(
+                      title: const Text('Edit Account'),
+                      trailing: const Icon(MIcons.Edit1),
+                      onTap: () async => showEditBottomSheet(context, ref),
+                    ),
+                    ListTile(
                       title: const Text('About'),
                       trailing: const Icon(MIcons.InfoCircle1),
                       onTap: () => router.push(const AboutRoute()),
@@ -115,7 +128,12 @@ class ProfileContent extends ConsumerWidget {
                     ListTile(
                       title: const Text('Delete Account'),
                       trailing: const Icon(MIcons.Paper1),
-                      onTap: () {},
+                      onTap: () async {
+                        final result = await onDeleteAccount();
+                        if (result) {
+                          ref.read(authProvider.notifier).deleteUser();
+                        }
+                      },
                     ),
                     ListTile(
                       title: const Text('Logout'),

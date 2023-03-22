@@ -90,12 +90,12 @@ class _AdminLayout extends HookWidget {
       HomeRoute(goTo: (v) => layoutTabRouter.value?.setActiveIndex(v)),
       BibleRoute(),
       const BlogRoute(),
-      const ProfileRoute(),
+      const AdminProfileRoute(),
     ];
 
     return AutoTabsScaffold(
       scaffoldKey: MKeys.layoutScaffoldKey,
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       routes: routes,
       appBarBuilder: (context, tabsRouter) {
         WidgetsBinding.instance.addPostFrameCallback((_) {

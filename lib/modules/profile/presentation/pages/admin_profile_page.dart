@@ -7,14 +7,15 @@ import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_content_skeleton.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class ProfilePage extends ConsumerStatefulWidget {
-  const ProfilePage({super.key});
+class AdminProfilePage extends ConsumerStatefulWidget {
+  const AdminProfilePage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ProfilePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AdminProfilePageState();
 }
 
-class _ProfilePageState extends ConsumerState<ProfilePage> {
+class _AdminProfilePageState extends ConsumerState<AdminProfilePage> {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 

@@ -91,4 +91,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     //   // state = const AuthState.passwordReset();
     // }
   }
+
+  Future<void> deleteUser() async {
+    await _facade.deleteUser().whenComplete(() {
+      state = const AuthState.unauthenticated();
+    });
+  }
 }

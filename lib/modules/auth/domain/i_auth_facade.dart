@@ -68,4 +68,7 @@ abstract class IAuthFacade {
     required IEmail email,
     required IOtp otp,
   });
+
+  /// Delete the currently logged in user;
+  Future<Either<AuthFailure, Unit>> deleteUser();
 }

@@ -228,10 +228,10 @@ class _$MRouter extends RootStackRouter {
         child: const NotesPage(),
       );
     },
-    ProfileRoute.name: (routeData) {
+    AdminProfileRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const ProfilePage(),
+        child: const AdminProfilePage(),
       );
     },
     BlogRoute.name: (routeData) {
@@ -331,8 +331,8 @@ class _$MRouter extends RootStackRouter {
               parent: LayoutRoute.name,
             ),
             RouteConfig(
-              ProfileRoute.name,
-              path: 'profile-page',
+              AdminProfileRoute.name,
+              path: 'admin-profile-page',
               parent: LayoutRoute.name,
             ),
             RouteConfig(
@@ -940,15 +940,15 @@ class NotesRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ProfilePage]
-class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute()
+/// [AdminProfilePage]
+class AdminProfileRoute extends PageRouteInfo<void> {
+  const AdminProfileRoute()
       : super(
-          ProfileRoute.name,
-          path: 'profile-page',
+          AdminProfileRoute.name,
+          path: 'admin-profile-page',
         );
 
-  static const String name = 'ProfileRoute';
+  static const String name = 'AdminProfileRoute';
 }
 
 /// generated route for
