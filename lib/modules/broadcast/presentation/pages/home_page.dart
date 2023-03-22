@@ -1,10 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
-import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
+import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/discover_meno_section.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/live_for_you_section.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/now_live_section.dart';
@@ -27,10 +27,6 @@ class HomePage extends HookConsumerWidget {
       });
       return null;
     });
-
-    if (ref.watch(roleProvider).value == Role.guest) {
-      return _GuestHome(goTo: goTo);
-    }
 
     return SmartRefresher(
       controller: _refreshController,
@@ -95,8 +91,8 @@ class HomePage extends HookConsumerWidget {
   }
 }
 
-class _GuestHome extends StatelessWidget {
-  const _GuestHome({Key? key, required this.goTo}) : super(key: key);
+class GuestHomePage extends StatelessWidget {
+  const GuestHomePage({Key? key, required this.goTo}) : super(key: key);
   final void Function(int value) goTo;
 
   @override
@@ -105,7 +101,9 @@ class _GuestHome extends StatelessWidget {
       padding: MSize.pOnly(b: 20, t: 20),
       child: Column(
         children: [
-          DiscoverMenoSection(goToAbout: () => goTo(3)),
+          DiscoverMenoSection(
+            goToAbout: () => AutoRouter.of(context).push(const AboutRoute()),
+          ),
           MSize.vS(30),
           ReadBibleSection(goToBible: () => goTo(1)),
           MSize.vS(30),

@@ -19,6 +19,7 @@ class NowLiveSection extends ConsumerWidget {
           title: 'Now Live',
           addSideMargin: true,
           loading: socketState.loading,
+          showSeeAllButton: false,
         ),
         MSize.vS(6),
         if (socketState.loading || socketState.liveBroadcasts == null)

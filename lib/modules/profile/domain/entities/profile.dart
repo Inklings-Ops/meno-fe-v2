@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meno_fe_v2/core/value/value_objects.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile_stats.dart';
 
 part 'profile.freezed.dart';
@@ -13,6 +14,7 @@ class Profile with _$Profile {
     String? imageUrl,
     ProfileStats? count,
     bool? isSubscribedToUser,
+    required Role role,
   }) = _Profile;
 
   factory Profile.empty() {
@@ -23,6 +25,7 @@ class Profile with _$Profile {
       count: ProfileStats.empty(),
       imageUrl: '',
       isSubscribedToUser: false,
+      role: Role.guest,
     );
   }
 }

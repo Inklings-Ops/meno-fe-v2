@@ -28,6 +28,7 @@ mixin _$ProfileDto {
   @JsonKey(name: '_count')
   ProfileStatsDto? get count => throw _privateConstructorUsedError;
   bool? get isSubscribedToUser => throw _privateConstructorUsedError;
+  Role get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +48,8 @@ abstract class $ProfileDtoCopyWith<$Res> {
       String? bio,
       String? imageUrl,
       @JsonKey(name: '_count') ProfileStatsDto? count,
-      bool? isSubscribedToUser});
+      bool? isSubscribedToUser,
+      Role role});
 
   $ProfileStatsDtoCopyWith<$Res>? get count;
 }
@@ -71,6 +73,7 @@ class _$ProfileDtoCopyWithImpl<$Res, $Val extends ProfileDto>
     Object? imageUrl = freezed,
     Object? count = freezed,
     Object? isSubscribedToUser = freezed,
+    Object? role = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -97,6 +100,10 @@ class _$ProfileDtoCopyWithImpl<$Res, $Val extends ProfileDto>
           ? _value.isSubscribedToUser
           : isSubscribedToUser // ignore: cast_nullable_to_non_nullable
               as bool?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role,
     ) as $Val);
   }
 
@@ -127,7 +134,8 @@ abstract class _$$_ProfileDtoCopyWith<$Res>
       String? bio,
       String? imageUrl,
       @JsonKey(name: '_count') ProfileStatsDto? count,
-      bool? isSubscribedToUser});
+      bool? isSubscribedToUser,
+      Role role});
 
   @override
   $ProfileStatsDtoCopyWith<$Res>? get count;
@@ -150,6 +158,7 @@ class __$$_ProfileDtoCopyWithImpl<$Res>
     Object? imageUrl = freezed,
     Object? count = freezed,
     Object? isSubscribedToUser = freezed,
+    Object? role = null,
   }) {
     return _then(_$_ProfileDto(
       id: null == id
@@ -176,6 +185,10 @@ class __$$_ProfileDtoCopyWithImpl<$Res>
           ? _value.isSubscribedToUser
           : isSubscribedToUser // ignore: cast_nullable_to_non_nullable
               as bool?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role,
     ));
   }
 }
@@ -189,7 +202,8 @@ class _$_ProfileDto implements _ProfileDto {
       this.bio,
       this.imageUrl,
       @JsonKey(name: '_count') this.count,
-      this.isSubscribedToUser});
+      this.isSubscribedToUser,
+      required this.role});
 
   factory _$_ProfileDto.fromJson(Map<String, dynamic> json) =>
       _$$_ProfileDtoFromJson(json);
@@ -208,10 +222,12 @@ class _$_ProfileDto implements _ProfileDto {
   final ProfileStatsDto? count;
   @override
   final bool? isSubscribedToUser;
+  @override
+  final Role role;
 
   @override
   String toString() {
-    return 'ProfileDto(id: $id, fullName: $fullName, bio: $bio, imageUrl: $imageUrl, count: $count, isSubscribedToUser: $isSubscribedToUser)';
+    return 'ProfileDto(id: $id, fullName: $fullName, bio: $bio, imageUrl: $imageUrl, count: $count, isSubscribedToUser: $isSubscribedToUser, role: $role)';
   }
 
   @override
@@ -227,13 +243,14 @@ class _$_ProfileDto implements _ProfileDto {
                 other.imageUrl == imageUrl) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.isSubscribedToUser, isSubscribedToUser) ||
-                other.isSubscribedToUser == isSubscribedToUser));
+                other.isSubscribedToUser == isSubscribedToUser) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, fullName, bio, imageUrl, count, isSubscribedToUser);
+  int get hashCode => Object.hash(runtimeType, id, fullName, bio, imageUrl,
+      count, isSubscribedToUser, role);
 
   @JsonKey(ignore: true)
   @override
@@ -256,7 +273,8 @@ abstract class _ProfileDto implements ProfileDto {
       final String? bio,
       final String? imageUrl,
       @JsonKey(name: '_count') final ProfileStatsDto? count,
-      final bool? isSubscribedToUser}) = _$_ProfileDto;
+      final bool? isSubscribedToUser,
+      required final Role role}) = _$_ProfileDto;
 
   factory _ProfileDto.fromJson(Map<String, dynamic> json) =
       _$_ProfileDto.fromJson;
@@ -274,6 +292,8 @@ abstract class _ProfileDto implements ProfileDto {
   ProfileStatsDto? get count;
   @override
   bool? get isSubscribedToUser;
+  @override
+  Role get role;
   @override
   @JsonKey(ignore: true)
   _$$_ProfileDtoCopyWith<_$_ProfileDto> get copyWith =>

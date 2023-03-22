@@ -206,6 +206,16 @@ class _$MRouter extends RootStackRouter {
         ),
       );
     },
+    GuestHomeRoute.name: (routeData) {
+      final args = routeData.argsAs<GuestHomeRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: GuestHomePage(
+          key: args.key,
+          goTo: args.goTo,
+        ),
+      );
+    },
     DiscoverRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -303,6 +313,11 @@ class _$MRouter extends RootStackRouter {
             RouteConfig(
               HomeRoute.name,
               path: 'home-page',
+              parent: LayoutRoute.name,
+            ),
+            RouteConfig(
+              GuestHomeRoute.name,
+              path: 'guest-home-page',
               parent: LayoutRoute.name,
             ),
             RouteConfig(
@@ -863,6 +878,40 @@ class HomeRouteArgs {
   @override
   String toString() {
     return 'HomeRouteArgs{key: $key, goTo: $goTo}';
+  }
+}
+
+/// generated route for
+/// [GuestHomePage]
+class GuestHomeRoute extends PageRouteInfo<GuestHomeRouteArgs> {
+  GuestHomeRoute({
+    Key? key,
+    required void Function(int) goTo,
+  }) : super(
+          GuestHomeRoute.name,
+          path: 'guest-home-page',
+          args: GuestHomeRouteArgs(
+            key: key,
+            goTo: goTo,
+          ),
+        );
+
+  static const String name = 'GuestHomeRoute';
+}
+
+class GuestHomeRouteArgs {
+  const GuestHomeRouteArgs({
+    this.key,
+    required this.goTo,
+  });
+
+  final Key? key;
+
+  final void Function(int) goTo;
+
+  @override
+  String toString() {
+    return 'GuestHomeRouteArgs{key: $key, goTo: $goTo}';
   }
 }
 

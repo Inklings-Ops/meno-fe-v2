@@ -16,6 +16,7 @@ class ProfileMapper {
       imageUrl: dto.imageUrl,
       count: ProfileStatsMapper().toDomain(dto.count),
       isSubscribedToUser: dto.isSubscribedToUser,
+      role: dto.role,
     );
   }
 }

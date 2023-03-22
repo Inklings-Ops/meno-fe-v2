@@ -10,7 +10,6 @@ class SecurityPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leadingWidth: MSize.w(70),
@@ -32,7 +31,7 @@ class SecurityPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const MSectionTitle(title: 'Security'),
+            const MSectionTitle(title: 'Security', showSeeAllButton: false),
             MSize.vS(16),
             const Text('Make your security changes here.'),
             MSize.vS(30),

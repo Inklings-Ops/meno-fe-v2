@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/bottom_sheets/start_broadcast_bottom_sheet.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar_item.dart';
-import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
-import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class MBottomNavigationBar extends ConsumerStatefulWidget {
-  const MBottomNavigationBar({
+class MAdminBottomNavigationBar extends StatefulWidget {
+  const MAdminBottomNavigationBar({
     super.key,
     required this.currentIndex,
     required this.items,
@@ -22,21 +18,18 @@ class MBottomNavigationBar extends ConsumerStatefulWidget {
   final ValueChanged<int>? onTap;
 
   @override
-  ConsumerState<MBottomNavigationBar> createState() =>
-      _MBottomNavigationBarState();
+  State<MAdminBottomNavigationBar> createState() =>
+      MAdminBottomNavigationBarState();
 }
 
-class _MBottomNavigationBarState extends ConsumerState<MBottomNavigationBar> {
+class MAdminBottomNavigationBarState extends State<MAdminBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    final role = ref.watch(roleProvider).value;
-
-    final List<Widget> adminTiles = <Widget>[];
-    final List<Widget> guestTiles = <Widget>[];
+    final List<Widget> tiles = <Widget>[];
 
     for (var i = 0; i < 4; i++) {
       if (i == 2) {
-        adminTiles.add(
+        tiles.add(
           MBottomNavigationBarItem(
             selected: false,
             onTap: () => onCreateBroadcast(context),
@@ -47,14 +40,7 @@ class _MBottomNavigationBarState extends ConsumerState<MBottomNavigationBar> {
           ),
         );
       }
-      adminTiles.add(
-        MBottomNavigationBarItem(
-          onTap: () => widget.onTap?.call(i),
-          item: widget.items[i],
-          selected: i == widget.currentIndex,
-        ),
-      );
-      guestTiles.add(
+      tiles.add(
         MBottomNavigationBarItem(
           onTap: () => widget.onTap?.call(i),
           item: widget.items[i],
@@ -79,7 +65,7 @@ class _MBottomNavigationBarState extends ConsumerState<MBottomNavigationBar> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: role == Role.admin ? adminTiles : guestTiles,
+        children: tiles,
       ),
     );
   }
@@ -88,7 +74,6 @@ class _MBottomNavigationBarState extends ConsumerState<MBottomNavigationBar> {
     final scaffoldContext = ScaffoldMessenger.of(context);
 
     final status = await Permission.microphone.request();
-    Logger().wtf(status);
     if (status.isGranted || status.isLimited) {
       if (context.mounted) {
         showModalBottomSheet(

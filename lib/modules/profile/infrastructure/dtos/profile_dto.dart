@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart' hide JsonKey;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
 import 'package:meno_fe_v2/modules/profile/infrastructure/dtos/profile_stats_dto.dart';
 
@@ -21,6 +22,7 @@ class ProfileDto with _$ProfileDto {
     // ignore: invalid_annotation_target
     @JsonKey(name: '_count') ProfileStatsDto? count,
     bool? isSubscribedToUser,
+    required Role role,
   }) = _ProfileDto;
 
   factory ProfileDto.fromDomain(Profile p) {
@@ -31,6 +33,7 @@ class ProfileDto with _$ProfileDto {
       imageUrl: p.imageUrl,
       count: p.count != null ? ProfileStatsDto.fromDomain(p.count!) : null,
       isSubscribedToUser: p.isSubscribedToUser,
+      role: p.role,
     );
   }
 

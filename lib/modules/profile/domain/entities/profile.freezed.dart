@@ -22,6 +22,7 @@ mixin _$Profile {
   String? get imageUrl => throw _privateConstructorUsedError;
   ProfileStats? get count => throw _privateConstructorUsedError;
   bool? get isSubscribedToUser => throw _privateConstructorUsedError;
+  Role get role => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileCopyWith<Profile> get copyWith => throw _privateConstructorUsedError;
@@ -38,7 +39,8 @@ abstract class $ProfileCopyWith<$Res> {
       IBio? bio,
       String? imageUrl,
       ProfileStats? count,
-      bool? isSubscribedToUser});
+      bool? isSubscribedToUser,
+      Role role});
 
   $ProfileStatsCopyWith<$Res>? get count;
 }
@@ -62,6 +64,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     Object? imageUrl = freezed,
     Object? count = freezed,
     Object? isSubscribedToUser = freezed,
+    Object? role = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -88,6 +91,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.isSubscribedToUser
           : isSubscribedToUser // ignore: cast_nullable_to_non_nullable
               as bool?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role,
     ) as $Val);
   }
 
@@ -117,7 +124,8 @@ abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       IBio? bio,
       String? imageUrl,
       ProfileStats? count,
-      bool? isSubscribedToUser});
+      bool? isSubscribedToUser,
+      Role role});
 
   @override
   $ProfileStatsCopyWith<$Res>? get count;
@@ -139,6 +147,7 @@ class __$$_ProfileCopyWithImpl<$Res>
     Object? imageUrl = freezed,
     Object? count = freezed,
     Object? isSubscribedToUser = freezed,
+    Object? role = null,
   }) {
     return _then(_$_Profile(
       id: null == id
@@ -165,6 +174,10 @@ class __$$_ProfileCopyWithImpl<$Res>
           ? _value.isSubscribedToUser
           : isSubscribedToUser // ignore: cast_nullable_to_non_nullable
               as bool?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role,
     ));
   }
 }
@@ -178,7 +191,8 @@ class _$_Profile implements _Profile {
       this.bio,
       this.imageUrl,
       this.count,
-      this.isSubscribedToUser});
+      this.isSubscribedToUser,
+      required this.role});
 
   @override
   final String id;
@@ -192,10 +206,12 @@ class _$_Profile implements _Profile {
   final ProfileStats? count;
   @override
   final bool? isSubscribedToUser;
+  @override
+  final Role role;
 
   @override
   String toString() {
-    return 'Profile(id: $id, fullName: $fullName, bio: $bio, imageUrl: $imageUrl, count: $count, isSubscribedToUser: $isSubscribedToUser)';
+    return 'Profile(id: $id, fullName: $fullName, bio: $bio, imageUrl: $imageUrl, count: $count, isSubscribedToUser: $isSubscribedToUser, role: $role)';
   }
 
   @override
@@ -211,12 +227,13 @@ class _$_Profile implements _Profile {
                 other.imageUrl == imageUrl) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.isSubscribedToUser, isSubscribedToUser) ||
-                other.isSubscribedToUser == isSubscribedToUser));
+                other.isSubscribedToUser == isSubscribedToUser) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, fullName, bio, imageUrl, count, isSubscribedToUser);
+  int get hashCode => Object.hash(runtimeType, id, fullName, bio, imageUrl,
+      count, isSubscribedToUser, role);
 
   @JsonKey(ignore: true)
   @override
@@ -232,7 +249,8 @@ abstract class _Profile implements Profile {
       final IBio? bio,
       final String? imageUrl,
       final ProfileStats? count,
-      final bool? isSubscribedToUser}) = _$_Profile;
+      final bool? isSubscribedToUser,
+      required final Role role}) = _$_Profile;
 
   @override
   String get id;
@@ -246,6 +264,8 @@ abstract class _Profile implements Profile {
   ProfileStats? get count;
   @override
   bool? get isSubscribedToUser;
+  @override
+  Role get role;
   @override
   @JsonKey(ignore: true)
   _$$_ProfileCopyWith<_$_Profile> get copyWith =>

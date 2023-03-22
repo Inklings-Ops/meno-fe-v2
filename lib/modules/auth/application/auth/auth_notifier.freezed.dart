@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserCredentials credentials) authenticated,
+    required TResult Function(UserCredentials credentials) adminAuth,
+    required TResult Function(UserCredentials credentials) guestAuth,
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() partiallyUnauthenticated,
@@ -28,7 +29,8 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserCredentials credentials)? authenticated,
+    TResult? Function(UserCredentials credentials)? adminAuth,
+    TResult? Function(UserCredentials credentials)? guestAuth,
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
     TResult? Function()? partiallyUnauthenticated,
@@ -38,7 +40,8 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserCredentials credentials)? authenticated,
+    TResult Function(UserCredentials credentials)? adminAuth,
+    TResult Function(UserCredentials credentials)? guestAuth,
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? partiallyUnauthenticated,
@@ -49,7 +52,8 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_AdminAuth value) adminAuth,
+    required TResult Function(_GuestAuth value) guestAuth,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_PartiallyUnauthenticated value)
@@ -60,7 +64,8 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_AdminAuth value)? adminAuth,
+    TResult? Function(_GuestAuth value)? guestAuth,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_PartiallyUnauthenticated value)?
@@ -71,7 +76,8 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_AdminAuth value)? adminAuth,
+    TResult Function(_GuestAuth value)? guestAuth,
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_PartiallyUnauthenticated value)? partiallyUnauthenticated,
@@ -100,10 +106,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
 }
 
 /// @nodoc
-abstract class _$$_AuthenticatedCopyWith<$Res> {
-  factory _$$_AuthenticatedCopyWith(
-          _$_Authenticated value, $Res Function(_$_Authenticated) then) =
-      __$$_AuthenticatedCopyWithImpl<$Res>;
+abstract class _$$_AdminAuthCopyWith<$Res> {
+  factory _$$_AdminAuthCopyWith(
+          _$_AdminAuth value, $Res Function(_$_AdminAuth) then) =
+      __$$_AdminAuthCopyWithImpl<$Res>;
   @useResult
   $Res call({UserCredentials credentials});
 
@@ -111,11 +117,11 @@ abstract class _$$_AuthenticatedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AuthenticatedCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_Authenticated>
-    implements _$$_AuthenticatedCopyWith<$Res> {
-  __$$_AuthenticatedCopyWithImpl(
-      _$_Authenticated _value, $Res Function(_$_Authenticated) _then)
+class __$$_AdminAuthCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_AdminAuth>
+    implements _$$_AdminAuthCopyWith<$Res> {
+  __$$_AdminAuthCopyWithImpl(
+      _$_AdminAuth _value, $Res Function(_$_AdminAuth) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +129,7 @@ class __$$_AuthenticatedCopyWithImpl<$Res>
   $Res call({
     Object? credentials = null,
   }) {
-    return _then(_$_Authenticated(
+    return _then(_$_AdminAuth(
       null == credentials
           ? _value.credentials
           : credentials // ignore: cast_nullable_to_non_nullable
@@ -142,22 +148,22 @@ class __$$_AuthenticatedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Authenticated implements _Authenticated {
-  const _$_Authenticated(this.credentials);
+class _$_AdminAuth implements _AdminAuth {
+  const _$_AdminAuth(this.credentials);
 
   @override
   final UserCredentials credentials;
 
   @override
   String toString() {
-    return 'AuthState.authenticated(credentials: $credentials)';
+    return 'AuthState.adminAuth(credentials: $credentials)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Authenticated &&
+            other is _$_AdminAuth &&
             (identical(other.credentials, credentials) ||
                 other.credentials == credentials));
   }
@@ -168,39 +174,42 @@ class _$_Authenticated implements _Authenticated {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
-      __$$_AuthenticatedCopyWithImpl<_$_Authenticated>(this, _$identity);
+  _$$_AdminAuthCopyWith<_$_AdminAuth> get copyWith =>
+      __$$_AdminAuthCopyWithImpl<_$_AdminAuth>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserCredentials credentials) authenticated,
+    required TResult Function(UserCredentials credentials) adminAuth,
+    required TResult Function(UserCredentials credentials) guestAuth,
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() partiallyUnauthenticated,
     required TResult Function() unverified,
     required TResult Function() verified,
   }) {
-    return authenticated(credentials);
+    return adminAuth(credentials);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserCredentials credentials)? authenticated,
+    TResult? Function(UserCredentials credentials)? adminAuth,
+    TResult? Function(UserCredentials credentials)? guestAuth,
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
     TResult? Function()? partiallyUnauthenticated,
     TResult? Function()? unverified,
     TResult? Function()? verified,
   }) {
-    return authenticated?.call(credentials);
+    return adminAuth?.call(credentials);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserCredentials credentials)? authenticated,
+    TResult Function(UserCredentials credentials)? adminAuth,
+    TResult Function(UserCredentials credentials)? guestAuth,
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? partiallyUnauthenticated,
@@ -208,8 +217,8 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? verified,
     required TResult orElse(),
   }) {
-    if (authenticated != null) {
-      return authenticated(credentials);
+    if (adminAuth != null) {
+      return adminAuth(credentials);
     }
     return orElse();
   }
@@ -217,7 +226,8 @@ class _$_Authenticated implements _Authenticated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_AdminAuth value) adminAuth,
+    required TResult Function(_GuestAuth value) guestAuth,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_PartiallyUnauthenticated value)
@@ -225,13 +235,14 @@ class _$_Authenticated implements _Authenticated {
     required TResult Function(_Unverified value) unverified,
     required TResult Function(_Verified value) verified,
   }) {
-    return authenticated(this);
+    return adminAuth(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_AdminAuth value)? adminAuth,
+    TResult? Function(_GuestAuth value)? guestAuth,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_PartiallyUnauthenticated value)?
@@ -239,13 +250,14 @@ class _$_Authenticated implements _Authenticated {
     TResult? Function(_Unverified value)? unverified,
     TResult? Function(_Verified value)? verified,
   }) {
-    return authenticated?.call(this);
+    return adminAuth?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_AdminAuth value)? adminAuth,
+    TResult Function(_GuestAuth value)? guestAuth,
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_PartiallyUnauthenticated value)? partiallyUnauthenticated,
@@ -253,20 +265,195 @@ class _$_Authenticated implements _Authenticated {
     TResult Function(_Verified value)? verified,
     required TResult orElse(),
   }) {
-    if (authenticated != null) {
-      return authenticated(this);
+    if (adminAuth != null) {
+      return adminAuth(this);
     }
     return orElse();
   }
 }
 
-abstract class _Authenticated implements AuthState {
-  const factory _Authenticated(final UserCredentials credentials) =
-      _$_Authenticated;
+abstract class _AdminAuth implements AuthState {
+  const factory _AdminAuth(final UserCredentials credentials) = _$_AdminAuth;
 
   UserCredentials get credentials;
   @JsonKey(ignore: true)
-  _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
+  _$$_AdminAuthCopyWith<_$_AdminAuth> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GuestAuthCopyWith<$Res> {
+  factory _$$_GuestAuthCopyWith(
+          _$_GuestAuth value, $Res Function(_$_GuestAuth) then) =
+      __$$_GuestAuthCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UserCredentials credentials});
+
+  $UserCredentialsCopyWith<$Res> get credentials;
+}
+
+/// @nodoc
+class __$$_GuestAuthCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_GuestAuth>
+    implements _$$_GuestAuthCopyWith<$Res> {
+  __$$_GuestAuthCopyWithImpl(
+      _$_GuestAuth _value, $Res Function(_$_GuestAuth) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? credentials = null,
+  }) {
+    return _then(_$_GuestAuth(
+      null == credentials
+          ? _value.credentials
+          : credentials // ignore: cast_nullable_to_non_nullable
+              as UserCredentials,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCredentialsCopyWith<$Res> get credentials {
+    return $UserCredentialsCopyWith<$Res>(_value.credentials, (value) {
+      return _then(_value.copyWith(credentials: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_GuestAuth implements _GuestAuth {
+  const _$_GuestAuth(this.credentials);
+
+  @override
+  final UserCredentials credentials;
+
+  @override
+  String toString() {
+    return 'AuthState.guestAuth(credentials: $credentials)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GuestAuth &&
+            (identical(other.credentials, credentials) ||
+                other.credentials == credentials));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, credentials);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GuestAuthCopyWith<_$_GuestAuth> get copyWith =>
+      __$$_GuestAuthCopyWithImpl<_$_GuestAuth>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserCredentials credentials) adminAuth,
+    required TResult Function(UserCredentials credentials) guestAuth,
+    required TResult Function() initial,
+    required TResult Function() unauthenticated,
+    required TResult Function() partiallyUnauthenticated,
+    required TResult Function() unverified,
+    required TResult Function() verified,
+  }) {
+    return guestAuth(credentials);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserCredentials credentials)? adminAuth,
+    TResult? Function(UserCredentials credentials)? guestAuth,
+    TResult? Function()? initial,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? partiallyUnauthenticated,
+    TResult? Function()? unverified,
+    TResult? Function()? verified,
+  }) {
+    return guestAuth?.call(credentials);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserCredentials credentials)? adminAuth,
+    TResult Function(UserCredentials credentials)? guestAuth,
+    TResult Function()? initial,
+    TResult Function()? unauthenticated,
+    TResult Function()? partiallyUnauthenticated,
+    TResult Function()? unverified,
+    TResult Function()? verified,
+    required TResult orElse(),
+  }) {
+    if (guestAuth != null) {
+      return guestAuth(credentials);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AdminAuth value) adminAuth,
+    required TResult Function(_GuestAuth value) guestAuth,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_PartiallyUnauthenticated value)
+        partiallyUnauthenticated,
+    required TResult Function(_Unverified value) unverified,
+    required TResult Function(_Verified value) verified,
+  }) {
+    return guestAuth(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AdminAuth value)? adminAuth,
+    TResult? Function(_GuestAuth value)? guestAuth,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_PartiallyUnauthenticated value)?
+        partiallyUnauthenticated,
+    TResult? Function(_Unverified value)? unverified,
+    TResult? Function(_Verified value)? verified,
+  }) {
+    return guestAuth?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AdminAuth value)? adminAuth,
+    TResult Function(_GuestAuth value)? guestAuth,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_PartiallyUnauthenticated value)? partiallyUnauthenticated,
+    TResult Function(_Unverified value)? unverified,
+    TResult Function(_Verified value)? verified,
+    required TResult orElse(),
+  }) {
+    if (guestAuth != null) {
+      return guestAuth(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GuestAuth implements AuthState {
+  const factory _GuestAuth(final UserCredentials credentials) = _$_GuestAuth;
+
+  UserCredentials get credentials;
+  @JsonKey(ignore: true)
+  _$$_GuestAuthCopyWith<_$_GuestAuth> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -307,7 +494,8 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserCredentials credentials) authenticated,
+    required TResult Function(UserCredentials credentials) adminAuth,
+    required TResult Function(UserCredentials credentials) guestAuth,
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() partiallyUnauthenticated,
@@ -320,7 +508,8 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserCredentials credentials)? authenticated,
+    TResult? Function(UserCredentials credentials)? adminAuth,
+    TResult? Function(UserCredentials credentials)? guestAuth,
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
     TResult? Function()? partiallyUnauthenticated,
@@ -333,7 +522,8 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserCredentials credentials)? authenticated,
+    TResult Function(UserCredentials credentials)? adminAuth,
+    TResult Function(UserCredentials credentials)? guestAuth,
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? partiallyUnauthenticated,
@@ -350,7 +540,8 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_AdminAuth value) adminAuth,
+    required TResult Function(_GuestAuth value) guestAuth,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_PartiallyUnauthenticated value)
@@ -364,7 +555,8 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_AdminAuth value)? adminAuth,
+    TResult? Function(_GuestAuth value)? guestAuth,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_PartiallyUnauthenticated value)?
@@ -378,7 +570,8 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_AdminAuth value)? adminAuth,
+    TResult Function(_GuestAuth value)? guestAuth,
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_PartiallyUnauthenticated value)? partiallyUnauthenticated,
@@ -435,7 +628,8 @@ class _$_Unauthenticated implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserCredentials credentials) authenticated,
+    required TResult Function(UserCredentials credentials) adminAuth,
+    required TResult Function(UserCredentials credentials) guestAuth,
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() partiallyUnauthenticated,
@@ -448,7 +642,8 @@ class _$_Unauthenticated implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserCredentials credentials)? authenticated,
+    TResult? Function(UserCredentials credentials)? adminAuth,
+    TResult? Function(UserCredentials credentials)? guestAuth,
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
     TResult? Function()? partiallyUnauthenticated,
@@ -461,7 +656,8 @@ class _$_Unauthenticated implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserCredentials credentials)? authenticated,
+    TResult Function(UserCredentials credentials)? adminAuth,
+    TResult Function(UserCredentials credentials)? guestAuth,
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? partiallyUnauthenticated,
@@ -478,7 +674,8 @@ class _$_Unauthenticated implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_AdminAuth value) adminAuth,
+    required TResult Function(_GuestAuth value) guestAuth,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_PartiallyUnauthenticated value)
@@ -492,7 +689,8 @@ class _$_Unauthenticated implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_AdminAuth value)? adminAuth,
+    TResult? Function(_GuestAuth value)? guestAuth,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_PartiallyUnauthenticated value)?
@@ -506,7 +704,8 @@ class _$_Unauthenticated implements _Unauthenticated {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_AdminAuth value)? adminAuth,
+    TResult Function(_GuestAuth value)? guestAuth,
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_PartiallyUnauthenticated value)? partiallyUnauthenticated,
@@ -565,7 +764,8 @@ class _$_PartiallyUnauthenticated implements _PartiallyUnauthenticated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserCredentials credentials) authenticated,
+    required TResult Function(UserCredentials credentials) adminAuth,
+    required TResult Function(UserCredentials credentials) guestAuth,
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() partiallyUnauthenticated,
@@ -578,7 +778,8 @@ class _$_PartiallyUnauthenticated implements _PartiallyUnauthenticated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserCredentials credentials)? authenticated,
+    TResult? Function(UserCredentials credentials)? adminAuth,
+    TResult? Function(UserCredentials credentials)? guestAuth,
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
     TResult? Function()? partiallyUnauthenticated,
@@ -591,7 +792,8 @@ class _$_PartiallyUnauthenticated implements _PartiallyUnauthenticated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserCredentials credentials)? authenticated,
+    TResult Function(UserCredentials credentials)? adminAuth,
+    TResult Function(UserCredentials credentials)? guestAuth,
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? partiallyUnauthenticated,
@@ -608,7 +810,8 @@ class _$_PartiallyUnauthenticated implements _PartiallyUnauthenticated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_AdminAuth value) adminAuth,
+    required TResult Function(_GuestAuth value) guestAuth,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_PartiallyUnauthenticated value)
@@ -622,7 +825,8 @@ class _$_PartiallyUnauthenticated implements _PartiallyUnauthenticated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_AdminAuth value)? adminAuth,
+    TResult? Function(_GuestAuth value)? guestAuth,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_PartiallyUnauthenticated value)?
@@ -636,7 +840,8 @@ class _$_PartiallyUnauthenticated implements _PartiallyUnauthenticated {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_AdminAuth value)? adminAuth,
+    TResult Function(_GuestAuth value)? guestAuth,
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_PartiallyUnauthenticated value)? partiallyUnauthenticated,
@@ -693,7 +898,8 @@ class _$_Unverified implements _Unverified {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserCredentials credentials) authenticated,
+    required TResult Function(UserCredentials credentials) adminAuth,
+    required TResult Function(UserCredentials credentials) guestAuth,
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() partiallyUnauthenticated,
@@ -706,7 +912,8 @@ class _$_Unverified implements _Unverified {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserCredentials credentials)? authenticated,
+    TResult? Function(UserCredentials credentials)? adminAuth,
+    TResult? Function(UserCredentials credentials)? guestAuth,
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
     TResult? Function()? partiallyUnauthenticated,
@@ -719,7 +926,8 @@ class _$_Unverified implements _Unverified {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserCredentials credentials)? authenticated,
+    TResult Function(UserCredentials credentials)? adminAuth,
+    TResult Function(UserCredentials credentials)? guestAuth,
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? partiallyUnauthenticated,
@@ -736,7 +944,8 @@ class _$_Unverified implements _Unverified {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_AdminAuth value) adminAuth,
+    required TResult Function(_GuestAuth value) guestAuth,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_PartiallyUnauthenticated value)
@@ -750,7 +959,8 @@ class _$_Unverified implements _Unverified {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_AdminAuth value)? adminAuth,
+    TResult? Function(_GuestAuth value)? guestAuth,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_PartiallyUnauthenticated value)?
@@ -764,7 +974,8 @@ class _$_Unverified implements _Unverified {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_AdminAuth value)? adminAuth,
+    TResult Function(_GuestAuth value)? guestAuth,
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_PartiallyUnauthenticated value)? partiallyUnauthenticated,
@@ -821,7 +1032,8 @@ class _$_Verified implements _Verified {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserCredentials credentials) authenticated,
+    required TResult Function(UserCredentials credentials) adminAuth,
+    required TResult Function(UserCredentials credentials) guestAuth,
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() partiallyUnauthenticated,
@@ -834,7 +1046,8 @@ class _$_Verified implements _Verified {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserCredentials credentials)? authenticated,
+    TResult? Function(UserCredentials credentials)? adminAuth,
+    TResult? Function(UserCredentials credentials)? guestAuth,
     TResult? Function()? initial,
     TResult? Function()? unauthenticated,
     TResult? Function()? partiallyUnauthenticated,
@@ -847,7 +1060,8 @@ class _$_Verified implements _Verified {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserCredentials credentials)? authenticated,
+    TResult Function(UserCredentials credentials)? adminAuth,
+    TResult Function(UserCredentials credentials)? guestAuth,
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? partiallyUnauthenticated,
@@ -864,7 +1078,8 @@ class _$_Verified implements _Verified {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_AdminAuth value) adminAuth,
+    required TResult Function(_GuestAuth value) guestAuth,
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_PartiallyUnauthenticated value)
@@ -878,7 +1093,8 @@ class _$_Verified implements _Verified {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_AdminAuth value)? adminAuth,
+    TResult? Function(_GuestAuth value)? guestAuth,
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Unauthenticated value)? unauthenticated,
     TResult? Function(_PartiallyUnauthenticated value)?
@@ -892,7 +1108,8 @@ class _$_Verified implements _Verified {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_AdminAuth value)? adminAuth,
+    TResult Function(_GuestAuth value)? guestAuth,
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_PartiallyUnauthenticated value)? partiallyUnauthenticated,

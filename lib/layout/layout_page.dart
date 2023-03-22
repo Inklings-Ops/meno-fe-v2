@@ -9,10 +9,10 @@ import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/layout/loading_page.dart';
 import 'package:meno_fe_v2/layout/widgets/exit_alert_dialog.dart';
+import 'package:meno_fe_v2/layout/widgets/m_admin_bottom_navigation_bar.dart';
 import 'package:meno_fe_v2/layout/widgets/m_app_bar.dart';
-import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar.dart';
+import 'package:meno_fe_v2/layout/widgets/m_guest_bottom_navigation_bar.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
-import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/verification/verification_feedback_page.dart';
@@ -40,15 +40,18 @@ class LayoutPage extends ConsumerWidget {
 
     final state = ref.watch(authProvider);
 
+    void initLoad() {
+      if (preferences.hasKey(MKeys.initLogin) == false) {
+        preferences.write(key: MKeys.initLogin, value: 1);
+      }
+      ref.read(profileProvider.notifier).authProfileLoaded();
+    }
+
     ref.listen<AuthState>(authProvider, (previous, next) {
       next.maybeWhen(
         orElse: () => null,
-        authenticated: (_) async {
-          if (preferences.hasKey(MKeys.initLogin) == false) {
-            preferences.write(key: MKeys.initLogin, value: 1);
-          }
-          ref.read(profileProvider.notifier).authProfileLoaded();
-        },
+        adminAuth: (_) async => initLoad(),
+        guestAuth: (_) async => initLoad(),
       );
     });
 
@@ -69,39 +72,31 @@ class LayoutPage extends ConsumerWidget {
         unauthenticated: (_) => LoginPage(
           showLeading: AutoRouter.of(context).canNavigateBack,
         ),
-        authenticated: (a) => const _Layout(),
+        adminAuth: (a) => const _AdminLayout(),
+        guestAuth: (a) => const _GuestLayout(),
       ),
     );
   }
 }
 
-class _Layout extends HookConsumerWidget {
-  const _Layout({Key? key}) : super(key: key);
+class _AdminLayout extends HookWidget {
+  const _AdminLayout({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final role = ref.watch(roleProvider).value;
-
+  Widget build(BuildContext context) {
     final layoutTabRouter = useState<TabsRouter?>(null);
 
-    final adminRoutes = <PageRouteInfo<dynamic>>[
+    final routes = <PageRouteInfo<dynamic>>[
       HomeRoute(goTo: (v) => layoutTabRouter.value?.setActiveIndex(v)),
       BibleRoute(),
       const BlogRoute(),
       const ProfileRoute(),
     ];
 
-    final guestRoutes = <PageRouteInfo<dynamic>>[
-      HomeRoute(goTo: (v) => layoutTabRouter.value?.setActiveIndex(v)),
-      BibleRoute(),
-      const BlogRoute(),
-      const GuestProfileRoute(),
-    ];
-
     return AutoTabsScaffold(
       scaffoldKey: MKeys.layoutScaffoldKey,
-      extendBodyBehindAppBar: role == Role.admin,
-      routes: role == Role.admin ? adminRoutes : guestRoutes,
+      extendBodyBehindAppBar: true,
+      routes: routes,
       appBarBuilder: (context, tabsRouter) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           layoutTabRouter.value = tabsRouter;
@@ -114,11 +109,7 @@ class _Layout extends HookConsumerWidget {
           case 1:
             return BibleAppBar(onAvatarPressed: onAvatarPressed);
           case 3:
-            if (role == Role.guest) {
-              return AppBar(toolbarHeight: MSize.r(0));
-            } else {
-              return const ProfileAppBar();
-            }
+            return const ProfileAppBar();
           default:
             return MAppBar(
               title: tabsRouter.current.name.split('R')[0],
@@ -127,11 +118,63 @@ class _Layout extends HookConsumerWidget {
             );
         }
       },
-      bottomNavigationBuilder: (context, tabsRouter) => MBottomNavigationBar(
-        currentIndex: tabsRouter.activeIndex,
-        onTap: tabsRouter.setActiveIndex,
-        items: items,
-      ),
+      bottomNavigationBuilder: (context, tabsRouter) {
+        return MAdminBottomNavigationBar(
+          currentIndex: tabsRouter.activeIndex,
+          onTap: tabsRouter.setActiveIndex,
+          items: items,
+        );
+      },
+    );
+  }
+}
+
+class _GuestLayout extends HookWidget {
+  const _GuestLayout({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final layoutTabRouter = useState<TabsRouter?>(null);
+
+    final routes = <PageRouteInfo<dynamic>>[
+      GuestHomeRoute(goTo: (v) => layoutTabRouter.value?.setActiveIndex(v)),
+      BibleRoute(),
+      const BlogRoute(),
+      const GuestProfileRoute(),
+    ];
+
+    return AutoTabsScaffold(
+      scaffoldKey: MKeys.layoutScaffoldKey,
+      extendBodyBehindAppBar: false,
+      routes: routes,
+      appBarBuilder: (context, tabsRouter) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          layoutTabRouter.value = tabsRouter;
+        });
+        void onAvatarPressed() => tabsRouter.setActiveIndex(3);
+
+        switch (tabsRouter.activeIndex) {
+          case 0:
+            return HomeAppBar(onAvatarPressed: onAvatarPressed);
+          case 1:
+            return BibleAppBar(onAvatarPressed: onAvatarPressed);
+          case 3:
+            return AppBar(toolbarHeight: MSize.r(0));
+          default:
+            return MAppBar(
+              title: tabsRouter.current.name.split('R')[0],
+              onAvatarPressed: onAvatarPressed,
+              showBorder: false,
+            );
+        }
+      },
+      bottomNavigationBuilder: (context, tabsRouter) {
+        return MGuestBottomNavigationBar(
+          currentIndex: tabsRouter.activeIndex,
+          onTap: tabsRouter.setActiveIndex,
+          items: items,
+        );
+      },
     );
   }
 }

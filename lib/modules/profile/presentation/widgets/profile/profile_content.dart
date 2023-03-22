@@ -26,11 +26,11 @@ class ProfileContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAdmin = ref.watch(roleProvider).value == Role.admin;
+    final isAdmin = profile.role == Role.admin;
     final router = AutoRouter.of(context);
 
     return SingleChildScrollView(
-      padding: isAdmin ? MSize.pOnly(t: 80) : MSize.pFromLTRB(0, 0, 0, 16),
+      padding: isAdmin ? MSize.pOnly(t: 80) : MSize.pFromLTRB(0, 30, 0, 16),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -115,7 +115,7 @@ class ProfileContent extends ConsumerWidget {
                     ListTile(
                       title: const Text('Delete Account'),
                       trailing: const Icon(MIcons.Paper1),
-                      onTap: () => router.push(const PrivacyPolicyRoute()),
+                      onTap: () {},
                     ),
                     ListTile(
                       title: const Text('Logout'),

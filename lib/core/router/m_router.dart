@@ -57,6 +57,7 @@ part 'm_router.gr.dart';
       guards: [OnboardingGuard],
       children: [
         AutoRoute(page: HomePage),
+        AutoRoute(page: GuestHomePage),
         AutoRoute(page: DiscoverPage),
         AutoRoute(page: NotesPage),
         AutoRoute(page: ProfilePage),

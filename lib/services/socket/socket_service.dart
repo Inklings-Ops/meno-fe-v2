@@ -27,7 +27,7 @@ final socketProvider = Provider<SocketService>((ref) {
   final state = ref.watch(authProvider);
   return state.maybeWhen(
     orElse: () => SocketService(null),
-    authenticated: (credentials) => SocketService(credentials.token),
+    adminAuth: (credentials) => SocketService(credentials.token),
   );
 });
 

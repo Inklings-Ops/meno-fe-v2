@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
-import 'package:meno_fe_v2/layout/widgets/m_notification_icon.dart';
-import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
-import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -18,7 +15,6 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileState = ref.watch(profileProvider);
-    final isAdmin = ref.watch(roleProvider).value == Role.admin;
 
     return profileState.maybeWhen(
       orElse: () => const _AppBarSkeleton(),
@@ -51,10 +47,6 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
           ],
         ),
         actions: [
-          if (isAdmin) ...[
-            const MNotificationIcon(),
-            MSize.hS(16),
-          ],
           MAvatar(
             radius: MSize.r(21),
             onTap: onAvatarPressed,

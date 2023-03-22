@@ -32,7 +32,7 @@ class AboutPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const MSectionTitle(title: 'About Menō?'),
+            const MSectionTitle(title: 'About Menō?', showSeeAllButton: false),
             MSize.vS(10),
             const AutoSizeText(
               "μένω ménō, men'-o; a primary verb; to stay (in a given place, state, relation or expectancy):—abide, continue, dwell, endure, be present, remain, stand, tarry (for)",
@@ -88,6 +88,7 @@ class AboutPage extends StatelessWidget {
               title: 'More Information',
               showBorder: false,
               addSideMargin: false,
+              showSeeAllButton: false,
             ),
             MSize.vS(10),
             SettingsListItem(

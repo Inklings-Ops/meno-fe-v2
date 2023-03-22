@@ -52,7 +52,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
         } else if (credentials?.user?.verified == false) {
           return const AuthState.unverified();
         } else {
-          return AuthState.authenticated(credentials!);
+          if (credentials?.user?.role == Role.admin) {
+            return AuthState.adminAuth(credentials!);
+          } else {
+            return AuthState.guestAuth(credentials!);
+          }
         }
       },
     );
