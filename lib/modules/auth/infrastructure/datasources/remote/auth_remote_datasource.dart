@@ -72,4 +72,7 @@ abstract class AuthRemoteDatasource {
     @Field() required String email,
     @Field() required String code,
   });
+
+  @DELETE("/api/v1/users")
+  Future<AuthResponse<UserCredentialsDto?>> delete();
 }

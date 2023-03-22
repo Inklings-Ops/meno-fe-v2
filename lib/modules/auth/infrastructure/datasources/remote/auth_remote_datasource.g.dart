@@ -331,6 +331,34 @@ class _AuthRemoteDatasource implements AuthRemoteDatasource {
     return value;
   }
 
+  @override
+  Future<AuthResponse<UserCredentialsDto?>> delete() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AuthResponse<UserCredentialsDto>>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/users',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AuthResponse<UserCredentialsDto?>.fromJson(
+      _result.data!,
+      (json) => json == null
+          ? null
+          : UserCredentialsDto.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
