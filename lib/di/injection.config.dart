@@ -11,9 +11,7 @@ import 'package:image_picker/image_picker.dart' as _i16;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i17;
-import 'package:meno_fe_v2/di/register_module.dart' as _i43;
-import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart'
-    as _i32;
+import 'package:meno_fe_v2/di/register_module.dart' as _i42;
 import 'package:meno_fe_v2/modules/auth/application/login/login_notifier.dart'
     as _i19;
 import 'package:meno_fe_v2/modules/auth/domain/i_auth_facade.dart' as _i14;
@@ -27,11 +25,11 @@ import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/mapper/user_m
     as _i30;
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/remote/auth_remote_datasource.dart'
     as _i5;
-import 'package:meno_fe_v2/modules/bible/domain/i_bible_facade.dart' as _i35;
+import 'package:meno_fe_v2/modules/bible/domain/i_bible_facade.dart' as _i34;
 import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/bible_facade.dart'
-    as _i36;
+    as _i35;
 import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/local/bible_local_datasource.dart'
-    as _i33;
+    as _i32;
 import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/mapper/book_mapper.dart'
     as _i7;
 import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/mapper/chapter_mapper.dart'
@@ -43,15 +41,15 @@ import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/mapper/verse
 import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/remote/bible_remote_datasource.dart'
     as _i6;
 import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_notifier.dart'
-    as _i42;
-import 'package:meno_fe_v2/modules/broadcast/application/broadcast_form/broadcast_form_notifier.dart'
     as _i41;
+import 'package:meno_fe_v2/modules/broadcast/application/broadcast_form/broadcast_form_notifier.dart'
+    as _i40;
 import 'package:meno_fe_v2/modules/broadcast/domain/i_broadcast_facade.dart'
-    as _i37;
+    as _i36;
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/broadcast_facade.dart'
-    as _i38;
+    as _i37;
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/local/broadcast_local_datasource.dart'
-    as _i34;
+    as _i33;
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/mapper/broadcast_listener_mapper.dart'
     as _i8;
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/mapper/broadcast_mapper.dart'
@@ -63,7 +61,7 @@ import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/mapper/j
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/remote/broadcast_remote_datasource.dart'
     as _i10;
 import 'package:meno_fe_v2/modules/profile/domain/i_profile_facade.dart'
-    as _i39;
+    as _i38;
 import 'package:meno_fe_v2/modules/profile/infrastructure/datasources/local/profile_local_datasource.dart'
     as _i21;
 import 'package:meno_fe_v2/modules/profile/infrastructure/datasources/mapper/profile_mapper.dart'
@@ -73,7 +71,7 @@ import 'package:meno_fe_v2/modules/profile/infrastructure/datasources/mapper/pro
 import 'package:meno_fe_v2/modules/profile/infrastructure/datasources/remote/profile_remote_datasource.dart'
     as _i23;
 import 'package:meno_fe_v2/modules/profile/infrastructure/profile_facade.dart'
-    as _i40;
+    as _i39;
 import 'package:meno_fe_v2/services/agora_service.dart' as _i3;
 import 'package:meno_fe_v2/services/media_service.dart' as _i20;
 import 'package:meno_fe_v2/services/secure_storage_Service.dart' as _i25;
@@ -139,33 +137,31 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i29.UserCredentialsMapper>(_i29.UserCredentialsMapper());
     gh.singleton<_i30.UserMapper>(_i30.UserMapper());
     gh.lazySingleton<_i31.VerseMapper>(() => _i31.VerseMapper());
-    gh.factory<_i32.AuthNotifier>(
-        () => _i32.AuthNotifier(gh<_i14.IAuthFacade>()));
-    gh.factory<_i33.BibleLocalDatasource>(
-        () => _i33.BibleLocalDatasource(gh<_i27.SharedPreferencesService>()));
-    gh.factory<_i34.BroadcastLocalDatasource>(() =>
-        _i34.BroadcastLocalDatasource(gh<_i27.SharedPreferencesService>()));
-    gh.factory<_i35.IBibleFacade>(() => _i36.BibleFacade(
-          gh<_i33.BibleLocalDatasource>(),
+    gh.factory<_i32.BibleLocalDatasource>(
+        () => _i32.BibleLocalDatasource(gh<_i27.SharedPreferencesService>()));
+    gh.factory<_i33.BroadcastLocalDatasource>(() =>
+        _i33.BroadcastLocalDatasource(gh<_i27.SharedPreferencesService>()));
+    gh.factory<_i34.IBibleFacade>(() => _i35.BibleFacade(
+          gh<_i32.BibleLocalDatasource>(),
           gh<_i6.BibleRemoteDatasource>(),
         ));
-    gh.lazySingleton<_i37.IBroadcastFacade>(() => _i38.BroadcastFacade(
-          gh<_i34.BroadcastLocalDatasource>(),
+    gh.lazySingleton<_i36.IBroadcastFacade>(() => _i37.BroadcastFacade(
+          gh<_i33.BroadcastLocalDatasource>(),
           gh<_i10.BroadcastRemoteDatasource>(),
           gh<_i9.BroadcastMapper>(),
         ));
-    gh.factory<_i39.IProfileFacade>(() => _i40.ProfileFacade(
+    gh.factory<_i38.IProfileFacade>(() => _i39.ProfileFacade(
           gh<_i21.ProfileLocalDatasource>(),
           gh<_i23.ProfileRemoteDatasource>(),
         ));
-    gh.factory<_i41.BroadcastFormNotifier>(() => _i41.BroadcastFormNotifier(
-          gh<_i37.IBroadcastFacade>(),
+    gh.factory<_i40.BroadcastFormNotifier>(() => _i40.BroadcastFormNotifier(
+          gh<_i36.IBroadcastFacade>(),
           gh<_i20.MediaService>(),
         ));
-    gh.factory<_i42.BroadcastNotifier>(
-        () => _i42.BroadcastNotifier(gh<_i37.IBroadcastFacade>()));
+    gh.factory<_i41.BroadcastNotifier>(
+        () => _i41.BroadcastNotifier(gh<_i36.IBroadcastFacade>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i43.RegisterModule {}
+class _$RegisterModule extends _i42.RegisterModule {}

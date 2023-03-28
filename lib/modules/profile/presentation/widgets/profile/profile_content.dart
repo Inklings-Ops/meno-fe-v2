@@ -38,7 +38,9 @@ class ProfileContent extends ConsumerWidget {
     }
 
     return SingleChildScrollView(
-      padding: isAdmin ? MSize.pOnly(t: 0) : MSize.pFromLTRB(0, 30, 0, 16),
+      padding: isAdmin
+          ? MSize.pOnly(t: kToolbarHeight)
+          : MSize.pFromLTRB(0, 30, 0, 16),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

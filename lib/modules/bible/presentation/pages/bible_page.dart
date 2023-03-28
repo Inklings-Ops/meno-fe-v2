@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
+import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/bible/application/bible/bible_notifier.dart';
 
 class BiblePage extends ConsumerWidget {
@@ -10,6 +12,7 @@ class BiblePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chapter = ref.watch(bibleProvider).chapter;
+    final isAdmin = ref.watch(roleProvider) == Role.admin;
     // final loading = ref.watch(bibleProvider).loading;
 
     List<Widget> children = [MSize.vS(10)];
@@ -81,6 +84,7 @@ class BiblePage extends ConsumerWidget {
 
     return SingleChildScrollView(
       controller: scrollController,
+      padding: isAdmin ? MSize.pOnly(t: kToolbarHeight * 2.2) : null,
       child: Column(children: children),
     );
   }

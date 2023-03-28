@@ -5,7 +5,6 @@ import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_button.dart';
-import 'package:meno_fe_v2/common/widgets/m_text_button.dart';
 import 'package:meno_fe_v2/common/widgets/m_text_form_field.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/di/injection.dart';
@@ -24,7 +23,6 @@ class LoginForm extends ConsumerWidget {
     final authEvent = ref.watch(authProvider.notifier);
     final preferences = di<SharedPreferencesService>();
 
-
     ref.listen<LoginState>(loginProvider, (previous, next) {
       next.option.fold(
         () => null,
@@ -42,10 +40,11 @@ class LoginForm extends ConsumerWidget {
           },
           (_) {
             ScaffoldMessenger.of(context).clearSnackBars();
-            if ( preferences.hasKey(MKeys.initLogin) == false) {
+            if (preferences.hasKey(MKeys.initLogin) == false) {
               AutoRouter.of(context).replaceAll([const LayoutRoute()]);
             }
             authEvent.checkAuthenticated();
+            
           },
         ),
       );
@@ -84,16 +83,16 @@ class LoginForm extends ConsumerWidget {
               (_) => null,
             ),
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: MTextButton(
-              title: 'Forgot Password?',
-              onPressed: () {
-                AutoRouter.of(context).push(const ForgotPasswordRoute());
-              },
-            ),
-          ),
-          MSize.vS(30),
+          // Align(
+          //   alignment: Alignment.centerRight,
+          //   child: MTextButton(
+          //     title: 'Forgot Password?',
+          //     onPressed: () {
+          //       AutoRouter.of(context).push(const ForgotPasswordRoute());
+          //     },
+          //   ),
+          // ),
+          MSize.vS(70),
           MButton(
             title: 'Login',
             loading: state.loading,

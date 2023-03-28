@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/common/widgets/bottom_sheets/start_broadcast_bottom_sheet.dart';
+import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar_item.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -76,12 +77,13 @@ class MAdminBottomNavigationBarState extends State<MAdminBottomNavigationBar> {
     final status = await Permission.microphone.request();
     if (status.isGranted || status.isLimited) {
       if (context.mounted) {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          elevation: 0,
-          builder: (context) => const StartBroadcastBottomSheet(),
-        );
+        AutoRouter.of(context).push(const CreateBroadcastRoute());
+        // showModalBottomSheet(
+        //   context: context,
+        //   isScrollControlled: true,
+        //   elevation: 0,
+        //   builder: (context) => const StartBroadcastBottomSheet(),
+        // );
       }
     } else if (status == PermissionStatus.permanentlyDenied) {
       openAppSettings();
