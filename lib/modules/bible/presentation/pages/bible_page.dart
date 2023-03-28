@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/bible/application/bible/bible_notifier.dart';
+
+final _kFont = GoogleFonts.robotoSerif().fontFamily;
 
 class BiblePage extends ConsumerWidget {
   const BiblePage({super.key, this.scrollController});
@@ -13,78 +16,46 @@ class BiblePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final chapter = ref.watch(bibleProvider).chapter;
     final isAdmin = ref.watch(roleProvider) == Role.admin;
-    // final loading = ref.watch(bibleProvider).loading;
 
-    List<Widget> children = [MSize.vS(10)];
+    List<Widget> children = [];
     List<InlineSpan> spans = [];
+
+    final textTheme = Theme.of(context).textTheme;
+    final verseStyle = textTheme.bodyMedium?.copyWith(
+      height: 2.1,
+      fontFamily: _kFont,
+    );
+    final numberStyle = verseStyle?.copyWith(fontSize: 12);
+
+    final RegExp isParagraph = RegExp(r'\u00B6');
+    final RegExp allExpr = RegExp(r'[\u2039\u203a\u00B6\[\]]');
+
+    for (var i = 0; i < chapter.verses.length; i++) {
+      var item = chapter.verses[i]!;
+      final verseNumber = item.verse;
+      final text = item.text?.replaceAll(allExpr, '');
+
+      if (isParagraph.hasMatch(item.text!)) {
+        spans.add(TextSpan(text: '\n   $verseNumber ', style: numberStyle));
+      } else {
+        spans.add(TextSpan(text: '   $verseNumber ', style: numberStyle));
+      }
+
+      spans.add(TextSpan(text: '$text', style: verseStyle));
+    }
 
     children.add(
       Container(
         margin: MSize.pSymmetric(h: 24),
-        child: Text.rich(
-          TextSpan(children: spans),
-          style: TextStyle(
-            fontSize: MSize.fS(14),
-            fontWeight: FontWeight.w400,
-            height: MSize.h(1.5),
-          ),
-        ),
+        child: Text.rich(TextSpan(children: spans)),
       ),
     );
 
-    for (var i = 0; i < chapter.verses.length; i++) {
-      var item = chapter.verses[i];
-      spans.add(
-        WidgetSpan(
-          alignment: PlaceholderAlignment.top,
-          child: GestureDetector(
-            onTap: () {},
-            child: Padding(
-              padding: MSize.pOnly(r: 1, t: 2, l: 4),
-              child: Text(
-                '${item?.verse}',
-                style: TextStyle(fontSize: MSize.fS(8)),
-              ),
-            ),
-          ),
-        ),
-      );
-
-      spans.add(
-        TextSpan(children: [
-          TextSpan(text: '${item?.text}\n'),
-          TextSpan(
-            text: ' ',
-            style: TextStyle(
-              fontSize: MSize.fS(14),
-              fontWeight: FontWeight.w400,
-              height: MSize.h(2.4),
-            ),
-          ),
-        ]),
-      );
-
-      if (!(i == chapter.verses.length - 1)) {
-        spans.add(const TextSpan(text: ' '));
-      }
-    }
-
     children.add(MSize.vS(40));
-
-    // if (loading) {
-    //   return SingleChildScrollView(
-    //     controller: scrollController,
-    //     child: Column(
-    //       children: const [
-    //         BibleSkeleton(),
-    //       ],
-    //     ),
-    //   );
-    // }
 
     return SingleChildScrollView(
       controller: scrollController,
-      padding: isAdmin ? MSize.pOnly(t: kToolbarHeight * 2.2) : null,
+      padding: isAdmin ? MSize.pOnly(t: kToolbarHeight * 1.8) : null,
       child: Column(children: children),
     );
   }
