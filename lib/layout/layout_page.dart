@@ -69,9 +69,7 @@ class LayoutPage extends ConsumerWidget {
         verified: (_) => const VerificationFeedbackPage(),
         unverified: (_) => const VerificationPage(),
         partiallyUnauthenticated: (_) => const LoginReturnPage(),
-        unauthenticated: (_) => LoginPage(
-          showLeading: AutoRouter.of(context).canNavigateBack,
-        ),
+        unauthenticated: (_) => const LoginPage(showLeading: false),
         adminAuth: (a) => const _AdminLayout(),
         guestAuth: (a) => const _GuestLayout(),
       ),
@@ -95,7 +93,7 @@ class _AdminLayout extends HookWidget {
 
     return AutoTabsScaffold(
       scaffoldKey: MKeys.layoutScaffoldKey,
-      extendBodyBehindAppBar: false,
+      extendBodyBehindAppBar: true,
       routes: routes,
       appBarBuilder: (context, tabsRouter) {
         WidgetsBinding.instance.addPostFrameCallback((_) {

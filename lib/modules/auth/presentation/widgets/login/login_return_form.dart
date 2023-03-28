@@ -1,12 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_button.dart';
-import 'package:meno_fe_v2/common/widgets/m_text_button.dart';
 import 'package:meno_fe_v2/common/widgets/m_text_form_field.dart';
-import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/application/login/login_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/application/login_return/login_return_notifier.dart';
@@ -66,16 +63,16 @@ class LoginReturnForm extends ConsumerWidget {
               (_) => null,
             ),
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: MTextButton(
-              title: 'Forgot Password?',
-              onPressed: () {
-                AutoRouter.of(context).push(const ForgotPasswordRoute());
-              },
-            ),
-          ),
-          MSize.vS(30),
+          // Align(
+          //   alignment: Alignment.centerRight,
+          //   child: MTextButton(
+          //     title: 'Forgot Password?',
+          //     onPressed: () {
+          //       AutoRouter.of(context).push(const ForgotPasswordRoute());
+          //     },
+          //   ),
+          // ),
+          MSize.vS(70),
           MButton(
             title: 'Login',
             loading: state.loading,

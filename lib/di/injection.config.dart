@@ -12,8 +12,6 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i17;
 import 'package:meno_fe_v2/di/register_module.dart' as _i43;
-import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart'
-    as _i32;
 import 'package:meno_fe_v2/modules/auth/application/login/login_notifier.dart'
     as _i19;
 import 'package:meno_fe_v2/modules/auth/domain/i_auth_facade.dart' as _i14;
@@ -139,8 +137,6 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i29.UserCredentialsMapper>(_i29.UserCredentialsMapper());
     gh.singleton<_i30.UserMapper>(_i30.UserMapper());
     gh.lazySingleton<_i31.VerseMapper>(() => _i31.VerseMapper());
-    gh.factory<_i32.AuthNotifier>(
-        () => _i32.AuthNotifier(gh<_i14.IAuthFacade>()));
     gh.factory<_i33.BibleLocalDatasource>(
         () => _i33.BibleLocalDatasource(gh<_i27.SharedPreferencesService>()));
     gh.factory<_i34.BroadcastLocalDatasource>(() =>

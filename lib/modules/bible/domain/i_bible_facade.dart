@@ -16,4 +16,8 @@ abstract class IBibleFacade {
   Future<Verse?> getVerse(String reference, String translation);
 
   Future<List<Verse?>> getVerses(String reference, String translation);
+
+  List<String> get books;
+
+  List<int> chapters(int book);
 }

@@ -21,25 +21,25 @@ class LoginPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           LoginForm(),
-          MSize.vS(15),
-          const Text('or', textAlign: TextAlign.center),
-          MSize.vS(15),
-          const MGoogleButton('Login with Google'),
-          MSize.vS(30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("Don't have an account?"),
-              MSize.hS(4),
-              MTextButton(
-                title: 'Create one',
-                onPressed: () {
-                  AutoRouter.of(context).push(const RegisterRoute());
-                },
-                fontWeight: FontWeight.w600,
-              ),
-            ],
-          ),
+          // MSize.vS(15),
+          // const Text('or', textAlign: TextAlign.center),
+          // MSize.vS(15),
+          // const MGoogleButton('Login with Google'),
+          // MSize.vS(30),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     const Text("Don't have an account?"),
+          //     MSize.hS(4),
+          //     MTextButton(
+          //       title: 'Create one',
+          //       onPressed: () {
+          //         AutoRouter.of(context).push(const RegisterRoute());
+          //       },
+          //       fontWeight: FontWeight.w600,
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

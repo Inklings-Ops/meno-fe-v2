@@ -39,6 +39,7 @@ class MScaffold extends HookWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0,
         leadingWidth: MSize.w(70),
         leading: Visibility(
           visible: showLeading,

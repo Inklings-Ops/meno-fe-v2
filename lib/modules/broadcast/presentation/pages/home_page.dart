@@ -5,11 +5,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
+import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/discover_meno_section.dart';
-import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/live_for_you_section.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/now_live_section.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/read_bible_section.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/read_blog_section.dart';
+import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
+import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_recent_broadcasts_list.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -27,6 +30,9 @@ class HomePage extends HookConsumerWidget {
       });
       return null;
     });
+
+    final profileState = ref.watch(profileProvider);
+    final isAdmin = ref.watch(roleProvider) == Role.admin;
 
     return SmartRefresher(
       controller: _refreshController,
@@ -71,14 +77,22 @@ class HomePage extends HookConsumerWidget {
         },
       ),
       child: SingleChildScrollView(
-        padding: MSize.pOnly(t: 20, b: 20),
+        padding: MSize.pOnly(t: isAdmin ? kToolbarHeight * 2.2 : 20, b: 20),
         child: Column(
           children: [
-            LiveForYouSection(onDiscoverPressed: () => goTo(1)),
-            MSize.vS(30),
+            // LiveForYouSection(onDiscoverPressed: () => goTo(1)),
+            // MSize.vS(30),
 
             const NowLiveSection(),
             MSize.vS(30),
+
+            SizedBox(
+              child: profileState.mapOrNull(
+                authUserLoaded: (value) {
+                  return ProfileRecentBroadcastList(profile: value.profile);
+                },
+              ),
+            ),
 
             // if (model.isFrequent) const RecentlyLiveSection(),
             // 30.verticalSpace,

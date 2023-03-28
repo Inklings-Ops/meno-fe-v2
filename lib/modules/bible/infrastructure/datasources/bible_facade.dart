@@ -77,4 +77,11 @@ class BibleFacade implements IBibleFacade {
     final chapter = _chapterMapper.toDomain(res.data)!;
     return chapter.verses;
   }
+
+  @override
+  List<String> get books =>
+      List<String>.from(_local.mapOfBookNamesToChapters.keys);
+
+  @override
+  List<int> chapters(int book) => _local.mapOfIdToChapters[book]!;
 }
