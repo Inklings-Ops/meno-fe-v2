@@ -40,24 +40,26 @@ class MScaffold extends HookWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
-        leadingWidth: MSize.w(70),
+        leadingWidth: MSize.w(100),
         leading: Visibility(
           visible: showLeading,
           child: GestureDetector(
             onTap: leadingAction ?? () => Navigator.of(context).pop(),
-            child: Padding(
-              padding: MSize.pOnly(l: 10.0),
-              child: Row(
-                children: [
-                  Icon(Icons.chevron_left, color: theme.primaryColorLight),
-                  Text(
-                    'Back',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                  )
-                ],
+            child: Flexible(
+              child: Padding(
+                padding: MSize.pOnly(l: 10.0),
+                child: Row(
+                  children: [
+                    Icon(Icons.chevron_left, color: theme.primaryColorLight),
+                    Text(
+                      'Back',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

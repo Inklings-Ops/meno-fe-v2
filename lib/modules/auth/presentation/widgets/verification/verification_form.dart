@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_button.dart';
 import 'package:meno_fe_v2/common/widgets/m_text_button.dart';
-import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/application/verification/verification_notifier.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -18,7 +17,7 @@ class VerificationForm extends ConsumerWidget {
 
     final state = ref.watch(verificationProvider);
     final event = ref.watch(verificationProvider.notifier);
-    final authEvent = ref.watch(authProvider.notifier);
+    // final authEvent = ref.watch(authProvider.notifier);
 
     ref.listen<VerificationState>(verificationProvider, (previous, next) {
       next.option.fold(
@@ -37,7 +36,7 @@ class VerificationForm extends ConsumerWidget {
           },
           (success) {
             ScaffoldMessenger.of(context).clearMaterialBanners();
-            authEvent.checkVerified();
+            // authEvent.checkVerified();
           },
         ),
       );

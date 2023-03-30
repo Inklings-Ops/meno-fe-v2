@@ -17,7 +17,7 @@ class BiblePage extends ConsumerWidget {
     final chapter = ref.watch(bibleProvider).chapter;
     final isAdmin = ref.watch(roleProvider) == Role.admin;
 
-    List<Widget> children = [];
+    List<Widget> children = [MSize.vS(10)];
     List<InlineSpan> spans = [];
 
     final textTheme = Theme.of(context).textTheme;

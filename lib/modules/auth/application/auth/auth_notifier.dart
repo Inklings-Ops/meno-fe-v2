@@ -41,6 +41,28 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   AuthNotifier(this._facade, this._ref) : super(const AuthState.initial());
 
+  // Future<void> checkAuthenticated() async {
+  //   final option = await _facade.authCredentials();
+  //   state = option.fold(
+  //     () => const AuthState.unauthenticated(),
+  //     (credentials) {
+  //       if (credentials?.token == null) {
+  //         return const AuthState.partiallyUnauthenticated();
+  //       } else if (credentials?.user?.verified == false) {
+  //         return const AuthState.unverified();
+  //       } else {
+  //         if (credentials?.user?.role == Role.admin) {
+  //           _ref.watch(roleProvider.notifier).state = Role.admin;
+  //           return AuthState.adminAuth(credentials!);
+  //         } else {
+  //           _ref.watch(roleProvider.notifier).state = Role.guest;
+  //           return AuthState.guestAuth(credentials!);
+  //         }
+  //       }
+  //     },
+  //   );
+  // }
+
   Future<void> checkAuthenticated() async {
     final option = await _facade.authCredentials();
     state = option.fold(
@@ -48,8 +70,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
       (credentials) {
         if (credentials?.token == null) {
           return const AuthState.partiallyUnauthenticated();
-        } else if (credentials?.user?.verified == false) {
-          return const AuthState.unverified();
         } else {
           if (credentials?.user?.role == Role.admin) {
             _ref.watch(roleProvider.notifier).state = Role.admin;

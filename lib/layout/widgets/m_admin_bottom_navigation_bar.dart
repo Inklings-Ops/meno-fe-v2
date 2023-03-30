@@ -4,6 +4,7 @@ import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/layout/widgets/m_bottom_navigation_bar_item.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class MAdminBottomNavigationBar extends StatefulWidget {
   const MAdminBottomNavigationBar({
@@ -50,8 +51,9 @@ class MAdminBottomNavigationBarState extends State<MAdminBottomNavigationBar> {
     }
 
     return Container(
-      height: MSize.h(94),
+      height: MSize.h(90),
       width: MSize.sw(1),
+      padding: MSize.pOnly(b: 14),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -71,27 +73,28 @@ class MAdminBottomNavigationBarState extends State<MAdminBottomNavigationBar> {
   }
 
   Future<void> onCreateBroadcast(BuildContext context) async {
-    AutoRouter.of(context).push(const CreateBroadcastRoute());
+    // AutoRouter.of(context).push(const CreateBroadcastRoute());
 
-    // final scaffoldContext = ScaffoldMessenger.of(context);
-    // final status = await Permission.microphone.request();
-    // if (status.isGranted || status.isLimited) {
-    //   if (context.mounted) {
-    //     showModalBottomSheet(
-    //       context: context,
-    //       isScrollControlled: true,
-    //       elevation: 0,
-    //       builder: (context) => const StartBroadcastBottomSheet(),
-    //     );
-    //   }
-    // } else if (status == PermissionStatus.permanentlyDenied) {
-    //   openAppSettings();
-    // } else {
-    //   scaffoldContext.showSnackBar(
-    //     const SnackBar(
-    //       content: Text('Please allow microphone permission for Menō'),
-    //     ),
-    //   );
-    // }
+    final scaffoldContext = ScaffoldMessenger.of(context);
+    final status = await Permission.microphone.request();
+    if (status.isGranted || status.isLimited) {
+      if (context.mounted) {
+        AutoRouter.of(context).push(const CreateBroadcastRoute());
+        // showModalBottomSheet(
+        //   context: context,
+        //   isScrollControlled: true,
+        //   elevation: 0,
+        //   builder: (context) => const StartBroadcastBottomSheet(),
+        // );
+      }
+    } else if (status == PermissionStatus.permanentlyDenied) {
+      openAppSettings();
+    } else {
+      scaffoldContext.showSnackBar(
+        const SnackBar(
+          content: Text('Please allow microphone permission for Menō'),
+        ),
+      );
+    }
   }
 }

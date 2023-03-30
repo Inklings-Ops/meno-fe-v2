@@ -37,7 +37,7 @@ class _MGuestBottomNavigationBarState extends State<MGuestBottomNavigationBar> {
     }
 
     return Container(
-      height: MSize.h(94),
+      height: MSize.h(kBottomNavigationBarHeight),
       width: MSize.sw(1),
       decoration: BoxDecoration(
         color: Colors.white,
