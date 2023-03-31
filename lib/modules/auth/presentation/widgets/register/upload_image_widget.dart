@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
@@ -24,6 +24,7 @@ class UploadImageWidget extends ConsumerWidget {
         await showModalBottomSheet(
           context: context,
           backgroundColor: Colors.transparent,
+          elevation: 0,
           builder: (context) => MImageSourceBottomSheet(
             fromGallery: () {
               event.avatarPicked(true);

@@ -45,21 +45,19 @@ class MScaffold extends HookWidget {
           visible: showLeading,
           child: GestureDetector(
             onTap: leadingAction ?? () => Navigator.of(context).pop(),
-            child: Flexible(
-              child: Padding(
-                padding: MSize.pOnly(l: 10.0),
-                child: Row(
-                  children: [
-                    Icon(Icons.chevron_left, color: theme.primaryColorLight),
-                    Text(
-                      'Back',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    )
-                  ],
-                ),
+            child: Padding(
+              padding: MSize.pOnly(l: 10.0),
+              child: Row(
+                children: [
+                  Icon(Icons.chevron_left, color: theme.primaryColorLight),
+                  Text(
+                    'Back',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  )
+                ],
               ),
             ),
           ),

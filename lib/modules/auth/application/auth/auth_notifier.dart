@@ -70,14 +70,15 @@ class AuthNotifier extends StateNotifier<AuthState> {
       (credentials) {
         if (credentials?.token == null) {
           return const AuthState.partiallyUnauthenticated();
-        } else {
-          if (credentials?.user?.role == Role.admin) {
+        }
+
+        switch (credentials?.user?.role) {
+          case Role.admin:
             _ref.watch(roleProvider.notifier).state = Role.admin;
             return AuthState.adminAuth(credentials!);
-          } else {
+          default:
             _ref.watch(roleProvider.notifier).state = Role.guest;
             return AuthState.guestAuth(credentials!);
-          }
         }
       },
     );

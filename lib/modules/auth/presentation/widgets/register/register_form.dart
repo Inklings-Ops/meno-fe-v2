@@ -38,8 +38,8 @@ class RegisterForm extends ConsumerWidget {
         }, (success) {
           ScaffoldMessenger.of(context).clearSnackBars();
           // authEvent.requestOTP(OtpType.verifyEmail);
-          authEvent.checkAuthenticated();
           AutoRouter.of(context).replaceAll([const LayoutRoute()]);
+          authEvent.checkAuthenticated();
         }),
       );
     });

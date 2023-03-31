@@ -17,48 +17,35 @@ class OnboardingButtons extends ConsumerWidget {
 
     return Visibility(
       visible: !event.isSkipVisible() && count != 0,
-      child: Column(
+      child: Wrap(
         children: [
-          MSize.vS(49),
-          Wrap(
-            children: [
-              MButton(
-                title: 'Login',
+          OutlinedButton(
+            onPressed: () {
+              event.onboardComplete();
+              AutoRouter.of(context).push(LoginRoute());
+            },
+            style: OutlinedButton.styleFrom(
+              fixedSize: Size(MSize.w(104), MSize.r(53)),
+              side: const BorderSide(color: Color(0xFF170B2B)),
+            ),
+            child: Text(
+              'Login',
+              style: TextStyle(
+                color: MColors.menoPurple,
                 fontSize: MSize.fS(16),
-                onPressed: () {
-                  event.onboardComplete();
-                  AutoRouter.of(context).push(LoginRoute());
-                },
+                fontWeight: FontWeight.w600,
               ),
-              OutlinedButton(
-                onPressed: () {
-                  event.onboardComplete();
-                  AutoRouter.of(context).push(LoginRoute());
-                },
-                style: OutlinedButton.styleFrom(
-                  fixedSize: Size(MSize.w(104), MSize.r(53)),
-                  side: const BorderSide(color: Color(0xFF170B2B)),
-                ),
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    color: MColors.menoPurple,
-                    fontSize: MSize.fS(16),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              MSize.hS(15),
-              MButton(
-                title: 'Get Started',
-                fontSize: MSize.fS(16),
-                fixedSize: Size(MSize.w(223), MSize.r(53)),
-                onPressed: () {
-                  event.onboardComplete();
-                  AutoRouter.of(context).push(const RegisterRoute());
-                },
-              ),
-            ],
+            ),
+          ),
+          MSize.hS(15),
+          MButton(
+            title: 'Get Started',
+            fontSize: MSize.fS(16),
+            fixedSize: Size(MSize.w(223), MSize.r(53)),
+            onPressed: () {
+              event.onboardComplete();
+              AutoRouter.of(context).push(const RegisterRoute());
+            },
           ),
         ],
       ),

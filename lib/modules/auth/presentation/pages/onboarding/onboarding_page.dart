@@ -58,6 +58,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 const OnboardingContent(),
                 MSize.vS(23),
                 const Dots(),
+                MSize.vS(23),
                 const OnboardingButtons(),
                 MSize.vS(56),
               ],

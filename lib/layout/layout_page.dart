@@ -143,7 +143,7 @@ class _GuestLayout extends HookWidget {
 
     return AutoTabsScaffold(
       scaffoldKey: MKeys.layoutScaffoldKey,
-      extendBodyBehindAppBar: false,
+      extendBodyBehindAppBar: true,
       routes: routes,
       appBarBuilder: (context, tabsRouter) {
         WidgetsBinding.instance.addPostFrameCallback((_) {

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
-import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
 import 'package:meno_fe_v2/modules/bible/application/bible/bible_notifier.dart';
 
 final _kFont = GoogleFonts.robotoSerif().fontFamily;
@@ -15,9 +13,8 @@ class BiblePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chapter = ref.watch(bibleProvider).chapter;
-    final isAdmin = ref.watch(roleProvider) == Role.admin;
 
-    List<Widget> children = [MSize.vS(10)];
+    List<Widget> children = [MSize.vS(20)];
     List<InlineSpan> spans = [];
 
     final textTheme = Theme.of(context).textTheme;
@@ -55,7 +52,7 @@ class BiblePage extends ConsumerWidget {
 
     return SingleChildScrollView(
       controller: scrollController,
-      padding: isAdmin ? MSize.pOnly(t: kToolbarHeight * 1.8) : null,
+      padding: MSize.pOnly(t: kToolbarHeight * 1.8),
       child: Column(children: children),
     );
   }
