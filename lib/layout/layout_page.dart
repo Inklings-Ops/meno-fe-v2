@@ -12,6 +12,7 @@ import 'package:meno_fe_v2/layout/widgets/exit_alert_dialog.dart';
 import 'package:meno_fe_v2/layout/widgets/m_admin_bottom_navigation_bar.dart';
 import 'package:meno_fe_v2/layout/widgets/m_app_bar.dart';
 import 'package:meno_fe_v2/layout/widgets/m_guest_bottom_navigation_bar.dart';
+import 'package:meno_fe_v2/layout/widgets/network_dialog.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_page.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/pages/login/login_return_page.dart';
@@ -21,6 +22,7 @@ import 'package:meno_fe_v2/modules/bible/presentation/widgets/bible_app_bar.dart
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/home/home_app_bar.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_app_bar.dart';
+import 'package:meno_fe_v2/services/network/network_notifier.dart';
 import 'package:meno_fe_v2/services/shared_preferences_service.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -53,6 +55,19 @@ class LayoutPage extends ConsumerWidget {
         adminAuth: (_) async => initLoad(),
         guestAuth: (_) async => initLoad(),
       );
+    });
+
+    ref.listen<NetworkStatus>(networkProvider, (previous, next) {
+      switch (next) {
+        case NetworkStatus.disconnected:
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => const NetworkDialog(),
+          );
+          break;
+        default:
+      }
     });
 
     Future<bool> onExit() async {
