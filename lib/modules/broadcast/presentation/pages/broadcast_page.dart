@@ -7,7 +7,8 @@ import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/di/injection.dart';
-import 'package:meno_fe_v2/modules/bible/presentation/pages/bible_page.dart';
+import 'package:meno_fe_v2/modules/bible/presentation/widgets/bible_reader.dart';
+import 'package:meno_fe_v2/modules/bible/presentation/widgets/scripture_selector.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/timer/timer_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
@@ -63,7 +64,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
               pinned: true,
               snap: true,
               floating: true,
-              toolbarHeight: isLive ? MSize.h(20) : MSize.h(40),
+              toolbarHeight: isLive ? MSize.h(0) : MSize.h(0),
               backgroundColor: Colors.white,
               scrolledUnderElevation: 0,
               bottom: TabBar(
@@ -115,7 +116,16 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
                 onStart: onStart,
               ),
               // const ComingSoonPage(),
-              const BiblePage(),
+              SingleChildScrollView(
+                primary: false,
+                child: Column(
+                  children: [
+                    MSize.vS(30),
+                    const ScriptureSelector(),
+                    const BibleReader(),
+                  ],
+                ),
+              ),
               // const ComingSoonPage(),
             ],
           ),
