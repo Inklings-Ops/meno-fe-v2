@@ -19,7 +19,7 @@ class StreamBottomSheetTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MSize.h(160),
+      height: MSize.h(140),
       width: MSize.sw(1),
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColorLight,
@@ -67,36 +67,37 @@ class StreamBottomSheetTitle extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TabBar(
-              controller: tabController,
-              indicatorSize: TabBarIndicatorSize.label,
-              labelStyle: TextStyle(
-                fontSize: MSize.fS(14),
-                color: Colors.black,
-              ),
-              labelPadding: EdgeInsets.zero,
-              indicatorColor: Colors.black,
-              indicatorWeight: MSize.r(0.6),
-              dividerColor: Colors.transparent,
-              padding: EdgeInsets.zero,
-              tabs: [
-                Tab(
-                  height: MSize.h(16),
-                  child: const Text('Chat'),
-                ),
-                Tab(
-                  height: MSize.h(16),
-                  child: const Text('Live bible'),
-                ),
-                Tab(
-                  height: MSize.h(16),
-                  child: const Text('Take Notes'),
-                ),
-              ],
-            ),
-          ),
+
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: TabBar(
+          //     controller: tabController,
+          //     indicatorSize: TabBarIndicatorSize.label,
+          //     labelStyle: TextStyle(
+          //       fontSize: MSize.fS(14),
+          //       color: Colors.black,
+          //     ),
+          //     labelPadding: EdgeInsets.zero,
+          //     indicatorColor: Colors.black,
+          //     indicatorWeight: MSize.r(0.6),
+          //     dividerColor: Colors.transparent,
+          //     padding: EdgeInsets.zero,
+          //     tabs: [
+          //       // Tab(
+          //       //   height: MSize.h(16),
+          //       //   child: const Text('Chat'),
+          //       // ),
+          //       Tab(
+          //         height: MSize.h(16),
+          //         child: const Text('Live bible'),
+          //       ),
+          //       // Tab(
+          //       //   height: MSize.h(16),
+          //       //   child: const Text('Take Notes'),
+          //       // ),
+          //     ],
+          //   ),
+          // ),
           MSize.vS(13),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
@@ -45,8 +46,8 @@ class NetworkDialog extends ConsumerWidget {
             ),
             MSize.vS(30),
             MButton(
-              title: 'Try Again',
-              onPressed: event.checkConnection,
+              title: 'Close',
+              onPressed: () => AutoRouter.of(context).pop(),
               loading: loading,
             ),
             MSize.vS(20),

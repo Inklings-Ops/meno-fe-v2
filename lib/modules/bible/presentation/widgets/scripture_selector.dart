@@ -16,7 +16,7 @@ class ScriptureSelector extends ConsumerWidget {
       // height: MSize.h(60),
       width: MSize.sh(1),
       alignment: Alignment.center,
-      padding: MSize.pFromLTRB(16, 0, 16, 8),
+      padding: MSize.pFromLTRB(16, 0, 16, 0),
       child: Row(
         children: [
           GestureDetector(

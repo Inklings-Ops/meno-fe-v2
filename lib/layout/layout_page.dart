@@ -33,14 +33,28 @@ const items = [
   BottomNavigationBarItem(label: 'Profile', icon: Icon(MIcons.Profile1)),
 ];
 
-class LayoutPage extends ConsumerWidget {
+class LayoutPage extends HookConsumerWidget {
   const LayoutPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final preferences = di<SharedPreferencesService>();
-
     final state = ref.watch(authProvider);
+    final networkState = ref.watch(networkProvider);
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (networkState == NetworkStatus.disconnected) {
+          showDialog(
+            context: context,
+            builder: (context) => const NetworkDialog(),
+          );
+        }
+      });
+
+      return () {};
+    }, [networkState]);
+
+    final preferences = di<SharedPreferencesService>();
 
     void initLoad() {
       if (preferences.hasKey(MKeys.initLogin) == false) {
@@ -55,19 +69,6 @@ class LayoutPage extends ConsumerWidget {
         adminAuth: (_) async => initLoad(),
         guestAuth: (_) async => initLoad(),
       );
-    });
-
-    ref.listen<NetworkStatus>(networkProvider, (previous, next) {
-      switch (next) {
-        case NetworkStatus.disconnected:
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => const NetworkDialog(),
-          );
-          break;
-        default:
-      }
     });
 
     Future<bool> onExit() async {

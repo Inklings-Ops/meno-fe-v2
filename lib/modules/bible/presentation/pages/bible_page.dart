@@ -10,7 +10,7 @@ class BiblePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       controller: scrollController,
-      padding: MSize.pOnly(t: kToolbarHeight * 1.8),
+      padding: MSize.pOnly(t: kToolbarHeight * 2.2),
       child: const BibleReader(),
     );
   }

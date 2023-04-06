@@ -18,16 +18,7 @@ class NetworkNotifier extends StateNotifier<NetworkStatus> {
     });
   }
 
-  Future<void> checkConnection() async {
-    state = NetworkStatus.loading;
-    Future.delayed(const Duration(seconds: 3));
-    final hasConn = await di<InternetConnectionChecker>().hasConnection;
-    if (hasConn) {
-      state = NetworkStatus.connected;
-    } else {
-      state = NetworkStatus.disconnected;
-    }
-  }
+ 
 }
 
 enum NetworkStatus { connected, disconnected, loading }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/layout/coming_soon_page.dart';
-import 'package:meno_fe_v2/modules/bible/presentation/pages/bible_page.dart';
+import 'package:meno_fe_v2/modules/bible/presentation/widgets/bible_reader.dart';
+import 'package:meno_fe_v2/modules/bible/presentation/widgets/scripture_selector.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_bottom_sheet_title.dart';
 
@@ -25,38 +25,30 @@ class StreamBottomSheet extends StatelessWidget {
       maxChildSize: 0.9,
       initialChildSize: 0.67,
       builder: (context, scrollController) {
-        return SingleChildScrollView(
-          controller: scrollController,
-          primary: false,
-          child: Container(
-            height: MSize.sh(0.9),
-            width: MSize.sw(1),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(MSize.r(30)),
+        return SizedBox(
+          height: MSize.sh(0.9),
+          width: MSize.sw(1),
+          child: SingleChildScrollView(
+            controller: scrollController,
+            primary: false,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(MSize.r(30)),
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                StreamBottomSheetTitle(
-                  broadcast: broadcast,
-                  tabController: tabController,
-                ),
-                Expanded(
-                  child: Container(
-                    color: Colors.white,
-                    child: TabBarView(
-                      controller: tabController,
-                      children: [
-                        const ComingSoonPage(),
-                        BiblePage(scrollController: scrollController),
-                        const ComingSoonPage(),
-                      ],
-                    ),
+              child: Column(
+                children: [
+                  StreamBottomSheetTitle(
+                    broadcast: broadcast,
+                    tabController: tabController,
                   ),
-                ),
-              ],
+                  MSize.vS(20),
+                  const ScriptureSelector(),
+                  const BibleReader(),
+                ],
+              ),
             ),
           ),
         );
