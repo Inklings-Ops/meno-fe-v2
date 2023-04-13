@@ -10,7 +10,6 @@ class NetworkDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final event = ref.watch(networkProvider.notifier);
     final loading = ref.watch(networkProvider) == NetworkStatus.loading;
 
     return Dialog(

@@ -5,8 +5,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_button.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
+import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
+import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 
 class BroadcastDetailsActionButtons extends HookConsumerWidget {
   const BroadcastDetailsActionButtons({super.key, required this.broadcast});
@@ -14,7 +16,11 @@ class BroadcastDetailsActionButtons extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(currentUserProvider).value;
     final broadcastEvent = ref.watch(broadcastProvider.notifier);
+
+    final isCreatorIsCurrentUser = currentUser?.id == broadcast.creator?.id;
+
     final loading = useState<bool>(false);
 
     ref.listen<BroadcastState>(broadcastProvider, (previous, next) {
@@ -51,6 +57,7 @@ class BroadcastDetailsActionButtons extends HookConsumerWidget {
               borderRadius: BorderRadius.circular(MSize.r(5)),
               padding: EdgeInsets.zero,
               loading: loading.value,
+              disabled: isCreatorIsCurrentUser,
               onPressed: () {
                 loading.value = true;
                 broadcastEvent.joinPressed(
@@ -60,22 +67,32 @@ class BroadcastDetailsActionButtons extends HookConsumerWidget {
               },
             ),
           ),
-          MSize.hS(8),
-          Expanded(
-            child: OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                padding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(MSize.r(5)),
+          if (isCreatorIsCurrentUser) ...[
+            MSize.hS(8),
+            Expanded(
+              child: OutlinedButton(
+                onPressed: () {
+                  ref
+                      .read(socketDataProvider.notifier)
+                      .endBroadcast(broadcast.id);
+                  Navigator.pop(context);
+                },
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(MSize.r(5)),
+                  ),
+                ),
+                child: Text(
+                  'End',
+                  style: TextStyle(fontSize: MSize.fS(12)),
                 ),
               ),
-              child: Text(
-                'Share',
-                style: TextStyle(fontSize: MSize.fS(12)),
-              ),
             ),
-          ),
+          ] else
+            const Spacer(),
         ],
       ),
     );

@@ -26,6 +26,21 @@ class BroadcastPage extends StatefulHookConsumerWidget {
 }
 
 class _BroadcastPageState extends ConsumerState<BroadcastPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.read(broadcastProvider.notifier).initialized(widget.broadcast);
+      await _agora.initialize(isHost: true);
+    });
+  }
+
+  @override
+  void dispose() {
+    _agora.dispose();
+    super.dispose();
+  }
+
   final _agora = di<AgoraService>();
 
   @override
@@ -84,18 +99,10 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
                     height: MSize.h(24),
                     child: const Tab(text: 'Broadcast'),
                   ),
-                  // SizedBox(
-                  //   height: MSize.h(24),
-                  //   child: const Tab(text: 'Notes'),
-                  // ),
                   SizedBox(
                     height: MSize.h(24),
                     child: const Tab(text: 'Live Bible'),
                   ),
-                  // SizedBox(
-                  //   height: MSize.h(24),
-                  //   child: const Tab(text: 'Chat'),
-                  // ),
                 ],
               ),
             ),
@@ -115,7 +122,6 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
                 },
                 onStart: onStart,
               ),
-              // const ComingSoonPage(),
               SingleChildScrollView(
                 primary: false,
                 child: Column(
@@ -126,21 +132,11 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
                   ],
                 ),
               ),
-              // const ComingSoonPage(),
             ],
           ),
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      ref.read(broadcastProvider.notifier).initialized(widget.broadcast);
-      await _agora.initialize(isHost: true);
-    });
   }
 
   Future<void> onDelete() async {

@@ -5,6 +5,7 @@ import 'package:meno_fe_v2/common/utils/terms_of_use.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/otp_type.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/role.dart';
+import 'package:meno_fe_v2/modules/auth/domain/entities/user.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user_credentials.dart';
 import 'package:meno_fe_v2/modules/auth/domain/i_auth_facade.dart';
 
@@ -16,6 +17,10 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
 });
 
 final roleProvider = StateProvider<Role>((ref) => Role.guest);
+
+final currentUserProvider = FutureProvider<User?>(
+  (ref) async => await di<IAuthFacade>().getUser(),
+);
 
 final termsOfUseProvider = Provider<Map<String, String>>((ref) {
   final role = ref.watch(roleProvider);
@@ -55,7 +60,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   //           _ref.watch(roleProvider.notifier).state = Role.admin;
   //           return AuthState.adminAuth(credentials!);
   //         } else {
-  //           _ref.watch(roleProvider.notifier).state = Role.guest;
+  //           _ref.watch(roleProvider.notifier).state = r;
   //           return AuthState.guestAuth(credentials!);
   //         }
   //       }
