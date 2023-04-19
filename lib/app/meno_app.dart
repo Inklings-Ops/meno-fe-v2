@@ -25,7 +25,6 @@ class MenoApp extends StatelessWidget {
           enableRefreshVibrate: false,
           enableLoadMoreVibrate: false,
           shouldFooterFollowWhenNotFull: (state) {
-            // If you want load more with noMoreData state ,may be you should return false
             return false;
           },
           child: MaterialApp.router(

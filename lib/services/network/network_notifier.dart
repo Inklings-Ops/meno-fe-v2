@@ -8,7 +8,7 @@ final networkProvider =
 });
 
 class NetworkNotifier extends StateNotifier<NetworkStatus> {
-  NetworkNotifier() : super(NetworkStatus.disconnected) {
+  NetworkNotifier() : super(NetworkStatus.connected) {
     di<InternetConnectionChecker>().onStatusChange.listen((event) {
       if (event == InternetConnectionStatus.connected) {
         state = NetworkStatus.connected;

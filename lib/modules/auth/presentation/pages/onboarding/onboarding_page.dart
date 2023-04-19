@@ -42,27 +42,25 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         backgroundColor: Colors.transparent,
         actions: [SkipButton(visible: event.isSkipVisible())],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          padding: MSize.pFromLTRB(16, 20, 16, 0),
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onHorizontalDragEnd: event.handleSwipe,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                MSize.vS(56),
-                Image.asset(item.imageUrl, width: MSize.w(268)),
-                MSize.vS(94),
-                const OnboardingContent(),
-                MSize.vS(23),
-                const Dots(),
-                MSize.vS(23),
-                const OnboardingButtons(),
-                MSize.vS(56),
-              ],
-            ),
+      body: Container(
+        alignment: Alignment.center,
+        padding: MSize.pFromLTRB(16, 20, 16, 0),
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onHorizontalDragEnd: event.handleSwipe,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Spacer(),
+              Image.asset(item.imageUrl, width: MSize.w(268)),
+              MSize.vS(94),
+              const OnboardingContent(),
+              MSize.vS(23),
+              const Dots(),
+              MSize.vS(23),
+              const OnboardingButtons(),
+              const Spacer(),
+            ],
           ),
         ),
       ),
