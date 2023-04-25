@@ -27,6 +27,7 @@ class OnboardingButtons extends ConsumerWidget {
             style: OutlinedButton.styleFrom(
               fixedSize: Size(MSize.w(104), MSize.r(53)),
               side: const BorderSide(color: Color(0xFF170B2B)),
+              padding: EdgeInsets.zero,
             ),
             child: Text(
               'Login',

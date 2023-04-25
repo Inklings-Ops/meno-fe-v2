@@ -23,7 +23,7 @@ class SkipButton extends ConsumerWidget {
           child: Text(
             'Skip',
             style: TextStyle(
-              fontSize: MSize.fS(18),
+              fontSize: MSize.fS(16),
               color: MColors.blackText1,
             ),
           ),

@@ -52,8 +52,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Spacer(),
-              Image.asset(item.imageUrl, width: MSize.w(268)),
-              MSize.vS(94),
+              Image.asset(item.imageUrl, width: MSize.w(248)),
+              MSize.vS(30),
               const OnboardingContent(),
               MSize.vS(23),
               const Dots(),
