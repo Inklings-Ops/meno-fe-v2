@@ -14,6 +14,7 @@ class OnboardingButtons extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final count = ref.watch(onboardingProvider);
     final event = ref.watch(onboardingProvider.notifier);
+    final textTheme = Theme.of(context).textTheme;
 
     return Visibility(
       visible: !event.isSkipVisible() && count != 0,
@@ -31,9 +32,8 @@ class OnboardingButtons extends ConsumerWidget {
             ),
             child: Text(
               'Login',
-              style: TextStyle(
+              style: textTheme.titleLarge?.copyWith(
                 color: MColors.menoPurple,
-                fontSize: MSize.fS(16),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -41,7 +41,7 @@ class OnboardingButtons extends ConsumerWidget {
           MSize.hS(15),
           MButton(
             title: 'Get Started',
-            fontSize: MSize.fS(16),
+            // fontSize: MSize.fS(16),
             fixedSize: Size(MSize.w(223), MSize.r(53)),
             onPressed: () {
               event.onboardComplete();

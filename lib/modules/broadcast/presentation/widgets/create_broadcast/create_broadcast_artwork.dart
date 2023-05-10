@@ -10,6 +10,8 @@ class CreateBroadcastArtwork extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     final state = ref.watch(broadcastFormProvider);
     final event = ref.watch(broadcastFormProvider.notifier);
 
@@ -49,8 +51,7 @@ class CreateBroadcastArtwork extends ConsumerWidget {
             child: Text(
               state.artwork != null ? 'Change?' : 'Add an \nartwork?',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: MSize.fS(14),
+              style: textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w500,
                 color: state.artwork != null
                     ? Colors.white

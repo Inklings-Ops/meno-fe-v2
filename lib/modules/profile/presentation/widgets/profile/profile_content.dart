@@ -27,6 +27,13 @@ class ProfileContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
+    final nameStyle = isTablet ? textTheme.displaySmall : textTheme.titleLarge;
+    final bioStyle = isTablet ? textTheme.titleLarge : textTheme.bodyMedium;
+
     final isAdmin = profile.role == Role.admin;
     final router = AutoRouter.of(context);
 
@@ -44,7 +51,7 @@ class ProfileContent extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             MAvatar(
-              radius: isAdmin ? MSize.r(50) : MSize.r(70),
+              radius: isAdmin ? MSize.r(50) : MSize.r(65),
               showBorder: true,
               image: profile.imageUrl != null
                   ? NetworkImage(profile.imageUrl!)
@@ -55,10 +62,7 @@ class ProfileContent extends ConsumerWidget {
               padding: MSize.pSymmetric(h: 16),
               child: Text(
                 profile.fullName.get()!,
-                style: TextStyle(
-                  fontSize: isAdmin ? MSize.fS(18) : MSize.fS(20),
-                  fontWeight: FontWeight.w500,
-                ),
+                style: nameStyle?.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
             MSize.vS(18),
@@ -68,15 +72,13 @@ class ProfileContent extends ConsumerWidget {
                 child: Text(
                   profile.bio!.get()!,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: MSize.fS(14),
+                  style: bioStyle?.copyWith(
                     fontWeight: FontWeight.w500,
-                    height: MSize.fS(1.3),
                     color: const Color(0xFF898A8D),
                   ),
                 ),
               ),
-              MSize.vS(16),
+              MSize.vS(20),
             ],
             if (isAdmin) ...[
               Padding(
@@ -180,11 +182,7 @@ class _AuthUserActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        EditProfileButton(),
-        // MSize.hS(13),
-        // const GoProButton(),
-      ],
+      children: const [EditProfileButton()],
     );
   }
 }

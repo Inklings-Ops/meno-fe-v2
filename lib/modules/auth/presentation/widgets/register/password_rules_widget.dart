@@ -21,6 +21,8 @@ class PasswordRuleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     Color ruleColor = password == null
         ? Colors.black54
         : !ruleMap['rule'](password)
@@ -39,10 +41,7 @@ class PasswordRuleItem extends StatelessWidget {
           MSize.hS(6),
           Text(
             ruleMap["name"].toString(),
-            style: TextStyle(
-              fontSize: MSize.fS(12),
-              color: ruleColor,
-            ),
+            style: textTheme.bodySmall?.copyWith(color: ruleColor),
           )
         ],
       ),

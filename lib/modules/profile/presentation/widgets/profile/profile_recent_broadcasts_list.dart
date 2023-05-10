@@ -22,6 +22,8 @@ class _ProfileRecentBroadcastListState
     extends ConsumerState<ProfileRecentBroadcastList> {
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     final broadcasts = ref.watch(broadcastProvider).currentUserBroadcasts;
 
     if (broadcasts == null) {
@@ -47,13 +49,10 @@ class _ProfileRecentBroadcastListState
             margin: MSize.pSymmetric(h: 16, v: 10),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: MColors.primaryLight,
+              color: MColors.primaryLight.withOpacity(0.4),
               borderRadius: BorderRadius.circular(MSize.r(16)),
             ),
-            child: Text(
-              'No Live Broadcast',
-              style: TextStyle(fontSize: MSize.r(16)),
-            ),
+            child: Text('No Live Broadcast', style: textTheme.titleLarge),
           )
         else
           SizedBox(

@@ -18,6 +18,13 @@ class ActivityCountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
+    final countStyle = isTablet ? textTheme.displaySmall : textTheme.titleLarge;
+    final labelStyle = isTablet ? textTheme.bodyLarge : textTheme.labelLarge;
+
     if (loading) {
       return const _Skeleton();
     }
@@ -26,22 +33,19 @@ class ActivityCountWidget extends StatelessWidget {
       onTap: onTap,
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
               '$count',
-              style: TextStyle(
+              style: countStyle?.copyWith(
                 color: Colors.black,
-                fontSize: MSize.fS(22),
                 fontWeight: FontWeight.w600,
                 height: MSize.h(1),
               ),
             ),
-            MSize.vS(7),
             Text(
               '$title',
-              style: TextStyle(
-                fontSize: MSize.fS(12),
+              style: labelStyle?.copyWith(
                 height: MSize.h(1),
                 color: const Color(0xFF898A8D),
               ),
@@ -54,24 +58,31 @@ class ActivityCountWidget extends StatelessWidget {
 }
 
 class _Skeleton extends StatelessWidget {
-  const _Skeleton({Key? key}) : super(key: key);
+  const _Skeleton();
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
+    final countStyle = isTablet ? textTheme.displaySmall : textTheme.titleLarge;
+    final labelStyle = isTablet ? textTheme.bodyLarge : textTheme.labelLarge;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SkeletonLine(
             style: SkeletonLineStyle(
-              height: MSize.fS(26),
+              height: countStyle?.fontSize,
               width: MSize.w(28),
             ),
           ),
           MSize.vS(7),
           SkeletonLine(
             style: SkeletonLineStyle(
-              height: MSize.fS(12),
+              height: labelStyle?.fontSize,
               width: MSize.w(65),
             ),
           )

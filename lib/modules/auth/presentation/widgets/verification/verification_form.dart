@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_button.dart';
-import 'package:meno_fe_v2/common/widgets/m_text_button.dart';
 import 'package:meno_fe_v2/modules/auth/application/verification/verification_notifier.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -14,6 +13,7 @@ class VerificationForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
 
     final state = ref.watch(verificationProvider);
     final event = ref.watch(verificationProvider.notifier);
@@ -63,8 +63,7 @@ class VerificationForm extends ConsumerWidget {
             backgroundColor: Colors.transparent,
             keyboardType: TextInputType.number,
             enableActiveFill: false,
-            textStyle: TextStyle(
-              fontSize: MSize.fS(24),
+            textStyle: textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
             pinTheme: PinTheme(
@@ -81,12 +80,17 @@ class VerificationForm extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Didn't receive any code?"),
-              MSize.hS(4),
-              MTextButton(
-                title: 'Request again',
-                onPressed: () {},
-                fontWeight: FontWeight.w600,
+              Text("Didn't receive any code?", style: textTheme.bodyMedium),
+              MSize.hS(2),
+              GestureDetector(
+                onTap: () {},
+                child: Text(
+                  "Request again",
+                  style: textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ],
           ),

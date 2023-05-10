@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -23,7 +24,10 @@ class _RecentBroadcastListPageState
     extends ConsumerState<RecentBroadcastListPage> {
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     final broadcasts = ref.watch(broadcastProvider).currentUserBroadcasts;
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -51,11 +55,10 @@ class _RecentBroadcastListPageState
             addSideMargin: true,
             showSeeAllButton: false,
           ),
-          MSize.vS(10),
-          MSize.vS(30),
+          MSize.vS(20),
           Container(
-            height: MSize.h(37),
-            padding: MSize.pSymmetric(h: 18),
+            alignment: Alignment.center,
+            margin: MSize.pSymmetric(h: 18),
             child: TextFormField(
               decoration: InputDecoration(
                 hintText: 'Search your recent broadcasts',
@@ -63,11 +66,12 @@ class _RecentBroadcastListPageState
                 filled: true,
                 fillColor: const Color(0xFFF0F0F0),
                 errorMaxLines: 5,
-                hintStyle: TextStyle(
+                hintStyle: textTheme.bodyLarge?.copyWith(
                   color: const Color(0xffc4c4c4),
-                  fontSize: MSize.fS(14),
+                  height: 1,
                   fontWeight: FontWeight.w400,
                 ),
+                contentPadding: EdgeInsets.zero,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(MSize.r(10)),
                   borderSide: const BorderSide(color: Color(0xff9D9D9D)),
@@ -83,17 +87,6 @@ class _RecentBroadcastListPageState
               ),
             ),
           ),
-          // MSize.vS(20),
-          // Padding(
-          //   padding: MSize.pSymmetric(h: 16),
-          //   child: Row(
-          //     children: [
-          //       const ChoiceChip(label: Text('All'), selected: true),
-          //       MSize.hS(20),
-          //       const ChoiceChip(label: Text('Subscribed'), selected: false),
-          //     ],
-          //   ),
-          // ),
           MSize.vS(20),
           if (broadcasts == null || broadcasts.isEmpty)
             GridView.count(
@@ -114,10 +107,10 @@ class _RecentBroadcastListPageState
               shrinkWrap: true,
               padding: MSize.pFromLTRB(16, 0, 16, 30),
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: isTablet ? 3 : 2,
                 mainAxisSpacing: 24,
-                childAspectRatio: 0.9,
+                childAspectRatio: isTablet ? 0.96 : 0.9,
                 crossAxisSpacing: 24,
               ),
               itemCount: broadcasts.length,
@@ -129,7 +122,7 @@ class _RecentBroadcastListPageState
 
                 return Container(
                   height: MSize.h(172),
-                  width: MSize.w(160),
+                  width: isTablet ? MSize.sw(0.28) : MSize.w(166),
                   padding: MSize.pSymmetric(v: 10, h: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(MSize.r(20)),
@@ -164,38 +157,39 @@ class _RecentBroadcastListPageState
                             ? const Icon(MIcons.Image2, color: MColors.disabled)
                             : null,
                       ),
-                      MSize.vS(6),
-                      Text(
+                      const Spacer(),
+                      AutoSizeText(
                         broadcast.title.get()!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: MSize.fS(12),
+                        minFontSize: 14,
+                        style: textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      MSize.vS(6),
+                      const Spacer(),
                       Text(
                         '$formattedNumber tuned in',
-                        style: TextStyle(
-                          fontSize: MSize.fS(12),
+                        style: textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w400,
                           color: const Color(0xFF6F6F6F),
                         ),
                       ),
-                      MSize.vS(5),
-                      Text(
+                      MSize.vS(4),
+                      AutoSizeText(
                         widget.profile.fullName.get()!,
                         maxLines: 1,
+                        minFontSize: 11,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: MSize.fS(12),
+                        maxFontSize: 12,
+                        style: textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w400,
                           color: const Color(0xFF6F6F6F),
                         ),
                       ),
+                      const Spacer(),
                     ],
                   ),
                 );

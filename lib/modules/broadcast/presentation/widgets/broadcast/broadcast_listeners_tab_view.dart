@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
@@ -9,22 +10,21 @@ class BroadcastListenersTabView extends HookConsumerWidget {
   final String broadcastId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // useEffect(() {
-    //   Future.delayed(Duration.zero, () {
-    //     final event = ref.read(socketDataProvider.notifier);
-    //     event.getBroadcastListeners(broadcastId);
-    //   });
-    //   return null;
-    // });
-
+    final textTheme = Theme.of(context).textTheme;
     final listeners = ref.watch(socketDataProvider).listeners;
 
     if (listeners == null || listeners.isEmpty) {
       return SizedBox(
-        height: MSize.sh(0.1),
+        // height: MSize.sh(0.1),
         width: MSize.sw(1),
-        child: const Center(
-          child: Text('No live listeners. Share.'),
+        child: Wrap(
+          spacing: 30,
+          children: [
+            MSize.vS(30),
+            Center(
+              child: Text('No live listeners.', style: textTheme.bodyLarge),
+            ),
+          ],
         ),
       );
     }
@@ -53,16 +53,15 @@ class BroadcastListenersTabView extends HookConsumerWidget {
                     : null,
               ),
               MSize.vS(5),
-              Text(
+              AutoSizeText(
                 listeners[index]!.fullName,
                 maxLines: 2,
                 softWrap: true,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.clip,
-                style: TextStyle(
-                  fontSize: MSize.fS(11),
-                  fontWeight: FontWeight.w400,
-                  height: MSize.h(1.07),
+                style: textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.normal,
+                  height: MSize.h(1),
                 ),
               )
             ],

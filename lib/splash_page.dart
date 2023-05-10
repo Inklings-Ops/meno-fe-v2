@@ -22,7 +22,7 @@ class SplashPage extends ConsumerWidget {
         child: CustomPaint(
           painter: SplashPageBackgroundPainter(),
           child: SplashScreen.callback(
-            width: MSize.sw(0.8),
+            width: MSize.sw(0.5),
             name: 'assets/animations/meno_splash.riv',
             onSuccess: (data) async {
               ref.read(authProvider.notifier).checkAuthenticated();

@@ -13,6 +13,7 @@ class UploadImageWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     final state = ref.watch(registerProvider);
     final event = ref.watch(registerProvider.notifier);
 
@@ -58,10 +59,7 @@ class UploadImageWidget extends ConsumerWidget {
           MSize.vS(4),
           Text(
             'Upload Image',
-            style: TextStyle(
-              fontSize: MSize.fS(14),
-              color: Colors.grey,
-            ),
+            style: textTheme.bodyMedium?.copyWith(color: Colors.grey),
           ),
         ],
       ),

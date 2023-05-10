@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
+import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
 import 'package:meno_fe_v2/common/widgets/m_scaffold.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
-import 'package:meno_fe_v2/layout/widgets/delete_account_alert_dialog.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -15,11 +15,20 @@ class SettingsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = AutoRouter.of(context);
 
-    Future<bool> onDeleteAccount() async {
-      return await showDialog(
+    Future<void> onDeleteAccount() async {
+      final shouldDelete = await showDialog<bool>(
         context: context,
-        builder: (context) => const DeleteAccountAlertDialog(),
+        builder: (context) => const MConfirmationDialog(
+          title: 'Delete Account?',
+          buttonTitle: 'Yes Delete',
+          content:
+              'You are about to delete your account? \nThis cannot be undone.',
+        ),
       );
+
+      if (shouldDelete == true) {
+        ref.read(authProvider.notifier).deleteUser();
+      }
     }
 
     return MScaffold(
@@ -46,12 +55,7 @@ class SettingsPage extends ConsumerWidget {
               tileColor: const Color.fromRGBO(244, 67, 54, 0.2),
               titleColor: Colors.red,
               iconColor: Colors.red,
-              onTap: () async {
-                final result = await onDeleteAccount();
-                if (result) {
-                  ref.read(authProvider.notifier).deleteUser();
-                }
-              },
+              onTap: onDeleteAccount,
             ),
             MSize.vS(15),
           ],
@@ -81,19 +85,20 @@ class SettingsListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       alignment: Alignment.center,
-      height: MSize.h(54),
       child: ListTile(
         onTap: onTap,
         dense: true,
-        leading:
-            leadingIcon != null ? Icon(leadingIcon, size: MSize.fS(20)) : null,
+        leading: leadingIcon != null ? Icon(leadingIcon) : null,
         title: Text(
           title,
-          style: TextStyle(fontSize: MSize.fS(14), color: titleColor),
+          style: textTheme.bodyLarge?.copyWith(color: titleColor),
         ),
-        trailing: Icon(MIcons.ArrowRight4, size: MSize.fS(16)),
+        contentPadding: MSize.pSymmetric(h: 12, v: 2),
+        trailing: const Icon(MIcons.ArrowRight4),
         iconColor: iconColor ?? Theme.of(context).primaryColor,
         minLeadingWidth: leadingIcon == null ? 0 : MSize.r(20),
         tileColor: tileColor ?? const Color(0xFFF6F7FB),

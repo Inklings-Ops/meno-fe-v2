@@ -7,6 +7,8 @@ class ResetPasswordUserHeaderDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -16,18 +18,16 @@ class ResetPasswordUserHeaderDetails extends StatelessWidget {
           children: [
             Text(
               'Welcome back,',
-              style: TextStyle(
+              style: textTheme.titleLarge?.copyWith(
                 color: Theme.of(context).primaryColorDark,
-                fontSize: MSize.fS(24),
               ),
             ),
             MSize.vS(2),
             Text(
               'Mimi Okigbo',
-              style: TextStyle(
+              style: textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).primaryColorDark,
-                fontSize: MSize.fS(24),
               ),
             ),
           ],

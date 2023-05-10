@@ -32,12 +32,11 @@ class MTextButton extends StatelessWidget {
         alignment: alignment ?? Alignment.center,
         fixedSize: size,
         minimumSize: Size(MSize.w(0), MSize.h(0)),
+        foregroundColor: color ?? Theme.of(context).primaryColor,
       ),
       child: Text(
         title,
         style: TextStyle(
-          color: color ?? Theme.of(context).primaryColor,
-          fontSize: fontSize ?? MSize.fS(14),
           fontWeight: fontWeight ?? FontWeight.w500,
         ),
       ),

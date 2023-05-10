@@ -89,7 +89,7 @@ class MTextFormField extends HookWidget {
           maxLength: maxLength,
           maxLengthEnforcement: MaxLengthEnforcement.enforced,
           style: TextStyle(
-            fontSize: fontSize ?? MSize.fS(16),
+            // fontSize: fontSize ?? MSize.fS(16),
             fontWeight: fontWeight ?? FontWeight.w500,
             color: const Color(0xff131313),
           ),
@@ -129,8 +129,8 @@ class _Label extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label!,
-      style: TextStyle(
-        fontSize: MSize.fS(14),
+      style: const TextStyle(
+        // fontSize: MSize.fS(14),
         fontWeight: FontWeight.w400,
       ),
     );

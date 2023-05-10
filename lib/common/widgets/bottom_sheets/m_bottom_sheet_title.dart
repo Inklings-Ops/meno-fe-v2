@@ -17,6 +17,8 @@ class MBottomSheetTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -41,9 +43,8 @@ class MBottomSheetTile extends StatelessWidget {
             MSize.hS(25),
             Text(
               title,
-              style: TextStyle(
+              style: textTheme.bodyLarge?.copyWith(
                 color: Theme.of(context).primaryColor,
-                fontSize: MSize.fS(16),
                 fontWeight: FontWeight.w500,
               ),
             )

@@ -12,22 +12,22 @@ class MSize {
   static r(num value) => value.r;
 
   /// Vertical Spacing
-  static vS(num height) => ScreenUtil().setVerticalSpacing(height);
+  static vS(num height) => height.verticalSpace;
 
   /// Horizontal Spacing
-  static hS(num width) => ScreenUtil().setHorizontalSpacing(width);
+  static hS(num width) => width.horizontalSpace;
 
   /// Height
-  static h(num height) => ScreenUtil().setHeight(height);
+  static h(num height) => height.h;
 
   /// Width
-  static w(num width) => ScreenUtil().setWidth(width);
+  static w(num width) => width.w;
 
   /// Screen height
-  static sh(num value) => ScreenUtil().screenHeight * value;
+  static sh(num value) => value.sh;
 
   /// Screen width
-  static sw(num value) => ScreenUtil().screenWidth * value;
+  static sw(num value) => value.sw;
 
   /// Padding all
   static pAll(double value) => EdgeInsets.all(value).r;

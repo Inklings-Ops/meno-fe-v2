@@ -11,6 +11,10 @@ class BroadcastNestedTabBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
     final controller = useTabController(initialLength: 1);
 
     final broadcast = ref.watch(broadcastProvider).broadcast;
@@ -23,10 +27,7 @@ class BroadcastNestedTabBar extends HookConsumerWidget {
           child: TabBar(
             controller: controller,
             indicatorSize: TabBarIndicatorSize.label,
-            labelStyle: TextStyle(
-              fontSize: MSize.fS(14),
-              color: Colors.black,
-            ),
+            labelStyle: isTablet ? textTheme.titleLarge : textTheme.titleMedium,
             labelPadding: EdgeInsets.zero,
             indicatorPadding: EdgeInsets.zero,
             indicatorColor: Colors.black,
@@ -35,10 +36,7 @@ class BroadcastNestedTabBar extends HookConsumerWidget {
             tabs: [
               // const Tab(text: 'Co-host(s)'),
               Tab(
-                child: ListenerCounter(
-                  broadcast: broadcast,
-                  fontSize: MSize.fS(16),
-                ),
+                child: ListenerCounter(broadcast: broadcast),
               ),
             ],
           ),

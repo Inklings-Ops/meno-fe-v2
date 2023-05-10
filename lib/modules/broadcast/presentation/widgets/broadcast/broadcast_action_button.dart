@@ -20,6 +20,8 @@ class BroadcastActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -37,18 +39,16 @@ class BroadcastActionButton extends StatelessWidget {
             child: loading
                 ? Padding(
                     padding: MSize.pAll(14.0),
-                    child: CircularProgressIndicator(
-                      strokeWidth: MSize.r(2),
-                    ),
+                    child: CircularProgressIndicator(strokeWidth: MSize.r(2)),
                   )
                 : Icon(icon, color: onTap == null ? MColors.disabled : color),
           ),
           MSize.vS(6),
           Text(
             title,
-            style: TextStyle(
-              fontSize: MSize.fS(10),
+            style: textTheme.labelLarge?.copyWith(
               color: onTap == null ? MColors.disabled : const Color(0xFFA4A4A4),
+              fontWeight: FontWeight.normal,
             ),
           ),
         ],

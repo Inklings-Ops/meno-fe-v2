@@ -18,13 +18,17 @@ class ProfileBroadcastCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
     var formattedNumber = NumberFormat.compact().format(0);
 
     return GestureDetector(
       onTap: () {},
       child: Container(
         height: MSize.h(194),
-        width: MSize.w(166),
+        width: isTablet ? MSize.sw(0.28) : MSize.w(166),
         padding: MSize.pSymmetric(v: 10, h: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(MSize.r(20)),
@@ -42,30 +46,29 @@ class ProfileBroadcastCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Spacer(),
             BroadcastCardArtwork(imageUrl: broadcast.imageUrl),
-            MSize.vS(10),
+            const Spacer(),
             AutoSizeText(
               broadcast.title.get()!,
-              maxLines: 1,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               minFontSize: 12,
-              maxFontSize: 12,
-              style: TextStyle(
-                fontSize: MSize.fS(12),
+              maxFontSize: 18,
+              style: textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
-            MSize.vS(6),
+            const Spacer(),
             Text(
               '$formattedNumber tuned in',
-              style: TextStyle(
-                fontSize: MSize.fS(12),
+              style: textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.w400,
                 color: const Color(0xFF6F6F6F),
               ),
             ),
-            MSize.vS(6),
+            MSize.vS(4),
             AutoSizeText(
               profile.fullName.get()!,
               maxLines: 1,
@@ -73,12 +76,12 @@ class ProfileBroadcastCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               maxFontSize: 12,
-              style: TextStyle(
-                fontSize: MSize.fS(12),
+              style: textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.w400,
                 color: const Color(0xFF6F6F6F),
               ),
             ),
+            const Spacer(),
           ],
         ),
       ),

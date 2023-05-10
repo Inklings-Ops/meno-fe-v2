@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
@@ -17,19 +16,11 @@ class BibleAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleWidget = AutoSizeText(
-      'Bible',
-      style: TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: MSize.fS(18),
-      ),
-    );
-
     return AppBar(
       toolbarHeight: MSize.r(90),
       elevation: 0,
       scrolledUnderElevation: 0,
-      title: titleWidget,
+      title: const Text('Bible'),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(MSize.h(0)),
         child: const ScriptureSelector(),
@@ -53,13 +44,13 @@ class _Avatar extends ConsumerWidget {
     return profileState.maybeWhen(
       orElse: () => SkeletonAvatar(
         style: SkeletonAvatarStyle(
-          height: MSize.r(42),
-          width: MSize.r(42),
+          height: MSize.r(36),
+          width: MSize.r(36),
           shape: BoxShape.circle,
         ),
       ),
       authUserLoaded: (profile) => MAvatar(
-        radius: MSize.r(21),
+        radius: MSize.r(18),
         onTap: onAvatarPressed,
         image:
             profile.imageUrl != null ? NetworkImage(profile.imageUrl!) : null,

@@ -14,6 +14,8 @@ class LeaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return GestureDetector(
       onTap: disabled ? null : onLeavePressed,
       child: Container(
@@ -24,9 +26,12 @@ class LeaveButton extends StatelessWidget {
           color: disabled ? MColors.disabled : Colors.red,
           borderRadius: BorderRadius.circular(MSize.r(5)),
         ),
-        child: const Text(
+        child: Text(
           'Leave',
-          style: TextStyle(color: Colors.white, height: 1),
+          style: textTheme.bodyLarge?.copyWith(
+            color: Colors.white,
+            height: 1,
+          ),
         ),
       ),
     );

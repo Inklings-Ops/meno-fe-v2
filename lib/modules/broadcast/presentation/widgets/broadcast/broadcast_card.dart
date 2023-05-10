@@ -13,6 +13,10 @@ class BroadcastCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
     return GestureDetector(
       onTap: () async {
         await showModalBottomSheet(
@@ -28,7 +32,7 @@ class BroadcastCard extends StatelessWidget {
       },
       child: Container(
         height: MSize.h(194),
-        width: MSize.w(166),
+        width: isTablet ? MSize.sw(0.28) : MSize.w(166),
         padding: MSize.pSymmetric(v: 10, h: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(MSize.r(20)),
@@ -46,27 +50,31 @@ class BroadcastCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Spacer(),
             BroadcastCardArtwork(imageUrl: broadcast.imageUrl),
-            MSize.vS(10),
+            const Spacer(),
             AutoSizeText(
               broadcast.title.get()!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              minFontSize: 12,
-              maxFontSize: 12,
-              style: TextStyle(
-                fontSize: MSize.fS(12),
+              minFontSize: 16,
+              style: textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
-            MSize.vS(6),
-            ListenerCounter(broadcast: broadcast, isListening: false),
-            MSize.vS(6),
+            const Spacer(),
+            ListenerCounter(
+              broadcast: broadcast,
+              isListening: false,
+              fontSize: 14,
+            ),
+            MSize.vS(4),
             CreatorWidget(
               creator: broadcast.creator!,
               alignment: MainAxisAlignment.center,
             ),
+            const Spacer(),
           ],
         ),
       ),

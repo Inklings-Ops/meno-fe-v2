@@ -13,7 +13,7 @@ class ProfileActivityCountWidget extends HookConsumerWidget {
 
     return state.maybeWhen(
       orElse: () => Padding(
-              padding: MSize.pSymmetric(h: 16),
+        padding: MSize.pSymmetric(h: 16),
         child: SizedBox(
           height: MSize.h(54),
           child: Row(
@@ -27,7 +27,7 @@ class ProfileActivityCountWidget extends HookConsumerWidget {
         ),
       ),
       authUserLoaded: (profile) => Padding(
-              padding: MSize.pSymmetric(h: 16),
+        padding: MSize.pSymmetric(h: 16),
         child: SizedBox(
           height: MSize.h(54),
           child: Row(

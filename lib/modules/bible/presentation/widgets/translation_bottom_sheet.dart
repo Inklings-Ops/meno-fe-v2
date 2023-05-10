@@ -12,6 +12,8 @@ class TranslationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     final translations = ref.watch(bibleProvider).translations;
     final chapter = ref.watch(bibleProvider).chapterNumber;
     final event = ref.watch(bibleProvider.notifier);
@@ -50,8 +52,7 @@ class TranslationBottomSheet extends HookConsumerWidget {
                       return ListTile(
                         title: Text(
                           translations[index].toUpperCase(),
-                          style: TextStyle(
-                            fontSize: MSize.fS(14),
+                          style: textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.w500,
                           ),
                         ),

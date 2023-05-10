@@ -35,11 +35,8 @@ class EditProfileButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return OutlinedButton.icon(
       onPressed: () async => showEditBottomSheet(context, ref),
-      icon: Icon(Icons.edit, size: MSize.r(12)),
-      label: Text(
-        'Edit details',
-        style: TextStyle(fontSize: MSize.fS(12)),
-      ),
+      icon: const Icon(Icons.edit),
+      label: const Text('Edit details'),
       style: OutlinedButton.styleFrom(
         fixedSize: Size(MSize.w(116), MSize.h(37)),
         padding: EdgeInsets.zero,

@@ -11,6 +11,8 @@ class TermsAndConditionsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     final termsOfUse = ref.watch(termsOfUseProvider);
 
     return Scaffold(
@@ -32,7 +34,7 @@ class TermsAndConditionsPage extends ConsumerWidget {
         ),
       ),
       body: ListView.builder(
-        padding: MSize.pSymmetric(h: 20, v: 16),
+        padding: MSize.pSymmetric(h: 20),
         itemCount: termsOfUse.length,
         itemBuilder: (context, index) {
           String key = termsOfUse.keys.elementAt(index);
@@ -43,7 +45,9 @@ class TermsAndConditionsPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  constraints: BoxConstraints(minHeight: MSize.fS(20)),
+                  constraints: BoxConstraints(
+                    minHeight: textTheme.titleLarge!.fontSize!,
+                  ),
                   decoration: BoxDecoration(
                     border: Border(
                       left: BorderSide(
@@ -59,14 +63,14 @@ class TermsAndConditionsPage extends ConsumerWidget {
                     maxFontSize: 20,
                     softWrap: true,
                     maxLines: 2,
-                    style: TextStyle(
+                    style: textTheme.titleLarge?.copyWith(
                       height: MSize.r(1.2),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 MSize.vS(4),
-                AutoSizeText(value),
+                AutoSizeText(value, style: textTheme.bodyLarge),
               ],
             ),
           );

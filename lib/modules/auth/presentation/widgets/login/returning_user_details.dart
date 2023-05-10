@@ -12,6 +12,8 @@ class ReturningUserDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     final state = ref.watch(loginReturnProvider);
     final authEvent = ref.watch(authProvider.notifier);
 
@@ -28,26 +30,24 @@ class ReturningUserDetails extends ConsumerWidget {
                 children: [
                   Text(
                     'Welcome back,',
-                    style: TextStyle(
+                    style: textTheme.titleMedium?.copyWith(
                       color: Theme.of(context).primaryColorDark,
-                      fontSize: MSize.fS(20),
                     ),
                   ),
                   if (state.fullName?.get() == null) ...[
                     MSize.hS(2),
                     SkeletonLine(
                       style: SkeletonLineStyle(
-                        height: MSize.fS(24),
+                        height: textTheme.titleLarge?.fontSize,
                         width: MSize.w(160),
                       ),
                     )
                   ] else
                     Text(
                       state.fullName!.get()!,
-                      style: TextStyle(
+                      style: textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).primaryColorDark,
-                        fontSize: MSize.fS(24),
                       ),
                     ),
                 ],

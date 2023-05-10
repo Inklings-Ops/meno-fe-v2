@@ -10,10 +10,12 @@ class ListenersList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     var formattedNumber = NumberFormat.compact().format(
       ref.watch(socketDataProvider).numberOfLiveListeners ?? 0,
     );
-    
+
     final listeners = ref.read(socketDataProvider).listeners;
 
     return SizedBox(
@@ -54,10 +56,7 @@ class ListenersList extends ConsumerWidget {
               MSize.hS(2),
               Text(
                 formattedNumber,
-                style: TextStyle(
-                  fontSize: MSize.fS(14),
-                  color: Colors.white,
-                ),
+                style: textTheme.titleLarge?.copyWith(color: Colors.white),
               ),
             ],
           ),

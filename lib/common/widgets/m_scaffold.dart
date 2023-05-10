@@ -33,6 +33,9 @@ class MScaffold extends HookWidget {
     animationController.repeat(reverse: true);
 
     final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
 
     return Scaffold(
       backgroundColor: backgroundColor ?? Colors.white,
@@ -43,24 +46,7 @@ class MScaffold extends HookWidget {
         leadingWidth: MSize.w(100),
         leading: Visibility(
           visible: showLeading,
-          child: GestureDetector(
-            onTap: leadingAction ?? () => Navigator.of(context).pop(),
-            child: Padding(
-              padding: MSize.pOnly(l: 10.0),
-              child: Row(
-                children: [
-                  Icon(Icons.chevron_left, color: theme.primaryColorLight),
-                  Text(
-                    'Back',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+          child: _BackButton(leadingAction: leadingAction),
         ),
       ),
       body: Stack(
@@ -85,7 +71,7 @@ class MScaffold extends HookWidget {
             child: CustomPaint(
               painter: MHeaderPainter(color: theme.primaryColor),
               child: Padding(
-                padding: MSize.pOnly(t: 90.0),
+                padding: MSize.pOnly(t: isTablet ? 70 : 90),
                 child: Stack(
                   fit: StackFit.passthrough,
                   clipBehavior: Clip.none,
@@ -93,10 +79,12 @@ class MScaffold extends HookWidget {
                     MRedDot(controller: animationController),
                     Text(
                       title,
-                      style: TextStyle(
+                      style: textTheme.displaySmall?.copyWith(
                         color: theme.primaryColorLight,
                         fontWeight: FontWeight.w600,
-                        fontSize: MSize.fS(24),
+                        fontSize: isTablet
+                            ? textTheme.displaySmall?.fontSize
+                            : textTheme.displaySmall!.fontSize! * 0.7,
                       ),
                     ),
                   ],
@@ -105,6 +93,36 @@ class MScaffold extends HookWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _BackButton extends StatelessWidget {
+  const _BackButton({required this.leadingAction});
+
+  final void Function()? leadingAction;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return GestureDetector(
+      onTap: leadingAction ?? () => Navigator.of(context).pop(),
+      child: Padding(
+        padding: MSize.pOnly(l: 10.0),
+        child: Row(
+          children: [
+            Icon(Icons.chevron_left, color: theme.primaryColorLight),
+            Text(
+              'Back',
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

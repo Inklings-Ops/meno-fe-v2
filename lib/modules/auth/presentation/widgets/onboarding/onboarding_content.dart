@@ -12,6 +12,8 @@ class OnboardingContent extends ConsumerWidget {
     final count = ref.watch(onboardingProvider);
     final item = onboardingItems[count];
 
+    final textTheme = Theme.of(context).textTheme;
+
     return IntrinsicWidth(
       child: Column(
         children: [
@@ -29,11 +31,10 @@ class OnboardingContent extends ConsumerWidget {
               Text(
                 item.title,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: textTheme.displayMedium?.copyWith(
                   color: const Color(0xFF131313),
                   letterSpacing: 0.36,
                   fontWeight: FontWeight.w700,
-                  fontSize: MSize.fS(30),
                 ),
               ),
             ],
@@ -44,11 +45,10 @@ class OnboardingContent extends ConsumerWidget {
             child: Text(
               item.body,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: textTheme.titleLarge?.copyWith(
                 color: const Color(0xFF131313),
                 letterSpacing: 0.36,
                 fontWeight: FontWeight.w400,
-                fontSize: MSize.fS(16),
               ),
             ),
           ),

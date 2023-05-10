@@ -22,6 +22,9 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
     useEffect(() {
       Future.delayed(Duration.zero, () {
         ref.watch(socketDataProvider.notifier).getLiveBroadcasts();
@@ -74,7 +77,9 @@ class HomePage extends HookConsumerWidget {
         },
       ),
       child: SingleChildScrollView(
-        padding: MSize.pOnly(t: kToolbarHeight * 2.2, b: 20),
+        padding: isTablet
+            ? MSize.pOnly(t: kToolbarHeight * 1.6, b: 20)
+            : MSize.pOnly(t: kToolbarHeight * 2, b: 20),
         child: Column(
           children: [
             // LiveForYouSection(onDiscoverPressed: () => goTo(1)),

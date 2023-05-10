@@ -13,7 +13,7 @@ class BroadcastListSkeleton extends StatelessWidget {
         itemCount: 8,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        separatorBuilder: (context, i) => MSize.hS(25),
+        separatorBuilder: (context, i) => MSize.hS(13),
         padding: MSize.pAll(16),
         itemBuilder: (context, index) {
           return const BroadcastCardSkeleton();
@@ -28,9 +28,12 @@ class BroadcastCardSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
     return Container(
       height: MSize.h(194),
-      width: MSize.w(166),
+      width: isTablet ? MSize.sw(0.28) : MSize.w(166),
       padding: MSize.pAll(12),
       decoration: BoxDecoration(
         color: Colors.white,

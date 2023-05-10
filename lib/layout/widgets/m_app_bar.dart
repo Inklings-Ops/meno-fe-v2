@@ -31,13 +31,7 @@ class MAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleWidget = Text(
-      title,
-      style: TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: MSize.fS(18),
-      ),
-    );
+    Widget titleWidget = Text(title);
 
     if (customTitle != null) {
       titleWidget = customTitle!;

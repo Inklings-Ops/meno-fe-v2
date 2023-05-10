@@ -12,6 +12,9 @@ class ForgotPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
     return MScaffold(
       title: 'Forgot Password',
       child: Column(
@@ -19,10 +22,7 @@ class ForgotPasswordPage extends StatelessWidget {
         children: [
           Text(
             "Please fill in your email address. You will receive a link to create a new password via email.",
-            style: TextStyle(
-              fontSize: MSize.fS(16),
-              fontWeight: FontWeight.w500,
-            ),
+            style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
           ),
           MSize.vS(50),
           Form(

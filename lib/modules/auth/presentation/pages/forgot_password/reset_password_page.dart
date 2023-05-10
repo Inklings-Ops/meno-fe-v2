@@ -13,6 +13,8 @@ class ResetPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return MScaffold(
       title: 'Reset Password',
       showLeading: false,
@@ -23,7 +25,7 @@ class ResetPasswordPage extends StatelessWidget {
           MSize.vS(4),
           Text(
             'Set up a new password to continue \nyour experience',
-            style: TextStyle(fontSize: MSize.fS(14)),
+            style: textTheme.bodyMedium,
           ),
           MSize.vS(36),
           MTextFormField(
@@ -31,7 +33,6 @@ class ResetPasswordPage extends StatelessWidget {
             isPassword: true,
             hint: 'Enter your password',
             prefixIcon: Icon(MIcons.Password1, size: MSize.r(22)),
-            // enabled: false,
           ),
           MSize.vS(4),
           // PasswordRulesWidget(passwordController: passwordController),

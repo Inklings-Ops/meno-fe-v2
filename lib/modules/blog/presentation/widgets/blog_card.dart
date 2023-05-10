@@ -9,6 +9,8 @@ class BlogCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return GestureDetector(
       onTap: () => AutoRouter.of(context).push(const BlogDetailsRoute()),
       child: Card(
@@ -28,7 +30,7 @@ class BlogCard extends StatelessWidget {
               Hero(
                 tag: 'blog-image',
                 child: Container(
-                  width: MSize.sw(0.37),
+                  width: MSize.w(130),
                   height: MSize.sh(1),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.horizontal(
@@ -36,6 +38,7 @@ class BlogCard extends StatelessWidget {
                     ),
                     image: const DecorationImage(
                       image: AssetImage('assets/images/a-call-to-abide.jpg'),
+                      alignment: Alignment.center,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -58,21 +61,18 @@ class BlogCard extends StatelessWidget {
                           child: AutoSizeText(
                             'A Call to Abide',
                             maxLines: 2,
-                            style: TextStyle(
-                              fontSize: MSize.fS(20),
+                            style: textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
                       ),
                     ),
-                    MSize.vS(8),
-                    AutoSizeText(
+                    Text(
                       'And having this confidence, I know that I shall abide and continue with you all for your furtherance and joy of faith; (Phil. 1:25)',
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: MSize.fS(12),
+                      style: textTheme.bodyMedium?.copyWith(
                         fontStyle: FontStyle.italic,
                         color: Colors.black45,
                       ),
@@ -87,10 +87,9 @@ class BlogCard extends StatelessWidget {
                           ),
                         ),
                         MSize.hS(8),
-                        AutoSizeText(
+                        Text(
                           'F.O.',
-                          style: TextStyle(
-                            fontSize: MSize.fS(12),
+                          style: textTheme.bodySmall?.copyWith(
                             color: Colors.black45,
                           ),
                         ),

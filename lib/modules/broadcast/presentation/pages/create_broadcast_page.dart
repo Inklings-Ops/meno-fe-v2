@@ -9,12 +9,6 @@ class CreateBroadcastPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final networkEvent = ref.watch(networkProvider.notifier);
-
-    // ref.listen<NetworkStatus>(networkProvider, (previous, next) async {
-    //   await networkEvent.networkHelperMethod(context, next);
-    // });
-
     return MScaffold(
       title: 'Broadcast \nDetails',
       padding: MSize.pOnly(t: 190, b: 20),

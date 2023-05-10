@@ -32,6 +32,8 @@ class MSectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     if (loading) {
       return Container(
         alignment: Alignment.centerLeft,
@@ -65,7 +67,9 @@ class MSectionTitle extends StatelessWidget {
         children: [
           Container(
             alignment: Alignment.centerLeft,
-            constraints: BoxConstraints(minHeight: MSize.fS(20)),
+            constraints: BoxConstraints(
+              minHeight: textTheme.titleMedium!.fontSize!,
+            ),
             decoration: BoxDecoration(
               border: !showBorder
                   ? null
@@ -81,7 +85,7 @@ class MSectionTitle extends StatelessWidget {
               title!,
               minFontSize: 19,
               maxFontSize: 22,
-              style: TextStyle(
+              style: textTheme.titleMedium?.copyWith(
                 height: MSize.r(1),
                 fontWeight: FontWeight.bold,
                 color: textColor,
@@ -102,8 +106,7 @@ class MSectionTitle extends StatelessWidget {
               onTap: seeAllAction,
               child: Text(
                 'See All',
-                style: TextStyle(
-                  fontSize: MSize.fS(14),
+                style: textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w500,
                   color: Colors.black54,
                 ),

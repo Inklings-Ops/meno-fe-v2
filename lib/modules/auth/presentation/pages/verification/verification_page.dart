@@ -11,6 +11,7 @@ class VerificationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(verificationProvider);
+    final textTheme = Theme.of(context).textTheme;
 
     return MScaffold(
       title: 'Verify your Email',
@@ -20,18 +21,12 @@ class VerificationPage extends ConsumerWidget {
         children: [
           Text(
             'Check Your Email',
-            style: TextStyle(
-              fontSize: MSize.fS(24),
-              fontWeight: FontWeight.w600,
-            ),
+            style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
           ),
           MSize.vS(10),
           RichText(
             text: TextSpan(
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: MSize.fS(14),
-              ),
+              style: textTheme.bodyLarge?.copyWith(color: Colors.black),
               children: [
                 const TextSpan(
                   text: 'Enter the 4-digit code we sent to ',

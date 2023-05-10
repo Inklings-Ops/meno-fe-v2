@@ -9,6 +9,8 @@ class ResetPasswordFeedbackPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: Padding(
         padding: MSize.pSymmetric(h: 16.0),
@@ -23,8 +25,7 @@ class ResetPasswordFeedbackPage extends StatelessWidget {
             MSize.vS(70),
             Text(
               'Success!',
-              style: TextStyle(
-                fontSize: MSize.fS(24),
+              style: textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -34,7 +35,7 @@ class ResetPasswordFeedbackPage extends StatelessWidget {
               child: Text(
                 'Your password has been reset Mimi. Phew! That was a close one',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: MSize.fS(16)),
+                style: textTheme.bodyLarge,
               ),
             ),
             MSize.vS(100),

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
@@ -39,6 +40,13 @@ class _BroadcastTabViewState extends ConsumerState<BroadcastTabView>
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
+    final titleStyle = isTablet ? textTheme.displaySmall : textTheme.titleLarge;
+    final nameStyle = isTablet ? textTheme.titleLarge : textTheme.bodyLarge;
+
     super.build(context);
 
     final theme = Theme.of(context);
@@ -57,15 +65,14 @@ class _BroadcastTabViewState extends ConsumerState<BroadcastTabView>
                 children: [
                   Padding(
                     padding: MSize.pSymmetric(h: 16),
-                    child: Text(
+                    child: AutoSizeText(
                       widget.broadcast.title.get()!,
                       maxLines: 2,
+                      minFontSize: 16,
+                      maxFontSize: 30,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: MSize.fS(19),
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: titleStyle?.copyWith(fontWeight: FontWeight.w600),
                     ),
                   ),
                   MSize.vS(10),
@@ -76,13 +83,12 @@ class _BroadcastTabViewState extends ConsumerState<BroadcastTabView>
                       children: [
                         Text(
                           widget.broadcast.creator!.fullName!,
-                          style: TextStyle(fontSize: MSize.fS(14)),
+                          style: nameStyle,
                         ),
                         MSize.hS(4),
                         Text(
                           'HOST',
-                          style: TextStyle(
-                            fontSize: MSize.fS(10),
+                          style: textTheme.labelSmall?.copyWith(
                             letterSpacing: MSize.fS(1),
                           ),
                         ),

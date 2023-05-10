@@ -8,6 +8,8 @@ class ExitAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return AlertDialog(
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.white,
@@ -17,10 +19,7 @@ class ExitAlertDialog extends StatelessWidget {
       title: Text(
         'Exit Meno?',
         textAlign: TextAlign.center,
-        style: TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: MSize.fS(24),
-        ),
+        style: textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w600),
       ),
       actions: [
         MButton(
@@ -34,8 +33,7 @@ class ExitAlertDialog extends StatelessWidget {
           onPressed: () => AutoRouter.of(context).pop(false),
           child: Text(
             'Cancel',
-            style: TextStyle(
-              fontSize: MSize.fS(16),
+            style: textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w600,
               color: Colors.black,
             ),

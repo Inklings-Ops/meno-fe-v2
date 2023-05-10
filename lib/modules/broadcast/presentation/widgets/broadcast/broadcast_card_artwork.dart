@@ -14,8 +14,8 @@ class BroadcastCardArtwork extends StatelessWidget {
 
     return Container(
       alignment: Alignment.center,
-      height: MSize.r(98),
-      width: MSize.r(98),
+      height: MSize.r(88),
+      width: MSize.r(88),
       decoration: BoxDecoration(
         color: Colors.transparent,
         shape: BoxShape.circle,
@@ -24,7 +24,7 @@ class BroadcastCardArtwork extends StatelessWidget {
         ),
       ),
       child: CircleAvatar(
-        radius: MSize.r(45),
+        radius: MSize.r(40),
         backgroundColor: Colors.white,
         foregroundImage: isImageNull ? null : NetworkImage(imageUrl!),
         child: isImageNull

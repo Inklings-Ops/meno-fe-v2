@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_scaffold.dart';
-import 'package:meno_fe_v2/common/widgets/m_text_button.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/auth/presentation/widgets/login/login_form.dart';
 
@@ -12,6 +11,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+    final redirectStyle = isTablet ? textTheme.bodyLarge : textTheme.bodyMedium;
+
     return MScaffold(
       title: "Login",
       padding: MSize.pOnly(t: 250),
@@ -24,14 +28,17 @@ class LoginPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Don't have an account?"),
-              MSize.hS(4),
-              MTextButton(
-                title: 'Create one',
-                onPressed: () {
-                  AutoRouter.of(context).push(const RegisterRoute());
-                },
-                fontWeight: FontWeight.w600,
+              Text("Don't have an account?", style: redirectStyle),
+              MSize.hS(2),
+              GestureDetector(
+                onTap: () => AutoRouter.of(context).push(const RegisterRoute()),
+                child: Text(
+                  'Create one',
+                  style: redirectStyle?.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ],
           ),

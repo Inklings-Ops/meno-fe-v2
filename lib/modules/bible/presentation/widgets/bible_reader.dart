@@ -11,12 +11,13 @@ class BibleReader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     final chapter = ref.watch(bibleProvider).chapter;
 
     List<Widget> children = [];
     List<InlineSpan> spans = [];
 
-    final textTheme = Theme.of(context).textTheme;
     final verseStyle = textTheme.bodyMedium?.copyWith(
       height: 2.1,
       fontFamily: _kFont,

@@ -23,6 +23,8 @@ class CreatorWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     if (loading) {
       return _Skeleton(showAvatar: showAvatar);
     }
@@ -33,7 +35,7 @@ class CreatorWidget extends ConsumerWidget {
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment:alignment,
+        mainAxisAlignment: alignment,
         children: [
           if (showAvatar) ...[
             MAvatar(
@@ -52,8 +54,7 @@ class CreatorWidget extends ConsumerWidget {
               textAlign: TextAlign.center,
               minFontSize: 11,
               maxFontSize: 12,
-              style: TextStyle(
-                fontSize: MSize.fS(12),
+              style: textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w400,
                 color: const Color(0xFF6F6F6F),
               ),

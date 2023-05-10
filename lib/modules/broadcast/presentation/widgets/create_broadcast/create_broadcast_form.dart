@@ -7,7 +7,6 @@ import 'package:meno_fe_v2/common/widgets/m_text_form_field.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/broadcast_form/broadcast_form_notifier.dart';
-import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/create_broadcast/add_cohost_button.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/create_broadcast/create_broadcast_artwork.dart';
 
 class CreateBroadcastForm extends ConsumerStatefulWidget {
@@ -57,6 +56,7 @@ class _CreateBroadcastFormState extends ConsumerState<CreateBroadcastForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          MSize.vS(20),
           const CreateBroadcastArtwork(),
           MSize.vS(10),
           MTextFormField(
@@ -90,9 +90,9 @@ class _CreateBroadcastFormState extends ConsumerState<CreateBroadcastForm> {
               (_) => null,
             ),
           ),
-          MSize.vS(10),
-          const AddCohostButton(),
-          MSize.vS(28),
+          // MSize.vS(10),
+          // const AddCohostButton(),
+          MSize.vS(30),
           MButton(
             title: 'Create Broadcast',
             onPressed: () => event.createPressed(),

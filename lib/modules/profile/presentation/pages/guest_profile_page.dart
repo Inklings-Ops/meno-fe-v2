@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_content.dart';
-import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_content_skeleton.dart';
 
 class GuestProfilePage extends ConsumerWidget {
   const GuestProfilePage({super.key});
@@ -13,11 +12,15 @@ class GuestProfilePage extends ConsumerWidget {
 
     return Scaffold(
       body: state.whenOrNull(
-        loading: () => const ProfileContentSkeleton(),
+        loading: () => _buildLoadingIndicator(),
         authUserLoaded: (profile) => ProfileContent(profile: profile),
-        otherUserLoaded: (profile) => const ProfileContentSkeleton(),
-        failed: () => const ProfileContentSkeleton(),
+        otherUserLoaded: (profile) => _buildLoadingIndicator(),
+        failed: () => _buildLoadingIndicator(),
       ),
     );
+  }
+
+  Widget _buildLoadingIndicator() {
+    return const Center(child: CircularProgressIndicator());
   }
 }

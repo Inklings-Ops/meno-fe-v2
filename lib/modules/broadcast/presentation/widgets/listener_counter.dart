@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 import 'package:meno_fe_v2/services/socket/socket_service.dart';
@@ -12,15 +11,20 @@ class ListenerCounter extends HookConsumerWidget {
     Key? key,
     required this.broadcast,
     this.isListening = true,
-    this.fontSize = 12.0,
+    this.fontSize,
   }) : super(key: key);
 
   final Broadcast broadcast;
   final bool isListening;
-  final double fontSize;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+    final style = isTablet ? textTheme.titleLarge : textTheme.titleMedium;
+
     SocketState socketState = ref.watch(socketDataProvider);
 
     useEffect(() {
@@ -37,9 +41,9 @@ class ListenerCounter extends HookConsumerWidget {
 
     return Text(
       isListening ? '$formattedNumber listening' : '$formattedNumber streaming',
-      style: TextStyle(
-        fontSize: MSize.fS(fontSize),
+      style: style?.copyWith(
         fontWeight: FontWeight.w400,
+        fontSize: fontSize,
         color: const Color(0xFF6F6F6F),
       ),
     );

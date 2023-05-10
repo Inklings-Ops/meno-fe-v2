@@ -10,13 +10,18 @@ class ScriptureSelector extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
+    final style = isTablet ? textTheme.bodyLarge : textTheme.bodyMedium;
+
     final state = ref.watch(bibleProvider);
 
     return Container(
-      // height: MSize.h(60),
       width: MSize.sh(1),
       alignment: Alignment.center,
-      padding: MSize.pFromLTRB(16, 0, 16, 0),
+      padding: MSize.pFromLTRB(14, 0, 14, 0),
       child: Row(
         children: [
           GestureDetector(
@@ -39,10 +44,7 @@ class ScriptureSelector extends ConsumerWidget {
               ),
               child: Text(
                 state.reference,
-                style: TextStyle(
-                  fontSize: MSize.fS(12),
-                  fontWeight: FontWeight.w500,
-                ),
+                style: style?.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
           ),
@@ -67,10 +69,7 @@ class ScriptureSelector extends ConsumerWidget {
               ),
               child: Text(
                 state.translation.toUpperCase(),
-                style: TextStyle(
-                  fontSize: MSize.fS(12),
-                  fontWeight: FontWeight.w500,
-                ),
+                style: style?.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
           ),

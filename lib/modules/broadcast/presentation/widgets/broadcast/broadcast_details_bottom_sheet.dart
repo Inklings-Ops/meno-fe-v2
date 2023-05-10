@@ -17,6 +17,8 @@ class BroadcastDetailsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return DraggableScrollableSheet(
       initialChildSize: MSize.r(0.35),
       minChildSize: MSize.r(0.35),
@@ -55,27 +57,14 @@ class BroadcastDetailsBottomSheet extends StatelessWidget {
                       MSize.vS(10),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding: MSize.pSymmetric(h: 16),
+                        padding: MSize.pSymmetric(h: 22),
                         child: Text(
                           broadcast.description!.get()!,
-                          style: TextStyle(
-                            fontSize: MSize.fS(14),
-                            height: MSize.h(1.6),
-                          ),
+                          style: textTheme.bodyLarge,
                         ),
                       ),
                     ],
                     MSize.vS(30),
-                    MSectionTitle(
-                      title: 'Recent Broadcasts',
-                      showBorder: false,
-                      addSideMargin: true,
-                      fontSize: MSize.fS(16),
-                    ),
-                    MSize.vS(6),
-                    // BroadcastList(
-                    //   broadcasts: allBroadcasts.where((e) => !e.live).toList(),
-                    // ),
                   ],
                 ),
               ),
@@ -94,6 +83,8 @@ class _TopSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Padding(
       padding: MSize.pSymmetric(h: 16),
       child: Row(
@@ -112,25 +103,22 @@ class _TopSection extends StatelessWidget {
                   softWrap: true,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  minFontSize: 14,
-                  maxFontSize: 18,
-                  style: TextStyle(
-                    fontSize: MSize.fS(18),
+                  minFontSize: 16,
+                  style: textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                MSize.vS(6),
                 Text(
                   broadcast.creator!.fullName!,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: MSize.fS(12)),
+                  style: textTheme.bodyLarge,
                 ),
                 MSize.vS(11),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ListenerCounter(broadcast: broadcast),
+                    ListenerCounter(broadcast: broadcast, fontSize: 16),
                     MSize.hS(12),
                     StatusIndicator(status: broadcast.status),
                   ],

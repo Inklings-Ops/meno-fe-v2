@@ -11,6 +11,8 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
         leadingWidth: MSize.w(70),
@@ -34,9 +36,9 @@ class AboutPage extends StatelessWidget {
           children: [
             const MSectionTitle(title: 'About Menō?', showSeeAllButton: false),
             MSize.vS(10),
-            const AutoSizeText(
+            AutoSizeText(
               "μένω ménō, men'-o; a primary verb; to stay (in a given place, state, relation or expectancy):—abide, continue, dwell, endure, be present, remain, stand, tarry (for)",
-              style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+              style: textTheme.bodyLarge?.copyWith(fontStyle: FontStyle.italic),
             ),
             MSize.vS(30),
             const MSectionTitle(
@@ -45,9 +47,9 @@ class AboutPage extends StatelessWidget {
               showSeeAllButton: false,
             ),
             MSize.vS(10),
-            const AutoSizeText(
+            AutoSizeText(
               "Menō is a devotional app for Christians that allows users to read different translations of the Christian Bible while also being able to read articles and blogs to help them grow spiritually.",
-              style: TextStyle(fontSize: 14),
+              style: textTheme.bodyLarge,
             ),
             MSize.vS(30),
             const MSectionTitle(
@@ -56,9 +58,9 @@ class AboutPage extends StatelessWidget {
               showSeeAllButton: false,
             ),
             MSize.vS(10),
-            const AutoSizeText(
+            AutoSizeText(
               "The vision of Menō is to see every Christian be able to easily access resources and tools beneficial for their spiritual growth.",
-              style: TextStyle(fontSize: 14),
+              style: textTheme.bodyLarge,
             ),
             MSize.vS(30),
             const MSectionTitle(
@@ -67,21 +69,21 @@ class AboutPage extends StatelessWidget {
               showSeeAllButton: false,
             ),
             MSize.vS(10),
-            const AutoSizeText(
+            AutoSizeText(
               "Read Bible & Blogs",
-              style: TextStyle(fontSize: 14),
+              style: textTheme.bodyLarge,
             ),
-            const AutoSizeText(
+            AutoSizeText(
               "Create Live Broadcasts (Coming Soon)",
-              style: TextStyle(fontSize: 14),
+              style: textTheme.bodyLarge,
             ),
-            const AutoSizeText(
+            AutoSizeText(
               "Join Broadcasts you subscribe to (Coming Soon)",
-              style: TextStyle(fontSize: 14),
+              style: textTheme.bodyLarge,
             ),
-            const AutoSizeText(
+            AutoSizeText(
               "Take Notes (Coming Soon)",
-              style: TextStyle(fontSize: 14),
+              style: textTheme.bodyLarge,
             ),
             MSize.vS(30),
             const MSectionTitle(

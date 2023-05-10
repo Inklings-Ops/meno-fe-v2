@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/bottom_sheets/m_bottom_sheet_handle.dart';
@@ -18,6 +19,8 @@ class StreamBottomSheetTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       height: MSize.h(140),
       width: MSize.sw(1),
@@ -36,13 +39,12 @@ class StreamBottomSheetTitle extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: MSize.pSymmetric(h: 16),
-              child: Text(
+              child: AutoSizeText(
                 broadcast.title.get()!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.w600,
-                  fontSize: MSize.fS(18),
                 ),
               ),
             ),
@@ -67,37 +69,6 @@ class StreamBottomSheetTitle extends StatelessWidget {
             ),
           ),
           const Spacer(),
-
-          // Align(
-          //   alignment: Alignment.centerLeft,
-          //   child: TabBar(
-          //     controller: tabController,
-          //     indicatorSize: TabBarIndicatorSize.label,
-          //     labelStyle: TextStyle(
-          //       fontSize: MSize.fS(14),
-          //       color: Colors.black,
-          //     ),
-          //     labelPadding: EdgeInsets.zero,
-          //     indicatorColor: Colors.black,
-          //     indicatorWeight: MSize.r(0.6),
-          //     dividerColor: Colors.transparent,
-          //     padding: EdgeInsets.zero,
-          //     tabs: [
-          //       // Tab(
-          //       //   height: MSize.h(16),
-          //       //   child: const Text('Chat'),
-          //       // ),
-          //       Tab(
-          //         height: MSize.h(16),
-          //         child: const Text('Live bible'),
-          //       ),
-          //       // Tab(
-          //       //   height: MSize.h(16),
-          //       //   child: const Text('Take Notes'),
-          //       // ),
-          //     ],
-          //   ),
-          // ),
           MSize.vS(13),
         ],
       ),

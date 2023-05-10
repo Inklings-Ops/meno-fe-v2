@@ -11,6 +11,8 @@ class PrivacyPolicyPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     final privacyPolicy = ref.watch(privacyPolicyProvider);
 
     return Scaffold(
@@ -34,7 +36,7 @@ class PrivacyPolicyPage extends ConsumerWidget {
       body: ListView.builder(
         shrinkWrap: true,
         primary: false,
-        padding: MSize.pSymmetric(h: 20, v: 16),
+        padding: MSize.pSymmetric(h: 20),
         itemCount: privacyPolicy.length,
         itemBuilder: (context, index) {
           String key = privacyPolicy.keys.elementAt(index);
@@ -45,7 +47,9 @@ class PrivacyPolicyPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  constraints: BoxConstraints(minHeight: MSize.fS(20)),
+                  constraints: BoxConstraints(
+                    minHeight: textTheme.titleLarge!.fontSize!,
+                  ),
                   decoration: BoxDecoration(
                     border: Border(
                       left: BorderSide(
@@ -61,14 +65,14 @@ class PrivacyPolicyPage extends ConsumerWidget {
                     maxFontSize: 20,
                     softWrap: true,
                     maxLines: 2,
-                    style: TextStyle(
+                    style: textTheme.titleLarge?.copyWith(
                       height: MSize.r(1.2),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 MSize.vS(4),
-                AutoSizeText(value),
+                AutoSizeText(value, style: textTheme.bodyLarge),
               ],
             ),
           );

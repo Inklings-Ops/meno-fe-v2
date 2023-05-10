@@ -26,6 +26,9 @@ class MAdminBottomNavigationBar extends StatefulWidget {
 class MAdminBottomNavigationBarState extends State<MAdminBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
     final List<Widget> tiles = <Widget>[];
 
     for (var i = 0; i < 4; i++) {
@@ -51,9 +54,10 @@ class MAdminBottomNavigationBarState extends State<MAdminBottomNavigationBar> {
     }
 
     return Container(
-      height: MSize.h(90),
+      height:
+          isTablet ? MSize.h(kBottomNavigationBarHeight * 1.2) : MSize.h(90),
       width: MSize.sw(1),
-      padding: MSize.pOnly(b: 14),
+      padding: isTablet ? MSize.pSymmetric(v: 6) : MSize.pOnly(b: 14, t: 6),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
@@ -17,6 +18,13 @@ class BroadcastFeedbackPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
+    final titleStyle = isTablet ? textTheme.displaySmall : textTheme.titleLarge;
+    final nameStyle = isTablet ? textTheme.titleLarge : textTheme.bodyLarge;
+
     final timerEvent = ref.watch(timerProvider.notifier);
     final listeners = ref.read(socketDataProvider).listeners;
 
@@ -30,34 +38,31 @@ class BroadcastFeedbackPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            AutoSizeText(
               broadcast.title.get()!,
+              maxLines: 2,
+              minFontSize: 16,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: MSize.fS(20),
+              style: titleStyle?.copyWith(
                 fontWeight: FontWeight.w600,
                 letterSpacing: MSize.r(0.25),
               ),
             ),
-            MSize.vS(15),
+            MSize.vS(6),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  '${broadcast.creator?.fullName}',
-                  style: TextStyle(fontSize: MSize.fS(14)),
-                ),
+                Text('${broadcast.creator?.fullName}', style: nameStyle),
                 MSize.hS(4),
                 Text(
                   'HOST',
-                  style: TextStyle(
-                    fontSize: MSize.fS(10),
+                  style: textTheme.labelSmall?.copyWith(
                     letterSpacing: MSize.fS(1),
                   ),
                 ),
               ],
             ),
-            MSize.vS(24),
+            const Spacer(),
             Container(
               height: MSize.r(164),
               width: MSize.r(164),
@@ -78,13 +83,13 @@ class BroadcastFeedbackPage extends ConsumerWidget {
                     : null,
               ),
             ),
-            MSize.vS(24),
+            MSize.vS(20),
             BroadcastTimer(
               placeholder: broadcast.timeElapsed != null
                   ? '0${durationString(broadcast.timeElapsed!)}'
                   : '00:00:00',
             ),
-            MSize.vS(24),
+            const Spacer(),
             SizedBox(
               height: MSize.h(36),
               width: MSize.w(30 * (listeners?.length ?? 0)),
@@ -105,12 +110,11 @@ class BroadcastFeedbackPage extends ConsumerWidget {
                 ],
               ),
             ),
-            MSize.vS(18),
+            MSize.vS(6),
             Text(
               numberOfListeners(),
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: MSize.fS(16),
+              style: textTheme.bodyLarge?.copyWith(
                 color: const Color(0xFF9D9D9D),
               ),
             ),

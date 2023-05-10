@@ -14,6 +14,8 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     final profileState = ref.watch(profileProvider);
 
     return profileState.maybeWhen(
@@ -30,25 +32,27 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
           children: [
             Text(
               'Hello,',
-              style: TextStyle(
+              style: textTheme.titleMedium?.copyWith(
                 color: Theme.of(context).primaryColorDark,
                 fontWeight: FontWeight.w400,
-                fontSize: MSize.fS(18),
+                height: 1,
+                letterSpacing: 0,
               ),
             ),
             Text(
               profile.fullName.get()!,
-              style: TextStyle(
+              style: textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).primaryColorDark,
-                fontSize: MSize.fS(18),
+                letterSpacing: 0,
+                fontSize: textTheme.titleLarge!.fontSize! * 0.85,
               ),
             ),
           ],
         ),
         actions: [
           MAvatar(
-            radius: MSize.r(21),
+            radius: MSize.r(18),
             onTap: onAvatarPressed,
             image: profile.imageUrl != null
                 ? NetworkImage(profile.imageUrl!)
@@ -66,6 +70,8 @@ class _AppBarSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return AppBar(
       toolbarHeight: MSize.r(100),
       leading: const SizedBox(),
@@ -76,13 +82,13 @@ class _AppBarSkeleton extends StatelessWidget {
         children: [
           SkeletonLine(
             style: SkeletonLineStyle(
-              height: MSize.fS(18),
+              height: textTheme.titleMedium!.fontSize!,
               width: MSize.w(60),
             ),
           ),
           SkeletonLine(
             style: SkeletonLineStyle(
-              height: MSize.fS(18),
+              height: textTheme.titleMedium!.fontSize!,
               width: MSize.w(160),
             ),
           )
@@ -99,8 +105,8 @@ class _AppBarSkeleton extends StatelessWidget {
         MSize.hS(16),
         SkeletonAvatar(
           style: SkeletonAvatarStyle(
-            height: MSize.r(42),
-            width: MSize.r(42),
+            height: MSize.r(36),
+            width: MSize.r(36),
             shape: BoxShape.circle,
           ),
         ),

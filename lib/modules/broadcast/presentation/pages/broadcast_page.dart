@@ -45,6 +45,10 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
     final tinker = useSingleTickerProvider();
     final tabController = useTabController(initialLength: 2, vsync: tinker);
 
@@ -85,10 +89,8 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
               bottom: TabBar(
                 controller: tabController,
                 indicatorSize: TabBarIndicatorSize.label,
-                labelStyle: TextStyle(
-                  fontSize: MSize.fS(14),
-                  color: Colors.black,
-                ),
+                labelStyle:
+                    isTablet ? textTheme.titleLarge : textTheme.titleMedium,
                 labelPadding: EdgeInsets.zero,
                 indicatorColor: Colors.black,
                 indicatorWeight: MSize.r(0.6),

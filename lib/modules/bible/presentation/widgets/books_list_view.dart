@@ -9,6 +9,8 @@ class BooksListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     final event = ref.watch(bibleProvider.notifier);
     final books = ref.watch(bibleProvider).books;
 
@@ -18,10 +20,7 @@ class BooksListView extends ConsumerWidget {
         return ListTile(
           title: Text(
             books[i].name.last,
-            style: TextStyle(
-              fontSize: MSize.fS(14),
-              fontWeight: FontWeight.w500,
-            ),
+            style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
           ),
           dense: true,
           contentPadding: MSize.pSymmetric(h: 20, v: 0),

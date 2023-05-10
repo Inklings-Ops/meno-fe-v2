@@ -11,6 +11,8 @@ class BroadcastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     if (broadcasts.isEmpty) {
       return Container(
         height: MSize.h(206),
@@ -18,13 +20,10 @@ class BroadcastList extends StatelessWidget {
         margin: MSize.pSymmetric(h: 16, v: 10),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: MColors.primaryLight,
+          color: MColors.primaryLight.withOpacity(0.6),
           borderRadius: BorderRadius.circular(MSize.r(16)),
         ),
-        child: Text(
-          'No Live Broadcast',
-          style: TextStyle(fontSize: MSize.r(16)),
-        ),
+        child: Text('No Live Broadcast', style: textTheme.bodyLarge),
       );
     }
 

@@ -103,6 +103,16 @@ class MTheme {
           ),
         ),
       ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: MColors.primary,
+          // fixedSize: Size.fromHeight(MSize.r(53)),
+          // padding: EdgeInsets.symmetric(vertical: MSize.r(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(MSize.r(10)),
+          ),
+        ),
+      ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,

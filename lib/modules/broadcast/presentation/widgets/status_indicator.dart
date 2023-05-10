@@ -16,8 +16,10 @@ class _StatusIndicatorState extends State<StatusIndicator> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
-      height: widget.height ?? MSize.h(16),
+      height: widget.height ?? MSize.h(18),
       padding: MSize.pSymmetric(h: 8),
       alignment: Alignment.center,
       decoration: BoxDecoration(
@@ -26,8 +28,7 @@ class _StatusIndicatorState extends State<StatusIndicator> {
       ),
       child: Text(
         statusText().toUpperCase(),
-        style: TextStyle(
-          fontSize: MSize.fS(11),
+        style: textTheme.bodyMedium?.copyWith(
           fontWeight: FontWeight.w600,
           color: statusColor(),
           letterSpacing: MSize.fS(1),

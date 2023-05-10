@@ -9,6 +9,8 @@ class BlogDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -56,13 +58,12 @@ class BlogDetailsPage extends StatelessWidget {
                             tag: 'blog-title',
                             child: Padding(
                               padding: MSize.pOnly(l: 4, r: 18),
-                              child: const Material(
+                              child: Material(
                                 color: Colors.transparent,
                                 child: AutoSizeText(
                                   'A Call to Abide',
                                   maxLines: 2,
-                                  // minFontSize: 18,
-                                  style: TextStyle(
+                                  style: textTheme.titleLarge?.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -83,10 +84,9 @@ class BlogDetailsPage extends StatelessWidget {
           padding: MSize.pAll(18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               AutoSizeText.rich(
-                TextSpan(
-                  style: TextStyle(color: Colors.black87),
+                const TextSpan(
                   children: [
                     TextSpan(
                       text:
@@ -158,7 +158,7 @@ class BlogDetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                minFontSize: 14,
+                style: textTheme.bodyLarge?.copyWith(color: Colors.black87),
               ),
             ],
           ),

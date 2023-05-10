@@ -12,6 +12,7 @@ class SkipButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final event = ref.watch(onboardingProvider.notifier);
+    final textTheme = Theme.of(context).textTheme;
 
     return Visibility(
       visible: event.isSkipVisible(),
@@ -22,10 +23,7 @@ class SkipButton extends ConsumerWidget {
           padding: MSize.pSymmetric(h: 16),
           child: Text(
             'Skip',
-            style: TextStyle(
-              fontSize: MSize.fS(16),
-              color: MColors.blackText1,
-            ),
+            style: textTheme.titleLarge?.copyWith(color: MColors.blackText1),
           ),
         ),
       ),

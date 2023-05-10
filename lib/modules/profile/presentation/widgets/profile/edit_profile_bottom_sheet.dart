@@ -14,6 +14,8 @@ class EditProfileBottomSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+
     final state = ref.watch(profileFormProvider);
     final event = ref.watch(profileFormProvider.notifier);
     final profileEvent = ref.watch(profileProvider.notifier);
@@ -66,8 +68,7 @@ class EditProfileBottomSheet extends ConsumerWidget {
                     Text(
                       'Edit Profile Details',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: MSize.fS(16),
+                      style: textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w500,
                       ),
                     ),

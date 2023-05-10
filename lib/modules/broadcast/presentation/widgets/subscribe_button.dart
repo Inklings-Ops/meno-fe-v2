@@ -8,6 +8,8 @@ class SubscribeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       height: MSize.h(23),
       width: MSize.w(97),
@@ -21,10 +23,7 @@ class SubscribeButton extends StatelessWidget {
         children: [
           Text(
             'Subscribed',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: MSize.fS(14),
-            ),
+            style: textTheme.bodyLarge?.copyWith(color: Colors.white),
           ),
           Icon(
             Icons.check,

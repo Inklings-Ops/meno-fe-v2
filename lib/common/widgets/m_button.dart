@@ -91,11 +91,16 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+    final style = isTablet ? textTheme.titleLarge : textTheme.titleMedium;
+
     return Text(
       title,
-      style: TextStyle(
+      style: style?.copyWith(
         color: titleColor ?? Theme.of(context).colorScheme.onPrimary,
-        fontSize: fontSize ?? MSize.fS(18),
+        fontSize: fontSize,
         fontWeight: fontWeight ?? FontWeight.w600,
       ),
     );

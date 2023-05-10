@@ -53,7 +53,6 @@ class BroadcastDetailsActionButtons extends HookConsumerWidget {
           Expanded(
             child: MButton(
               title: 'Join',
-              fontSize: MSize.fS(12),
               borderRadius: BorderRadius.circular(MSize.r(5)),
               padding: EdgeInsets.zero,
               loading: loading.value,
@@ -70,25 +69,19 @@ class BroadcastDetailsActionButtons extends HookConsumerWidget {
           if (isCreatorIsCurrentUser) ...[
             MSize.hS(8),
             Expanded(
-              child: OutlinedButton(
+              child: MButton(
+                title: 'End',
+                borderRadius: BorderRadius.circular(MSize.r(5)),
+                padding: EdgeInsets.zero,
+                loading: loading.value,
+                color: Colors.red,
+                titleColor: Colors.white,
                 onPressed: () {
                   ref
                       .read(socketDataProvider.notifier)
                       .endBroadcast(broadcast.id);
                   Navigator.pop(context);
                 },
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(MSize.r(5)),
-                  ),
-                ),
-                child: Text(
-                  'End',
-                  style: TextStyle(fontSize: MSize.fS(12)),
-                ),
               ),
             ),
           ] else

@@ -46,7 +46,7 @@ class MAvatar extends StatelessWidget {
             ? Icon(
                 icon,
                 color: iconColor,
-                size: MSize.r((secondaryRadius * 0.9)),
+                size: MSize.r((secondaryRadius * 0.56)),
               )
             : null,
       ),

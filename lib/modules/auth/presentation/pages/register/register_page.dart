@@ -9,6 +9,8 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return MScaffold(
       title: 'Register',
       padding: MSize.pOnly(t: 170),
@@ -21,12 +23,16 @@ class RegisterPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text("Already have an account? Please "),
+              Text(
+                "Already have an account? Please ",
+                style: textTheme.bodyMedium,
+              ),
+              MSize.hS(2),
               GestureDetector(
                 onTap: () => AutoRouter.of(context).pop(),
                 child: Text(
                   "Login",
-                  style: TextStyle(
+                  style: textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w500,
                   ),

@@ -18,6 +18,7 @@ class MBottomNavigationBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
 
     final itemColor = selected
@@ -49,7 +50,10 @@ class MBottomNavigationBarItem extends StatelessWidget {
                   data: IconThemeData(color: itemColor),
                   child: item.icon,
                 ),
-                Text(item.label!, style: TextStyle(color: itemColor))
+                Text(
+                  item.label!,
+                  style: textTheme.labelLarge?.copyWith(color: itemColor),
+                )
               ],
             ),
     );
