@@ -9,9 +9,7 @@ import 'package:meno_fe_v2/modules/auth/application/login/login_notifier.dart';
 import 'package:meno_fe_v2/modules/auth/application/login_return/login_return_notifier.dart';
 
 class LoginReturnForm extends ConsumerWidget {
-  final formKey = GlobalKey<FormState>();
-
-  LoginReturnForm({super.key});
+  const LoginReturnForm({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,8 +42,6 @@ class LoginReturnForm extends ConsumerWidget {
     });
 
     return Form(
-      key: formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -77,11 +73,7 @@ class LoginReturnForm extends ConsumerWidget {
             title: 'Login',
             loading: state.loading,
             disabled: !event.isFormValid || loginState.googleButtonLoading,
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                event.loginPressed();
-              }
-            },
+            onPressed: event.loginPressed,
           ),
         ],
       ),

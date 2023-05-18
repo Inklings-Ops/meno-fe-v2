@@ -23,7 +23,7 @@ class LoginReturnPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const ReturningUserDetails(),
-            LoginReturnForm(),
+            const LoginReturnForm(),
             MSize.vS(15),
             // const Text('or', textAlign: TextAlign.center),
             // MSize.vS(15),

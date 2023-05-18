@@ -17,7 +17,7 @@ class RegisterPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          RegisterForm(),
+          const RegisterForm(),
           MSize.vS(30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

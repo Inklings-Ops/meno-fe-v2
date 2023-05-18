@@ -13,8 +13,7 @@ import 'package:meno_fe_v2/modules/auth/application/login/login_notifier.dart';
 import 'package:meno_fe_v2/services/shared_preferences_service.dart';
 
 class LoginForm extends ConsumerWidget {
-  final formKey = GlobalKey<FormState>();
-  LoginForm({super.key});
+  const LoginForm({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,7 +49,6 @@ class LoginForm extends ConsumerWidget {
     });
 
     return Form(
-      key: formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -96,11 +94,7 @@ class LoginForm extends ConsumerWidget {
             title: 'Login',
             loading: state.loading,
             disabled: !event.isFormValid || state.googleButtonLoading,
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                event.loginPressed();
-              }
-            },
+            onPressed: event.loginPressed,
           ),
         ],
       ),

@@ -12,9 +12,7 @@ import 'package:meno_fe_v2/modules/auth/presentation/widgets/register/password_r
 import 'package:meno_fe_v2/modules/auth/presentation/widgets/register/upload_image_widget.dart';
 
 class RegisterForm extends ConsumerWidget {
-  final formKey = GlobalKey<FormState>();
-
-  RegisterForm({Key? key}) : super(key: key);
+  const RegisterForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,7 +43,6 @@ class RegisterForm extends ConsumerWidget {
     });
 
     return Form(
-      key: formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -104,11 +101,7 @@ class RegisterForm extends ConsumerWidget {
             title: 'Create Account',
             loading: state.loading,
             disabled: !event.isFormValid || state.googleButtonLoading,
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                event.registerPressed();
-              }
-            },
+            onPressed: event.registerPressed,
           ),
         ],
       ),

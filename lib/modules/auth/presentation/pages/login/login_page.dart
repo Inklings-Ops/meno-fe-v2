@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          LoginForm(),
+          const LoginForm(),
           MSize.vS(15),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
