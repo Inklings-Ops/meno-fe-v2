@@ -20,6 +20,10 @@ class StreamBottomSheetTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
+    final titleStyle = isTablet ? textTheme.displaySmall : textTheme.titleLarge;
 
     return Container(
       height: MSize.h(140),
@@ -43,9 +47,7 @@ class StreamBottomSheetTitle extends StatelessWidget {
                 broadcast.title.get()!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: textTheme.displaySmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                style: titleStyle?.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
           ),

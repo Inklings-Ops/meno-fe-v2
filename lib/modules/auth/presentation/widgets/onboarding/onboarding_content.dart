@@ -31,7 +31,7 @@ class OnboardingContent extends ConsumerWidget {
               Text(
                 item.title,
                 textAlign: TextAlign.center,
-                style: textTheme.displayMedium?.copyWith(
+                style: textTheme.displaySmall?.copyWith(
                   color: const Color(0xFF131313),
                   letterSpacing: 0.36,
                   fontWeight: FontWeight.w700,
@@ -39,13 +39,13 @@ class OnboardingContent extends ConsumerWidget {
               ),
             ],
           ),
-          MSize.vS(22),
+          MSize.vS(10),
           Container(
             alignment: Alignment.center,
             child: Text(
               item.body,
               textAlign: TextAlign.center,
-              style: textTheme.titleLarge?.copyWith(
+              style: textTheme.titleMedium?.copyWith(
                 color: const Color(0xFF131313),
                 letterSpacing: 0.36,
                 fontWeight: FontWeight.w400,

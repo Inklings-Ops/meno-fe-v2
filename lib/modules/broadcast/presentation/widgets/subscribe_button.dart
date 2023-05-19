@@ -23,7 +23,7 @@ class SubscribeButton extends StatelessWidget {
         children: [
           Text(
             'Subscribed',
-            style: textTheme.bodyLarge?.copyWith(color: Colors.white),
+            style: textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
           Icon(
             Icons.check,

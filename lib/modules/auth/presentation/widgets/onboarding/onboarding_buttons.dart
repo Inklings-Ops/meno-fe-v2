@@ -32,7 +32,7 @@ class OnboardingButtons extends ConsumerWidget {
             ),
             child: Text(
               'Login',
-              style: textTheme.titleLarge?.copyWith(
+              style: textTheme.titleMedium?.copyWith(
                 color: MColors.menoPurple,
                 fontWeight: FontWeight.w600,
               ),

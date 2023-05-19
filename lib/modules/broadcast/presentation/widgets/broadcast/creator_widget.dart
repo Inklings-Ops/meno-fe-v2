@@ -24,6 +24,8 @@ class CreatorWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
+    final Size size = MediaQuery.of(context).size;
+    final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
 
     if (loading) {
       return _Skeleton(showAvatar: showAvatar);
@@ -39,26 +41,25 @@ class CreatorWidget extends ConsumerWidget {
         children: [
           if (showAvatar) ...[
             MAvatar(
-              radius: MSize.r(13),
+              radius: isTablet ? MSize.r(8) : MSize.r(13),
               showBorder: false,
               image: creator.imageUrl != null
                   ? NetworkImage(creator.imageUrl!)
                   : null,
             ),
-            MSize.hS(10),
-          ] else
-            AutoSizeText(
-              creator.fullName!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              minFontSize: 11,
-              maxFontSize: 12,
-              style: textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFF6F6F6F),
-              ),
+            isTablet ? MSize.hS(5) : MSize.hS(10),
+          ],
+          AutoSizeText(
+            creator.fullName!,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            minFontSize: 11,
+            style: textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w400,
+              color: const Color(0xFF6F6F6F),
             ),
+          ),
         ],
       ),
     );
