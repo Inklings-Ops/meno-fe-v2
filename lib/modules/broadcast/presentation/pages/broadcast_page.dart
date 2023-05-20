@@ -15,7 +15,6 @@ import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_tab_view.dart';
 import 'package:meno_fe_v2/services/agora_service.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class BroadcastPage extends StatefulHookConsumerWidget {
   const BroadcastPage({super.key, required this.broadcast});
@@ -190,24 +189,6 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
   Future<void> onMute(bool isMute) async => _agora.muteAudio(!isMute);
 
   Future<void> onStart() async {
-    final scaffoldContext = ScaffoldMessenger.of(context);
-
-    if (await isMicrophoneInUse()) {
-      scaffoldContext.showSnackBar(
-        const SnackBar(content: Text('Your microphone is already in use.')),
-      );
-    } else {
-      ref.read(broadcastProvider.notifier).startPressed(widget.broadcast.id);
-    }
-  }
-
-  Future<bool> isMicrophoneInUse() async {
-    final permissionStatus = await Permission.microphone.status;
-    if (permissionStatus != PermissionStatus.granted) {
-      final result = await Permission.microphone.request();
-      return result == PermissionStatus.granted;
-    } else {
-      return true;
-    }
+    ref.read(broadcastProvider.notifier).startPressed(widget.broadcast.id);
   }
 }
