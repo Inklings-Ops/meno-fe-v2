@@ -117,31 +117,32 @@ class _AdminLayout extends HookWidget {
         });
         void onAvatarPressed() => tabsRouter.setActiveIndex(3);
 
-        Widget? appBar;
-
         switch (tabsRouter.activeIndex) {
           case 0:
-            appBar = HomeAppBar(onAvatarPressed: onAvatarPressed);
-            break;
-          case 1:
-            appBar = BibleAppBar(onAvatarPressed: onAvatarPressed);
-            break;
-          case 3:
-            appBar = const ProfileAppBar();
-            break;
-          default:
-            appBar = MAppBar(
-              title: tabsRouter.current.name.split('R')[0],
-              onAvatarPressed: onAvatarPressed,
-              showBorder: false,
+            return PreferredSize(
+              preferredSize: Size.fromHeight(MSize.r(kToolbarHeight)),
+              child: HomeAppBar(onAvatarPressed: onAvatarPressed),
             );
-            break;
+          case 1:
+            return PreferredSize(
+              preferredSize: Size.fromHeight(MSize.r(90)),
+              child: BibleAppBar(onAvatarPressed: onAvatarPressed),
+            );
+          case 3:
+            return PreferredSize(
+              preferredSize: Size.fromHeight(MSize.r(kToolbarHeight)),
+              child: const ProfileAppBar(),
+            );
+          default:
+            return PreferredSize(
+              preferredSize: Size.fromHeight(MSize.r(kToolbarHeight)),
+              child: MAppBar(
+                title: tabsRouter.current.name.split('R')[0],
+                onAvatarPressed: onAvatarPressed,
+                showBorder: false,
+              ),
+            );
         }
-
-        return PreferredSize(
-          preferredSize: Size.fromHeight(MSize.r(kToolbarHeight)),
-          child: appBar,
-        );
       },
       bottomNavigationBuilder: (context, tabsRouter) {
         return MAdminBottomNavigationBar(
