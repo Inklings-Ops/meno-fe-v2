@@ -6,7 +6,7 @@ import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:skeletons/skeletons.dart';
 
-class MAppBar extends StatelessWidget with PreferredSizeWidget {
+class MAppBar extends StatelessWidget {
   const MAppBar({
     super.key,
     this.actions,
@@ -25,9 +25,6 @@ class MAppBar extends StatelessWidget with PreferredSizeWidget {
   final void Function()? onAvatarPressed;
   final bool showBorder;
   final bool showAvatar;
-
-  @override
-  Size get preferredSize => Size.fromHeight(MSize.r(kToolbarHeight));
 
   @override
   Widget build(BuildContext context) {

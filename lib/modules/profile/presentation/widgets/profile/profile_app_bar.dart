@@ -7,11 +7,8 @@ import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 
-class ProfileAppBar extends ConsumerWidget with PreferredSizeWidget {
+class ProfileAppBar extends ConsumerWidget {
   const ProfileAppBar({super.key});
-
-  @override
-  Size get preferredSize => Size.fromHeight(MSize.r(kToolbarHeight));
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

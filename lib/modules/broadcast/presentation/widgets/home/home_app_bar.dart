@@ -5,12 +5,9 @@ import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:skeletons/skeletons.dart';
 
-class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
+class HomeAppBar extends ConsumerWidget {
   const HomeAppBar({super.key, required this.onAvatarPressed});
   final void Function() onAvatarPressed;
-
-  @override
-  Size get preferredSize => Size.fromHeight(MSize.r(kToolbarHeight));
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -6,13 +6,10 @@ import 'package:meno_fe_v2/modules/bible/presentation/widgets/scripture_selector
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:skeletons/skeletons.dart';
 
-class BibleAppBar extends StatelessWidget with PreferredSizeWidget {
+class BibleAppBar extends StatelessWidget {
   const BibleAppBar({super.key, this.onAvatarPressed});
 
   final void Function()? onAvatarPressed;
-
-  @override
-  Size get preferredSize => Size.fromHeight(MSize.r(90));
 
   @override
   Widget build(BuildContext context) {
