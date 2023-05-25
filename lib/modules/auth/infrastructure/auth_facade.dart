@@ -1,5 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -151,14 +153,19 @@ class AuthFacade implements IAuthFacade {
     final password_ = password.get()!;
 
     try {
-      final res = await _remote.login(email: email_, password: password_);
+      final res = await _remote
+          .login(email: email_, password: password_)
+          .timeout(const Duration(seconds: 30));
 
       await _local.storeToken(res.data!.token!);
       await _local.storeCredentials(res.data!);
 
       return right(unit);
     } on DioError catch (error) {
-      Logger().i(error.response);
+      Logger().wtf(error.type);
+      if (error.type == DioErrorType.response) {
+        return left(const AuthFailure.serverError());
+      }
 
       final message = displayAuthError(error);
       if (message != null) {
@@ -166,6 +173,12 @@ class AuthFacade implements IAuthFacade {
       } else {
         return left(const AuthFailure.serverError());
       }
+    } on TimeoutException {
+      return left(
+        const AuthFailure.message(
+          'Oops! We are sorry, the service timed out. Try again.',
+        ),
+      );
     }
   }
 
@@ -200,12 +213,23 @@ class AuthFacade implements IAuthFacade {
 
       return right(unit);
     } on DioError catch (error) {
+      Logger().wtf(error.type);
+      if (error.type == DioErrorType.response) {
+        return left(const AuthFailure.serverError());
+      }
+
       final message = displayAuthError(error);
       if (message != null) {
         return left(AuthFailure.message(message));
       } else {
         return left(const AuthFailure.serverError());
       }
+    } on TimeoutException {
+      return left(
+        const AuthFailure.message(
+          'Oops! We are sorry, the service timed out. Try again.',
+        ),
+      );
     }
   }
 
