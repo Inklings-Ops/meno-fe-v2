@@ -54,9 +54,8 @@ class ProfileBroadcastCard extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              minFontSize: 12,
               maxFontSize: 18,
-              style: textTheme.titleMedium?.copyWith(
+              style: textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),

@@ -63,10 +63,7 @@ class StreamBottomSheetTitle extends StatelessWidget {
               children: [
                 const SubscribeButton(disabled: true),
                 MSize.hS(10),
-                StatusIndicator(
-                  height: MSize.r(23),
-                  status: broadcast.status,
-                ),
+                StatusIndicator(height: MSize.r(23), broadcast: broadcast),
               ],
             ),
           ),

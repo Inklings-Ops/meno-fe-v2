@@ -24,7 +24,8 @@ class _ProfileRecentBroadcastListState
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    final broadcasts = ref.watch(broadcastProvider).currentUserBroadcasts;
+    final allBroadcasts = ref.watch(broadcastProvider).currentUserBroadcasts;
+    final broadcasts = allBroadcasts?.take(5).toList();
 
     if (broadcasts == null) {
       return const SizedBox();

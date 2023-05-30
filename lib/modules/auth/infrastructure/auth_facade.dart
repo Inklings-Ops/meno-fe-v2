@@ -200,13 +200,14 @@ class AuthFacade implements IAuthFacade {
     IAvatar? avatar,
   }) async {
     try {
-      final res = await _remote.register(
-        fullName: fullName.get()!,
-        bio: bio?.get(),
-        email: email.get()!,
-        password: password.get()!,
-        image: avatar?.get(),
-      );
+      final res = await _remote
+          .register(
+              fullName: fullName.get()!,
+              bio: bio?.get(),
+              email: email.get()!,
+              password: password.get()!,
+              image: avatar?.get())
+          .timeout(const Duration(seconds: 30));
 
       await _local.storeToken(res.data!.token!);
       await _local.storeCredentials(res.data!);

@@ -72,6 +72,14 @@ abstract class BroadcastRemoteDatasource {
     @Query('include') String? include,
   });
 
+  @GET('/api/v1/broadcasts/')
+  Future<BroadcastResponse<BroadcastListDataDto?>> getBroadcastsForUser({
+    @Query('creatorId') required String creatorId, // = 'db1eed33-c26b-46e0',
+    @Query('include') String? include = 'totalListeners', // = 'totalListeners',
+    @Query('sortBy') String? sortBy = 'startTime', // = 'title',
+    @Query('orderBy') String? orderBy = 'ASC', // = 'ASC',
+  });
+
   @GET("/api/v1/broadcasts/")
   Future<BroadcastResponse<BroadcastListDataDto?>> getBroadcasts({
     /// Status of broadcast: `active` or `inactive`

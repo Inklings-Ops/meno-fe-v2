@@ -58,8 +58,7 @@ class BroadcastCard extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              minFontSize: 16,
-              style: textTheme.titleMedium?.copyWith(
+              style: textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),

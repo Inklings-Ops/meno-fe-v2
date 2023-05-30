@@ -329,6 +329,45 @@ class _BroadcastRemoteDatasource implements BroadcastRemoteDatasource {
   }
 
   @override
+  Future<BroadcastResponse<BroadcastListDataDto?>> getBroadcastsForUser({
+    required creatorId,
+    include = 'totalListeners',
+    sortBy = 'startTime',
+    orderBy = 'ASC',
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'creatorId': creatorId,
+      r'include': include,
+      r'sortBy': sortBy,
+      r'orderBy': orderBy,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BroadcastResponse<BroadcastListDataDto>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/broadcasts/',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BroadcastResponse<BroadcastListDataDto?>.fromJson(
+      _result.data!,
+      (json) => json == null
+          ? null
+          : BroadcastListDataDto.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<BroadcastResponse<BroadcastListDataDto?>> getBroadcasts({
     status,
     include,

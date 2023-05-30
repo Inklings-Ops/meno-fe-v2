@@ -50,6 +50,14 @@ abstract class IBroadcastFacade {
   });
 
   Future<Either<BroadcastFailure, List<Broadcast?>>> getCurrentUserBroadcasts();
+
+  Future<Either<BroadcastFailure, List<Broadcast?>>> getBroadcastsByUser({
+    required String creatorId,
+    String? include,
+    String? sortBy,
+    String? orderBy,
+  });
+
   Future<Either<BroadcastFailure, List<Broadcast?>>> getBroadcasts({
     /// Status of broadcast: `active` or `inactive`
     String? status,

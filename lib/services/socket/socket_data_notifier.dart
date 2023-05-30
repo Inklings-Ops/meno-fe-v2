@@ -57,9 +57,7 @@ class SocketDataNotifier extends StateNotifier<SocketState> {
           state = state.copyWith(listeners: socketData?.listeners);
           break;
         case GetLiveBroadcastsData:
-          state = state.copyWith(
-            liveBroadcasts: socketData!.liveBroadcasts,
-          );
+          state = state.copyWith(liveBroadcasts: socketData!.liveBroadcasts);
           break;
         case GetNumberOfLiveBroadcastsData:
           state = state.copyWith(

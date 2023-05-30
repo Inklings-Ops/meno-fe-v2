@@ -83,7 +83,7 @@ class MSectionTitle extends StatelessWidget {
             padding: MSize.pOnly(l: 6),
             child: AutoSizeText(
               title!,
-              minFontSize: 19,
+              minFontSize: 16,
               maxFontSize: 22,
               style: textTheme.titleMedium?.copyWith(
                 height: MSize.r(1),

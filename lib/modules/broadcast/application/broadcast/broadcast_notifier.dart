@@ -151,14 +151,8 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
 
     // final res = await _facade.getCurrentUserBroadcasts();
     final credentials = await _facade.getUserCredentials();
-    final res = await _facade.getBroadcasts(
-      creatorId: credentials.user?.id,
-      include: 'totalListeners',
-      sortBy: 'endTime',
-      orderBy: 'DESC',
-      page: 1,
-      size: 10,
-    );
+    final id = credentials.user!.id;
+    final res = await _facade.getBroadcastsByUser(creatorId: id);
 
     res.fold(
       (l) => null,

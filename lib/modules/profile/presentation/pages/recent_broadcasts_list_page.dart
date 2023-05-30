@@ -39,8 +39,8 @@ class _RecentBroadcastListPageState
           onTap: () => AutoRouter.of(context).pop(),
           child: Padding(
             padding: MSize.pOnly(l: 10.0),
-            child: Row(
-              children: const [
+            child: const Row(
+              children: [
                 Icon(Icons.chevron_left),
                 Text('Back', style: TextStyle(fontWeight: FontWeight.w500))
               ],

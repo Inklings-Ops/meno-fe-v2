@@ -82,24 +82,17 @@ class HomePage extends HookConsumerWidget {
             : MSize.pOnly(t: kToolbarHeight * 2, b: 20),
         child: Column(
           children: [
-            // LiveForYouSection(onDiscoverPressed: () => goTo(1)),
-            // MSize.vS(30),
-
             const NowLiveSection(),
             MSize.vS(30),
-
             SizedBox(
               child: profileState.mapOrNull(
                 authUserLoaded: (value) {
-                  return ProfileRecentBroadcastList(profile: value.profile);
+                  return ProfileRecentBroadcastList(
+                    profile: value.profile,
+                  );
                 },
               ),
             ),
-
-            // if (model.isFrequent) const RecentlyLiveSection(),
-            // 30.verticalSpace,
-
-            // if (model.isFrequent) const ListeningSection(),
           ],
         ),
       ),

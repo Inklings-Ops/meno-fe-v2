@@ -94,7 +94,7 @@ class _Title extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final Size size = MediaQuery.of(context).size;
     final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
-    final style = isTablet ? textTheme.titleLarge : textTheme.titleMedium;
+    final style = isTablet ? textTheme.titleLarge : textTheme.labelLarge;
 
     return Text(
       title,

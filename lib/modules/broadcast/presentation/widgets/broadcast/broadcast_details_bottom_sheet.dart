@@ -46,11 +46,10 @@ class BroadcastDetailsBottomSheet extends StatelessWidget {
                     MSize.vS(20),
                     _TopSection(broadcast: broadcast),
                     MSize.vS(40),
-                    MSectionTitle(
+                    const MSectionTitle(
                       title: 'Broadcast Information',
                       showBorder: false,
                       addSideMargin: true,
-                      fontSize: MSize.fS(16),
                       showSeeAllButton: false,
                     ),
                     if (broadcast.description?.get() != null) ...[
@@ -102,9 +101,9 @@ class _TopSection extends StatelessWidget {
                   textAlign: TextAlign.left,
                   softWrap: true,
                   maxLines: 2,
+                  maxFontSize: 26,
                   overflow: TextOverflow.ellipsis,
-                  minFontSize: 16,
-                  style: textTheme.titleLarge?.copyWith(
+                  style: textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -112,7 +111,7 @@ class _TopSection extends StatelessWidget {
                   broadcast.creator!.fullName!,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: textTheme.bodyLarge,
+                  style: textTheme.bodyMedium,
                 ),
                 MSize.vS(11),
                 Row(
@@ -120,7 +119,7 @@ class _TopSection extends StatelessWidget {
                   children: [
                     ListenerCounter(broadcast: broadcast, fontSize: 16),
                     MSize.hS(12),
-                    StatusIndicator(status: broadcast.status),
+                    StatusIndicator(broadcast: broadcast),
                   ],
                 ),
                 MSize.vS(11),

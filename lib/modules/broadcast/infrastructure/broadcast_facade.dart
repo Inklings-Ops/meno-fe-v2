@@ -230,4 +230,26 @@ class BroadcastFacade implements IBroadcastFacade {
       return left(const BroadcastFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<BroadcastFailure, List<Broadcast?>>> getBroadcastsByUser({
+    required String creatorId,
+    String? include,
+    String? sortBy,
+    String? orderBy,
+  }) async {
+    try {
+      final res = await _remote.getBroadcastsForUser(
+        creatorId: creatorId,
+        include: include,
+        orderBy: orderBy,
+        sortBy: sortBy,
+      );
+      final dto = res.data!.broadcasts;
+      final broadcasts = dto.map((e) => _mapper.toDomain(e)).toList();
+      return right(broadcasts);
+    } on DioError {
+      return left(const BroadcastFailure.serverError());
+    }
+  }
 }

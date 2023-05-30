@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
@@ -15,6 +16,10 @@ import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_
 import 'package:meno_fe_v2/services/agora_service.dart';
 import 'package:meno_fe_v2/services/socket/models.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
+import 'package:wakelock/wakelock.dart';
+import 'package:workmanager/workmanager.dart';
+
+const streamTask = "com.inklings.meno.streamTask";
 
 class StreamPage extends StatefulHookConsumerWidget {
   const StreamPage({super.key, required this.broadcast});
@@ -90,14 +95,37 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     );
   }
 
+  @pragma('vm:entry-point')
+  static void callbackDispatcher() {
+    Workmanager().executeTask((taskName, inputData) {
+      switch (taskName) {
+        case streamTask:
+          Logger().wtf('STILL STREAMING');
+          break;
+        default:
+      }
+      return Future.value(true);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     loading = true;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _agora
-          .initialize(isHost: false)
-          .whenComplete(() => _joinBroadcast());
+      Wakelock.enable();
+
+      await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+
+      await _agora.initialize(isHost: false).whenComplete(() async {
+        await _joinBroadcast();
+        await Workmanager().registerPeriodicTask(
+          streamTask,
+          streamTask,
+          frequency: const Duration(seconds: 1),
+          constraints: Constraints(networkType: NetworkType.connected),
+        );
+      });
     });
   }
 
@@ -117,15 +145,20 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     });
   }
 
-  void onLeavePressed() {
+  Future<void> onLeavePressed() async {
+    Wakelock.disable();
     ref.read(socketDataProvider.notifier).leaveBroadcast(widget.broadcast.id);
-    _agora.leave();
+    await _agora.leave();
+    await Workmanager().cancelAll();
+
     AutoRouter.of(MKeys.streamScaffoldKey.currentContext!).pop();
   }
 
   Future<bool> onWillPop() async {
+    Wakelock.disable();
     ref.read(socketDataProvider.notifier).leaveBroadcast(widget.broadcast.id);
-    _agora.leave();
+    await _agora.leave();
+    await Workmanager().cancelAll();
     return true;
   }
 }
