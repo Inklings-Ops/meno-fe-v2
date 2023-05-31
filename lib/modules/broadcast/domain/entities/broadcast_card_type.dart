@@ -1,0 +1,1 @@
+enum BroadcastCardType { live, recent }

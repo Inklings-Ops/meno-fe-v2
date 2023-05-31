@@ -20,6 +20,7 @@ mixin _$Broadcast {
   IBroadcastTitle get title => throw _privateConstructorUsedError;
   IBroadcastDescription? get description => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
+  String? get fullName => throw _privateConstructorUsedError;
   String? get agoraToken => throw _privateConstructorUsedError;
   String? get timezone => throw _privateConstructorUsedError;
   dynamic get imageId => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $BroadcastCopyWith<$Res> {
       IBroadcastTitle title,
       IBroadcastDescription? description,
       String? status,
+      String? fullName,
       String? agoraToken,
       String? timezone,
       dynamic imageId,
@@ -83,6 +85,7 @@ class _$BroadcastCopyWithImpl<$Res, $Val extends Broadcast>
     Object? title = null,
     Object? description = freezed,
     Object? status = freezed,
+    Object? fullName = freezed,
     Object? agoraToken = freezed,
     Object? timezone = freezed,
     Object? imageId = freezed,
@@ -113,6 +116,10 @@ class _$BroadcastCopyWithImpl<$Res, $Val extends Broadcast>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullName: freezed == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
       agoraToken: freezed == agoraToken
           ? _value.agoraToken
@@ -194,6 +201,7 @@ abstract class _$$_BroadcastCopyWith<$Res> implements $BroadcastCopyWith<$Res> {
       IBroadcastTitle title,
       IBroadcastDescription? description,
       String? status,
+      String? fullName,
       String? agoraToken,
       String? timezone,
       dynamic imageId,
@@ -227,6 +235,7 @@ class __$$_BroadcastCopyWithImpl<$Res>
     Object? title = null,
     Object? description = freezed,
     Object? status = freezed,
+    Object? fullName = freezed,
     Object? agoraToken = freezed,
     Object? timezone = freezed,
     Object? imageId = freezed,
@@ -257,6 +266,10 @@ class __$$_BroadcastCopyWithImpl<$Res>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullName: freezed == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
       agoraToken: freezed == agoraToken
           ? _value.agoraToken
@@ -322,6 +335,7 @@ class _$_Broadcast implements _Broadcast {
       required this.title,
       this.description,
       this.status,
+      this.fullName,
       this.agoraToken,
       this.timezone,
       this.imageId,
@@ -344,6 +358,8 @@ class _$_Broadcast implements _Broadcast {
   final IBroadcastDescription? description;
   @override
   final String? status;
+  @override
+  final String? fullName;
   @override
   final String? agoraToken;
   @override
@@ -373,7 +389,7 @@ class _$_Broadcast implements _Broadcast {
 
   @override
   String toString() {
-    return 'Broadcast(id: $id, title: $title, description: $description, status: $status, agoraToken: $agoraToken, timezone: $timezone, imageId: $imageId, imageUrl: $imageUrl, startTime: $startTime, endTime: $endTime, createdAt: $createdAt, deleted: $deleted, creatorId: $creatorId, creator: $creator, liveListeners: $liveListeners, timeElapsed: $timeElapsed, totalListeners: $totalListeners)';
+    return 'Broadcast(id: $id, title: $title, description: $description, status: $status, fullName: $fullName, agoraToken: $agoraToken, timezone: $timezone, imageId: $imageId, imageUrl: $imageUrl, startTime: $startTime, endTime: $endTime, createdAt: $createdAt, deleted: $deleted, creatorId: $creatorId, creator: $creator, liveListeners: $liveListeners, timeElapsed: $timeElapsed, totalListeners: $totalListeners)';
   }
 
   @override
@@ -386,6 +402,8 @@ class _$_Broadcast implements _Broadcast {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
             (identical(other.agoraToken, agoraToken) ||
                 other.agoraToken == agoraToken) &&
             (identical(other.timezone, timezone) ||
@@ -417,6 +435,7 @@ class _$_Broadcast implements _Broadcast {
       title,
       description,
       status,
+      fullName,
       agoraToken,
       timezone,
       const DeepCollectionEquality().hash(imageId),
@@ -444,6 +463,7 @@ abstract class _Broadcast implements Broadcast {
       required final IBroadcastTitle title,
       final IBroadcastDescription? description,
       final String? status,
+      final String? fullName,
       final String? agoraToken,
       final String? timezone,
       final dynamic imageId,
@@ -466,6 +486,8 @@ abstract class _Broadcast implements Broadcast {
   IBroadcastDescription? get description;
   @override
   String? get status;
+  @override
+  String? get fullName;
   @override
   String? get agoraToken;
   @override

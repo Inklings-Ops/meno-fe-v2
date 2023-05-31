@@ -20,6 +20,7 @@ Map<String, dynamic> _$BroadcastDtoToJson(BroadcastDto instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('status', instance.status);
+  writeNotNull('fullName', instance.fullName);
   writeNotNull('agoraToken', instance.agoraToken);
   writeNotNull('timezone', instance.timezone);
   writeNotNull('imageId', instance.imageId);
@@ -42,6 +43,7 @@ _$_BroadcastDto _$$_BroadcastDtoFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       description: json['description'] as String?,
       status: json['status'] as String?,
+      fullName: json['fullName'] as String?,
       agoraToken: json['agoraToken'] as String?,
       timezone: json['timezone'] as String?,
       imageId: json['imageId'],
@@ -69,6 +71,7 @@ Map<String, dynamic> _$$_BroadcastDtoToJson(_$_BroadcastDto instance) =>
       'title': instance.title,
       'description': instance.description,
       'status': instance.status,
+      'fullName': instance.fullName,
       'agoraToken': instance.agoraToken,
       'timezone': instance.timezone,
       'imageId': instance.imageId,

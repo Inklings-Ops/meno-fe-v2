@@ -2,11 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast_card_type.dart';
 
 class BroadcastCardArtwork extends StatelessWidget {
-  const BroadcastCardArtwork({super.key, required this.imageUrl});
-
   final String? imageUrl;
+  final BroadcastCardType cardType;
+
+  const BroadcastCardArtwork({
+    super.key,
+    required this.imageUrl,
+    this.cardType = BroadcastCardType.live,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    switch (cardType) {
+      case BroadcastCardType.live:
+        return _CircleAvatar(imageUrl: imageUrl);
+      default:
+        return _RectangleAvatar(imageUrl: imageUrl);
+    }
+  }
+}
+
+class _CircleAvatar extends StatelessWidget {
+  final String? imageUrl;
+
+  const _CircleAvatar({this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +57,35 @@ class BroadcastCardArtwork extends StatelessWidget {
               )
             : null,
       ),
+    );
+  }
+}
+
+class _RectangleAvatar extends StatelessWidget {
+  final String? imageUrl;
+
+  const _RectangleAvatar({this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    final isImageNull = imageUrl == ' ' || imageUrl == null;
+
+    return Container(
+      height: MSize.h(84),
+      width: MSize.w(135),
+      decoration: BoxDecoration(
+        border: Border.all(color: MColors.disabled),
+        borderRadius: BorderRadius.circular(MSize.r(14)),
+        image: !isImageNull
+            ? DecorationImage(
+                image: NetworkImage(imageUrl!),
+                fit: BoxFit.cover,
+              )
+            : null,
+      ),
+      child: isImageNull
+          ? const Icon(MIcons.Image2, color: MColors.disabled)
+          : null,
     );
   }
 }

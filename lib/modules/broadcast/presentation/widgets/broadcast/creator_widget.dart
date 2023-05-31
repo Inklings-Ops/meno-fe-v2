@@ -55,8 +55,8 @@ class CreatorWidget extends ConsumerWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
             minFontSize: 11,
+            maxFontSize: 12,
             style: textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w400,
               color: const Color(0xFF6F6F6F),
             ),
           ),

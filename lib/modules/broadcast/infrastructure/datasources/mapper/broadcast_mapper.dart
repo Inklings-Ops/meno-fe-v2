@@ -19,6 +19,7 @@ class BroadcastMapper {
       createdAt: dto.createdAt,
       creator: CreatorMapper().toDomain(dto.creator),
       creatorId: dto.creatorId,
+      fullName: dto.fullName,
       deleted: dto.deleted,
       endTime: dto.endTime,
       imageId: dto.imageId,

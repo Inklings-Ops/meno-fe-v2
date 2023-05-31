@@ -1,21 +1,33 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast_card_type.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_card_artwork.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_details_bottom_sheet.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/creator_widget.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/listener_counter.dart';
 
 class BroadcastCard extends StatelessWidget {
-  const BroadcastCard({Key? key, required this.broadcast}) : super(key: key);
+  const BroadcastCard({
+    super.key,
+    required this.broadcast,
+    this.cardType = BroadcastCardType.live,
+  });
+
   final Broadcast broadcast;
+  final BroadcastCardType cardType;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final Size size = MediaQuery.of(context).size;
     final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
+
+    var formattedNumber = NumberFormat.compact().format(
+      broadcast.totalListeners ?? 0,
+    );
 
     return GestureDetector(
       onTap: () async {
@@ -51,28 +63,54 @@ class BroadcastCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Spacer(),
-            BroadcastCardArtwork(imageUrl: broadcast.imageUrl),
+            BroadcastCardArtwork(
+              imageUrl: broadcast.imageUrl,
+              cardType: cardType,
+            ),
             const Spacer(),
             AutoSizeText(
               broadcast.title.get()!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
+              minFontSize: 12,
               style: textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
             const Spacer(),
-            ListenerCounter(
-              broadcast: broadcast,
-              isListening: false,
-              fontSize: 14,
-            ),
+            if (cardType == BroadcastCardType.live)
+              ListenerCounter(
+                broadcast: broadcast,
+                isListening: false,
+                fontSize: 14,
+              )
+            else
+              Text(
+                '$formattedNumber tuned in',
+                style: textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xFF6F6F6F),
+                ),
+              ),
             MSize.vS(4),
-            CreatorWidget(
-              creator: broadcast.creator!,
-              alignment: MainAxisAlignment.center,
-            ),
+            if (cardType == BroadcastCardType.live)
+              CreatorWidget(
+                creator: broadcast.creator!,
+                alignment: MainAxisAlignment.center,
+              )
+            else
+              AutoSizeText(
+                broadcast.fullName ?? '',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                minFontSize: 11,
+                maxFontSize: 12,
+                style: textTheme.bodySmall?.copyWith(
+                  color: const Color(0xFF6F6F6F),
+                ),
+              ),
             const Spacer(),
           ],
         ),

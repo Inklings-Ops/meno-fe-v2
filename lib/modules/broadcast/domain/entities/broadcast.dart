@@ -11,6 +11,7 @@ class Broadcast with _$Broadcast {
     required IBroadcastTitle title,
     IBroadcastDescription? description,
     String? status,
+    String? fullName,
     String? agoraToken,
     String? timezone,
     dynamic imageId,
