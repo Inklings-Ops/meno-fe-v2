@@ -19,7 +19,7 @@ class ExitAlertDialog extends StatelessWidget {
       title: Text(
         'Exit Meno?',
         textAlign: TextAlign.center,
-        style: textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w600),
+        style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
       actions: [
         MButton(
@@ -31,13 +31,8 @@ class ExitAlertDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: () => AutoRouter.of(context).pop(false),
-          child: Text(
-            'Cancel',
-            style: textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-            ),
-          ),
+          style: TextButton.styleFrom(foregroundColor: Colors.black),
+          child: const Text('Cancel'),
         )
       ],
     );
