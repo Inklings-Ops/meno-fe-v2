@@ -58,6 +58,13 @@ abstract class IBroadcastFacade {
     String? orderBy,
   });
 
+  Future<Either<BroadcastFailure, List<Broadcast?>>> search({
+    String? creatorId,
+    String? include,
+    String? sortBy,
+    String? orderBy,
+  });
+
   Future<Either<BroadcastFailure, List<Broadcast?>>> getBroadcasts({
     /// Status of broadcast: `active` or `inactive`
     String? status,

@@ -252,4 +252,14 @@ class BroadcastFacade implements IBroadcastFacade {
       return left(const BroadcastFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<BroadcastFailure, List<Broadcast?>>> search({
+    String? creatorId,
+    String? include,
+    String? sortBy,
+    String? orderBy,
+  }) {
+    throw UnimplementedError();
+  }
 }
