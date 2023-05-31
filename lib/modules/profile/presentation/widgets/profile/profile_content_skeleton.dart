@@ -63,9 +63,9 @@ class ProfileContentSkeleton extends StatelessWidget {
           MSize.vS(31),
           SizedBox(
             height: MSize.h(47),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 ActivityCountWidget(loading: true),
                 ActivityCountWidget(loading: true),
                 ActivityCountWidget(loading: true),

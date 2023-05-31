@@ -20,6 +20,7 @@ class CreateBroadcastArtwork extends ConsumerWidget {
         await showModalBottomSheet(
           context: context,
           isScrollControlled: true,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           builder: (context) => MImageSourceBottomSheet(
             fromGallery: () {

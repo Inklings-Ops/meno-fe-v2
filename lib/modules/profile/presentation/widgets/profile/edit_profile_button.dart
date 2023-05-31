@@ -7,21 +7,18 @@ import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/edit_pro
 
 Future<void> showEditBottomSheet(BuildContext context, WidgetRef ref) async {
   final profileFormEvent = ref.watch(profileFormProvider.notifier);
+  final bottom = MediaQuery.of(context).viewInsets.bottom;
 
   await profileFormEvent.init().whenComplete(() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       elevation: 0,
+      showDragHandle: true,
       useSafeArea: true,
-      constraints: BoxConstraints(
-        maxHeight: MSize.sh(0.95),
-      ),
       builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
+        padding: EdgeInsets.only(bottom: bottom),
         child: const EditProfileBottomSheet(),
       ),
     );
@@ -35,10 +32,10 @@ class EditProfileButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return OutlinedButton.icon(
       onPressed: () async => showEditBottomSheet(context, ref),
-      icon: const Icon(Icons.edit),
+      icon: Icon(Icons.edit, size: MSize.fS(16)),
       label: const Text('Edit details'),
       style: OutlinedButton.styleFrom(
-        fixedSize: Size(MSize.w(116), MSize.h(37)),
+        fixedSize: Size.fromWidth(MSize.w(130)),
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(MSize.r(8)),
