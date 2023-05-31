@@ -36,6 +36,10 @@ class AgoraService {
     _log.i('Agora Initialization complete.');
   }
 
+  Future<void> enableDualStreamMode() async {
+    return await _agora.enableDualStreamMode(enabled: true);
+  }
+
   Future<void> join({required String token, required String channelId}) async {
     _log.i('Joining...');
 

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
@@ -15,11 +14,10 @@ import 'package:meno_fe_v2/modules/broadcast/application/timer/timer_notifier.da
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_tab_view.dart';
 import 'package:meno_fe_v2/services/agora_service.dart';
+import 'package:meno_fe_v2/services/background_service.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 import 'package:wakelock/wakelock.dart';
-import 'package:workmanager/workmanager.dart';
 
-const broadcastTask = "com.inklings.meno.broadcastTask";
 
 class BroadcastPage extends StatefulHookConsumerWidget {
   final Broadcast broadcast;
@@ -31,6 +29,7 @@ class BroadcastPage extends StatefulHookConsumerWidget {
 
 class _BroadcastPageState extends ConsumerState<BroadcastPage> {
   final _agora = di<AgoraService>();
+  final _backgroundService = di<BackgroundService>();
 
   @override
   Widget build(BuildContext context) {
@@ -130,20 +129,6 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
     );
   }
 
-  @pragma('vm:entry-point')
-  static void callbackDispatcher() {
-    Workmanager().executeTask((taskName, inputData) {
-      switch (taskName) {
-        case broadcastTask:
-          // onStart();
-          Logger().wtf('STILL AIRING');
-          break;
-        default:
-      }
-      return Future.value(true);
-    });
-  }
-
   @override
   void dispose() {
     Wakelock.disable();
@@ -157,9 +142,9 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       Wakelock.enable();
-      await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
       ref.read(broadcastProvider.notifier).initialized(widget.broadcast);
       await _agora.initialize(isHost: true);
+      await _backgroundService.initialize();
     });
   }
 
@@ -176,7 +161,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
       final event = ref.read(broadcastProvider.notifier);
       event.deletePressed(widget.broadcast.id);
       await _agora.leave();
-      await Workmanager().cancelAll();
+      await _backgroundService.cancelAll();
 
       await Future.delayed(Duration.zero);
       if (context.mounted) {
@@ -200,7 +185,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
       await _agora.leave();
       ref.read(socketDataProvider.notifier).endBroadcast(widget.broadcast.id);
       ref.read(timerProvider.notifier).stop();
-      await Workmanager().cancelAll();
+      await _backgroundService.cancelAll();
 
       await Future.delayed(Duration.zero);
       if (context.mounted) {
@@ -216,11 +201,11 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
 
   Future<void> onStart() async {
     ref.read(broadcastProvider.notifier).startPressed(widget.broadcast.id);
-    await Workmanager().registerPeriodicTask(
-      broadcastTask,
-      widget.broadcast.title.get()!,
-      frequency: const Duration(minutes: 100),
-      constraints: Constraints(networkType: NetworkType.connected),
+    await _backgroundService.registerTask(
+      broadcastTitle: widget.broadcast.title.get()!,
+      taskName: broadcastTask,
+      agoraToken: widget.broadcast.agoraToken!,
+      channelId: widget.broadcast.id,
     );
   }
 }

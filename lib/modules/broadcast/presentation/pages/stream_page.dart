@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
@@ -14,12 +13,11 @@ import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/listene
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_bottom_sheet.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_page_skeleton.dart';
 import 'package:meno_fe_v2/services/agora_service.dart';
+import 'package:meno_fe_v2/services/background_service.dart';
 import 'package:meno_fe_v2/services/socket/models.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 import 'package:wakelock/wakelock.dart';
-import 'package:workmanager/workmanager.dart';
-
-const streamTask = "com.inklings.meno.streamTask";
+// import 'package:workmanager/workmanager.dart';
 
 class StreamPage extends StatefulHookConsumerWidget {
   const StreamPage({super.key, required this.broadcast});
@@ -33,6 +31,7 @@ class _StreamPageState extends ConsumerState<StreamPage> {
   bool loading = false;
 
   final _agora = di<AgoraService>();
+  final _backgroundService = di<BackgroundService>();
 
   @override
   Widget build(BuildContext context) {
@@ -95,19 +94,6 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     );
   }
 
-  @pragma('vm:entry-point')
-  static void callbackDispatcher() {
-    Workmanager().executeTask((taskName, inputData) {
-      switch (taskName) {
-        case streamTask:
-          Logger().wtf('STILL STREAMING');
-          break;
-        default:
-      }
-      return Future.value(true);
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -115,15 +101,14 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       Wakelock.enable();
 
-      await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
-
       await _agora.initialize(isHost: false).whenComplete(() async {
+        await _backgroundService.initialize();
         await _joinBroadcast();
-        await Workmanager().registerPeriodicTask(
-          streamTask,
-          streamTask,
-          frequency: const Duration(seconds: 1),
-          constraints: Constraints(networkType: NetworkType.connected),
+        await _backgroundService.registerTask(
+          broadcastTitle: widget.broadcast.title.get()!,
+          taskName: streamTask,
+          agoraToken: widget.broadcast.agoraToken!,
+          channelId: widget.broadcast.id,
         );
       });
     });
@@ -149,7 +134,7 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     Wakelock.disable();
     ref.read(socketDataProvider.notifier).leaveBroadcast(widget.broadcast.id);
     await _agora.leave();
-    await Workmanager().cancelAll();
+    await _backgroundService.cancelAll();
 
     AutoRouter.of(MKeys.streamScaffoldKey.currentContext!).pop();
   }
@@ -158,7 +143,7 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     Wakelock.disable();
     ref.read(socketDataProvider.notifier).leaveBroadcast(widget.broadcast.id);
     await _agora.leave();
-    await Workmanager().cancelAll();
+    await _backgroundService.cancelAll();
     return true;
   }
 }
