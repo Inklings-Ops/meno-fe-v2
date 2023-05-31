@@ -6,8 +6,9 @@ import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/m_section_title.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_notifier.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast_card_type.dart';
+import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_card.dart';
 import 'package:meno_fe_v2/modules/profile/domain/entities/profile.dart';
-import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/profile_broadcast_card.dart';
 
 class ProfileRecentBroadcastList extends ConsumerStatefulWidget {
   const ProfileRecentBroadcastList({super.key, required this.profile});
@@ -34,7 +35,7 @@ class _ProfileRecentBroadcastListState
     return Column(
       children: [
         MSectionTitle(
-          title: 'Recent Broadcasts',
+          title: 'My Recent Broadcasts',
           addSideMargin: true,
           seeAllAction: () {
             AutoRouter.of(context).push(
@@ -68,9 +69,9 @@ class _ProfileRecentBroadcastListState
                 if (index > 2) {
                   return const SizedBox();
                 } else {
-                  return ProfileBroadcastCard(
+                  return BroadcastCard(
                     broadcast: broadcasts[index]!,
-                    profile: widget.profile,
+                    cardType: BroadcastCardType.recent,
                   );
                 }
               },

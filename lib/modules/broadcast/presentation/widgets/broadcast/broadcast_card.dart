@@ -33,13 +33,20 @@ class BroadcastCard extends StatelessWidget {
       onTap: () async {
         await showModalBottomSheet(
           context: context,
+          showDragHandle: true,
+          backgroundColor: Colors.white,
           isDismissible: true,
           isScrollControlled: true,
           enableDrag: true,
-          elevation: 0,
-          builder: (BuildContext context) {
-            return BroadcastDetailsBottomSheet(broadcast: broadcast);
-          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(MSize.r(40)),
+            ),
+          ),
+          builder: (context) => BroadcastDetailsBottomSheet(
+            broadcast: broadcast,
+            cardType: cardType,
+          ),
         );
       },
       child: Container(
