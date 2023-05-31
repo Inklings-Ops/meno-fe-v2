@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
+import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 
@@ -13,6 +14,20 @@ class ProfileAppBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final event = ref.watch(authProvider.notifier);
+
+    Future<void> onLogout() async {
+      final shouldDelete = await showDialog<bool>(
+        context: context,
+        builder: (context) => const MConfirmationDialog(
+          title: 'Logout?',
+          buttonTitle: 'Yes logout',
+        ),
+      );
+
+      if (shouldDelete == true) {
+        event.logoutPartially();
+      }
+    }
 
     return AppBar(
       toolbarHeight: MSize.r(kToolbarHeight),
@@ -45,7 +60,7 @@ class ProfileAppBar extends ConsumerWidget {
       actions: [
         Center(
           child: GestureDetector(
-            onTap: () => event.logoutPartially(),
+            onTap: onLogout,
             child: Container(
               height: MSize.r(32),
               width: MSize.r(32),

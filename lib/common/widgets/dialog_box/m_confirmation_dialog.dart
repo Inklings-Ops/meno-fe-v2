@@ -24,53 +24,44 @@ class MConfirmationDialog extends StatelessWidget {
     final titleStyle = isTablet ? textTheme.displaySmall : textTheme.titleLarge;
     final cancelStyle = isTablet ? textTheme.titleLarge : textTheme.labelLarge;
 
-    return Dialog(
+    return AlertDialog(
+      backgroundColor: Colors.white,
       surfaceTintColor: Colors.white,
-      insetPadding: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(MSize.r(30)),
+      actionsAlignment: MainAxisAlignment.center,
+      actionsOverflowAlignment: OverflowBarAlignment.center,
+      alignment: Alignment.center,
+      title: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: titleStyle?.copyWith(fontWeight: FontWeight.w600),
       ),
-      child: Container(
-        padding: MSize.pSymmetric(h: 20),
-        width: MSize.sw(0.9),
-        height: MSize.h(232),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Spacer(),
-            Text(
-              title,
-              style: titleStyle?.copyWith(fontWeight: FontWeight.w600),
-            ),
-            if (content != null) ...[
-              MSize.vS(10),
-              Text(
-                content!,
-                style: textTheme.bodyMedium,
-                textAlign: TextAlign.center,
-              ),
-            ],
-            MSize.vS(14),
-            MButton(
-              title: buttonTitle,
-              onPressed: () => context.router.pop(true),
-              fixedSize: Size(MSize.sw(1), MSize.h(43)),
-              color: const Color(0xFFDF0201),
-              titleColor: Colors.white,
-            ),
-            MSize.vS(4),
-            TextButton(
-              onPressed: context.router.pop,
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
-                textStyle: cancelStyle,
-              ),
-              child: const Text('Cancel'),
-            ),
-            const Spacer(),
-          ],
+      actions: [
+        if (content != null) ...[
+          MSize.vS(10),
+          Text(
+            content!,
+            style: textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
+          MSize.vS(14),
+        ],
+        MButton(
+          title: buttonTitle,
+          onPressed: () => context.router.pop(true),
+          fixedSize: Size(MSize.w(255), MSize.h(43)),
+          color: const Color(0xFFDF0201),
+          titleColor: Colors.white,
         ),
-      ),
+        MSize.vS(4),
+        TextButton(
+          onPressed: () => AutoRouter.of(context).pop(false),
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.black,
+            textStyle: cancelStyle,
+          ),
+          child: const Text('Cancel'),
+        )
+      ],
     );
   }
 }
