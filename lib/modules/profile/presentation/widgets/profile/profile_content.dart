@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
+import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
 import 'package:meno_fe_v2/common/widgets/m_avatar.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
 import 'package:meno_fe_v2/layout/widgets/delete_account_alert_dialog.dart';
@@ -42,6 +43,20 @@ class ProfileContent extends ConsumerWidget {
         context: context,
         builder: (context) => const DeleteAccountAlertDialog(),
       );
+    }
+
+    Future<void> onLogout() async {
+      final shouldDelete = await showDialog<bool>(
+        context: context,
+        builder: (context) => const MConfirmationDialog(
+          title: 'Logout?',
+          buttonTitle: 'Yes logout',
+        ),
+      );
+
+      if (shouldDelete == true) {
+        ref.read(authProvider.notifier).logoutPartially();
+      }
     }
 
     return SingleChildScrollView(
@@ -140,7 +155,7 @@ class ProfileContent extends ConsumerWidget {
                     ListTile(
                       title: const Text('Logout'),
                       trailing: const Icon(MIcons.Logout1),
-                      onTap: ref.watch(authProvider.notifier).logoutPartially,
+                      onTap: onLogout,
                     ),
                   ],
                 ),
