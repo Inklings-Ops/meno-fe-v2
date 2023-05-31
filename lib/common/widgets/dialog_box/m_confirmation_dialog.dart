@@ -22,7 +22,7 @@ class MConfirmationDialog extends StatelessWidget {
     final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
 
     final titleStyle = isTablet ? textTheme.displaySmall : textTheme.titleLarge;
-    final cancelStyle = isTablet ? textTheme.titleLarge : textTheme.titleMedium;
+    final cancelStyle = isTablet ? textTheme.titleLarge : textTheme.labelLarge;
 
     return Dialog(
       surfaceTintColor: Colors.white,
@@ -37,20 +37,20 @@ class MConfirmationDialog extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MSize.vS(20),
+            const Spacer(),
             Text(
               title,
               style: titleStyle?.copyWith(fontWeight: FontWeight.w600),
             ),
             if (content != null) ...[
-              MSize.vS(20),
+              MSize.vS(10),
               Text(
                 content!,
                 style: textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
             ],
-            MSize.vS(20),
+            MSize.vS(14),
             MButton(
               title: buttonTitle,
               onPressed: () => context.router.pop(true),
@@ -58,16 +58,16 @@ class MConfirmationDialog extends StatelessWidget {
               color: const Color(0xFFDF0201),
               titleColor: Colors.white,
             ),
-            MSize.vS(10),
+            MSize.vS(4),
             TextButton(
               onPressed: context.router.pop,
               style: TextButton.styleFrom(
-                fixedSize: Size(MSize.w(200), MSize.h(43)),
                 foregroundColor: Colors.black,
-                textStyle: cancelStyle?.copyWith(fontWeight: FontWeight.w600),
+                textStyle: cancelStyle,
               ),
               child: const Text('Cancel'),
             ),
+            const Spacer(),
           ],
         ),
       ),

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
 import 'package:meno_fe_v2/common/widgets/m_scaffold.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
+import 'package:meno_fe_v2/layout/widgets/delete_account_alert_dialog.dart';
 import 'package:meno_fe_v2/modules/auth/application/auth/auth_notifier.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -18,12 +18,7 @@ class SettingsPage extends ConsumerWidget {
     Future<void> onDeleteAccount() async {
       final shouldDelete = await showDialog<bool>(
         context: context,
-        builder: (context) => const MConfirmationDialog(
-          title: 'Delete Account?',
-          buttonTitle: 'Yes Delete',
-          content:
-              'You are about to delete your account? \nThis cannot be undone.',
-        ),
+        builder: (context) => const DeleteAccountAlertDialog(),
       );
 
       if (shouldDelete == true) {
@@ -37,12 +32,6 @@ class SettingsPage extends ConsumerWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            // SettingsListItem(
-            //   leadingIcon: MIcons.ShieldDone1,
-            //   title: 'Security',
-            //   onTap: () => router.push(const SecurityRoute()),
-            // ),
-            // MSize.vS(15),
             SettingsListItem(
               leadingIcon: MIcons.InfoCircle1,
               title: 'About',

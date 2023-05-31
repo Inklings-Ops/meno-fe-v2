@@ -15,6 +15,8 @@ class AboutPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+        elevation: 0,
         leadingWidth: MSize.w(70),
         leading: GestureDetector(
           onTap: () => AutoRouter.of(context).pop(),
