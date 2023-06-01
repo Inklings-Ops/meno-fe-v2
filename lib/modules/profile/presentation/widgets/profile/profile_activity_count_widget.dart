@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
-import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_notifier.dart';
 import 'package:meno_fe_v2/modules/profile/application/profile/profile_notifier.dart';
 import 'package:meno_fe_v2/modules/profile/presentation/widgets/profile/activity_count_widget.dart';
 
@@ -11,8 +10,6 @@ class ProfileActivityCountWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(profileProvider);
-
-    final broadcasts = ref.watch(broadcastProvider).currentUserBroadcasts;
 
     return state.maybeWhen(
       orElse: () => Padding(
@@ -37,7 +34,7 @@ class ProfileActivityCountWidget extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ActivityCountWidget(
-                count: '${broadcasts?.length ?? 0}',
+                count: '${profile.count?.broadcasts}',
                 title: 'Broadcasts',
                 onTap: () {},
               ),
