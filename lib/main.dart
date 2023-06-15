@@ -8,7 +8,6 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/app/meno_app.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/firebase_options.dart';
@@ -40,12 +39,10 @@ Future<void> onStart(ServiceInstance service) async {
     service.on(broadcastTask).listen((event) async {
       service.setAsForegroundService();
       service.setAsBackgroundService();
-      Logger().wtf(event);
     });
     service.on(streamTask).listen((event) async {
       service.setAsForegroundService();
       service.setAsBackgroundService();
-      Logger().wtf(event);
     });
     service.on(endTask).listen((event) {
       service.stopSelf();
