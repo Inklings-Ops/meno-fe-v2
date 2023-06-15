@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_colors.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
+import 'package:meno_fe_v2/common/constants/m_strings.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
@@ -13,11 +15,9 @@ import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/listene
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_bottom_sheet.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_page_skeleton.dart';
 import 'package:meno_fe_v2/services/agora_service.dart';
-import 'package:meno_fe_v2/services/background_service.dart';
 import 'package:meno_fe_v2/services/socket/models.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 import 'package:wakelock/wakelock.dart';
-// import 'package:workmanager/workmanager.dart';
 
 class StreamPage extends StatefulHookConsumerWidget {
   const StreamPage({super.key, required this.broadcast});
@@ -30,8 +30,9 @@ class StreamPage extends StatefulHookConsumerWidget {
 class _StreamPageState extends ConsumerState<StreamPage> {
   bool loading = false;
 
+  final backgroundService = FlutterBackgroundService();
+
   final _agora = di<AgoraService>();
-  final _backgroundService = di<BackgroundService>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,7 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     ref.listen(socketService, (_, AsyncValue<SocketData> data) {
       if (data.value.runtimeType == EndedBroadcastData) {
         _agora.leave();
+        backgroundService.invoke(endTask);
         AutoRouter.of(context).popUntilRoot();
         ScaffoldMessenger.of(MKeys.layoutScaffoldKey.currentContext!)
             .showSnackBar(
@@ -66,7 +68,12 @@ class _StreamPageState extends ConsumerState<StreamPage> {
           scrolledUnderElevation: 0,
           elevation: 0,
           automaticallyImplyLeading: false,
-          actions: [LeaveButton(onLeavePressed: onLeavePressed), MSize.hS(16)],
+          actions: [
+            LeaveButton(
+              onLeavePressed: () => onLeavePressed(context),
+            ),
+            MSize.hS(16)
+          ],
         ),
         backgroundColor: MColors.splashScreenBg,
         extendBodyBehindAppBar: true,
@@ -100,50 +107,41 @@ class _StreamPageState extends ConsumerState<StreamPage> {
     loading = true;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       Wakelock.enable();
-
-      await _agora.initialize(isHost: false).whenComplete(() async {
-        await _backgroundService.initialize();
-        await _joinBroadcast();
-        await _backgroundService.registerTask(
-          broadcastTitle: widget.broadcast.title.get()!,
-          taskName: streamTask,
-          agoraToken: widget.broadcast.agoraToken!,
-          channelId: widget.broadcast.id,
-        );
+      backgroundService.invoke(streamTask, {
+        'title': widget.broadcast.title.get(),
+        'content': 'Streaming live now.',
       });
+      await _agora.initialize(isHost: false).then((_) {
+        return _joinBroadcast();
+      });
+      backgroundService.startService();
     });
   }
 
   Future<void> _joinBroadcast() async {
-    await _agora
-        .join(
-      token: widget.broadcast.agoraToken!,
-      channelId: widget.broadcast.id,
-    )
-        .whenComplete(() {
+    final id = widget.broadcast.id;
+    final token = widget.broadcast.agoraToken!;
+    final fullName = widget.broadcast.creator!.fullName!;
+    await _agora.join(token: token, channelId: id).then((value) {
       final socketEvent = ref.read(socketDataProvider.notifier);
-      socketEvent.joinBroadcast(
-        broadcastId: widget.broadcast.id,
-        fullName: widget.broadcast.creator!.fullName!,
-      );
-      setState(() => loading = false);
+      socketEvent.joinBroadcast(broadcastId: id, fullName: fullName);
     });
+    setState(() => loading = false);
   }
 
-  Future<void> onLeavePressed() async {
+  Future<void> onLeavePressed(BuildContext context) async {
     Wakelock.disable();
     ref.read(socketDataProvider.notifier).leaveBroadcast(widget.broadcast.id);
-    await _agora.leave();
-    await _backgroundService.cancelAll();
-
-    AutoRouter.of(MKeys.streamScaffoldKey.currentContext!).pop();
+    _agora.leave();
+    backgroundService.invoke(endTask);
+    AutoRouter.of(context).pop();
   }
 
   Future<bool> onWillPop() async {
     Wakelock.disable();
     ref.read(socketDataProvider.notifier).leaveBroadcast(widget.broadcast.id);
     await _agora.leave();
-    await _backgroundService.cancelAll();
+    backgroundService.invoke(endTask);
     return true;
   }
 }

@@ -20,9 +20,8 @@ class AgoraService {
 
     await _agora.initialize(RtcEngineContext(appId: Env.agoraID));
 
-    if (isHost) {
-      await _agora.enableAudio();
-    }
+    await _agora.enableAudio();
+
     _log.i('Agora Audio enabled...');
 
     _agora.registerEventHandler(

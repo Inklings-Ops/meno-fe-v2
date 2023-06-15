@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
+import 'package:meno_fe_v2/common/constants/m_strings.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
@@ -14,10 +16,8 @@ import 'package:meno_fe_v2/modules/broadcast/application/timer/timer_notifier.da
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_tab_view.dart';
 import 'package:meno_fe_v2/services/agora_service.dart';
-import 'package:meno_fe_v2/services/background_service.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 import 'package:wakelock/wakelock.dart';
-
 
 class BroadcastPage extends StatefulHookConsumerWidget {
   final Broadcast broadcast;
@@ -29,7 +29,9 @@ class BroadcastPage extends StatefulHookConsumerWidget {
 
 class _BroadcastPageState extends ConsumerState<BroadcastPage> {
   final _agora = di<AgoraService>();
-  final _backgroundService = di<BackgroundService>();
+  bool starting = false;
+
+  final backgroundService = FlutterBackgroundService();
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +50,21 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
 
     ref.listen<BroadcastState>(broadcastProvider, (previous, next) {
       next.startedOption.fold(
-        () => null,
+        () => setState(() => starting = false),
         (either) => either.fold(
           (l) => null,
           (b) async {
-            await _agora.start(token: b.agoraToken!, channelId: b.id);
-            socketEvent.startBroadcast(widget.broadcast.id);
-            timerEvent.start();
+            setState(() => starting = false);
+            if (await backgroundService.isRunning() == false) {
+              backgroundService.invoke(broadcastTask, {
+                'title': b.title.get(),
+                'content': 'You are live.',
+              });
+              await _agora.start(token: b.agoraToken!, channelId: b.id);
+              timerEvent.start();
+              socketEvent.startBroadcast(widget.broadcast.id);
+              backgroundService.startService();
+            }
           },
         ),
       );
@@ -102,6 +112,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
             controller: tabController,
             children: [
               BroadcastTabView(
+                starting: starting,
                 broadcast: widget.broadcast,
                 isMute: isMuteState.value,
                 onDelete: onDelete,
@@ -110,7 +121,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
                   isMuteState.value = !isMuteState.value;
                   await _agora.muteAudio(!isMuteState.value);
                 },
-                onStart: onStart,
+                onStart: starting ? () {} : onStart,
               ),
               SingleChildScrollView(
                 primary: false,
@@ -132,7 +143,6 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
   @override
   void dispose() {
     Wakelock.disable();
-
     _agora.dispose();
     super.dispose();
   }
@@ -144,7 +154,6 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
       Wakelock.enable();
       ref.read(broadcastProvider.notifier).initialized(widget.broadcast);
       await _agora.initialize(isHost: true);
-      await _backgroundService.initialize();
     });
   }
 
@@ -161,7 +170,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
       final event = ref.read(broadcastProvider.notifier);
       event.deletePressed(widget.broadcast.id);
       await _agora.leave();
-      await _backgroundService.cancelAll();
+      backgroundService.invoke(endTask);
 
       await Future.delayed(Duration.zero);
       if (context.mounted) {
@@ -185,7 +194,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
       await _agora.leave();
       ref.read(socketDataProvider.notifier).endBroadcast(widget.broadcast.id);
       ref.read(timerProvider.notifier).stop();
-      await _backgroundService.cancelAll();
+      backgroundService.invoke(endTask);
 
       await Future.delayed(Duration.zero);
       if (context.mounted) {
@@ -200,12 +209,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
   Future<void> onMute(bool isMute) async => _agora.muteAudio(!isMute);
 
   Future<void> onStart() async {
+    setState(() => starting = true);
     ref.read(broadcastProvider.notifier).startPressed(widget.broadcast.id);
-    await _backgroundService.registerTask(
-      broadcastTitle: widget.broadcast.title.get()!,
-      taskName: broadcastTask,
-      agoraToken: widget.broadcast.agoraToken!,
-      channelId: widget.broadcast.id,
-    );
   }
 }

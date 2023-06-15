@@ -33,7 +33,7 @@ class BroadcastDetailsBottomSheet extends StatelessWidget {
     return DraggableScrollableSheet(
         initialChildSize: MSize.r(0.24),
         minChildSize: MSize.r(0.24),
-        maxChildSize: MSize.r(0.9),
+        // maxChildSize: MSize.r(0.9),
         expand: false,
         builder: (context, scrollController) {
           return SingleChildScrollView(

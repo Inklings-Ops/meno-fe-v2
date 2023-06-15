@@ -162,11 +162,6 @@ class AuthFacade implements IAuthFacade {
 
       return right(unit);
     } on DioError catch (error) {
-      Logger().wtf(error.type);
-      if (error.type == DioErrorType.response) {
-        return left(const AuthFailure.serverError());
-      }
-
       final message = displayAuthError(error);
       if (message != null) {
         return left(AuthFailure.message(message));
@@ -214,11 +209,6 @@ class AuthFacade implements IAuthFacade {
 
       return right(unit);
     } on DioError catch (error) {
-      Logger().wtf(error.type);
-      if (error.type == DioErrorType.response) {
-        return left(const AuthFailure.serverError());
-      }
-
       final message = displayAuthError(error);
       if (message != null) {
         return left(AuthFailure.message(message));

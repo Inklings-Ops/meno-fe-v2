@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -41,15 +42,19 @@ class BroadcastFacade implements IBroadcastFacade {
     File? artwork,
   }) async {
     try {
-      final res = await _remote.createBroadcast(
-        title: title.get()!,
-        description: description.get(),
-        cohosts: cohosts,
-        image: artwork,
-        timezone: timezone,
-      );
+      final res = await _remote
+          .createBroadcast(
+            title: title.get()!,
+            description: description.get(),
+            cohosts: cohosts,
+            image: artwork,
+            timezone: timezone,
+          )
+          .timeout(const Duration(seconds: 30));
 
       return right(_mapper.toDomain(res.data)!);
+    } on TimeoutException {
+      return left(const BroadcastFailure.message('Server timed out'));
     } on DioError catch (error) {
       final message = displayBroadcastError(error);
       if (message != null) {

@@ -19,10 +19,12 @@ class BroadcastTabView extends ConsumerStatefulWidget {
     required this.onStart,
     required this.onEnd,
     required this.onDelete,
+    this.starting = false,
   });
 
   final Broadcast broadcast;
   final bool isMute;
+  final bool starting;
   final void Function() onMute;
   final void Function() onStart;
   final void Function() onEnd;
@@ -118,7 +120,11 @@ class _BroadcastTabViewState extends ConsumerState<BroadcastTabView>
                         icon: isLive
                             ? Icons.stop_rounded
                             : Icons.play_arrow_rounded,
-                        title: isLive ? 'stop broadcast' : 'start broadcast',
+                        title: isLive
+                            ? 'stop broadcast'
+                            : widget.starting
+                                ? 'Starting...'
+                                : 'start broadcast',
                       ),
                       BroadcastActionButton(
                         onTap: isLive ? () {} : widget.onDelete,

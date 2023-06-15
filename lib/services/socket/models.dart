@@ -13,7 +13,7 @@ abstract class SocketData {
   int? numberOfListeners;
   String? error;
   BroadcastListener? newListener;
-  String? newBroadcastListener;
+  BroadcastListener? newBroadcastListener;
   int? numberOfLiveListeners;
   bool isLive;
 
