@@ -4,7 +4,6 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meno_fe_v2/common/constants/m_keys.dart';
-import 'package:meno_fe_v2/common/constants/m_strings.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
 import 'package:meno_fe_v2/core/router/m_router.dart';
@@ -15,12 +14,14 @@ import 'package:meno_fe_v2/modules/broadcast/application/broadcast/broadcast_not
 import 'package:meno_fe_v2/modules/broadcast/application/timer/timer_notifier.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_tab_view.dart';
-import 'package:meno_fe_v2/services/agora_service.dart';
+import 'package:meno_fe_v2/services/livekit_service.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
-import 'package:wakelock/wakelock.dart';
+
+import '../../../../common/constants/m_strings.dart';
 
 class BroadcastPage extends StatefulHookConsumerWidget {
   final Broadcast broadcast;
+
   const BroadcastPage({super.key, required this.broadcast});
 
   @override
@@ -28,10 +29,11 @@ class BroadcastPage extends StatefulHookConsumerWidget {
 }
 
 class _BroadcastPageState extends ConsumerState<BroadcastPage> {
-  final _agora = di<AgoraService>();
   bool starting = false;
 
   final backgroundService = FlutterBackgroundService();
+
+  final livekit = di<LivekitService>();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
                 'title': b.title.get(),
                 'content': 'You are live.',
               });
-              await _agora.start(token: b.agoraToken!, channelId: b.id);
+              await livekit.connect(b.broadcastToken!);
               timerEvent.start();
               socketEvent.startBroadcast(widget.broadcast.id);
               backgroundService.startService();
@@ -119,7 +121,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
                 onEnd: onEnd,
                 onMute: () async {
                   isMuteState.value = !isMuteState.value;
-                  await _agora.muteAudio(!isMuteState.value);
+                  await onMute(!isMuteState.value);
                 },
                 onStart: starting ? () {} : onStart,
               ),
@@ -142,8 +144,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
 
   @override
   void dispose() {
-    Wakelock.disable();
-    _agora.dispose();
+    livekit.dispose();
     super.dispose();
   }
 
@@ -151,9 +152,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Wakelock.enable();
       ref.read(broadcastProvider.notifier).initialized(widget.broadcast);
-      await _agora.initialize(isHost: true);
     });
   }
 
@@ -169,7 +168,8 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
     if (shouldDelete == true) {
       final event = ref.read(broadcastProvider.notifier);
       event.deletePressed(widget.broadcast.id);
-      await _agora.leave();
+      await livekit.leave();
+      await livekit.dispose();
       backgroundService.invoke(endTask);
 
       await Future.delayed(Duration.zero);
@@ -190,8 +190,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
         liveListeners: ref.watch(socketDataProvider).numberOfLiveListeners,
       );
 
-      Wakelock.disable();
-      await _agora.leave();
+      await livekit.leave();
       ref.read(socketDataProvider.notifier).endBroadcast(widget.broadcast.id);
       ref.read(timerProvider.notifier).stop();
       backgroundService.invoke(endTask);
@@ -206,7 +205,7 @@ class _BroadcastPageState extends ConsumerState<BroadcastPage> {
     }
   }
 
-  Future<void> onMute(bool isMute) async => _agora.muteAudio(!isMute);
+  Future<void> onMute(bool isMute) async => await livekit.mute(isMute);
 
   Future<void> onStart() async {
     setState(() => starting = true);

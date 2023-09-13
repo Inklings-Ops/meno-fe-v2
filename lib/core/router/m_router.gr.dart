@@ -142,7 +142,7 @@ class _$MRouter extends RootStackRouter {
         routeData: routeData,
         child: StreamPage(
           key: args.key,
-          broadcast: args.broadcast,
+          joinedBroadcast: args.joinedBroadcast,
         ),
       );
     },
@@ -689,13 +689,13 @@ class BroadcastFeedbackRouteArgs {
 class StreamRoute extends PageRouteInfo<StreamRouteArgs> {
   StreamRoute({
     Key? key,
-    required Broadcast broadcast,
+    required JoinBroadcastData joinedBroadcast,
   }) : super(
           StreamRoute.name,
           path: '/stream-page',
           args: StreamRouteArgs(
             key: key,
-            broadcast: broadcast,
+            joinedBroadcast: joinedBroadcast,
           ),
         );
 
@@ -705,16 +705,16 @@ class StreamRoute extends PageRouteInfo<StreamRouteArgs> {
 class StreamRouteArgs {
   const StreamRouteArgs({
     this.key,
-    required this.broadcast,
+    required this.joinedBroadcast,
   });
 
   final Key? key;
 
-  final Broadcast broadcast;
+  final JoinBroadcastData joinedBroadcast;
 
   @override
   String toString() {
-    return 'StreamRouteArgs{key: $key, broadcast: $broadcast}';
+    return 'StreamRouteArgs{key: $key, joinedBroadcast: $joinedBroadcast}';
   }
 }
 

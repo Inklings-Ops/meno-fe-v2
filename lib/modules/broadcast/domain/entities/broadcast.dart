@@ -12,7 +12,7 @@ class Broadcast with _$Broadcast {
     IBroadcastDescription? description,
     String? status,
     String? fullName,
-    String? agoraToken,
+    String? broadcastToken,
     String? timezone,
     dynamic imageId,
     String? imageUrl,

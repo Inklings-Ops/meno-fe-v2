@@ -8,6 +8,7 @@ import 'package:meno_fe_v2/di/injection.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast_status.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/join_broadcast_data.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/errors/broadcast_failure.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/i_broadcast_facade.dart';
 
@@ -29,7 +30,7 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
   }
 
   Future<void> joinPressed({
-    required Broadcast broadcast,
+    required String broadcastId,
     required BuildContext context,
   }) async {
     state = state.copyWith(
@@ -40,9 +41,9 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
       leaveOption: none(),
     );
 
-    Either<BroadcastFailure, String> r;
+    Either<BroadcastFailure, JoinBroadcastData> r;
 
-    r = await _facade.joinBroadcast(broadcastId: broadcast.id);
+    r = await _facade.joinBroadcast(broadcastId: broadcastId);
     final credentials = await _facade.getUserCredentials();
 
     r.fold(
@@ -56,11 +57,11 @@ class BroadcastNotifier extends StateNotifier<BroadcastState> {
           )),
         ),
       ),
-      (agoraToken) {
+      (success) {
         state = state.copyWith(
-          broadcast: broadcast,
+          broadcast: success.broadcast,
+          joinedBroadcast: success,
           loading: false,
-          agoraToken: agoraToken,
           authUser: credentials.user!,
           showError: false,
           joinedOption: some(r),

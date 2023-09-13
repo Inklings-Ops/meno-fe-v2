@@ -7,27 +7,23 @@ part of 'join_broadcast_data_dto.dart';
 // **************************************************************************
 
 Map<String, dynamic> _$JoinBroadcastDataDtoToJson(
-    JoinBroadcastDataDto instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('agoraToken', instance.agoraToken);
-  return val;
-}
+        JoinBroadcastDataDto instance) =>
+    <String, dynamic>{
+      'broadcast': instance.broadcast.toJson(),
+      'broadcastToken': instance.broadcastToken,
+    };
 
 _$_JoinBroadcastDataDto _$$_JoinBroadcastDataDtoFromJson(
         Map<String, dynamic> json) =>
     _$_JoinBroadcastDataDto(
-      agoraToken: json['agoraToken'] as String?,
+      broadcast:
+          BroadcastDto.fromJson(json['broadcast'] as Map<String, dynamic>),
+      broadcastToken: json['broadcastToken'] as String,
     );
 
 Map<String, dynamic> _$$_JoinBroadcastDataDtoToJson(
         _$_JoinBroadcastDataDto instance) =>
     <String, dynamic>{
-      'agoraToken': instance.agoraToken,
+      'broadcast': instance.broadcast,
+      'broadcastToken': instance.broadcastToken,
     };

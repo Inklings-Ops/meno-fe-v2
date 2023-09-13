@@ -15,7 +15,7 @@ class BroadcastMapper {
       description: dto.description != null
           ? IBroadcastDescription(dto.description!)
           : null,
-      agoraToken: dto.agoraToken,
+      broadcastToken: dto.broadcastToken,
       createdAt: dto.createdAt,
       creator: CreatorMapper().toDomain(dto.creator),
       creatorId: dto.creatorId,

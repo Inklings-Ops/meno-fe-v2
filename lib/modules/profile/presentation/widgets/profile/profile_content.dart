@@ -2,6 +2,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:meno_fe_v2/common/constants/m_icons.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/common/widgets/dialog_box/m_confirmation_dialog.dart';
@@ -28,8 +29,12 @@ class ProfileContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textTheme = Theme.of(context).textTheme;
-    final Size size = MediaQuery.of(context).size;
+    final textTheme = Theme
+        .of(context)
+        .textTheme;
+    final Size size = MediaQuery
+        .of(context)
+        .size;
     final bool isTablet = size.shortestSide >= 600 && size.longestSide >= 960;
 
     final nameStyle = isTablet ? textTheme.displaySmall : textTheme.titleLarge;
@@ -45,10 +50,13 @@ class ProfileContent extends ConsumerWidget {
       );
     }
 
+    Logger().wtf(profile.toString());
+
     Future<void> onLogout() async {
       final shouldDelete = await showDialog<bool>(
         context: context,
-        builder: (context) => const MConfirmationDialog(
+        builder: (context) =>
+        const MConfirmationDialog(
           title: 'Logout?',
           buttonTitle: 'Yes logout',
         ),
@@ -106,61 +114,63 @@ class ProfileContent extends ConsumerWidget {
               const ProfileActivityCountWidget(),
               MSize.vS(30),
               ProfileRecentBroadcastList(profile: profile),
-            ] else ...[
-              _ListContainer(
-                child: ListView(
-                  padding: MSize.pAll(16),
-                  primary: false,
-                  shrinkWrap: true,
-                  children: [
-                    ListTile(
-                      title: const Text('Edit Account'),
-                      trailing: const Icon(MIcons.Edit1),
-                      onTap: () async => showEditBottomSheet(context, ref),
-                    ),
-                    ListTile(
-                      title: const Text('About'),
-                      trailing: const Icon(MIcons.InfoCircle1),
-                      onTap: () => router.push(const AboutRoute()),
-                    ),
-                    ListTile(
-                      title: const Text('Terms & Conditions'),
-                      trailing: const Icon(MIcons.Paper1),
-                      onTap: () => router.push(const TermsAndConditionsRoute()),
-                    ),
-                    ListTile(
-                      title: const Text('Privacy Policy'),
-                      trailing: const Icon(MIcons.Paper1),
-                      onTap: () => router.push(const PrivacyPolicyRoute()),
-                    ),
-                  ],
+            ] else
+              ...[
+                _ListContainer(
+                  child: ListView(
+                    padding: MSize.pAll(16),
+                    primary: false,
+                    shrinkWrap: true,
+                    children: [
+                      ListTile(
+                        title: const Text('Edit Account'),
+                        trailing: const Icon(MIcons.Edit1),
+                        onTap: () async => showEditBottomSheet(context, ref),
+                      ),
+                      ListTile(
+                        title: const Text('About'),
+                        trailing: const Icon(MIcons.InfoCircle1),
+                        onTap: () => router.push(const AboutRoute()),
+                      ),
+                      ListTile(
+                        title: const Text('Terms & Conditions'),
+                        trailing: const Icon(MIcons.Paper1),
+                        onTap: () =>
+                            router.push(const TermsAndConditionsRoute()),
+                      ),
+                      ListTile(
+                        title: const Text('Privacy Policy'),
+                        trailing: const Icon(MIcons.Paper1),
+                        onTap: () => router.push(const PrivacyPolicyRoute()),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              _ListContainer(
-                child: ListView(
-                  padding: MSize.pAll(16),
-                  primary: false,
-                  shrinkWrap: true,
-                  children: [
-                    ListTile(
-                      title: const Text('Delete Account'),
-                      trailing: const Icon(MIcons.Paper1),
-                      onTap: () async {
-                        final result = await onDeleteAccount();
-                        if (result) {
-                          ref.read(authProvider.notifier).deleteUser();
-                        }
-                      },
-                    ),
-                    ListTile(
-                      title: const Text('Logout'),
-                      trailing: const Icon(MIcons.Logout1),
-                      onTap: onLogout,
-                    ),
-                  ],
+                _ListContainer(
+                  child: ListView(
+                    padding: MSize.pAll(16),
+                    primary: false,
+                    shrinkWrap: true,
+                    children: [
+                      ListTile(
+                        title: const Text('Delete Account'),
+                        trailing: const Icon(MIcons.Paper1),
+                        onTap: () async {
+                          final result = await onDeleteAccount();
+                          if (result) {
+                            ref.read(authProvider.notifier).deleteUser();
+                          }
+                        },
+                      ),
+                      ListTile(
+                        title: const Text('Logout'),
+                        trailing: const Icon(MIcons.Logout1),
+                        onTap: onLogout,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ]
+              ]
           ],
         ),
       ),

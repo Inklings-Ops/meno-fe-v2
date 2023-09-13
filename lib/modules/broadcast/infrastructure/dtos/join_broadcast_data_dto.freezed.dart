@@ -20,7 +20,8 @@ JoinBroadcastDataDto _$JoinBroadcastDataDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$JoinBroadcastDataDto {
-  String? get agoraToken => throw _privateConstructorUsedError;
+  BroadcastDto get broadcast => throw _privateConstructorUsedError;
+  String get broadcastToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,9 @@ abstract class $JoinBroadcastDataDtoCopyWith<$Res> {
           $Res Function(JoinBroadcastDataDto) then) =
       _$JoinBroadcastDataDtoCopyWithImpl<$Res, JoinBroadcastDataDto>;
   @useResult
-  $Res call({String? agoraToken});
+  $Res call({BroadcastDto broadcast, String broadcastToken});
+
+  $BroadcastDtoCopyWith<$Res> get broadcast;
 }
 
 /// @nodoc
@@ -51,14 +54,27 @@ class _$JoinBroadcastDataDtoCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? agoraToken = freezed,
+    Object? broadcast = null,
+    Object? broadcastToken = null,
   }) {
     return _then(_value.copyWith(
-      agoraToken: freezed == agoraToken
-          ? _value.agoraToken
-          : agoraToken // ignore: cast_nullable_to_non_nullable
-              as String?,
+      broadcast: null == broadcast
+          ? _value.broadcast
+          : broadcast // ignore: cast_nullable_to_non_nullable
+              as BroadcastDto,
+      broadcastToken: null == broadcastToken
+          ? _value.broadcastToken
+          : broadcastToken // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BroadcastDtoCopyWith<$Res> get broadcast {
+    return $BroadcastDtoCopyWith<$Res>(_value.broadcast, (value) {
+      return _then(_value.copyWith(broadcast: value) as $Val);
+    });
   }
 }
 
@@ -70,7 +86,10 @@ abstract class _$$_JoinBroadcastDataDtoCopyWith<$Res>
       __$$_JoinBroadcastDataDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? agoraToken});
+  $Res call({BroadcastDto broadcast, String broadcastToken});
+
+  @override
+  $BroadcastDtoCopyWith<$Res> get broadcast;
 }
 
 /// @nodoc
@@ -84,13 +103,18 @@ class __$$_JoinBroadcastDataDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? agoraToken = freezed,
+    Object? broadcast = null,
+    Object? broadcastToken = null,
   }) {
     return _then(_$_JoinBroadcastDataDto(
-      agoraToken: freezed == agoraToken
-          ? _value.agoraToken
-          : agoraToken // ignore: cast_nullable_to_non_nullable
-              as String?,
+      broadcast: null == broadcast
+          ? _value.broadcast
+          : broadcast // ignore: cast_nullable_to_non_nullable
+              as BroadcastDto,
+      broadcastToken: null == broadcastToken
+          ? _value.broadcastToken
+          : broadcastToken // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -98,17 +122,20 @@ class __$$_JoinBroadcastDataDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_JoinBroadcastDataDto implements _JoinBroadcastDataDto {
-  _$_JoinBroadcastDataDto({this.agoraToken});
+  _$_JoinBroadcastDataDto(
+      {required this.broadcast, required this.broadcastToken});
 
   factory _$_JoinBroadcastDataDto.fromJson(Map<String, dynamic> json) =>
       _$$_JoinBroadcastDataDtoFromJson(json);
 
   @override
-  final String? agoraToken;
+  final BroadcastDto broadcast;
+  @override
+  final String broadcastToken;
 
   @override
   String toString() {
-    return 'JoinBroadcastDataDto(agoraToken: $agoraToken)';
+    return 'JoinBroadcastDataDto(broadcast: $broadcast, broadcastToken: $broadcastToken)';
   }
 
   @override
@@ -116,13 +143,15 @@ class _$_JoinBroadcastDataDto implements _JoinBroadcastDataDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_JoinBroadcastDataDto &&
-            (identical(other.agoraToken, agoraToken) ||
-                other.agoraToken == agoraToken));
+            (identical(other.broadcast, broadcast) ||
+                other.broadcast == broadcast) &&
+            (identical(other.broadcastToken, broadcastToken) ||
+                other.broadcastToken == broadcastToken));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, agoraToken);
+  int get hashCode => Object.hash(runtimeType, broadcast, broadcastToken);
 
   @JsonKey(ignore: true)
   @override
@@ -140,14 +169,17 @@ class _$_JoinBroadcastDataDto implements _JoinBroadcastDataDto {
 }
 
 abstract class _JoinBroadcastDataDto implements JoinBroadcastDataDto {
-  factory _JoinBroadcastDataDto({final String? agoraToken}) =
-      _$_JoinBroadcastDataDto;
+  factory _JoinBroadcastDataDto(
+      {required final BroadcastDto broadcast,
+      required final String broadcastToken}) = _$_JoinBroadcastDataDto;
 
   factory _JoinBroadcastDataDto.fromJson(Map<String, dynamic> json) =
       _$_JoinBroadcastDataDto.fromJson;
 
   @override
-  String? get agoraToken;
+  BroadcastDto get broadcast;
+  @override
+  String get broadcastToken;
   @override
   @JsonKey(ignore: true)
   _$$_JoinBroadcastDataDtoCopyWith<_$_JoinBroadcastDataDto> get copyWith =>

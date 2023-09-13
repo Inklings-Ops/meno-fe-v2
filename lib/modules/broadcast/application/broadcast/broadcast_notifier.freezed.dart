@@ -19,13 +19,14 @@ mixin _$BroadcastState {
   List<Broadcast?>? get currentUserBroadcasts =>
       throw _privateConstructorUsedError;
   Broadcast get broadcast => throw _privateConstructorUsedError;
+  JoinBroadcastData get joinedBroadcast => throw _privateConstructorUsedError;
   BroadcastStatus get status => throw _privateConstructorUsedError;
   bool get isAudioMute => throw _privateConstructorUsedError;
   User get authUser => throw _privateConstructorUsedError;
-  String? get agoraToken => throw _privateConstructorUsedError;
+  String? get broadcastToken => throw _privateConstructorUsedError;
   bool get showError => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
-  Option<Either<BroadcastFailure, String>> get joinedOption =>
+  Option<Either<BroadcastFailure, JoinBroadcastData>> get joinedOption =>
       throw _privateConstructorUsedError;
   Option<Either<BroadcastFailure, Broadcast>> get startedOption =>
       throw _privateConstructorUsedError;
@@ -48,18 +49,20 @@ abstract class $BroadcastStateCopyWith<$Res> {
   $Res call(
       {List<Broadcast?>? currentUserBroadcasts,
       Broadcast broadcast,
+      JoinBroadcastData joinedBroadcast,
       BroadcastStatus status,
       bool isAudioMute,
       User authUser,
-      String? agoraToken,
+      String? broadcastToken,
       bool showError,
       bool loading,
-      Option<Either<BroadcastFailure, String>> joinedOption,
+      Option<Either<BroadcastFailure, JoinBroadcastData>> joinedOption,
       Option<Either<BroadcastFailure, Broadcast>> startedOption,
       Option<Either<BroadcastFailure, Unit>> leaveOption,
       Option<Either<BroadcastFailure, Unit>> deleteOption});
 
   $BroadcastCopyWith<$Res> get broadcast;
+  $JoinBroadcastDataCopyWith<$Res> get joinedBroadcast;
   $UserCopyWith<$Res> get authUser;
 }
 
@@ -78,10 +81,11 @@ class _$BroadcastStateCopyWithImpl<$Res, $Val extends BroadcastState>
   $Res call({
     Object? currentUserBroadcasts = freezed,
     Object? broadcast = null,
+    Object? joinedBroadcast = null,
     Object? status = null,
     Object? isAudioMute = null,
     Object? authUser = null,
-    Object? agoraToken = freezed,
+    Object? broadcastToken = freezed,
     Object? showError = null,
     Object? loading = null,
     Object? joinedOption = null,
@@ -98,6 +102,10 @@ class _$BroadcastStateCopyWithImpl<$Res, $Val extends BroadcastState>
           ? _value.broadcast
           : broadcast // ignore: cast_nullable_to_non_nullable
               as Broadcast,
+      joinedBroadcast: null == joinedBroadcast
+          ? _value.joinedBroadcast
+          : joinedBroadcast // ignore: cast_nullable_to_non_nullable
+              as JoinBroadcastData,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -110,9 +118,9 @@ class _$BroadcastStateCopyWithImpl<$Res, $Val extends BroadcastState>
           ? _value.authUser
           : authUser // ignore: cast_nullable_to_non_nullable
               as User,
-      agoraToken: freezed == agoraToken
-          ? _value.agoraToken
-          : agoraToken // ignore: cast_nullable_to_non_nullable
+      broadcastToken: freezed == broadcastToken
+          ? _value.broadcastToken
+          : broadcastToken // ignore: cast_nullable_to_non_nullable
               as String?,
       showError: null == showError
           ? _value.showError
@@ -125,7 +133,7 @@ class _$BroadcastStateCopyWithImpl<$Res, $Val extends BroadcastState>
       joinedOption: null == joinedOption
           ? _value.joinedOption
           : joinedOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<BroadcastFailure, String>>,
+              as Option<Either<BroadcastFailure, JoinBroadcastData>>,
       startedOption: null == startedOption
           ? _value.startedOption
           : startedOption // ignore: cast_nullable_to_non_nullable
@@ -151,6 +159,14 @@ class _$BroadcastStateCopyWithImpl<$Res, $Val extends BroadcastState>
 
   @override
   @pragma('vm:prefer-inline')
+  $JoinBroadcastDataCopyWith<$Res> get joinedBroadcast {
+    return $JoinBroadcastDataCopyWith<$Res>(_value.joinedBroadcast, (value) {
+      return _then(_value.copyWith(joinedBroadcast: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get authUser {
     return $UserCopyWith<$Res>(_value.authUser, (value) {
       return _then(_value.copyWith(authUser: value) as $Val);
@@ -169,19 +185,22 @@ abstract class _$$_BroadcastStateCopyWith<$Res>
   $Res call(
       {List<Broadcast?>? currentUserBroadcasts,
       Broadcast broadcast,
+      JoinBroadcastData joinedBroadcast,
       BroadcastStatus status,
       bool isAudioMute,
       User authUser,
-      String? agoraToken,
+      String? broadcastToken,
       bool showError,
       bool loading,
-      Option<Either<BroadcastFailure, String>> joinedOption,
+      Option<Either<BroadcastFailure, JoinBroadcastData>> joinedOption,
       Option<Either<BroadcastFailure, Broadcast>> startedOption,
       Option<Either<BroadcastFailure, Unit>> leaveOption,
       Option<Either<BroadcastFailure, Unit>> deleteOption});
 
   @override
   $BroadcastCopyWith<$Res> get broadcast;
+  @override
+  $JoinBroadcastDataCopyWith<$Res> get joinedBroadcast;
   @override
   $UserCopyWith<$Res> get authUser;
 }
@@ -199,10 +218,11 @@ class __$$_BroadcastStateCopyWithImpl<$Res>
   $Res call({
     Object? currentUserBroadcasts = freezed,
     Object? broadcast = null,
+    Object? joinedBroadcast = null,
     Object? status = null,
     Object? isAudioMute = null,
     Object? authUser = null,
-    Object? agoraToken = freezed,
+    Object? broadcastToken = freezed,
     Object? showError = null,
     Object? loading = null,
     Object? joinedOption = null,
@@ -219,6 +239,10 @@ class __$$_BroadcastStateCopyWithImpl<$Res>
           ? _value.broadcast
           : broadcast // ignore: cast_nullable_to_non_nullable
               as Broadcast,
+      joinedBroadcast: null == joinedBroadcast
+          ? _value.joinedBroadcast
+          : joinedBroadcast // ignore: cast_nullable_to_non_nullable
+              as JoinBroadcastData,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -231,9 +255,9 @@ class __$$_BroadcastStateCopyWithImpl<$Res>
           ? _value.authUser
           : authUser // ignore: cast_nullable_to_non_nullable
               as User,
-      agoraToken: freezed == agoraToken
-          ? _value.agoraToken
-          : agoraToken // ignore: cast_nullable_to_non_nullable
+      broadcastToken: freezed == broadcastToken
+          ? _value.broadcastToken
+          : broadcastToken // ignore: cast_nullable_to_non_nullable
               as String?,
       showError: null == showError
           ? _value.showError
@@ -246,7 +270,7 @@ class __$$_BroadcastStateCopyWithImpl<$Res>
       joinedOption: null == joinedOption
           ? _value.joinedOption
           : joinedOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<BroadcastFailure, String>>,
+              as Option<Either<BroadcastFailure, JoinBroadcastData>>,
       startedOption: null == startedOption
           ? _value.startedOption
           : startedOption // ignore: cast_nullable_to_non_nullable
@@ -269,10 +293,11 @@ class _$_BroadcastState implements _BroadcastState {
   const _$_BroadcastState(
       {required final List<Broadcast?>? currentUserBroadcasts,
       required this.broadcast,
+      required this.joinedBroadcast,
       required this.status,
       required this.isAudioMute,
       required this.authUser,
-      this.agoraToken,
+      this.broadcastToken,
       required this.showError,
       required this.loading,
       required this.joinedOption,
@@ -295,19 +320,21 @@ class _$_BroadcastState implements _BroadcastState {
   @override
   final Broadcast broadcast;
   @override
+  final JoinBroadcastData joinedBroadcast;
+  @override
   final BroadcastStatus status;
   @override
   final bool isAudioMute;
   @override
   final User authUser;
   @override
-  final String? agoraToken;
+  final String? broadcastToken;
   @override
   final bool showError;
   @override
   final bool loading;
   @override
-  final Option<Either<BroadcastFailure, String>> joinedOption;
+  final Option<Either<BroadcastFailure, JoinBroadcastData>> joinedOption;
   @override
   final Option<Either<BroadcastFailure, Broadcast>> startedOption;
   @override
@@ -317,7 +344,7 @@ class _$_BroadcastState implements _BroadcastState {
 
   @override
   String toString() {
-    return 'BroadcastState(currentUserBroadcasts: $currentUserBroadcasts, broadcast: $broadcast, status: $status, isAudioMute: $isAudioMute, authUser: $authUser, agoraToken: $agoraToken, showError: $showError, loading: $loading, joinedOption: $joinedOption, startedOption: $startedOption, leaveOption: $leaveOption, deleteOption: $deleteOption)';
+    return 'BroadcastState(currentUserBroadcasts: $currentUserBroadcasts, broadcast: $broadcast, joinedBroadcast: $joinedBroadcast, status: $status, isAudioMute: $isAudioMute, authUser: $authUser, broadcastToken: $broadcastToken, showError: $showError, loading: $loading, joinedOption: $joinedOption, startedOption: $startedOption, leaveOption: $leaveOption, deleteOption: $deleteOption)';
   }
 
   @override
@@ -329,13 +356,15 @@ class _$_BroadcastState implements _BroadcastState {
                 .equals(other._currentUserBroadcasts, _currentUserBroadcasts) &&
             (identical(other.broadcast, broadcast) ||
                 other.broadcast == broadcast) &&
+            (identical(other.joinedBroadcast, joinedBroadcast) ||
+                other.joinedBroadcast == joinedBroadcast) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.isAudioMute, isAudioMute) ||
                 other.isAudioMute == isAudioMute) &&
             (identical(other.authUser, authUser) ||
                 other.authUser == authUser) &&
-            (identical(other.agoraToken, agoraToken) ||
-                other.agoraToken == agoraToken) &&
+            (identical(other.broadcastToken, broadcastToken) ||
+                other.broadcastToken == broadcastToken) &&
             (identical(other.showError, showError) ||
                 other.showError == showError) &&
             (identical(other.loading, loading) || other.loading == loading) &&
@@ -354,10 +383,11 @@ class _$_BroadcastState implements _BroadcastState {
       runtimeType,
       const DeepCollectionEquality().hash(_currentUserBroadcasts),
       broadcast,
+      joinedBroadcast,
       status,
       isAudioMute,
       authUser,
-      agoraToken,
+      broadcastToken,
       showError,
       loading,
       joinedOption,
@@ -376,13 +406,15 @@ abstract class _BroadcastState implements BroadcastState {
   const factory _BroadcastState(
       {required final List<Broadcast?>? currentUserBroadcasts,
       required final Broadcast broadcast,
+      required final JoinBroadcastData joinedBroadcast,
       required final BroadcastStatus status,
       required final bool isAudioMute,
       required final User authUser,
-      final String? agoraToken,
+      final String? broadcastToken,
       required final bool showError,
       required final bool loading,
-      required final Option<Either<BroadcastFailure, String>> joinedOption,
+      required final Option<Either<BroadcastFailure, JoinBroadcastData>>
+          joinedOption,
       required final Option<Either<BroadcastFailure, Broadcast>> startedOption,
       required final Option<Either<BroadcastFailure, Unit>> leaveOption,
       required final Option<Either<BroadcastFailure, Unit>>
@@ -393,19 +425,21 @@ abstract class _BroadcastState implements BroadcastState {
   @override
   Broadcast get broadcast;
   @override
+  JoinBroadcastData get joinedBroadcast;
+  @override
   BroadcastStatus get status;
   @override
   bool get isAudioMute;
   @override
   User get authUser;
   @override
-  String? get agoraToken;
+  String? get broadcastToken;
   @override
   bool get showError;
   @override
   bool get loading;
   @override
-  Option<Either<BroadcastFailure, String>> get joinedOption;
+  Option<Either<BroadcastFailure, JoinBroadcastData>> get joinedOption;
   @override
   Option<Either<BroadcastFailure, Broadcast>> get startedOption;
   @override

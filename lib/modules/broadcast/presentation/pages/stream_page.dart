@@ -8,20 +8,20 @@ import 'package:meno_fe_v2/common/constants/m_keys.dart';
 import 'package:meno_fe_v2/common/constants/m_strings.dart';
 import 'package:meno_fe_v2/common/utils/m_size.dart';
 import 'package:meno_fe_v2/di/injection.dart';
-import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/join_broadcast_data.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/broadcast/broadcast_artwork.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/leave_button.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/listeners_list.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_bottom_sheet.dart';
 import 'package:meno_fe_v2/modules/broadcast/presentation/widgets/stream/stream_page_skeleton.dart';
-import 'package:meno_fe_v2/services/agora_service.dart';
+import 'package:meno_fe_v2/services/livekit_service.dart';
 import 'package:meno_fe_v2/services/socket/models.dart';
 import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
-import 'package:wakelock/wakelock.dart';
 
 class StreamPage extends StatefulHookConsumerWidget {
-  const StreamPage({super.key, required this.broadcast});
-  final Broadcast broadcast;
+  const StreamPage({super.key, required this.joinedBroadcast});
+
+  final JoinBroadcastData joinedBroadcast;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _StreamPageState();
@@ -30,30 +30,32 @@ class StreamPage extends StatefulHookConsumerWidget {
 class _StreamPageState extends ConsumerState<StreamPage> {
   bool loading = false;
 
-  final backgroundService = FlutterBackgroundService();
+  final livekit = di<LivekitService>();
 
-  final _agora = di<AgoraService>();
+  final backgroundService = FlutterBackgroundService();
 
   @override
   Widget build(BuildContext context) {
+    final broadcast = widget.joinedBroadcast.broadcast;
+
     final tabController = useTabController(initialLength: 3);
 
+    final scaffoldMessenger = ScaffoldMessenger.of(
+      MKeys.layoutScaffoldKey.currentContext!,
+    );
+
     if (loading) {
-      return StreamPageSkeleton(broadcast: widget.broadcast);
+      return StreamPageSkeleton(broadcast: widget.joinedBroadcast.broadcast);
     }
 
     ref.listen(socketService, (_, AsyncValue<SocketData> data) {
+      final creator = broadcast.creator!;
       if (data.value.runtimeType == EndedBroadcastData) {
-        _agora.leave();
+        livekit.leave();
         backgroundService.invoke(endTask);
         AutoRouter.of(context).popUntilRoot();
-        ScaffoldMessenger.of(MKeys.layoutScaffoldKey.currentContext!)
-            .showSnackBar(
-          SnackBar(
-            content: Text(
-              '${widget.broadcast.creator?.fullName} has ended the broadcast.',
-            ),
-          ),
+        scaffoldMessenger.showSnackBar(
+          SnackBar(content: Text('${creator.fullName} ended the broadcast.')),
         );
       }
     });
@@ -69,9 +71,7 @@ class _StreamPageState extends ConsumerState<StreamPage> {
           elevation: 0,
           automaticallyImplyLeading: false,
           actions: [
-            LeaveButton(
-              onLeavePressed: () => onLeavePressed(context),
-            ),
+            LeaveButton(onLeavePressed: () => onLeavePressed(context)),
             MSize.hS(16)
           ],
         ),
@@ -84,7 +84,7 @@ class _StreamPageState extends ConsumerState<StreamPage> {
           child: Column(
             children: [
               MSize.vS(70),
-              BroadcastArtwork(imageUrl: widget.broadcast.imageUrl),
+              BroadcastArtwork(imageUrl: broadcast.imageUrl),
               MSize.vS(10),
               const Align(
                 alignment: Alignment.centerLeft,
@@ -94,7 +94,7 @@ class _StreamPageState extends ConsumerState<StreamPage> {
           ),
         ),
         bottomSheet: StreamBottomSheet(
-          broadcast: widget.broadcast,
+          broadcast: broadcast,
           tabController: tabController,
         ),
       ),
@@ -105,24 +105,21 @@ class _StreamPageState extends ConsumerState<StreamPage> {
   void initState() {
     super.initState();
     loading = true;
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Wakelock.enable();
       backgroundService.invoke(streamTask, {
-        'title': widget.broadcast.title.get(),
+        'title': widget.joinedBroadcast.broadcast.title.get(),
         'content': 'Streaming live now.',
       });
-      await _agora.initialize(isHost: false).then((_) {
-        return _joinBroadcast();
-      });
+      await _joinBroadcast();
       backgroundService.startService();
     });
   }
 
   Future<void> _joinBroadcast() async {
-    final id = widget.broadcast.id;
-    final token = widget.broadcast.agoraToken!;
-    final fullName = widget.broadcast.creator!.fullName!;
-    await _agora.join(token: token, channelId: id).then((value) {
+    final id = widget.joinedBroadcast.broadcast.id;
+    final fullName = widget.joinedBroadcast.broadcast.creator!.fullName!;
+    await livekit.connect(widget.joinedBroadcast.broadcastToken).then((_) {
       final socketEvent = ref.read(socketDataProvider.notifier);
       socketEvent.joinBroadcast(broadcastId: id, fullName: fullName);
     });
@@ -130,17 +127,19 @@ class _StreamPageState extends ConsumerState<StreamPage> {
   }
 
   Future<void> onLeavePressed(BuildContext context) async {
-    Wakelock.disable();
-    ref.read(socketDataProvider.notifier).leaveBroadcast(widget.broadcast.id);
-    _agora.leave();
+    final broadcastId = widget.joinedBroadcast.broadcast.id;
+    final router = AutoRouter.of(context);
+    ref.read(socketDataProvider.notifier).leaveBroadcast(broadcastId);
+    await livekit.leave();
     backgroundService.invoke(endTask);
-    AutoRouter.of(context).pop();
+    router.pop();
   }
 
   Future<bool> onWillPop() async {
-    Wakelock.disable();
-    ref.read(socketDataProvider.notifier).leaveBroadcast(widget.broadcast.id);
-    await _agora.leave();
+    final broadcastId = widget.joinedBroadcast.broadcast.id;
+    ref.read(socketDataProvider.notifier).leaveBroadcast(broadcastId);
+    await livekit.leave();
+    await livekit.dispose();
     backgroundService.invoke(endTask);
     return true;
   }

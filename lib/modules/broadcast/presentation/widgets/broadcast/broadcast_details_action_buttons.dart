@@ -12,6 +12,7 @@ import 'package:meno_fe_v2/services/socket/socket_data_notifier.dart';
 
 class BroadcastDetailsActionButtons extends HookConsumerWidget {
   const BroadcastDetailsActionButtons({super.key, required this.broadcast});
+
   final Broadcast broadcast;
 
   @override
@@ -36,9 +37,9 @@ class BroadcastDetailsActionButtons extends HookConsumerWidget {
               )),
             ),
           ),
-          (r) {
+          (success) {
             ScaffoldMessenger.of(context).clearSnackBars();
-            AutoRouter.of(context).push(StreamRoute(broadcast: broadcast));
+            AutoRouter.of(context).push(StreamRoute(joinedBroadcast: success));
             loading.value = false;
           },
         ),
@@ -59,7 +60,7 @@ class BroadcastDetailsActionButtons extends HookConsumerWidget {
                     : () {
                         loading.value = true;
                         broadcastEvent.joinPressed(
-                          broadcast: broadcast,
+                          broadcastId: broadcast.id,
                           context: context,
                         );
                       },

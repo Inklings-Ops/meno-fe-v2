@@ -21,7 +21,7 @@ mixin _$Broadcast {
   IBroadcastDescription? get description => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   String? get fullName => throw _privateConstructorUsedError;
-  String? get agoraToken => throw _privateConstructorUsedError;
+  String? get broadcastToken => throw _privateConstructorUsedError;
   String? get timezone => throw _privateConstructorUsedError;
   dynamic get imageId => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
@@ -51,7 +51,7 @@ abstract class $BroadcastCopyWith<$Res> {
       IBroadcastDescription? description,
       String? status,
       String? fullName,
-      String? agoraToken,
+      String? broadcastToken,
       String? timezone,
       dynamic imageId,
       String? imageUrl,
@@ -86,7 +86,7 @@ class _$BroadcastCopyWithImpl<$Res, $Val extends Broadcast>
     Object? description = freezed,
     Object? status = freezed,
     Object? fullName = freezed,
-    Object? agoraToken = freezed,
+    Object? broadcastToken = freezed,
     Object? timezone = freezed,
     Object? imageId = freezed,
     Object? imageUrl = freezed,
@@ -121,9 +121,9 @@ class _$BroadcastCopyWithImpl<$Res, $Val extends Broadcast>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
-      agoraToken: freezed == agoraToken
-          ? _value.agoraToken
-          : agoraToken // ignore: cast_nullable_to_non_nullable
+      broadcastToken: freezed == broadcastToken
+          ? _value.broadcastToken
+          : broadcastToken // ignore: cast_nullable_to_non_nullable
               as String?,
       timezone: freezed == timezone
           ? _value.timezone
@@ -202,7 +202,7 @@ abstract class _$$_BroadcastCopyWith<$Res> implements $BroadcastCopyWith<$Res> {
       IBroadcastDescription? description,
       String? status,
       String? fullName,
-      String? agoraToken,
+      String? broadcastToken,
       String? timezone,
       dynamic imageId,
       String? imageUrl,
@@ -236,7 +236,7 @@ class __$$_BroadcastCopyWithImpl<$Res>
     Object? description = freezed,
     Object? status = freezed,
     Object? fullName = freezed,
-    Object? agoraToken = freezed,
+    Object? broadcastToken = freezed,
     Object? timezone = freezed,
     Object? imageId = freezed,
     Object? imageUrl = freezed,
@@ -271,9 +271,9 @@ class __$$_BroadcastCopyWithImpl<$Res>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
-      agoraToken: freezed == agoraToken
-          ? _value.agoraToken
-          : agoraToken // ignore: cast_nullable_to_non_nullable
+      broadcastToken: freezed == broadcastToken
+          ? _value.broadcastToken
+          : broadcastToken // ignore: cast_nullable_to_non_nullable
               as String?,
       timezone: freezed == timezone
           ? _value.timezone
@@ -336,7 +336,7 @@ class _$_Broadcast implements _Broadcast {
       this.description,
       this.status,
       this.fullName,
-      this.agoraToken,
+      this.broadcastToken,
       this.timezone,
       this.imageId,
       this.imageUrl,
@@ -361,7 +361,7 @@ class _$_Broadcast implements _Broadcast {
   @override
   final String? fullName;
   @override
-  final String? agoraToken;
+  final String? broadcastToken;
   @override
   final String? timezone;
   @override
@@ -389,7 +389,7 @@ class _$_Broadcast implements _Broadcast {
 
   @override
   String toString() {
-    return 'Broadcast(id: $id, title: $title, description: $description, status: $status, fullName: $fullName, agoraToken: $agoraToken, timezone: $timezone, imageId: $imageId, imageUrl: $imageUrl, startTime: $startTime, endTime: $endTime, createdAt: $createdAt, deleted: $deleted, creatorId: $creatorId, creator: $creator, liveListeners: $liveListeners, timeElapsed: $timeElapsed, totalListeners: $totalListeners)';
+    return 'Broadcast(id: $id, title: $title, description: $description, status: $status, fullName: $fullName, broadcastToken: $broadcastToken, timezone: $timezone, imageId: $imageId, imageUrl: $imageUrl, startTime: $startTime, endTime: $endTime, createdAt: $createdAt, deleted: $deleted, creatorId: $creatorId, creator: $creator, liveListeners: $liveListeners, timeElapsed: $timeElapsed, totalListeners: $totalListeners)';
   }
 
   @override
@@ -404,8 +404,8 @@ class _$_Broadcast implements _Broadcast {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
-            (identical(other.agoraToken, agoraToken) ||
-                other.agoraToken == agoraToken) &&
+            (identical(other.broadcastToken, broadcastToken) ||
+                other.broadcastToken == broadcastToken) &&
             (identical(other.timezone, timezone) ||
                 other.timezone == timezone) &&
             const DeepCollectionEquality().equals(other.imageId, imageId) &&
@@ -436,7 +436,7 @@ class _$_Broadcast implements _Broadcast {
       description,
       status,
       fullName,
-      agoraToken,
+      broadcastToken,
       timezone,
       const DeepCollectionEquality().hash(imageId),
       imageUrl,
@@ -464,7 +464,7 @@ abstract class _Broadcast implements Broadcast {
       final IBroadcastDescription? description,
       final String? status,
       final String? fullName,
-      final String? agoraToken,
+      final String? broadcastToken,
       final String? timezone,
       final dynamic imageId,
       final String? imageUrl,
@@ -489,7 +489,7 @@ abstract class _Broadcast implements Broadcast {
   @override
   String? get fullName;
   @override
-  String? get agoraToken;
+  String? get broadcastToken;
   @override
   String? get timezone;
   @override

@@ -11,6 +11,7 @@ import 'package:meno_fe_v2/core/value/value_objects.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user_credentials.dart';
 import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/mapper/user_credentials_mapper.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/join_broadcast_data.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/errors/broadcast_failure.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/i_broadcast_facade.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/local/broadcast_local_datasource.dart';
@@ -25,6 +26,7 @@ class BroadcastFacade implements IBroadcastFacade {
   final BroadcastMapper _mapper;
 
   BroadcastFacade(this._local, this._remote, this._mapper);
+
   @override
   Future<Either<BroadcastFailure, Unit>> addBroadcastCoHost({
     required String broadcastId,
@@ -129,13 +131,18 @@ class BroadcastFacade implements IBroadcastFacade {
   }
 
   @override
-  Future<Either<BroadcastFailure, String>> joinBroadcast({
+  Future<Either<BroadcastFailure, JoinBroadcastData>> joinBroadcast({
     required String broadcastId,
   }) async {
     try {
       final res = await _remote.joinBroadcast(broadcastId: broadcastId);
 
-      return right(res.data!.agoraToken!);
+      return right(
+        JoinBroadcastData(
+          broadcastToken: res.data!.broadcastToken,
+          broadcast: BroadcastMapper().toDomain(res.data!.broadcast)!,
+        ),
+      );
     } on DioError catch (error) {
       final message = displayBroadcastError(error);
       if (message != null) {

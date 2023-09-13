@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:meno_fe_v2/core/value/value_objects.dart';
 import 'package:meno_fe_v2/modules/auth/domain/entities/user_credentials.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/entities/broadcast.dart';
+import 'package:meno_fe_v2/modules/broadcast/domain/entities/join_broadcast_data.dart';
 import 'package:meno_fe_v2/modules/broadcast/domain/errors/broadcast_failure.dart';
 
 abstract class IBroadcastFacade {
@@ -41,7 +42,7 @@ abstract class IBroadcastFacade {
 
   Future<UserCredentials> getUserCredentials();
 
-  Future<Either<BroadcastFailure, String>> joinBroadcast({
+  Future<Either<BroadcastFailure, JoinBroadcastData>> joinBroadcast({
     required String broadcastId,
   });
 

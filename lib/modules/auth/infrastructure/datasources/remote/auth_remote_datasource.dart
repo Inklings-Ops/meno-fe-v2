@@ -10,7 +10,6 @@ import 'package:retrofit/retrofit.dart';
 part 'auth_remote_datasource.g.dart';
 
 @RestApi()
-@injectable
 abstract class AuthRemoteDatasource {
   @factoryMethod
   factory AuthRemoteDatasource(

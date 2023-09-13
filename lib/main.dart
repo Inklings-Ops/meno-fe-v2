@@ -80,9 +80,22 @@ Future<void> main() async {
       Permission.notification.request();
     }
   });
+
   await Permission.microphone.isDenied.then((value) {
     if (value) {
       Permission.microphone.request();
+    }
+  });
+
+  await Permission.bluetooth.isDenied.then((value) {
+    if (value) {
+      Permission.bluetooth.request();
+    }
+  });
+
+  await Permission.bluetoothConnect.isDenied.then((value) {
+    if (value) {
+      Permission.bluetoothConnect.request();
     }
   });
 
