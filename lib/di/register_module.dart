@@ -8,7 +8,7 @@ import 'package:meno_fe_v2/modules/auth/infrastructure/datasources/remote/auth_r
 import 'package:meno_fe_v2/modules/bible/infrastructure/datasources/remote/bible_remote_datasource.dart';
 import 'package:meno_fe_v2/modules/broadcast/infrastructure/datasources/remote/broadcast_remote_datasource.dart';
 import 'package:meno_fe_v2/modules/profile/infrastructure/datasources/remote/profile_remote_datasource.dart';
-import 'package:meno_fe_v2/services/agora_service.dart';
+// import 'package:meno_fe_v2/services/agora_service.dart';
 import 'package:meno_fe_v2/services/livekit_service.dart';
 import 'package:meno_fe_v2/services/shared_preferences_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,8 +49,8 @@ abstract class RegisterModule {
   BibleRemoteDatasource get bibleRemote =>
       BibleRemoteDatasource(_dio, baseUrl: Env.bibleApi);
 
-  @lazySingleton
-  AgoraService get agoraService => AgoraService();
+//   @lazySingleton
+//   AgoraService get agoraService => AgoraService();
 
   @lazySingleton
   LivekitService get livekitService => LivekitService();
